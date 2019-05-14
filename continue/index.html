@@ -1,0 +1,19 @@
+<div id="page" role="main" itemprop="description">
+    <h1>continue</h1>
+<span>The <i>continue</i> statement skips the rest of the current iteration of a loop (<i><span class="function_ref">for</span></i>, <i><span class="function_ref">while</span></i>, or <i><span class="function_ref">do-while</span></i>). It continues by checking the conditional expression of the loop, and proceeding with any subsequent iterations.
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">for (x = 0; x < 255; x++) {
+    if (x > 40 && x < 120){      // create jump in values
+        continue;
+    }
+
+    analogWrite(PWMpin, x);
+    delay(50);
+}
+</code>
+</pre>
+</span>  
+</div>

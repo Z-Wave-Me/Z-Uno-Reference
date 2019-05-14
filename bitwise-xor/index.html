@@ -1,0 +1,35 @@
+<div id="page" role="main" itemprop="description">
+    <h1>bitwise xor</h1>
+<span class="function_description">There is a somewhat unusual operator in C++ called bitwise exclusive OR, also known as bitwise XOR. (In English this is usually pronounced "eks-or".) The bitwise XOR operator is written using the caret symbol ^. This operator is similar to the bitwise OR operator |, except that it evaluates to 1 for a given position when exactly one of the input bits for that position is 1. If both are 0 or both are 1, the XOR operator evaluates to 0:</span>
+<span class="function_example">
+<pre>
+<code class="c">0 ^ 0 == 0
+0 ^ 1 == 1
+1 ^ 0 == 1
+1 ^ 1 == 0
+</code>
+</pre>
+</span>
+
+<span class="function_description_more">Another way to look at bitwise XOR is that each bit in the result is a 1 if the input bits are different, or 0 if they are the same.</span>
+
+<span class="function_description_more">Here is a simple code example:</span>
+
+<span class="function_example">
+<pre>
+<code class="c">int x = 12;     // binary: 1100
+int y = 10;     // binary: 1010
+int z = x ^ y;  // binary: 0110, or decimal 6
+</code>
+</pre>
+</span> 
+
+<span class="function_description_more">The ^ operator is often used to toggle (i.e. change from 0 to 1, or 1 to 0) some of the bits in an integer expression while leaving others alone. For example:</span>
+<span class="function_example">
+
+<pre>
+<code class="c">y = x ^ 1;   // toggle the lowest bit in x, and store the result in y.
+</code>
+</pre>
+</span>
+</div>

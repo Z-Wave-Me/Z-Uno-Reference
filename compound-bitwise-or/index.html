@@ -1,0 +1,48 @@
+<div id="page" role="main" itemprop="description">
+    <span class="function_description">The compound bitwise OR operator (|=) is often used with a variable and a constant to "set" (set to 1) particular bits in a variable.</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">x |= y;   // equivalent to x = x | y;
+</code>
+</pre>
+</span>  
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">x</span>
+        <span class="function_parameters_param_description">a char, int or long variable</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">y</span>
+        <span class="function_parameters_param_description">an integer constant or char, int, or long
+    </span>
+</span>
+
+<span class="function_example">
+First, a review of the Bitwise OR (|) operator
+<pre>
+<code class="c">0  0  1  1    operand1
+0  1  0  1    operand2
+----------
+0  1  1  1    (operand1 | operand2) - returned result
+</code>
+</pre>
+</span>  
+
+<span class="function_example">
+Bits that are "bitwise ORed" with 0 are unchanged, so if myByte is a byte variable,<pre>
+<code class="c">myByte =| B00000000 = myByte;
+</code>
+</pre>
+</span>
+
+<span class="function_example">
+Bits that are "bitwise ORed" with 1 are set to 1 so:
+<pre>
+<code class="c">myByte | B11111111 = B11111111;
+</code>
+</pre>
+</span>
+
+</div>

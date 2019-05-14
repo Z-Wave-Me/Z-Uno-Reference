@@ -1,0 +1,30 @@
+<div id="page" role="main" itemprop="description">
+    <h1>bitwise or</h1>
+<span class="function_description">The bitwise OR operator in C++ is the vertical bar symbol, |. Like the & operator, | operates independently each bit in its two surrounding integer expressions, but what it does is different (of course). The bitwise OR of two bits is 1 if either or both of the input bits is 1, otherwise it is 0. In other words:</span>
+<span class="function_example">
+<pre>
+<code class="c">0 | 0 == 0
+0 | 1 == 1
+1 | 0 == 1
+1 | 1 == 1
+</code>
+</pre>
+</span>
+<span  class="function_description_more">Here is an example of the bitwise OR used in a snippet of C++ code:</span>
+<span class="function_example">
+<pre>
+<code class="c">int a =  92;    // in binary: 0000000001011100
+int b = 101;    // in binary: 0000000001100101
+int c = a | b;  // result:    0000000001111101, or 125 in decimal.
+</code>
+</pre>
+</span> 
+
+<span  class="function_description_more">Bitwise OR is often used to make sure that a given bit is turned on (set to 1) in a given expression. For example, to copy the bits from a into b, while making sure the lowest bit is set to 1, use the following code:</span>
+<span class="function_example">
+<pre>
+<code class="c">b = a | 1;
+</code>
+</pre>
+</span>
+</div>

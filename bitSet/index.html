@@ -1,0 +1,31 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Bitmask operation functions</h1>
+<span class="function_description">
+Operations on bit masks.</span>
+</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">value = bitRead(mask, bit);    // returns 1 if bit is set in the mask, otherwise 0
+bitSet(mask, bit);             // sets bit to 1 in the mask
+bitClear(mask, bit);           // sets bit to 0 in the mask
+bitWrite(mask, bit, bitvalue); // set bit to bitvalue in the mask
+</code></pre>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">mask</span>
+        <span class="function_parameters_param_description">number representing bit mask (BYTE for 8 bits, WORD for 16 bits or DWORDfor 32 bits)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">bit</span>
+        <span class="function_parameters_param_description">bit to deal with (non-negative integer number)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">bitvalue</span>
+        <span class="function_parameters_param_description">any expresstion evaluated to TRUE or FALSE</span>
+    </span>
+</span>
+
+</div>

@@ -1,0 +1,60 @@
+<div id="page" role="main" itemprop="description">
+    <h1>#define</h1>
+<span class="function_description">
+The directive <i>#define</i> serves as for replacement of the often used constants, keywords, operators or expressions some identifiers. Identifiers replacing hollerith or numerical constants name the named constants. Identifiers, replacing the fragments of the programs, name macro declarations, thus macro declarations can have arguments.
+</span>
+<span class="function_syntax">
+The directive <i>#define</i> has two syntactic forms:
+<pre>
+    <code class="c">#define identifier text
+
+#define identifier(list of parameters) text
+    </code>
+</pre>
+This directive substitutes all subsequent including of <i>identifier</i> by <i>text</i>. Such process is named a macro substitution. Text can be any fragment of the program on C or C++, and also can be absent. In last case all copies of identifier retire from the program.
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">#define WIDTH 80
+
+#define LENGTH (WIDTH+10)
+</code>
+</pre>
+These directives will change in text of the program every word WIDTH on a number 80, and every word LENGTH on expression (80+10) together with surrounding him brackets.
+<br/><br/>
+The brackets contained in macro declaration allow to avoid misunderstanding related to the order of calculation of triggerable operations. For example, in default of brackets expression t=LENGTH*7 will be regenerate in expression t=80+10*7, but not in expression t=(80+10)*7, as it turns out at presence of brackets, and 780 will ensue, but not 630.
+</span>
+
+<span class="function_description_more">In the second syntactic form in the directive of #define there is a list of formal parameters, that can contain one or a few identifiers divide commas. Formal parameters in text of macro declaration mark positions on that the actual arguments of macrocall must be put. Every formal parameter can appear in text of macro declaration several times.
+<br/><br/>
+At a macrocall after an identifier the list of actual arguments the amount of that must coincide with the amount of formal parameters is written down.</span>
+
+<span class="function_example">
+<pre>
+<code class="c">#define  MAX(x, y) ((x)>(y))?(x):(y)
+
+// This directive will replace a fragment
+t = MAX(i, s[i]);
+
+// on a fragment
+t = ((i)>(s[i])?(i):(s[i]);
+</code>
+</pre>
+</span>
+
+<span class="function_description_more">As well as in a previous example, parentheses, in that are celled formal parameters of macro declaration, allow to avoid the errors of with the wrong order of implementation link transaction, if actual arguments are expressions.</span>
+<span class="function_example">
+<pre>
+<code class="c">// For example, at presence of brackets fragment
+t=MAX(i&j,s[i]||j);
+
+// will be substituted by a fragment
+t=((i&j)>(s[i]||j)?(i&j):(s[i]||j);
+
+// and in default of brackets - on a fragment
+t=(i&j>s[i]||j)?i&j:s[i]||j;
+// in that conditional expression calculates at a completely another order.
+</code>
+</pre>
+</span>
+</div> 

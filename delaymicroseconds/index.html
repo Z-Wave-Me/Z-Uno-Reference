@@ -1,0 +1,36 @@
+<div id="page" role="main" itemprop="description">
+    <h1>delayMicroseconds()</h1>
+<span class="function_description">
+    Pauses the program for the amount of time (in microseconds) specified as parameter (there are 1 000 000 microseconds in a second).
+    In contrast to <span class="function_ref">delay</span>() function, delayMicroseconds() will completelly block Z-Uno and prevent all functions except for RF packets capturing to operate.
+</span>
+    
+<span class="function_description_note">
+This function have no limitation to use in getters and setters.
+</span>
+
+<span class="function_syntax">delayMicroseconds(us)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">us</span>
+        <span class="function_parameters_param_description">the number of microseconds to pause</span>
+    </span>
+</span>
+<span class="function_returns">
+none
+</span>
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+  pinMode(20, OUTPUT);          // sets the digital pin as output
+}
+
+void loop() {
+  digitalWrite(20, HIGH);       // sets the LED on
+  delayMicroseconds(500);       // waits for a second
+  digitalWrite(20, LOW);        // sets the LED off
+  delayMicroseconds(100);       // waits for a second
+}
+</code></pre>
+</span>
+</div>

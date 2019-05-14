@@ -1,0 +1,26 @@
+<div id="page" role="main" itemprop="description">
+    <h1>bitwise and</h1>
+<span  class="function_description">The bitwise AND operator in C++ is a single ampersand, &, used between two other integer expressions. Bitwise AND operates on each bit position of the surrounding expressions independently, according to this rule: if both input bits are 1, the resulting output is 1, otherwise the output is 0. Another way of expressing this is:</span>
+<span class="function_example">
+<pre>
+<code class="c">0 & 0 == 0
+0 & 1 == 0
+1 & 0 == 0
+1 & 1 == 1
+</code>
+</pre>
+</span>
+
+<span  class="function_description_more">One of the most common uses of bitwise AND is to select a particular bit (or bits) from an integer value, often called masking. For example, if you wanted to access the least significant bit in a variable x, and store the bit in another variable y, you could use the following code:</span>
+<span class="function_example">
+<pre>
+<code class="c">int x = 5;       // binary: 101
+int y = x & 1;   // now y == 1
+x = 4;           // binary: 100
+y = x & 1;       // now y == 0
+</code>
+</pre>
+</span>
+
+
+</div>
