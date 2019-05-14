@@ -1,0 +1,18 @@
+<div id="page" role="main" itemprop="description">
+    <h4>equals_raw16()</h4>
+<span clas="function_description">
+    Compare (non strict compare) of the received IR command with a command in raw mode and stores it as a null terminated array of marks and spaces (16 bits each). IR Controller must be initialized in receive mode prior to using this functions.
+</span>
+<span class="function_syntax">
+    IR.equals_raw16(word * data);
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">data</span>
+        <span class="function_parameters_param_description">pointer to an array to compare with; should be filled with marks and spaces; see <span class="function_ref" link="IR/send_raw16">IR.send_raw16</span>() for more info on Raw 16 format</span>
+    </span>
+</span>
+<span class="function_returns">
+    TRUE if received command matches data
+</span> 
+</div>

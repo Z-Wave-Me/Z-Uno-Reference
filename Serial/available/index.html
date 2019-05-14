@@ -1,0 +1,38 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Serial.available()</h1>
+<span class="function_description">
+Get the number of bytes (characters) available for reading from the serial port. This is data that's already arrived and stored in the serial receive buffer (which holds 64 bytes).</span>
+
+
+<span class="function_syntax">
+<pre>
+<code class="c">Serial.available();
+</code></pre>
+</span>
+
+<span class="function_returns">
+the number of bytes available to read 
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">int incomingByte = 0;   // for incoming serial data
+
+void setup() {
+    Serial.begin();     // opens serial port, sets data rate to 115200 bps
+}
+
+void loop() {
+    // send data only when you receive data:
+    if (Serial.available() > 0) {
+        // read the incoming byte:
+        incomingByte = Serial.read();
+
+        // say what you got:
+        Serial.print("I received: ");
+        Serial.println(incomingByte, DEC);
+    }
+}
+</code></pre>
+</span>
+</div>

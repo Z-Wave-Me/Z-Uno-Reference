@@ -1,0 +1,30 @@
+<div id="page" role="main" itemprop="description">
+    <h4>sendCommand() and sendCommand_*()</h4>
+<span clas="function_description">
+Send out IR command defined in raw mode. IR Controller must be initialized in transmission mode prior to using this functions.
+</span>
+<span clas="function_description_more">
+Vendor specific versions allows to reduce memory footprint of your code in case you need only one vendor encoding.
+</span>
+<span class="function_syntax">
+<pre><code class="c">IR.sendCommand(IRCommand_t * command);	
+IR.sendCommand_AIWA(IRCommand_t * command);
+IR.sendCommand_LG(IRCommand_t * command);
+IR.sendCommand_NEC(IRCommand_t * command);
+IR.sendCommand_PANASONIC(IRCommand_t * command);
+IR.sendCommand_RC5(IRCommand_t * command);
+IR.sendCommand_RC6(IRCommand_t * command);
+IR.sendCommand_SAMSUNG(IRCommand_t * command);
+IR.sendCommand_SONY(IRCommand_t * command);
+</code></pre>
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">command</span>
+        <span class="function_parameters_param_description">pointer to IR command onject to send out</span>
+    </span>
+</span>
+<span class="function_returns">
+    None
+</span> 
+</div>

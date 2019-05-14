@@ -1,0 +1,34 @@
+<div id="page" role="main" itemprop="description">
+    <h1>if...else</h1>
+<span class="function_description"><i>if/else</i> allows greater control over the flow of code than the basic <i><span <span class="function_ref">if</span></i> statement, by allowing multiple tests to be grouped together. For example, an analog input could be tested and one action taken if the input was less than 500, and another action taken if the input was 500 or greater. The code would look like this:
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">if (pinFiveInput < 500) {
+  // action A
+} else {
+  // action B
+}</code>
+    </pre>
+</span> 
+<span class="function_description_more">
+    <i>else</i> can proceed another <i>if</i> test, so that multiple, mutually exclusive tests can be run at the same time.
+    Each test will proceed to the next one until a true test is encountered. When a true test is found, its associated block of code is run, and the program then skips to the line following the entire <i>if/else</i> construction. If no test proves to be true, the default <i>else</i> block is executed, if one is present, and sets the default behavior.
+    Note that an <i>else if</i> block may be used with or without a terminating <i>else</i> block and vice versa. An unlimited number of such <i>else if</i> branches is allowed. 
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">if (pinFiveInput < 500) {
+  // do Thing A
+} else if (pinFiveInput >= 1000) {
+  // do Thing B
+} else {
+  // do Thing C
+}</code>
+    </pre>
+</span>
+<span class="function_description_more">
+Another way to express branching, mutually exclusive tests, is with the <span class="function_ref" link="switch-case">switch case</span> statement.
+</span>
+
+</div>

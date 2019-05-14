@@ -1,0 +1,50 @@
+<div id="page" role="main" itemprop="description">
+    <h2>println()</h2>
+    <span class="function_description">
+Prints data to the serial port as human-readable ASCII text followed by a carriage return character (ASCII 13, or '\r') and a newline character (ASCII 10, or '\n'). This command takes the same forms as Serial.print().
+    </span>
+<span class="function_syntax">
+ Serial.println(val)</br>
+Serial.println(val, format)</br> 
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">val</span>
+        <span class="function_parameters_param_description">the value to print - any data type</span>
+    </span>
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">format</span>
+            <span class="function_parameters_param_description">pecifies the number base (for integral data types) or number of decimal places (for floating point types)</span>
+</span>
+        </span>    
+        
+    </span>
+</span>
+</span>
+<span class="function_returns">
+    size_t (long): println() returns the number of bytes written, though reading that number is optional
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">int analogValue = 0;    // variable to hold the analog value
+
+void setup() {
+  // open the serial port at 115200 bps:
+  Serial.begin();
+}
+
+void loop() {
+  // read the analog input on pin 0:
+  analogValue = analogRead(0);
+
+  // print it out in many formats:
+  Serial.println(analogValue);       // print as an ASCII-encoded decimal
+  Serial.println(analogValue, DEC);  // print as an ASCII-encoded decimal
+  Serial.println(analogValue, HEX);  // print as an ASCII-encoded hexadecimal
+  Serial.println(analogValue, OCT);  // print as an ASCII-encoded octal
+  Serial.println(analogValue, BIN);  // print as an ASCII-encoded binary
+
+  // delay 10 milliseconds before the next reading:
+  delay(10);
+}
+</div>

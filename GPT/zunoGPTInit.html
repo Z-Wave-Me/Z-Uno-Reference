@@ -1,0 +1,26 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoGPTInit</h1>
+<span class="function_description">
+Initialize <span class="function_ref">GPT</span> according to flags below.
+</span>
+
+<span class="function_syntax">zunoGPTInit(flags)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">flags</span>
+        <span class="function_parameters_param_description">Combination of flags from the list below. Can be ORed.
+            <ul>
+                <li>ZUNO_GPT_SCALE1024 &mdash; specify tick frequency as 32 MHz/1024 = 31.25 kHz (tick is 32 μs), otherwise default 32 MHz/8 = 4 MHz (tick is 0.25 μs)is used</li>
+                <li>ZUNO_GPT_IMWRITE &mdash; write new value immediately instead of waiting for timer to reach zero</li>
+                <li>ZUNO_GPT_CYCLIC &mdash; reload the timer on reaching zero, otherwise timer triggers only once</li>
+            </ul>
+        </span>
+    </span>
+</span>
+
+<span class="function_returns">
+none
+</span>
+
+</div>

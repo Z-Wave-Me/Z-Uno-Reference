@@ -1,0 +1,23 @@
+<div id="page" role="main" itemprop="description">
+    <h1>do...while</h1>
+<span class="function_description">
+   The <i>do</i> loop works in the same manner as the <i><span class="function_ref">while</span></i> loop, with the exception that the condition is tested at the end of the loop, so the <i>do</i> loop will always run at least once.
+</span>
+<span class="function_syntax">
+<pre>   
+<code class="c">do {
+    // statement block
+} while (test condition);
+</code>
+</pre>
+</span>
+<span class="function_example">
+<pre>
+<code class="c">do {
+  delay(50);          // wait for sensors to stabilize
+  x = readSensors();  // check the sensors
+} while (x < 100);
+</code>
+</pre>
+</span>  
+</div>

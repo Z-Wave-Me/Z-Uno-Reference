@@ -1,0 +1,34 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Serial.begin()</h1>
+<span class="function_description">
+Sets the data rate in bits per second (baud) for serial data transmission. For USB baudrate is fixed on 115200 bps, on UART it is possible to select baudrate. Valid values are: 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps</span>
+
+<span class="function_description_more">For lower baudrates use <span class="function_ref" link="Software-Serial">Software Serial</span></span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">Serial.begin(baudrate) // for UART
+Serial.begin()         // for USB
+</code></pre>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">baudrate</span>
+        <span class="function_parameters_param_description">baudrate to be used. If omitted, default 115200 bps is used (the only available on USB interface)</span>
+    </span>
+</span>
+
+<span class="function_returns">
+nothing
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+    Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
+    Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
+}
+</code></pre>
+</span>  
+</div>

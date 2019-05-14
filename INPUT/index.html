@@ -1,0 +1,25 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Pins configured as INPUT</h1>
+<span class="function_description">
+<p>Pins configured as INPUT with <span class="function_ref">pinMode</span>() are said to be in a high-impedance state. Pins configured as INPUT make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 MΩ in front of the pin. This makes them useful for reading a sensor.
+</span>
+
+<span class="function_description_more">
+If you have your pin configured as an INPUT, and are reading a switch, when the switch is in the open state the input pin will be "floating", resulting in unpredictable results. In order to assure a proper reading when the switch is open, a pull-up or pull-down resistor must be used. The purpose of this resistor is to pull the pin to a known state when the switch is open. A 10 KΩ resistor is usually chosen, as it is a low enough value to reliably prevent a floating input, and at the same time a high enough value to not draw too much current when the switch is closed.
+</span>
+
+<span class="function_description_more">
+If a pull-down resistor is used, the input pin will be <span class="function_ref">LOW</span> when the switch is open and <span class="function_ref">HIGH</span> when the switch is closed.
+</span>
+
+<span class="function_description_more">
+If a pull-up resistor is used, the input pin will be HIGH when the switch is open and LOW when the switch is closed
+</span>
+
+<span class="function_description_more">
+Instead of using pull-up resistors one can use <span class="function_ref">INPUT_PULLUP</span> mode.
+</span>
+
+<span class="function_description_note">Pins configured as inputs with either INPUT or INPUT_PULLUP can be damaged or destroyed if they are connected to voltages below ground (negative voltages) or above the positive power rail (3.3V).</span>
+
+</div>

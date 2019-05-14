@@ -1,0 +1,29 @@
+<div id="page" role="main" itemprop="description">
+    <h1>int</h1>
+
+<span class="function_description">Integers are your primary data-type for number storage.</span>
+
+<span class="function_description_more"><i>int</i> store negative numbers with a technique called 2's complement math. The highest bit, sometimes referred to as the "sign" bit, flags the number as a negative number. The rest of the bits are inverted and 1 is added.</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">int var = val;
+</code></pre>
+
+<span class="function_example">
+<pre>
+<code class="c">int ledPin = 13;
+</code></pre>
+</span>
+    
+<span class="function_coding_tip">
+When variables are made to exceed their maximum capacity they "roll over" back to their minimum capacity, note that this happens in both directions. Example for a 16-bit int:
+<pre>
+<code class"c">int x;
+x = -32768;
+x = x - 1;       // x now contains 32,767 - rolls over in neg. direction
+
+x = 32767;
+x = x + 1;       // x now contains -32,768 - rolls over
+</code></pre></span>
+</div>

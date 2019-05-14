@@ -1,0 +1,85 @@
+<div id="page" role="main" itemprop="description">
+    <h1>map()</h1>
+<span class="function_description">
+Re-maps a number from one range to another. That is, a value of fromLow would get mapped to toLow, a value of fromHigh to toHigh, values in-between to values in-between, etc.
+</span>
+
+<span class="function_description_more">
+Does not constrain values to within the range, because out-of-range values are sometimes intended and useful. The <span class="function_ref">constrain</span>() function may be used either before or after this function, if limits to the ranges are desired.
+</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">mapped_value = map(value, fromLow, fromHigh, toLow, toHigh);
+</code></pre>
+</span>  
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">the number to map</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">fromLow</span>
+        <span class="function_parameters_param_description">the lower bound of the value's current range</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">fromHigh</span>
+        <span class="function_parameters_param_description">the upper bound of the value's current range</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">toLow</span>
+        <span class="function_parameters_param_description">the lower bound of the value's target range</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">toHigh</span>
+        <span class="function_parameters_param_description">the upper bound of the value's target range</span>
+    </span>
+</span>
+
+<span class="function_returns">
+The mapped value.
+</span>
+
+<span class="function_description_more">
+Note that the "lower bounds" of either range may be larger or smaller than the "upper bounds" so the map() function may be used to reverse a range of numbers, for example
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">y = map(x, 1, 50, 50, 1);</code></pre>
+</span>
+
+<span class="function_description_more">
+The function also handles negative numbers well, so that this example
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">y = map(x, 1, 50, 50, -100);
+</code></pre>
+</span>
+
+<span class="function_description_more">
+is also valid and works well.
+</span>
+
+<span class="function_description_more">
+The map() function uses integer math so will not generate fractions, when the math might indicate that it should do so. Fractional remainders are truncated, and are not rounded or averaged.
+</span>
+
+
+<span class="function_example">
+<pre>
+<code class="c">// Map an analog value to 8 bits (0 to 255)
+int val = analogRead(A1);
+val = map(val, 0, 1023, 0, 255);
+analogWrite(PWM1, val);
+</code></pre>
+</span>
+
+<span class="function_see_also">
+<span class="function_ref">constrain</span>()
+</san>
+
+</div>

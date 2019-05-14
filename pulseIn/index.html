@@ -1,0 +1,57 @@
+<div id="page" role="main" itemprop="description">
+    <h1>pulseIn()</h1>
+
+<span class="function_description">
+Reads a pulse (either HIGH or LOW) on a pin. For example, if value is HIGH, pulseIn() waits for the pin to go HIGH, starts timing, then waits for the pin to go LOW and stops timing. Returns the length of the pulse in microseconds or 0 if no complete pulse was received within the timeout.
+</span>
+
+<span class="function_description_more">
+The timing of this function has been determined empirically and will probably show errors on shorter pulses. Works on pulses from 10 microseconds to 3 minutes in length. Please also note that if the pin is already high when the function is called, it will wait for the pin to go LOW and then HIGH before it starts counting.
+</span>
+
+<span class="function_description_note">
+pulseIn() works only with fast pins defined via <span class="function_ref">s_pin</span> data type and hence can work only on pins 9&ndash;16.
+</span>
+
+<span class="function_syntax">width = pulseIn(pin, level, timeout);</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the number of the pin on which you want to read the pulse (<span class="function_ref">s_pin</span> type)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">level</span>
+        <span class="function_parameters_param_description">type of pulse to read: <span class="function_ref">HIGH</span> or <span class="function_ref">LOW</span></span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">timeout</span>
+        <span class="function_parameters_param_description">the number of microseconds to wait for the pulse to be completed: the function returns 0 if no complete pulse was received within the timeout (DWORD, must be &gt; 500 μs)</span>
+    </span>
+</span>
+
+<span class="function_returns">
+the length of the pulse (in microseconds) or 0 if no pulse is completed before the timeout (DWORD)
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">s_pin pinPulse = 9;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(pinPulse, INPUT); 
+}
+
+void loop() {
+  DWORD duration;
+
+  duration = pulseIn(pinPulse, HIGH, 1000000);
+  Serial.println(duration);
+  delay(1000);
+}
+</code>
+</pre>
+</span>
+
+</div>

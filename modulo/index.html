@@ -1,0 +1,55 @@
+<div id="page" role="main" itemprop="description">
+    <h1>modulo</h1>
+<span class="function_description">
+Calculates the remainder when one integer is divided by another. It is useful for keeping a variable within a particular range (e.g. the size of an array).
+</span>
+<span class="function_syntax">
+result = dividend % divisor
+</span>
+
+<span class="function_parameters">
+<span class="function_parameters_param">
+<span class="function_parameters_param_name">dividend</span>
+<span class="function_parameters_param_description">the number to be divided</span>
+</span>
+<span class="function_parameters_param">
+<span class="function_parameters_param_name">divisor</span>
+<span class="function_parameters_param_description">the number to divide by</span>
+</span>
+</span>
+
+<span class="function_returns">the remainder</span>
+
+<span class="function_example">
+<pre>
+<code class="c">x = 7 % 5;   // x now contains 2
+x = 9 % 5;   // x now contains 4
+x = 5 % 5;   // x now contains 0
+x = 4 % 5;   // x now contains 4
+</code>
+</pre>
+</span>  
+
+<span class="function_example">
+<pre>
+<code class="c">/* update one value in an array each time through a loop */
+
+int values[10];
+int i = 0;
+
+void setup() {
+}
+
+void loop() {
+  values[i] = analogRead(0);
+  i = (i + 1) % 10;   // modulo operator rolls over variable  
+}
+</code>
+</pre>    
+</span>
+
+<span class="function_tip">
+The modulo operator does not work on floats.
+</span>
+
+</div>
