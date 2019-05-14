@@ -1,5 +1,4 @@
-<div id="page" role="main" itemprop="description">
-    <h1>ZUNO_SETUP_BATTERY_HANDLER()</h1>
+<h1>ZUNO_SETUP_BATTERY_HANDLER()</h1>
 <span class="function_description">
 By default Z-Uno automatically maps battery voltage from 2.8V&ndash;3.0V to 0%&ndash;100% measuring the voltage on the 3V pin. But sometimes Z-Uno us powered via step-up converters and measuring the voltage on 3V pin will not make any sense. In that case you can define your own handler for battery reports, measure a value on ADC pins or even read the value from another chip via UART/SPI/I2C. This getter function will be called each time Z-Uno needs to report battery value.
 </span>
@@ -32,4 +31,3 @@ byte my_battery_handler() {
 <span class="function_see_also">
 <span class="function_ref">ZUNO_SETUP_BATTERY_LEVELS</span>
 </span>
-</div>
