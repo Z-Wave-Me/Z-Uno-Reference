@@ -1,0 +1,67 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SETUP_ASSOCIATIONS()</h1>
+<span class="function_description">
+This macro defines association groups in Z-Uno. Association groups are used to control other devices in Z-Wave network.
+<br/>
+<br/>
+In terms of Z-Wave protocol this macro instructs Sketch bootloader to create additional Association groups in the Z-Uno board exposed using Association Command Class.
+<br/>
+<br/>
+Each group should have it's own dedicated function.
+
+
+<span class="function_syntax">
+    ZUNO_SETUP_ASSOCIATIONS(ControlGroupType_1, ControlGroupType_2,...)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">ControlGroupType_n</span>
+        <span class="function_parameters_param_description">Type of group defines which commands will be sent to distant devices in the network.
+        </span>
+    </span>
+</span>
+
+<span class="function_description_more">
+There is only three possible types available:
+<ul>
+    <li>ZUNO_ASSOCIATION_GROUP_SET_VALUE &mdash; send switch on/off commands (using Basic Command Class) to devices in Z-Wave network by calling <span class="function_ref">zunoSendToGroupSetValueCommand</span>()</li>
+    <li>ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM &mdash; send dimming commands (using Switch Multilevel Command Class) to devices in Z-Wave network by calling <span class="function_ref">zunoSendToGroupDimmingCommand</span>(). You can also use <span class="function_ref">zunoSendToGroupSetValueCommand</span>() for devices in this group to send switch on/off commands (using Basic Command Class).</li>
+    <li>ZUNO_ASSOCIATION_GROUP_SCENE_CONTROL &mdash; send scene activation commands (using Scene Activation Command Class) to devices in Z-Wave network by calling <span class="function_ref">zunoSendToGroupScene</span>()</li>
+    
+    <li>ZUNO_ASSOCIATION_GROUP_DOORLOCK &mdash; send door lock open/close commands (using Door Lock Command Class) to devices in Z-Wave network by calling <span class="function_ref">zunoSendToGroupDoorlockControl</span>()</li>
+</ul>
+
+Groups are numbered in the same order as they are mentioned in parameters to ZUNO_SETUP_ASSOCIATIONS() macro.
+</span>
+
+<span class="function_description_note">Association groups should be referred by these macros:
+    <ul>
+        <li>CTRL_GROUP_1</li>
+        <li>CTRL_GROUP_2</li>
+        <li>CTRL_GROUP_3</li>
+        <li>CTRL_GROUP_4</li>
+        <li>CTRL_GROUP_5</li>
+    </ul>
+</span>
+
+<span class="function_description_note">
+Real association groups number are shifted by one. Means CTRL_GROUP_1 is in reality number 2. This is because number 1 is Life Line group. Read more in description of <span class="function_ref">Z-Wave</span> implementation.
+</span>
+
+<span class="function_description_note">
+After changing number and types of association groups Z-Uno must be excluded and included back. Z-Uno will not adopt any changes of association groups without being excluded. (A <a href="../../z-wave/configuration-parameters/index.html">debug configuration parameter</a> can disable this restriction).
+</span>
+
+ <span class="function_example">
+     <pre>
+         <code class="c">ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM)</code>
+     </pre>
+ </span> 
+
+<span class="function_see_also">
+    Get more information about <span class="function_ref">Z-Wave</span>.
+</span>
+
+
+</div>

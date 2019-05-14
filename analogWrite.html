@@ -1,0 +1,50 @@
+<div id="page" role="main" itemprop="description">
+    <h1>analogWrite()</h1> 
+<span class="function_description">
+Writes an analog value (PWM wave) to a pin. Can be used to light a LED varying brightnesses or drive a motor at various speeds.
+After a call to analogWrite(), the pin will generate a steady square wave of the specified duty cycle until the next call to analogWrite() (or a call to <span class="function_ref">digitalRead</span>() or <span class="function_ref">digitalWrite</span>() on the same pin)
+</span>
+
+<span class="function_description_more">
+PWM 1-4 works at 488 Hz. If you need faster operation, use <span class="function_ref">zunoFastPWM</span>() on A0.
+</span>
+
+<span class="function_description_more">
+Check <a href="../technical/pinout.1.html">Z-Uno pinout</a>
+</span>
+
+<span class="function_syntax">analogWrite(pin, value)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the pin to write to: PWM1, PWM2, PWM3 and PWM4</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">the duty cycle: between 0 (always off) and 255 (always on) (see <span class="function_ref">analogWriteResolution</span>() for more details)</span>
+    </span>
+    
+</span>
+
+<span class="function_returns">
+None
+</span>
+
+<span class="function_example">
+Sets the output to the LED proportional to the value read from the potentiometer. 
+<pre><code class="c">int val = 0;                   // variable to store the read value
+
+void setup() {
+}
+
+void loop() {
+  val = analogRead(A3);        // read the input pin
+  analogWrite(PWM1, val / 4);  // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
+}
+</code></pre>
+</span>
+
+<span class="function_see_also">
+<span class="function_ref">analogWriteResolution</span>()
+</span>
+</div>

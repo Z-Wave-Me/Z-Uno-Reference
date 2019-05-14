@@ -1,0 +1,110 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SETUP_SLEEPING_MODE()</h1>
+<span class="function_description">
+This macro defines how Z-Uno will manage power mode. It is very important to define correct mode because the behavior of the device changes dramatically depending on it. At the start, we recommend you to debug and develop your program using ZUNO_SLEEPING_MODE_ALWAYS_AWAKE mode, because that’s the easiest one.
+<br/>
+<br/>
+If not specified in the project, ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_ALWAYS_AWAKE) is assumed.
+</span>
+
+<span class="function_syntax">
+    ZUNO_SETUP_SLEEPING_MODE(mode)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">mode</span>
+        <span class="function_parameters_param_description">Mode to manage power
+        </span>
+    </span>
+</span>
+
+<span class="function_description_more">
+There is only three possible values available:
+<ul>
+    <li>ZUNO_SLEEPING_MODE_ALWAYS_AWAKE &mdash; device is <b>always awake</b>, reachable and helps to form mesh network acting as router (default mode). Used for mains powered devices.</li>
+    <li>ZUNO_SLEEPING_MODE_SLEEPING &mdash; device <b>wakes up by user request (interrupt) or periodically</b>. Does not help to form mesh. Used for battery powered devices.</li>
+    <li>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE &mdash; device <b>wakes up by user request (interrupt) or on packet received</b>. Always available but does not help to form mesh. Used for battery powered devices. In Z-Wave this type of devices is called <b>FLiRS</b></li>
+</ul>
+    <span class="function_description_more"><b>FLiRS</b> &mdash; Frequently Listening Routing Slaves &mdash; the device periodically quits the sleeping mode on a short period and checks, whether a message is sent to the device. If no packets are present for this device on air, the device goes back into the sleeping mode. Awakening interval is 1 second.
+    </span>
+</span>
+
+<span class="function_tip">
+In <b>sleeping</b> mode periodical wakeup is configured via the Z-Wave controller using the Wake Up Command Class. The period is a factor of 4 minutes, minumum is 4 minutes. Interrupt can wake up the device at any time.
+</span>
+
+<span class="function_description_note">
+Note that in sleeping and FLiRS mode devices should be explicitely sent into sleeping state. This is done using <b><span class="function_ref">zunoSendDeviceToSleep</span>()</b> function. Once called, loop will not be called anymore and Z-Uno will finalize all jobs to go into sleep mode.
+</span>
+
+<span class="function_description_note">
+Note that in sleeping and FLiRS mode during power consumption (deep sleep) state Z-Uno memory is not maintained. Hence it is cleaned all the time. If you want to keep some variables across sleeps you have to use <b><span class="function_ref">NZRAM</span></b> memory (very fast and do not consume enery) or <b><span class="function_ref">EEPROM</span></b> (slow and takes energy to read and write, but survive even during power off - this is a so called non-volatile memory).
+</span>
+
+<span class="function_tip">
+If device is in sleeping mode, the USB port is not available for uploading new sketch. Device should be woken up or turned into <a href="../../getting-started/troubleshooting.html">rescue mode</a> before uploading new sketch.
+</span>
+
+<span class="function_description_note">
+After changing sleeping mode Z-Uno must be excluded and included back. Z-Uno will not adopt sleeping mode change without being excluded. (A <a href="../../z-wave/configuration-parameters/index.html">debug configuration parameter</a> can disable this restriction).
+</span>
+
+<span class="function_example">
+<pre><code class="c">ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING);
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_ALWAYS_AWAKE);
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
+</code></pre>
+</span>
+
+<table>
+    <tr>
+        <td rowspan="2">Mode</td>
+        <td rowspan="2">setup() called</td>
+        <td rowspan="2">loop() called</td>
+        <td colspan="3" align="center">Wakes up</td>
+        <td rowspan="2">Routing for other Z-Wave devices</td>
+        <td rowspan="2"></td>
+    </tr>
+    <tr>
+        <td>on interrupt</td>
+        <td>periodically</td>
+        <td>on command received</td>
+    </tr>
+    <tr>
+        <td>ZUNO_SLEEPING_MODE_ALWAYS_AWAKE</td>
+        <td>once after power on</td>
+        <td>eternally</td>
+        <td align="center">&mdash;</td>
+        <td align="center">&mdash;</td>
+        <td align="center">&mdash;</td>
+        <td align="center">Yes</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ZUNO_SLEEPING_MODE_SLEEPING</td>
+        <td>on each wake up</td>
+        <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
+        <td align="center">Yes</td>
+        <td align="center">Yes</td>
+        <td align="center">No</td>
+        <td align="center">No</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</td>
+        <td>on each wake up</td>
+        <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
+        <td align="center">Yes</td>
+        <td align="center">No</td>
+        <td align="center">Yes</td>
+        <td align="center">No</td>
+        <td></td>
+    </tr>
+</table>
+
+<span class="function_see_also">
+    Get more information about <span class="function_ref">Z-Wave</span>.
+</span>
+
+</div>

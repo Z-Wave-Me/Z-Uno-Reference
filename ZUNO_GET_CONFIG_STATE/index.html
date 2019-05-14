@@ -1,0 +1,22 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_GET_CONFIG_STATE()</h1>
+<span class="function_description">
+This function returns the dynamic configuration state of Z-Uno.
+</span>
+
+<span class="function_syntax">ZUNO_GET_CONFIG_STATE()</span>
+
+<span class="function_return">
+Returns byte:
+<ul>
+    <li>ZUNO_CONFIG_DEFAULT &mdash; Default Z-Uno configuration without any sketch. No channels, only LifeLine association group</li>
+    <li>ZUNO_CONFIG_PREVIOUS &mdash; New configuration not applied since Z-Uno is included and <span class="function_ref" link="ZUNO_SETUP_DEBUG_MODE">Debug parameter</span> is not enabled</li>
+    <li>ZUNO_CONFIG_CURRENT &mdash; Was applied successfuly</li>
+</ul>
+</span>
+
+<span class="function_see_also">
+Examples can be found in the description of <span class="function_ref">ZUNO_START_CONFIG</span>().
+</span>
+
+</div>

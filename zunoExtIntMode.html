@@ -1,0 +1,72 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoExtIntMode()</h1>
+<span class="function_description">
+External Interrupts pins are INT0 (pin 17), INT1 (pin 18) and ZEROX (pin 3). Z-Uno can execute a user defined code on an action on those pins. zunoExtIntMode() function allows to configure interrupt trigger event.
+</span>
+
+<span class="function_description_more">
+Interrupts are may faster than polling and uses hardware features to operate.
+</span>
+
+<span class="function_description_more">
+Interrupt handler functions should be defined accordingly. See <span class="function_ref" link="Interrupts">interrupts description</span> for more information.
+</span>
+
+<span class="function_description_note">
+See restrictions on the code in user handlers in <span class="function_ref" link="Interrupts">interrupts description</span>.
+</span>
+
+<span class="function_syntax">zunoExtIntMode(int_num, mode)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">int_num</span>
+        <span class="function_parameters_param_description">the name of the interrupt:
+            <ul>
+                <li>ZUNO_EXT_INT0 &mdash; INT0 pin</li>
+                <li>ZUNO_EXT_INT1 &mdash; INT1 pin</li>
+                <li>ZUNO_EXT_ZEROX &mdash; ZEROX pin</li>
+            </ul>
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">mode</span>
+        <span class="function_parameters_param_description">trigger event:
+            <ul>
+                <li>CHANGE &mdash; value change</li>
+                <li>FALLING &mdash; high to low falling</li>
+                <li>RISING &mdash; low to high rising</li>
+            </ul>
+        </span>
+    </span>
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">ZUNO_SETUP_ISR_INT0(int0_handler);
+
+unsigned long count_int0 = 0;
+
+void int0_handler() {
+    count_int0++;
+}
+
+void setup() {
+    zunoExtIntMode(ZUNO_EXT_INT0, FALLING);
+
+    Serial.begin(115200);
+}
+
+void loop() {
+    Serial.println(count_int0);
+    delay(1000);
+}
+</code>
+</pre>
+</span>
+
+<span class="function_description_note">
+ZEROX pin takes about 20 μs to trigger, while INT0/INT1 take about 40 μs.
+</span>
+
+</div>

@@ -1,0 +1,62 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Interrupts</h1>
+<span class="function_description">
+Z-Uno uses hardware interrupts of Z-Wave chip as well as software generated interrupts provide users simple experience. Currently Z-Uno supports the following interrupts:
+<ul>
+    <li><span class="function_ref" link="zunoExtIntMode">INT0</span> (pin 17)</li>
+    <li><span class="function_ref" link="zunoExtIntMode">INT1</span> (pin 18)</li>
+    <li><span class="function_ref" link="zunoExtIntMode">ZEROX</span> (pin 3)</li>
+    <li><span class="function_ref">GPT</span> (General Purpose Timer)</li>
+    <li><span class="function_ref" link="1msTimer">1 milliseconds</span> software timer</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+Interrupt handler functions should be defined in user sketch and &laquo;announced&raquo; using the corresponding <code>ZUNO_SETUP_ISR_*(<i>my_handler_func</i>)</code> macro, where <i>my_handler_func</i> is the name of the handler function.
+</span>
+
+<span class="function_description_note">
+The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below. Also don't use local variables &mdash; use global variables instead!
+</span>
+
+<table>
+    <tr><th>Function allowed in interrupt handler</th><th>Limitations</th></tr>
+    <tr><td><span class="function_ref">digitalRead</span>(pin)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
+    <tr><td><span class="function_ref">digitalWrite</span>(pin, value)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
+    <tr><td><span class="function_ref">digitalToggle</span>(pin)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
+    <tr><td><span class="function_ref">pinMode</span>(pin, mode)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
+    <tr><td><span class="function_ref" link="zunoExtIntMode">zunoExtIntMode(int_num, mode)</td><td>constant int_num and mode</td></tr>
+    <tr><td><span class="function_ref" link="GPT/zunoGPTEnable">zunoGPTEnable</span></span>(mode)</td><td>mode: a constant</td></tr>
+    <tr><td><span class="function_ref" link="GPT/zunoGPTSet">zunoGPTSet</span>(value)</td><td>-</td></tr>
+    <tr><td><span class="function_ref" link="zunoFastPWM">zunoFastPWMEnable</span></span></span>(mode)</td><td>mode: a constant</td></tr>
+    <tr><td><span class="function_ref" link="zunoFastPWM">zunoFastPWMSet(a, b)</td><td>-</td></tr>
+    <tr><td><span class="function_ref">millis</span>()</td><td>(starting from 2.1.5)</td></tr>
+</table>
+
+<span class="function_syntax">ZUNO_SETUP_ISR_*(my_handler_func)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">*</span>
+        <span class="function_parameters_param_description">the name of the interrupt (see table below)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">my_handler_func</span>
+        <span class="function_parameters_param_description">the name of the user defined interrupt handler</span>
+    </span>
+</span>
+
+<br/><br/>
+<span class="function_description_more">
+<table>
+    <tr><th>Interrupt name</th><th>Description</th><th>Macro</th></tr>
+    <tr><td>INT0 rise/fall/change</td><td>Rise, fall or change of voltage on INT0 pin (pin 17)</td><td>ZUNO_SETUP_ISR_INT0(my_handler_func)</td></tr>
+    <tr><td>INT1 rise/fall/change</td><td>Rise, fall or change of voltage on INT1 pin (pin 18)</td><td>ZUNO_SETUP_ISR_INT1(my_handler_func)</td></tr>
+    <tr><td>ZEROX rise/fall/change</td><td>Rise, fall or change of voltage on ZEROX pin (pin 3)</td><td>ZUNO_SETUP_ISR_ZEROX(my_handler_func)</td></tr>
+    <tr><td>GPT</td><td>General purpose timer reached zero</td><td>ZUNO_SETUP_ISR_GPTIMER(my_handler_func)</td></tr>
+    <tr><td>1 millisecond tick</td><td>Executed every 1 millisecond</td><td>ZUNO_SETUP_ISR_1MSTIMER(my_handler_func)</td></tr>
+</tr>
+</table>
+</span>
+
+</div>

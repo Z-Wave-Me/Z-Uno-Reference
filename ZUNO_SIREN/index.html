@@ -1,0 +1,71 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SIREN()</h1>
+
+<span class="function_description">
+This macro is used to setup binary switch channel of type siren for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
+</span>
+
+<span class="function_syntax">ZUNO_SIREN(getter, setter)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">getter</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current value for this channel.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">setter</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new value is received for this channel. </span>
+    </span>
+</span>
+
+<span class="function_description">
+Functions getter should return 0 for Off and any non-zero value for On
+</span>
+<span class="function_syntax">BYTE getter(void)</span>
+
+<span class="function_description">
+Functions setter accepts next values:
+<ul>
+    <li>0 for off</li>
+    <li>1-99 for on</li>
+    <li>>=100 - reserved value</li>
+</ul>
+</span>
+<span class="function_syntax">void setter(BYTE value)</span>
+
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SWITCH_BINARY / SPECIFIC_TYPE_SIREN with Switch Binary Command Class.
+</span>
+
+<span class="function_tip">
+You can make a battery power siren using FLiRS power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
+</span>
+
+<span class="function_description_note">
+This type is allowed only in ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE and ZUNO_SLEEPING_MODE_ALWAYS_AWAKE power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SIREN(getterFunction, setterFunction));
+           
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+}
+
+BYTE getterFunction() {
+    return currentValue;
+}
+
+void setterFunction(BYTE newValue) {
+    ...
+}
+        </code>
+    </pre>
+</span>
+</div>

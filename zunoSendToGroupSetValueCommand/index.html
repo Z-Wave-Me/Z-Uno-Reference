@@ -1,0 +1,25 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoSendToGroupSetValueCommand()</h1>
+<span class="function_description">
+    This function sends switch on/off commands (using Basic Command Class) to devices in association group defined as ZUNO_ASSOCIATION_GROUP_SET_VALUE or ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM (see <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>).
+</span>
+<span class="function_syntax">
+    zunoSendToGroupSetValueCommand(CTRL_GROUP_n, value)
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">CTRL_GROUP_n</span>
+        <span class="function_parameters_param_description">number of group: CTRL_GROUP_1, ... CTRL_GROUP_5</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">0 (off) or 255 (on)</span>
+    </span>
+    </span>
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">zunoSendToGroupSetValueCommand(CTRL_GROUP_1, 50); // Dim to 50%</code>
+    </pre>
+</span> 
+</div>

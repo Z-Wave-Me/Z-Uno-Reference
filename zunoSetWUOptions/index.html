@@ -1,0 +1,57 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoSetWUOptions()</h1>
+
+<span class="function_description">
+This call instructs Z-Uno to wake up on INT1 going LOW or HIGH or on Key Scanner button press detection.
+</span>
+
+<span class="function_description_more">
+The built-in hardware keypad scanner is able to scan a key matrix of up to 7 rows x 16 columns. When the Keypad Scanner is activated, the 7 row inputs (pins 17-23) must either be connected to the hardware key matrix or kept open. The number of columns can be configured to the range 1-16. The actual pins being used as column outputs are 9 when the column count is set to one, 9 and 10 when the column count is set to two, 9, 10 and 11 when the column count is set to three, etc.
+</span>
+
+<span class="function_description_more">
+Full list of pins available as columns is the following (ordered): 9-16, 8-3, TX0, RX0
+</span>
+
+<span class="function_description_more">
+Once the Keypad Scanner is enabled, it will scan each column for an amount of time (set it as output and change voltage). If voltage on rows (pins 17-23) will change correspondingly, the button is assumend as pressed.
+at a certain column detects a key press.
+</span>
+
+<span class="function_description_more">
+Check <a href="../../technical/pinout.1.html">Z-Uno pinout</a>
+</span>
+
+<span class="function_syntax">zunoSetWUOptions(reason)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">reason</span>
+        <span class="function_parameters_param_description">ZUNO_WUPFLAGS_INT1_HIGH or ZUNO_WUPFLAGS_INT1_LOW or ZUNO_WUPFLAGS_INT1_KEYSCAN</span>
+    </span>
+</span>
+<span class="function_returns">
+none
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">#define LED_PIN 13
+
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING);
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);      // set LED pin as output
+  zunoSetWUOptions(ZUNO_WUPFLAGS_INT1_KEYSCAN); // turn INT1 wakeup into Key Scanner mode
+                                 // can also be called in any other place before zunoSendDeviceToSleep()
+}
+
+void loop() {
+  digitalWrite(LED_PIN, HIGH);   // turn LED on
+  delay(1000);                   // wait for 1 second
+  digitalWrite(LED_PIN, LOW);    // turn LED off
+  delay(1000);                   // wait for 1 second
+
+  zunoSendDeviceToSleep();	     // go to sleep
+}</code></pre></span>  
+
+</div>

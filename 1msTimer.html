@@ -1,0 +1,32 @@
+<div id="page" role="main" itemprop="description">
+    <h1>1 millisecond Timer</h1>
+<span class="function_description">
+1 millisecond Timer is similiar to <span class="function_ref">GPT</span> but ticks only every 1 millisecond. It does not have any restriction or conflicts with PWM pins. It allows to measure relatively big delays to control time critical processes as well as contolling servo motors.
+</span>
+
+<span class="function_description_more">
+To set up a user handler function use ZUNO_SETUP_ISR_1MSTIMER macro to as describted <span class="function_ref" link="Interrupts">here</span>.
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">ZUNO_SETUP_ISR_1MSTIMER(m1ms_handler);
+
+unsigned long count_1ms = 0;
+
+void m1ms_handler() {
+    count_1ms++;
+}
+
+void setup() {
+    Serial.begin(115200);
+}
+
+void loop() {
+    Serial.println(count_1ms);
+    delay(1000);
+}
+</code>
+</pre>
+</span>
+</div>

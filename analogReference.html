@@ -1,0 +1,39 @@
+<div id="page" role="main" itemprop="description">
+    <h1>analogReference()</h1>
+<span class="function_description">
+Set reference voltages for ADC used in <span class="function_ref">analogRead</span>().
+</span>
+
+<span class="function_syntax">analogReference(referenceMask)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">referenceMask</span>
+        <span class="function_parameters_param_description">ORed mask of values from the table below</span>
+    </span>
+</span>
+
+<span class="function_returns">
+None
+</span>
+
+<br/><br/>
+
+<span class="function_description_more">
+<table>
+    <tr><th>Value to be ORed</th><th>Upper voltage reference</th><th>Voltage reference</th></tr>
+    <tr><td>ADC_HIGH_EXTERNAL</td><td>A0 pin as upper reference voltage</td><td>Voltage on A0 pin</td></tr>
+    <tr><td>ADC_HIGH_INTERNAL</td><td>Internal voltage reference 1.2 V as upper reference voltage (NB! there might be a ±10% drift from Z-Uno to Z-Uno, but constant for a particular Z-Uno!)</td><td>1.2 V</td></tr>
+    <tr><td>ADC_HIGH_VCC</td><td>Vcc as upper reference voltage</td><td>Voltage on Vcc pin</td></tr>
+    <tr><th>Value to be ORed</th><th>Lower voltage reference</th><th>Voltage reference</th></tr>
+    <tr><td>ADC_LOW_EXTERNAL</td><td>A1 pin as lower reference voltage</td><td>Voltage on A1 pin</td></tr>
+    <tr><td>ADC_LOW_GND</td><td>GND as lower reference voltage</td><td>Voltage on GND pin</td></tr>
+    <tr><th>Value</th><th>Pre-defined (Arduino-like) combinations</th><th>Voltage reference</th></tr>
+    <tr><td>DEFAULT <b>(default)</b></td><td>GND&ndash;Vcc</td><td><nobr>(ADC_HIGH_VCC | ADC_LOW_GND)</nobr></td></tr>
+    <tr><td>INTERNAL</td><td>GND&ndash;1.2V</td><td><nobr>(ADC_HIGH_INTERNAL | ADC_LOW_GND)</nobr></td></tr>
+    <tr><td>EXTERNAL</td><td>GND&ndash;A0</td><td><nobr>(ADC_HIGH_EXTERNAL | ADC_LOW_GND)</nobr></td></tr>
+</tr>
+</table>
+</span>
+
+</div>

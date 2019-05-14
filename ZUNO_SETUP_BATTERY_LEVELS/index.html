@@ -1,0 +1,40 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SETUP_BATTERY_LEVELS()</h1>
+<span class="function_description">
+By default Z-Uno automatically maps battery voltage from 2.7V&ndash;3.0V to 0%&ndash;100% by measuring the voltage on the 3V3 pin. But some batteries might require different mapping. In thace case one can define the correct mapping.
+</span>
+
+<span class="function_syntax">
+    ZUNO_SETUP_BATTERY_LEVELS(min, max)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">min</span>
+        <span class="function_parameters_param_description">value corresponding to empty battery (0%) in mV, WORD
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">max</span>
+        <span class="function_parameters_param_description">value corresponding to full battery (100%) in mV, WORD
+        </span>
+    </span>
+</span>
+
+<span class="function_description_note">
+Battery is reported only if device is configured as sleeping (<span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> or <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span>).
+</span>
+
+<span class="function_description_note">
+Ignored if <span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span>()</b> is specified.
+</span>
+
+<span class="function_example">
+<pre><code class="c">ZUNO_SETUP_BATTERY_LEVELS(2700, 3300);</code></pre>
+</span>
+
+<span class="function_see_also">
+<span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span>
+</span>
+
+</div>

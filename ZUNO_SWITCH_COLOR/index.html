@@ -1,0 +1,64 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SWITCH_COLOR()</h1>
+
+<span class="function_description">
+This macro is used to setup color switch channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
+</span>
+
+<span class="function_syntax">ZUNO_SWITCH_COLOR(flags, getter, setter)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">flags</span>
+        <span class="function_parameters_param_description">Byte mask with supported colors. There are predefined constants named SWITCH_COLOR_FLAGS_*. Exact list can be found in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">getter</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current value of a specified component for this channel.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">setter</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new value is received for this channel. Setter function will accept one parameter with values from 0 (off) to 99 (maximum)</span>
+    </span>
+</span>
+
+<span class="function_description">
+Functions getter should return 0-255, where 0 is Off and 255 is maximal brightness. Parameter component refers to the color component (see SWITCH_COLOR_COMPONENT_* in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.
+</span>
+<span class="function_syntax">BYTE getter(BYTE component)</span>
+
+<span class="function_description">
+Functions setter accepts values 0-255 (0 is Off, 255 is maximal value). Parameter component refers to the color component (see SWITCH_COLOR_COMPONENT_* in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.
+</span>
+<span class="function_syntax">void setter(BYTE component, BYTE value)</span>
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SWITCH_MULTILEVEL / SPECIFIC_TYPE_COLOR_TUNABLE_MULTILEVEL with Switch Color Command Class.
+</span>
+
+<span class="function_description_note">
+This type is allowed only in ZUNO_SLEEPING_MODE_ALWAYS_AWAKE power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunction, setterFunction))
+           
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+}
+
+BYTE getterFunction(BYTE component) {
+    return currentValue;
+}
+
+void setterFunction(BYTE component, BYTE newValue) {
+    ...
+}</code>
+    </pre>
+</span>
+</div>

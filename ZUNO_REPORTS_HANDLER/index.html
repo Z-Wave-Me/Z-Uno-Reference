@@ -1,0 +1,80 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_REPORTS_HANDLER()</h1>
+
+<span class="function_description">
+This macro is used to setup up a handler for incoming reports from other sensors.
+</span>
+
+<span class="function_syntax">ZUNO_REPORTS_HANDLER(reportHandler)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">reportHandler</span>
+        <span class="function_parameters_param_description">pointer to a user defined function that parses the incoming report.</span>
+    </span>
+</span>
+
+<span class="function_syntax">void reportHandler(void)</span>
+
+<span class="function_tip">
+There are few helpful marco to parse the reported data inside the report handler:
+<ul>
+    <li>REPORT_TYPE() returns the type of the report: CC_BASIC, CC_SWITCH_BINARY, CC_SWITCH_MULTILEVEL, CC_SENSOR_BINARY, CC_SENSOR_MULTILEVEL, CC_METER, CC_THERMOSTAT_MODE, CC_THERMOSTAT_SETPOINT.</li>
+    <li>REPORT_GROUP_ID() returns the first group containing the sender or 255 if the sender is not present in any group</li>
+    <li>REPORT_NODE_ID() returns the sender Node Id</li>
+
+    <li>REPORT_VALUE_1B() returns the BYTE value contained in the Switch Binary, Switch Multilevel, Sensor Binary/Notification, Door Lock, Thermostat Mode reports as well as Sensor Multilevel, Meter or Thermostat temperature report with size = 1 bytes</li>
+    <li>REPORT_VALUE_2B() returns the WORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 2 bytes</li>
+    <li>REPORT_VALUE_4B() returns the DWORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 4 bytes</li>
+    
+    <li>REPORT_SENSOR_TYPE() returns sensor type</li>
+    <li>REPORT_SENSOR_SCALE() returns sensor scale</li>
+    <li>REPORT_SENSOR_VALUE_UNITS() returns sensor units</li>
+    <li>REPORT_SENSOR_VALUE_PRECISION() returns sensor precision (number of digits after .)</li>
+    <li>REPORT_SENSOR_VALUE_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
+    
+    <li>REPORT_METER_TYPE() returns meter type</li>
+    <li>REPORT_METER_RATE() returns meter rate</li>
+    <li>REPORT_METER_VALUE_UNITS() returns meter units</li>
+    <li>REPORT_METER_VALUE_PRECISION() returns meter precision (number of digits after .)</li>
+    <li>REPORT_METER_VALUE_SIZE() returns Meter value size (1, 2 or 4 bytes)</li>
+</ul>
+
+If you need to parse the report outside of the report handler, use CLONE_REPORT_DATA(<i>variable</i>) to copy the report data to a <i>variable</i>. Then use EXTRACT_*(<i>variable</i>) macro to extract data from the copy of the report.
+</span>
+
+<span class="function_description_note">
+Z-Uno will save the highest security level it used to communicate with a devices. The save value will be expected for a report.
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_REPORTS_HANDLER(reportHandler);
+
+void reportHandler() {
+  ... REPORT_VALUE_1B() ...
+}</code></pre>
+</span>
+
+<span class="function_description_note">
+It is suggested to return as fast as possible from the reports handler and do the main work in the loop().
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_REPORTS_HANDLER(reportHandler);
+
+// memory to store the incoming report
+REPORT_DATA_TYPE report_data;
+
+void reportHandler() {
+  CLONE_REPORT_DATA(report_data);
+  ...
+}
+
+void loop() {
+    ... EXTRACT_REPORT_VALUE_1B(report_data) ...
+}</code></pre>
+</span>
+
+</div>

@@ -1,0 +1,37 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoSendAssociationCommand()</h1>
+<span class="function_description">
+This function instructs Z-Uno to send a control sequence to an association group. This is a more generic function than <span class="function_ref">zunoSendToGroupSetValueCommand</span>(), <span class="function_ref">zunoSendToGroupDimmingCommand</span>(), <span class="function_ref">zunoSendToGroupScene</span>(), <span class="function_ref">zunoSendToGroupDoorlockControl</span>().
+</span>
+
+<span class="function_description_more">
+Association groups are defined via macro <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>() or via dynamic function <span class="function_ref">zunoAddAssociation</span>().
+</span>
+
+<span class="function_syntax">zunoSendAssociationCommand(CTRL_GROUP_n, group_type, value1, value2)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">CTRL_GROUP_n</span>
+        <span class="function_parameters_param_description">number of group: CTRL_GROUP_1, ... CTRL_GROUP_5
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">group_type</span>
+        <span class="function_parameters_param_description">Type of the command to send: ZUNO_ASSOC_BASIC_SET_NUMBER, ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER, 	ZUNO_ASSOC_SCENE_ACTIVATION_NUMBER, ZUNO_ASSOC_DOORLOCK_CONTROL_NUMBER as defined in <a hre="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a></span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value1</span>
+        <span class="function_parameters_param_description">Dimming value, scene Id or direction</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value2</span>
+        <span class="function_parameters_param_description">start or stop for dimming (otherwise ignored)</span>
+    </span>
+</span>
+
+<span class="function_description_note">
+It is recommended to use one of <span class="function_ref">zunoSendToGroupSetValueCommand</span>(), <span class="function_ref">zunoSendToGroupDimmingCommand</span>(), <span class="function_ref">zunoSendToGroupScene</span>(), <span class="function_ref">zunoSendToGroupDoorlockControl</span>() instead.
+</span>
+
+</div>

@@ -1,0 +1,60 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoSendReport()</h1>
+<span class="function_description">
+Instruct Z-Uno to send an unsolicited report to the controller.
+</span>
+<span class="function_description_more">
+Usually called in case of an event, i.e. when temperature/luminosity/wind speed/... changes too much or sensor state changes or button pressed.
+</span>
+<span class="function_description_more">
+Reports are sent to all devices members of Life Line Association group (group #1). These are unsolicited reports means they are not answers to a corresponding Get command.
+</span>
+
+<span class="function_syntax">
+    zunoSendReport(channelNumber)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">channelNumber</span>
+        <span class="function_parameters_param_description">Number of channel as defined in <span class="function_ref">ZUNO_SETUP_CHANNELS</span>() staring from 1.</span>
+    </span>
+</span>
+
+<span class="function_description_note">
+According to Z-Wave Plus restrictions, values from Sensor Multilevel channels (defined via <span class="function_ref">ZUNO_SENSOR_MULTILEVEL</span> macro) will not be sent unsolicitedly to Life Line more often than every 30 seconds. At the same time Z-Uno will answer instantly on Sensor Multilevel Get command (solicited report). You can also change this time using <a href="../../z-wave/configuration-parameters/index.html">configuration parameter #11</a>. This restriction is not applicable to other channel types.
+</span>
+
+<span class="function_description_note">
+If the sketch have more than one channel of the same type and simple association is used (means set up using Association Command Class) to association Life Line group with the controller, unsolicited reports will be sent only from the first channel of that type. To get all unsolicited reports from Z-Uno a channel association is required (means set up using MultiChannel Association Command Class).
+</span>
+<span class="function_description_more">
+For example instead of association of Life Line group with node 1 (controller) use association with 1:0 (node 1, channel 0). This will instruct Z-Uno to send MultiChannel encapsulated reports.
+</span>
+<span class="function_description_more">
+This is 100% Z-Wave Plus compliant. But some (mostly old) controllers might not yet support this behavior.
+</span>
+
+<span class="function_example">
+     <pre>
+         <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY(ZUNO_SENSOR_BINARY_TYPE_GENERAL_PURPOSE, getter));
+         
+void setup() {
+  ...
+}
+
+void loop() {
+  if (currentValue != lastValue) {
+    lastValue = currentValue;
+    zunoSendReport(1);
+  }
+}
+
+byte getter(void) {
+    return currentValue;
+}
+         </code>
+     </pre>
+ </span>
+
+</div>

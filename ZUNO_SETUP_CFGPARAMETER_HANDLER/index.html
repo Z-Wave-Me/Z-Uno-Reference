@@ -1,0 +1,107 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SETUP_CFGPARAMETER_HANDLER()</h1>
+<span class="function_description">
+Z-Uno can be configured using standard Z-Wave Configuration feature. A Z-Wave controller can push parameter values to Z-Uno to tune Z-Uno behavior without changing Z-Uno sketch.
+<br/><br/>
+This macro defines the handler to be called on Configuration parameter change.
+<br/><br/>
+Z-Uno supports up to 32 configurable parameters.
+</span>
+
+<span class="function_syntax">
+    ZUNO_SETUP_CFGPARAMETER_HANDLER(config_parameter_changed)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">config_parameter_changed</span>
+        <span class="function_parameters_param_description">Function to be called on parameters changed from the Z-Wave network. Function prototype is:
+            <br/>
+            <code>void config_parameter_changed(byte param, word * value)</code>
+            <br/>
+            param is the parameter number.
+            <br/>
+            value is the new value in 2-bytes representation 
+        </span>
+    </span>
+</span>
+
+<span class="function_description_more">
+Configuration parameters are automatically saved to the EEPROM. You can get them from the EEPROM at any time (even after reboot) using zunoLoadCFGParam(param, &value) or save (to be reported back to the controller upon request) using zunoSaveCFGParam(param, &value)
+</span>
+
+<span class="function_syntax">
+    zunoLoadCFGParam(byte param, word * value);
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">param</span>
+        <span class="function_parameters_param_description">Number of the parameter to be loaded from the EEPROM (starts from 64)</code>
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">reference to the word variable to load the value to</code>
+        </span>
+    </span>
+</span>
+
+<span class="function_syntax">
+    zunoSaveCFGParam(byte param, word * value);
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">param</span>
+        <span class="function_parameters_param_description">Number of the parameter to be saved to the EEPROM (starts from 64)</code>
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">reference to the word variable to take the value from</code>
+        </span>
+    </span>
+</span>
+
+<span class="function_description_note">
+Parameters on the Z-Wave controller side are numbered from 64 to 96.
+</span>
+
+<span class="function_description_note">
+Note that Configuration parameters are signed values when defined in the Z-Wave controller.
+</span>
+
+<span class="function_description_note">
+Prior to version 2.1.4 parameters were 4 bytes (dword). Starting from 2.1.4 parameters are now two bytes (word).
+</span>
+
+<span class="function_example">
+     <pre>
+         <code class="c">word paramValue;
+
+ZUNO_SETUP_CFGPARAMETER_HANDLER(config_parameter_changed);
+
+void setup() {
+  zunoLoadCFGParam(64, &amp;paramValue);
+}
+
+void config_parameter_changed(byte param, word * value) {
+    if(param == 64) { // The first user-defined parameter 
+      paramValue = *value;  
+    }
+}
+
+void loop() {
+}</code></pre>
+ </span> 
+
+<span class="function_description_note">
+    Configuration parameters values are stored in the <span class="function_ref">EEPROM</span>.
+</span>
+
+<span class="function_see_also">
+    Get more information about <span class="function_ref">Z-Wave</span>.
+</span>
+
+</div>

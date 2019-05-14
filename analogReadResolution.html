@@ -1,0 +1,31 @@
+<div id="page" role="main" itemprop="description">
+    <h1>analogReadResolution()</h1>
+<span class="function_description">
+Set resolution of ADC used in <span class="function_ref">analogRead</span>().
+This means that it will map input voltages between 0 and Vcc (about 3 V) into integer values between 0 and 2<sup>resolution</sup>-1.
+</span>
+
+<span class="function_syntax">analogReadResolution(resolution)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">resolution</span>
+        <span class="function_parameters_param_description">the number bits to use: 1&ndash;16</span>
+    </span>
+</span>
+
+<span class="function_returns">
+None
+</span>
+
+<span class="function_description_more">
+Most popular resolutions are:
+<table>
+    <tr><th>resolution in bits</th><th>Description</th><th>range of values returned by <span class="function_ref">analogRead</span>()</th></tr>
+    <tr><td>10 (default)</td><td>Arduino Uno compatibility mode</td><td>0&ndash;1023</td></tr>
+    <tr><td>12</td><td>maximum possible in Z-Uno</td><td>0&ndash;4095</td></tr>
+    <tr><td>8</td><td>can save energy in battery devices (uses special mode of Z-Wave MCU to make ADC faster)</td><td>0&ndash;255</td></tr>
+</table>
+</span>
+
+</div>

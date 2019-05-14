@@ -1,0 +1,19 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoReboot()</h1>
+<span class="function_description">
+Reboot Z-Uno. This function uses internally watch dog with an infinite loop. The sketch will restart from the beginning.
+</span>
+
+<span class="function_syntax">
+    zunoReboot()
+</span>
+
+<span class="function_description_note">
+If the service button is pulled down, your sketch will not boot anymore and Z-Uno will enter in <a href="../../getting-started/troubleshooting.html#Z-UnoHangs">Rescue mode</a>.
+</span>
+
+<span class="function_description_note">
+If your sketch requires periodical reboot to work properly, your sketch has huge problems! We suggest to debug it instead of doing a workaround with a reboot. In most cases your code hangs due to stack overflow. Use reboot only for debugging purpose.
+</span>
+
+</div>

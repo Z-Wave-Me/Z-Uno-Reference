@@ -1,0 +1,107 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_START_CONFIG()</h1>
+
+<span class="function_description">
+This function instructs Z-Uno to start channels and association configuration. Use it to configure your Z-Uno right from the user code.
+</span>
+
+<span class="function_description_note">
+After changing the number or types of channels or association groups Z-Uno must be excluded and included back. Z-Uno will not adopt any channel type change without being excluded. (A <a href="../../z-wave/configuration-parameters/index.html">debug configuration parameter</a> can disable this restriction).
+</span>
+
+<span class="function_syntax">ZUNO_START_CONFIG()</span>
+
+<span class="function_see_also">
+Z-Uno dynamic configuration uses the following functions:
+<ul>
+    <li>ZUNO_START_CONFIG(),</li>
+    <li><span class="function_ref">ZUNO_ADD_CHANNEL</span>(),</li>
+    <li><span class="function_ref">ZUNO_ADD_ASSOCIATION</span>(),</li>
+    <li><span class="function_ref">ZUNO_COMMIT_CONFIG</span>(),</li>
+    <li><span class="function_ref">ZUNO_GET_CONFIG_STATE</span>(),</li>
+</ul>
+</span>
+
+<span class="function_see_also">
+Good examples of usage of dynamic configuration can be found in <a href="../../examples/z-uno-as-a-modem.html">Modem example</a> or <a href="../../examples/multiple-dynamic-1-wire-ds18b20-temperature-sensors.html">multiple DS18B20 temperature sensors</a>.
+</span>
+
+<span class="example_code">
+Below is the Radio Blink sketch from Z-Uno paper manual made in static style
+<pre>
+<code class="c">
+byte dimmerValue=0xFF;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  dimmerValue = 100;
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
+}
+
+void setSwitchMultilevelValue(byte newValue) {
+  dimmerValue = newValue;
+}
+
+byte getSwitchMultilevelValue(void) {
+  return dimmerValue;
+}
+</code></pre>
+</span>
+
+<span class="example_code">
+Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic style
+<pre>
+<code class="c">
+byte dimmerValue=0xFF;
+
+void setup() {
+  ZUNO_START_CONFIG();
+  ZUNO_ADD_CHANNEL(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0);
+  ZUNO_COMMIT_CONFIG();
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  dimmerValue = 100;
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
+}
+
+void setSwitchMultilevelValue(byte newValue) {
+  dimmerValue = newValue;
+}
+
+byte getSwitchMultilevelValue(void) {
+  return dimmerValue;
+}
+
+void zunoCallback(void) {
+    switch(callback_data->type) {
+       case  ZUNO_CHANNEL1_GETTER:
+          callback_data->param.bParam = getSwitchMultilevelValue();
+          break;
+       case  ZUNO_CHANNEL1_SETTER:
+          setSwitchMultilevelValue(callback_data->param.bParam);
+          break;
+
+        default:
+          break;
+    }
+}
+</code></pre>
+</span>
+
+
+
+</div>

@@ -1,0 +1,48 @@
+<div id="page" role="main" itemprop="description">
+    <h1>General Purpose Timer</h1>
+<span class="function_description">
+General Purpose Timer (GPT) allows to measure precisely time and execute actions right after timer reaches zero. This allows a very accurate control over time critical processes as well as contolling servo motors.
+</span>
+
+<span class="function_description_more">
+To set up a user handler function to be called by GPT define it as described <span class="function_ref" link="Interrupts">here</span> using ZUNO_SETUP_ISR_GPTIMER macro.
+</span>
+
+<span class="function_description_note">
+<span class="function_ref" link="analogWrite">PWM/analogWrite()</span> can not be used when GPT is enabled!
+</span>
+
+<span class="function_description_more">GPT is configured using the following functions:
+<ul>
+    <li><span class="function_ref" link="GPT/zunoGPTInit">zunoGPTInit</span>()</li>
+    <li><span class="function_ref" link="GPT/zunoGPTEnable">zunoGPTEnable</span>()</li>
+    <li><span class="function_ref" link="GPT/zunoGPTSet">zunoGPTSet</span>()</li>
+</ul>
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">ZUNO_SETUP_ISR_GPTIMER(gpt_handler);
+
+unsigned long count_gpt = 0;
+
+void gpt_handler() {
+    count_gpt++;
+}
+
+void setup() {
+    zunoGPTInit(ZUNO_GPT_SCALE1024|ZUNO_GPT_CYCLIC);	
+    zunoGPTSet(65000);
+    zunoGPTEnable(1); 
+    
+    Serial.begin(115200);
+}
+
+void loop() {
+    Serial.println(count_gpt);
+    delay(1000);
+}
+</code>
+</pre>
+</span>
+</div>

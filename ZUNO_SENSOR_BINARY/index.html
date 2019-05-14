@@ -1,0 +1,70 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_SENSOR_BINARY()</h1>
+<span class="function_description">
+This macro is a generic macro to be used to setup binary sensor channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>. Instead we suggest to use one of the specific macro ZUNO_SENSOR_BINARY_* from the list below.
+This type (and 3 other) affects only the display on the controller.
+</span>
+
+<span class="function_syntax">
+    ZUNO_SENSOR_BINARY(type, getter)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">type of channel like ZUNO_SENSOR_BINARY_TYPE_DOOR, ZUNO_SENSOR_BINARY_TYPE_SMOKE,.. etc. Used to correctly display the sensor in the Z-Wave controller. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> and starts with ZUNO_SENSOR_BINARY_TYPE_</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">getter</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current value for this channel. </span>
+    </span>
+</span>
+
+<span class="function_description">
+Functions getter should return 0 for non-triggered state and any non-zero for triggered state.
+</span>
+<span class="function_syntax">BYTE getter(void)</span>
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SENSOR_NOTIFICATION / SPECIFIC_TYPE_NOTIFICATION_SENSOR
+ with Notification and Sensor Binary (for legacy suport) Command Classes.
+</span>
+
+<span class="function_example">
+       <pre>
+           <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY(ZUNO_SENSOR_BINARY_TYPE_SMOKE, getterFunction));
+           
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+}
+
+byte getterFunction() {
+    return currentValue;
+}
+        </code>
+    </pre>
+</span>
+
+<span class="function_description_more">
+Popular sensor types have pre-defined macro. Few are listed below. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> file and starts with ZUNO_SENSOR_BINARY_
+</span>
+
+<span class="function_syntax">
+ZUNO_SENSOR_BINARY_GENERAL_PURPOSE(getter)<br/>
+ZUNO_SENSOR_BINARY_SMOKE(getter)<br/>
+ZUNO_SENSOR_BINARY_CO(getter)<br/>
+ZUNO_SENSOR_BINARY_CO2(getter)<br/>
+ZUNO_SENSOR_BINARY_HEAT(getter)<br/>
+ZUNO_SENSOR_BINARY_WATER(getter)<br/>
+ZUNO_SENSOR_BINARY_FREEZE(getter)<br/>
+ZUNO_SENSOR_BINARY_TAMPER(getter)<br/>
+ZUNO_SENSOR_BINARY_DOOR_WINDOW(getter)<br/>
+ZUNO_SENSOR_BINARY_MOTION(getter)<br/>
+ZUNO_SENSOR_BINARY_GLASSBREAK(getter)
+</span>
+
+</div>

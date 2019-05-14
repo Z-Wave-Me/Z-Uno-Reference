@@ -1,0 +1,89 @@
+<div id="page" role="main" itemprop="description">
+    <h1>digitalRead()</h1> 
+
+<span class="function_description">Reads the value from a specified digital pin, either <span class="function_ref">HIGH</span> or <span class="function_ref">LOW</span></a>.</span>
+
+<span class="function_description_more">
+Check <a href="../technical/pinout.1.html">Z-Uno pinout</a>
+</span>
+
+<span class="function_syntax">digitalRead(pin)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the number of the digital pin you want to read </span>
+    </span>
+</span>
+
+<span class="function_returns">
+<span class="function_ref">HIGH</span> or <span class="function_ref">LOW</span>
+</span>
+
+<span class="function_sideeffect">
+If pin is not in <span class="function_ref">INPUT</span> or <span class="function_ref">INPUT_PULLUP</span> mode, automatically changes pin mode to INPUT as <span class="function_ref">pinMode</span>(pin, INPUT) was called.
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+  pinMode(13, OUTPUT);      // sets the digital pin 13 as output
+  pinMode(7, INPUT);        // sets the digital pin 7 as input
+}
+
+void loop() {
+  BYTE val;
+  
+  val = digitalRead(7);     // read the input pin
+  digitalWrite(13, val);    // sets the LED to the button's value
+}
+</code></pre></span>
+
+<span class="function_description_note">
+Z-Uno pin control is pretty slow, typical digitalRead() call will take itself about 1 ms. Hence it is not possible to do fast pin operations except on pins 9&ndash;16 that allows special "fast mode". To use this fast mode one need to specify pin number via <span class="function_ref">s_pin</span> variable type. Z-Uno compiler will detect it and use fast mode for such digitalRead() calls. In this case the call will take about 1&ndash;2 μs for indirect call (via function) and 0.5 μs for direct (see example below).
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">s_pin my_pin = 9;
+
+void setup() {
+  pinMode(my_pin, INPUT);
+}
+
+// timeout and return are in loop periods = 10 us + execution time of digitalRead + time of loop and compatison operands execution
+// it should be measured on a particular version of Z-Uno s/w (might change from version to version)
+int readPulseLength(s_pin pin, int timeoutCount) {
+  int __timeoutCount;
+  pinMode(pin, INPUT);
+
+  __timeoutCount = timeoutCount;
+  while(digitalRead(pin) != HIGH && timeoutCount-- > 0) {
+    // wait for HIGH state (pulse start) or timeout
+    delayMicroseconds(10);
+  }
+  if (timeoutCount == 0) return -1;
+
+  __timeoutCount = timeoutCount;
+  while(digitalRead(pin) != LOW && timeoutCount-- > 0) {
+    // wait for LOW state (pulse end) or timeout
+    delayMicroseconds(10);
+  }
+  if (timeoutCount == 0) return -1;
+  else return timeoutCount * 10;
+}
+
+void loop() {
+  byte another_pin;
+  int length;
+
+  byte result = digitalRead(my_pin);       // direct call is possible
+    
+  another_pin = 10;
+  length = readPulseLength(another_pin);   // or call via function
+}
+</code>
+</pre>
+</span>  
+
+</div> 

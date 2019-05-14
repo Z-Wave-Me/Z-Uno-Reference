@@ -1,0 +1,35 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_ADD_ASSOCIATION()</h1>
+<span class="function_description">
+This function instructs Z-Uno to add one more association group during dynamic configuration.
+</span>
+
+<span class="function_description_more">
+This function can be called many times to add more groups. Association groups are numbered from 2 to 6 (1 is Life Line, see <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>() for more info).
+</span>
+
+<span class="function_description_note">
+Z-Uno supports up to 5 association groups
+</span>
+
+<span class="function_syntax">ZUNO_ADD_ASSOCIATION(type)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">association group type:
+            <ol>
+                <li>ZUNO_ASSOC_BASIC_SET_NUMBER</li>
+                <li>ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER</li>
+                <li>ZUNO_ASSOC_SCENE_ACTIVATION_NUMBER</li>
+                <li>ZUNO_ASSOC_DOORLOCK_CONTROL_NUMBER</li>
+            </ol>
+        </span>
+    </span>
+</span>
+
+<span class="function_see_also">
+Examples can be found in the description of <span class="function_ref">ZUNO_START_CONFIG</span>.
+</span>
+
+</div>

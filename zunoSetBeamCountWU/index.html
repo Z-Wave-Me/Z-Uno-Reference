@@ -1,0 +1,36 @@
+<div id="page" role="main" itemprop="description">
+    <h1>zunoSetBeamCountWU()</h1>
+<span class="function_description">
+This function tells when to wake up Z-Uno in FLiRS mode even if no packets were received.
+</span>
+
+<span class="function_description_more">
+For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span> mode Z-Uno will wake up on packet recieved, after a wake up period defined using zunoSetBeamCountWU() or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.
+</span>
+
+<span class="function_syntax">
+    zunoSetBeamCountWU(sleep_time_in_beams_periods)
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">sleep_time_in_beams_periods (byte)</span>
+        <span class="function_parameters_param_description">Sleep time in beam periods. 0 (default) to disable periodical wakeup (Z-Uno will wake up only on an incoming packet and on external interrupts). Currently Z-Uno supports only 1 second beams, so this is in seconds.</span>
+    </span>
+</span>
+
+If not set, Z-Uno will wake up
+
+<span class="function_example">
+<pre>
+<code class="c">
+void loop() { 
+  zunoSetBeamCountWU(10); // wake up after 10 second if no packets received
+  zunoSendDeviceToSleep();
+}</code>
+</pre>
+</span>
+
+<span class="function_see_also">
+    <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span>
+</span>
+</div>

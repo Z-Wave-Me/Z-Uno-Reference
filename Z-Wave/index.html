@@ -1,0 +1,204 @@
+<div id="page" role="main" itemprop="description">
+    <style>.text-center{text-align:center;}.text-right{text-align:right}.text-justify{text-align:justify;}</style><h1>Z-Wave in Z-Uno</h1>
+<p>Z-Wave is a wireless home automation protocol. Designed for DIY and IoT it is very simple to deploy in your home.</p>
+
+<p>Working on sub-gigahertz frequencies it does not have interference with other wireless systems like WiFi, Bluetooth, LTE and others. In different regions Z-Wave frequencies differs and <a href="https://www.silabs.com/products/wireless/mesh-networking/z-wave/benefits/technology/global-regions">varies from 860 to 930 MHz</a>. Z-Uno supports all Z-Wave frequencies. You can choose the required frequency in Arduino IDE.</p><p>
+Z-Uno delivers out of the box Z-Wave funtionality. Your sketch will interact with other Z-Wave products in your network via radio protocol according to <b>Z-Wave Plus</b> standards. You don't need to know deep Z-Wave protocol — Z-Uno will hide all Z-Wave internals and provide you simple to use functions.</p>
+
+<h2 link="Channels">Channels</h2>
+<p>To allow multiple functions in one device Z-Wave introduces <b>channels</b> (sometimes called instances). Z-Uno follows this concept allowing you to create very complex  devices. Each channel in Z-Uno will have it's own functionality. Each channel hosts only two Command Classes: Basic and one of Switch Binary/Switch Multilevel/Sensor Binary/Sensor Multilevel depending on the channel type. Use <span class="function_ref">ZUNO_SETUP_CHANNELS</span> macro to setup types of channels.</p>
+<p>You can also partially control Z-Uno without using channels: first channel of each type is <b>mapped</b> to the corresponding Command Class outside channels.</p>
+<p>Example: Z-Uno with channels #1 Switch Multilevel, #2 Switch Binary, #3 Switch Multilevel, #4 Sensor Binary, #5 Sensor Binary will allow to control without channels Switch Multilevel (from channel #1), Switch Binary (from channel #3) and Sennsor Binary (from channel #4).</p>
+<p>If no channels are specified, Z-Uno will present Sensor Binary (and Basic mapped to it) to report Service Button state.</p>
+<p>If there is only one channel, Z-Uno will not create any channels and will keep only Command Classes outside channels.</p>
+
+<h2 link="Basic interoperability">Basic interoperability</h2>
+<p>Z-Wave provides Basic interoperability between different devices from different manufacturers via Basic Command Class. This Command Class is <b>mapped</b> to the corresponding Switch Binary/Switch Multilevel/Sensor Binary/Sensor Multilevel depending on channel type. Basic outside of channel behaves like Basic on channel #1.</p>
+
+<h2 link="Associations">Associations</h2>
+<p>Z-Uno allows to report values from each channel (be it a sensors or switch channel) out of the box. This is know as Life Line.</p>
+
+<p>But it is also important to be able to control other devices in Z-Wave network. For this Z-Wave protocol introduces <b>association groups</b> or shortly associations. Association group is just a list of other devices in the network to whom Z-Uno is supposed to send some commands. This list is managed using standard UI provided by all existing Z-Wave controllers. Each association group is defined to have one of the allowed types depending on commands we want to be sent out. This can be control of switches or control of dimmers or even scenes switching. You can manage association groups using <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span> macro.</p>
+
+<p>Z-Uno Associations supports simple and channel (managed by Association and MultiChannel Association Command Classes correspondingly). Each group (control groups and Life Line) can host up to 5 entries.</p>
+
+<h2 link="Power management">Power management</h2>
+<p>Z-Wave was design to allow very low power  consumption profile. Hence, many sensors are battery powered and can work more than two years without battery replacement. But as a side effect, such devices have to sleep most of the time to save battery and wake up only for short period to send reports to controller upon environment changes (i.e. temperature has changed or button is pressed). In Z-Wave these devices are called <b>sleeping</b>. Usually all battery powered sensors are sleeping. Wakeup period can be configured via <b>Wakeup</b> Command Class from Z-Wave controller.
+</p>
+<p>To solve this reachability problems of battery devices Z-Wave allows another type of power management mode called <b>frequently listening</b> or FLiRS. These devices wake up every second to check if there is something for them in the ether and goes immediately back into sleep. In this mode initial communication to such device will take a bit more than one second and during this second the ether will be jammed. But after this the device will react very fast. The battery in this mode will last for only about one year. Usual applications of frequently listening is a battery operated switch, alarm or door lock.
+</p><p>
+All mains powered devices such as dimmers, switches and other actors are <b>always listening</b>. This means they are always reachable instantly, they always listen for ether and can act as <b>repeaters</b> for other devices forming mesh network.
+</p><p>
+Z-Uno supports all three types of power management modes. You can define it using <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span> macro in your sketch.</p>
+
+<h2 link="Configuration parameters">Configuration parameters</h2>
+<p>Beside defining Z-Uno behavior in the user sketch, there are also few configuration parameters. Some parameters can be defined only during sketch upload (via Arduino IDE menu), others can be changed wirelessly via Z-Wave Configuration. Get more details on <a href="../../z-wave/configuration-parameters/index.html">supported parameters</a>.</p>
+
+<h2 link="Include/exclude, wake up and sending NIF">Include/exclude, wake up and sending NIF</h2>
+<p>To become part of Z-Wave network Z-Uno need to be included (added) to the network using Z-Wave controller. Read more about <a href="../../getting-started/include-in-network.html">inclusion and exclusion processes</a>. Inclusion and exclusion are confirmed on Z-Uno by <b>three press on the Service button</b>. This sequence will also tell Z-Uno to send <b>Node Information Frame</b> (NIF).</p>
+<p>Once sleeping power mode is used, Z-Uno will remain in deep sleep most of the time. <b>Single press on Service button</b> will wake up Z-Uno.</p>
+
+<h2 link="Security">Security</h2>
+<p>Z-Wave protocol allows secure commands transmission to bring more privacy to your IoT network. To enable Security in Z-Uno use Arduino IDE menu item. Once Security is turned on Z-Uno will follow the rules below:</p>
+<ul>
+    <li>All control commands to Z-Uno must be secure.</li>
+    <li>All commands sent by Z-Uno (based on Association groups) follow rules:
+        <ul style="margin-bottom: 0; margin-top: 0;">
+            <li>First time Z-Uno tries to speak securelly.</li>
+            <li>If success, Z-Uno will memorize that this device must always be spoken securelly.</li>
+            <li>If fails, Z-Uno will remember this and send unsecure commands to such a device.</li>
+        </ul>
+        This allows to mix secure and unsecure devices in the same Association group.</li>
+    <li>Only descriptive Command Classes are accessible without of Security: Battery, Device Reset Locally, Firmware Update, Manufacturer Specific, Power Level, Version, Wakeup, Z-Wave Plus Info.</li>
+</ul>
+
+<p>Note that Z-Uno supports Z-Wave Security S2 or Security S0.</p>
+
+<h2 link="Command Classes">Command Classes</h2>
+<p>Z-Uno supports the following Command Classes:</p>
+<style>
+    table.CClist, table.CClist td {
+        border: none;
+        padding: 0px;
+        margin: 0px;
+    }
+    ul {
+        margin-top: -0.5em;
+    }
+</style>
+<table class="CClist">
+<tr>
+   <td>
+        <ul>
+            <li>Association</li>
+            <li>Association Group Information</li>
+            <li>Battery (for sleeping and FLiRS modes)</li>
+            <li>Basic</li>
+            <li>Configuration</li>
+        </ul>
+   </td>
+   <td>
+        <ul>
+            <li>Device Reset Locally</li>
+            <li>Firmware Update</li>
+            <li>Manufacturer Specific</li>
+            <li>MultiChannel</li>
+            <li>MultiChannel Association</li>
+        </ul>
+   </td>
+   <td>
+        <ul>
+            <li>Power Level</li>
+            <li>Security</li>
+            <li>Version</li>
+            <li>Wakeup (for sleeping mode)</li>
+            <li>Z-Wave Plus Info</li>
+        </ul>
+   </td>
+</tr>
+</table>
+
+<p>Depending on channels types Z-Uno will also support some of these Command Classes:</p>
+<ul>
+    <li>Sensor Binary</li>
+    <li>Sensor Multilevel</li>
+    <li>Meter</li>
+    <li>Switch Binary and Notification</li>
+    <li>Switch Multilevel</li>
+    <li>Switch Color</li>
+    <li>Door Lock</li>
+    <li>Thermostat Mode and Thermostat Setpoit</li>
+</ul>
+<p>Depending on Association Groups set up Z-Uno can control:</p>
+<ul>
+    <li>Basic</li>
+    <li>Door Lock</li>
+    <li>Switch Multilevel</li>
+    <li>Scene Activation</li>
+</ul>
+
+<h2 link="Device Classes">Device Classes</h2>
+<p>Z-Wave also defines so called Device Classes to allow better interoperability. Z-Uno will automatically set corresponding Device Class to each channel depending on channel type. Z-Uno Device Class will be same as Device Class of channel #1. If no channels are defined, Z-Uno will behave like Sensor Binary (see above).
+</p>
+
+<style>
+    table.centralized td {
+        text-align: center;
+    }
+</style>
+<table class="centralized">
+    <tr>
+        <th></th>
+        <th>Generic type</th>
+        <th>Specific type</th>
+    <tr>
+        <th>Sensor Binary</th>
+        <td>Sensor Notification</td>
+        <td>Notification Sensor</td>
+    </tr>
+        <th>Sensor Multilevel</th>
+        <td>Sensor Multilevel</td>
+        <td>Routing Sensor Multilevel</td>
+    <tr>
+        <th>Meter</th>
+        <td>Meter</td>
+        <td>Simple Meter</td>
+    </tr>
+    <tr>
+        <th>Switch Binary</th>
+        <td>Switch Binary</td>
+        <td>Power Switch Binary</td>
+    </tr>
+    <tr>
+        <th>Siren</th>
+        <td>Switch Binary</td>
+        <td>Siren</td>
+    </tr>
+    <tr>
+        <th>Flow Stop</th>
+        <td>Switch Binary</td>
+        <td>Valve Open Close</td>
+    </tr>
+    <tr>
+        <th>Switch Multilevel</th>
+        <td>Switch Multilevel</td>
+        <td>Power Switch Multilevel</td>
+    </tr>
+    <tr>
+        <th>Switch Color</th>
+        <td>Switch Multilevel</td>
+        <td>Color Tunable Multilevel</td>
+    </tr>
+    <tr>
+        <th>Blinds</th>
+        <td>Switch Multilevel</td>
+        <td>Motor multiposition</td>
+    </tr>
+    <tr>
+        <th>Thermostat</th>
+        <td>Thermostat</td>
+        <td>General Thermostat</td>
+    </tr>
+    <tr>
+        <th>Door Lock</th>
+        <td>Entry Control</td>
+        <td>Door Lock</td>
+    </tr>
+</table>
+
+<h2 link="Firmware upgrade">Firmware upgrade</h2>
+<p>Z-Uno allows Over-The-Air bootloader and user sketch upgrade. So instead of connecting your Z-Uno via USB and upgrading bootloader or user sketch from Arduino IDE, you can also use Z-Wave Controller Firmware Upgrade feature. Firmware upgrade is <b>confirmed by three times press of Service Button</b> or via configuration parameter. Note that your sketch will be deleted during bootloader upgrade process &mdash; you will need to upload it again. See <a href="../../z-wave/ota.1.html">OTA process description</a> for more info.</p>
+
+<h2 link="Device reset">Device reset</h2>
+<p>Z-Uno can be excluded from network by following <a href="../../getting-started/include-in-network.html">Exclusion process</a> via Z-Wave controller or by resetting the device via Service button: <b>hold Service button for 5 seconds and then press three times</b>. Use this procedure only if your controller is missing or inoperable. Note that the sketch is not erased during exclusion or reset process.</p>
+
+<h2 link="Changing Z-Wave settings">Changing Z-Wave settings</h2>
+<p>Z-Uno sketch defines number of channels, their types, number of association groups and power mode. Arduino IDE also allows to turn on/off security. But Z-Wave do not allow to change these paramenters &laquo;on the fly&raquo;. To remain compatible with Z-Wave Plus, Z-Uno <b>will not adopt these changes until device is excluded or resetted</b>.</p>
+
+<h2 link="Learn more about Z-Wave">Learn more about Z-Wave</h2>
+<p><img src="../../wa-data/public/photos/61/15/1561/1561.970.jpg" width="70" height="85" border="0" alt="Z-Wave Basics" rel="float: right; margin-left: 1em; margin-bottom: 1em;" style="float: right; margin-left: 1em; margin-bottom: 1em;">
+
+Z-Wave Basics written by Dr. Christian Paetz is the perfect book to continue your dive into Z-Wave world. The book is available at <a href="http://www.amazon.com/Z-Wave-Basics-Remote-Control-Smart/dp/1490537368/" target="_blank">amazon.com</a> or <a href="http://www.amazon.co.uk/Z-Wave-Basics-Remote-Control-Smart/dp/1490537368/" target="_blank">amazon.co.uk</a> in English, <a href="http://www.amazon.com/Z-Wave-German-Christian-P%C3%A4tz/dp/3738601945">in German</a> or <a href="http://rus.z-wave.me/shop/additional/kniga-osnovy-z-wave/">in Russian</a>.
+</p>
+
+</div> 

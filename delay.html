@@ -1,0 +1,35 @@
+<div id="page" role="main" itemprop="description">
+    <h1>delay()</h1>
+<span class="function_description">
+    Pauses the program for the amount of time (in miliseconds) specified as parameter (there are 1000 milliseconds in a second).
+    During this amount of time, all Z-Wave specific tasks continue to execute, Z-Wave.Me bootloader continue to poll the service button and the USB. Only the user sketch is frozen.
+</span>
+<span class="function_description_note">
+    Due to strict radio timeouts, it is forbidden to call this function in the Z-Wave callback functions (getters and setters of Z-Wave channels). The Z-Wave.Me bootloader will ignore delay() in this situation.
+    Please use a flag instead: set a boolean variable in getters/setters that will be checked in loop() function.
+</span>
+<span class="function_syntax">delay(ms)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">ms</span>
+        <span class="function_parameters_param_description">the number of milliseconds to pause</span>
+    </span>
+</span>
+<span class="function_returns">
+none
+</span>
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+  pinMode(20, OUTPUT);          // sets the digital pin as output
+}
+
+void loop() {
+  digitalWrite(20, HIGH);       // sets the LED on
+  delay(1000);                  // waits for a second
+  digitalWrite(20, LOW);        // sets the LED off
+  delay(1000);                  // waits for a second
+}
+</code></pre>
+</span>
+</div>

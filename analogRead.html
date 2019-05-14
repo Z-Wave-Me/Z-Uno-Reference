@@ -1,0 +1,57 @@
+<div id="page" role="main" itemprop="description">
+    <h1>analogRead()</h1>
+<span class="function_description">
+Reads the value from the specified analog pin. The Z-Uno board contains a 4 channel, 10-bit analog to digital converter.
+This means that it will map input voltages between 0 and Vcc (about 3 V) into integer values between 0 and 1023.</span>
+</span>
+
+<span class="function_description_more">
+Check <a href="../technical/pinout.1.html">Z-Uno pinout</a>
+</span>
+
+<span class="function_syntax">analogRead(pin)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the number of the analog input pin to read from: A0, A1, A2, A3 or BATTERY</span>
+    </span>
+</span>
+
+<span class="function_returns">
+int (0 to 1023) (depends on ADC resolution check <span class="function_ref">analogReadResolution</span>() for more details)
+</span>
+
+<span class="function_description_note">
+If the analog input pin is not connected to anything, the value returned by analogRead() will fluctuate based on a number of factors (e.g. the values of the other analog inputs, how close your hand is to the board, etc.).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">void setup() {
+  Serial.begin();        //  setup serial
+}
+
+void loop() {
+  int val;               // variable to store the value read
+  val = analogRead(A3);  // read the input pin
+  Serial.println(val);   // debug output
+}
+</code></pre>
+</span>
+
+<span class="function_description_note">
+If you need an absolute measured value in Volts and not relative to Vcc, use BATTERY to re-scale the result according to the absolute Vcc voltage.
+</span>
+
+<span class="function_description_note">
+If BATTERY is used, the reported value is the position of 1.21V (internal reference voltage) between 0 and battery voltage (3V pin voltage). For 10-bits precision the battery voltage equals to <code>1.21 V * 1024 / value</code> or for 8-bits to <code>1.21 V * 256 / value = 30976 / value</code>. The accurace of the internal reference voltage is about 10%. You might need to calibrate this calculation for your Z-Uno.
+</span>
+
+
+<span class="function_see_also">
+    <span class="function_ref">analogReadResolution</span>()
+    <br/>
+    <span class="function_ref">analogReference</span>()
+</span>
+
+</div>

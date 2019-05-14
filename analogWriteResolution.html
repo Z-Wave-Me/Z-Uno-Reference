@@ -1,0 +1,30 @@
+<div id="page" role="main" itemprop="description">
+    <h1>analogWriteResolution()</h1>
+<span class="function_description">
+Set resolution of PWM used in <span class="function_ref">analogWrite</span>(). This allows to make smoother change of PWM than the default 256 steps.
+</span>
+
+<span class="function_syntax">analogWriteResolution(resolution)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">resolution</span>
+        <span class="function_parameters_param_description">the number bits to use: 1&ndash;16</span>
+    </span>
+</span>
+
+<span class="function_returns">
+None
+</span>
+
+<span class="function_description_more">
+Most popular resolutions are:
+<table>
+    <tr><td>resolution in bits</td><td>Description</td><td>range of values passed to <span class="function_ref">analogWrite</span>()</td></tr>
+    <tr><td>8 (default)</td><td>Arduino Uno compatibility mode</td><td>0&ndash;255</td></tr>
+    <tr><td>16</td><td>maximum possible in Z-Uno</td><td>0&ndash;65535</td></tr>
+></tr>
+</table>
+</span>
+
+</div>

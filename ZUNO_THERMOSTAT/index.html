@@ -1,0 +1,103 @@
+<div id="page" role="main" itemprop="description">
+    <h1>ZUNO_THERMOSTAT()</h1>
+
+<span class="function_description">
+This macro is used to setup thermostat channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
+</span>
+
+<span class="function_syntax">ZUNO_THERMOSTAT(flags, units, neg_pos, limits, getterMode, setterMode, getterTemp, setterTemp)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">flags</span>
+        <span class="function_parameters_param_description">Byte mask with supported modes. There are predefined constants named THERMOSTAT_FLAGS_*. Exact list can be found in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">units</span>
+        <span class="function_parameters_param_description">Use THERMOSTAT_UNITS_CELSIUS for °C and THERMOSTAT_UNITS_FAHRENHEIT for °F. Most controllers will automatically convert reported values to the regional units.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">neg_pos</span>
+        <span class="function_parameters_param_description">Defines if only negative, only positive or both negative and positive values should be accepted. Use THERMOSTAT_RANGE_NEG, THERMOSTAT_RANGE_POS or THERMOSTAT_RANGE_NEG | THERMOSTAT_RANGE_POS.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">limit</span>
+        <span class="function_parameters_param_description">Sets the limit for values: 0 … limit*10 for THERMOSTAT_RANGE_POS, -limit*10 … 0 for THERMOSTAT_RANGE_NEG and -limit*10 … limit*10 for THERMOSTAT_RANGE_NEG | THERMOSTAT_RANGE_POS.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">getterMode</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current mode: THERMOSTAT_MODE_OFF, THERMOSTAT_MODE_HEAT, THERMOSTAT_MODE_COOL or THERMOSTAT_MODE_AUTO.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">setterMode</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new mode is received for this channel. Setter function will accept one parameter with values: THERMOSTAT_MODE_OFF, THERMOSTAT_MODE_HEAT, THERMOSTAT_MODE_COOL or THERMOSTAT_MODE_AUTO</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">getterTemp</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current temperature value of a specified mode for this channel.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">setterTemp</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new temperature value is received for the specified mode of this channel. Setter function will accept two parameters: BYTE mode and WORD temperature value interpretted depending on channel flags.</span>
+    </span>
+</span>
+
+<span class="function_description">
+Functions getterMode should the current mode (see THERMOSTAT_MODE_* in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.
+</span>
+<span class="function_syntax">BYTE getterMode(void)</span>
+
+<span class="function_description">
+Functions setterMode accepts the new thermostat mode (see THERMOSTAT_MODE_* in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.
+</span>
+<span class="function_syntax">void setterMode(BYTE mode)</span>
+
+<span class="function_description">
+Functions getterTemp should return WORD (two bytes) representing the temperature for a specified mode. 
+</span>
+<span class="function_syntax">BYTE getterTemp(BYTE mode)</span>
+
+<span class="function_description">
+Functions setterTemp accepts a WORD representing the new temperature for a specified mode.
+</span>
+<span class="function_syntax">void setterTemp(BYTE mode, WORD temp)</span>
+
+<span class="function_note">
+The temperature is represented by a WORD (2 bytes) with one digit precision. This means value 105 = 10.5°, 235 = 23.5°, 300 = 30° etc.
+</span>
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_THERMOSTAT / SPECIFIC_TYPE_THERMOSTAT_GENERAL with Thermostat Mode and Thermostat Setpoint Command Classes.
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_THERMOSTAT(THERMOSTAT_FLAGS_OFF|THERMOSTAT_FLAGS_HEAT|THERMOSTAT_FLAGS_COOL, THERMOSTAT_UNITS_CELSIUS, THERMOSTAT_RANGE_NEG|THERMOSTAT_RANGE_POS, 3, getterMode, setterMode, getterTemp, setterTemp));
+
+           
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+}
+
+BYTE getterMode() {
+    return currentMode;
+}
+
+void setterMode(BYTE mode) {
+    ...
+}
+
+WORD getterTemp(BYTE mode) {
+    return currentSetpoint;
+}
+
+void setterTemp(BYTE mode, WORD temp) {
+    ...
+}</code>
+    </pre>
+</span>
+</div>
