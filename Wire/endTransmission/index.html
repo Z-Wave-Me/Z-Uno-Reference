@@ -1,0 +1,26 @@
+<div id="page" role="main" itemprop="description">
+    <h4>Wire.endTransmission(address)</h4></br>
+<span class="function_description">
+    Ends a transmission to a slave device that was begun by beginTransmission() and transmits the bytes that were queued by write().</br>
+    endTransmission() accepts a boolean argument changing its behavior for compatibility with certain I2C devices.</br>
+    If true, endTransmission() sends a stop message after transmission, releasing the I2C bus.</br>
+    If false, endTransmission() sends a restart message after transmission. The bus will not be released, which prevents another master device from transmitting between messages. This allows one master device to send multiple transmissions while in control.
+</span>
+<span class="function_syntax">
+    <br>Wire.endTransmission()</br>
+    <br>Wire.endTransmission(stop)</br>
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param_name">stop:</span>
+    <span class="function_parameters_param_description">boolean. true will send a stop message, releasing the bus after transmission. false will send a restart, keeping the connection active.</span>
+</span>
+<span class="function_returns">
+
+    byte, which indicates the status of the transmission:
+    </li><li>0:success</li>
+    </li><li>1:data too long to fit in transmit buffer</li>
+    </li><li>2:received NACK on transmit of address</li>
+    </li><li>3:received NACK on transmit of data</li>
+    </li><li>4:other error</li>
+</span>  
+</div>

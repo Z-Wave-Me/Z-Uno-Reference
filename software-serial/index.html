@@ -1,0 +1,55 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Software Serial</h1>
+<span class="function_description">
+    Z-Uno hardware serial allows UART baud rates starting from 9600 bps. Slower baudrates are available with Software Serial library. The following baudrates are supported: 1200, 2400, 4800 or 9600 bps, 1 stop bit, no parity bit.
+
+    Like hardware <span class="function_ref">Serial</span> same methods are available for Software Serial. The only difference is that the rate specified in <span class="function_ref" link="Serial/begin">begin</span>().
+</span>
+
+<span class="function_description_note"> Software Serial library cab be attached to any pair of <span class="function_ref" link="s_pin">Fast Pins</span>.</span>
+<span class="function_description_note"> Only one duplex (Rx & Tx) Software Serial can be used at time or up to 8 with Tx only.</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">SoftwareSerial swserial(pinTx, pinRx);</code></pre>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pinTx</span>
+        <span class="function_parameters_param_description">pin from <span class="function_ref" link="s_pin">Fast Pins</span> that is used for transmit (Tx)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pinRx</span>
+        <span class="function_parameters_param_description">pin from <span class="function_ref" link="s_pin">Fast Pins</span> that is used for receive (Rx). If not specified, only send operations will be possible.</span>
+    </span>
+</span>
+
+<span class="function_returns">
+C++ object is defined
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">#include "SoftwareSerial.h"
+
+SoftwareSerial swserial(11, 12);      // duplex mode on pins 11 and 12
+SoftwareSerial swserial_sendonly(14); // send only on pin 14
+
+void setup() {
+    swserial.begin(4800);
+    swserial_sendonly.begin(1200);
+}
+
+void loop() {
+    swserial.println(millis());
+
+    while(swserial.available()){
+        char c = swserial.read();
+        swserial_sendonly.write(c);
+    }
+    delay(1000);
+}</code></pre>
+</span>  
+
+</div>

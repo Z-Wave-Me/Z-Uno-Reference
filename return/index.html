@@ -1,0 +1,40 @@
+<div id="page" role="main" itemprop="description">
+    <h1>return</h1>
+<span>Terminate a function and return a value from a function to the calling function, if desired.
+</span>
+<span class="function_syntax">return;</span>
+ <span>return value; // both forms are valid</span>
+<span class="function_parameters">
+    <span class="function_parameters_param"></span>
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">any variable or constant type</span>
+    </span>
+ </span>
+</span> 
+<span class="function_example">
+A function to compare a sensor input to a threshold
+<pre>
+<code class="c">int checkSensor() {
+    if (analogRead(0) > 400) {
+        return 1;
+    else {
+        return 0;
+    }
+}
+</code>
+</pre>
+</span> 
+The return keyword is handy to test a section of code without having to "comment out" large sections of possibly buggy code.
+<span>
+<pre>
+<code class="c">void loop() {
+    // brilliant code idea to test here
+    return;
+
+    // the rest of a dysfunctional sketch here
+    // this code will never be executed
+}
+</code>
+</pre>
+</span> 
+</div>

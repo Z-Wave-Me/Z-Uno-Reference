@@ -1,0 +1,42 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Security</h1>
+<span class="function_description">
+Z-Uno can use no security, classical Z-Wave Security (also know as S0) and the newest Z-Wave Security S2 (also referred as just S2). Security mode can be selectedright in the Arduino IDE menu.
+</span>
+
+<span class="function_description_more">
+If S0 or S2 security mode is enabled <a href="../Z-Wave/index.html#Security">Security or Security S2 Command Class will be added to your Z-Uno</a>. This will force Z-Uno to use secure communications with the controller. Z-Uno will also try to establish secure communication with devices in Association groups and guess the security level accepted by the recepient.
+</span>
+
+<span class="function_description_more">
+Security protects communications from reading, modification, replay, authentity substitution attacks. Please note that Security S0 also increases the communication time between nodes by 3 times and battery consumtions. In contrast Security S2 is will keep the battery performance providing even better security level.
+</span>
+
+<span class="function_description_note">
+You must upload your sektch and then exclude or reset Z-Uno to apply security mode changes.
+</span>
+
+<span class="function_description_more">
+Z-Uno currently can not do both S0 and S2 ath the same time. Only one of them is supported. You need to upload the bootloader again after changing from S0 to S2 and back.
+</span>
+
+<span class="function_description_note">
+A Security enabled Z-Wave Controller must be used in order to use Z-Uno with Security mode on.
+</span>
+
+<span class="function_example">
+<img src="../../wa-data/public/site/img/Z-Uno-S2-menu.png" width="600">
+</span>
+
+<span class="function_description_more">More details on S2:
+<ul>
+    <li>You need to change the bootloader from non-secure/S0 to S2 version. This is done by selecting S2 from the menu Tools→Security.</li>
+    <li>Then do Tools→Burn bootloader. If bootloader mismatch your menu settings, you will get a warning.</li>
+    <li>To locate the Z-Uno PIN (also known as DSK or ZWS2DSK) check the log of the Arduino IDE (see the screenshot).</li>
+    <li>Z-Uno supports all security classes: S2 Unauthenticated, S2 Authenticated and S2 Access.</li>
+    <li>S2 capable bootloader do not support S0 security.</li>
+    <li>Z-Uno can autodetect the security scheme used by the recepient, so it can control devices with any S2 security level provided the corresponding key is granted to Z-Uno.</li>
+    <li>Z-Uno with S2 support can not control/support S0 security scheme. If you need to control actuator with S0 security only, either downgrade to S0 your Z-Uno or use rules on the controller to receive S2 sensors notifications and send S0 commands to the S0 capable actuator.</li>
+    <li>In S2 variant of Z-Uno the user code is limited to 6 Kb only. This is enough for most of your sketches.</li>
+</ul>
+</div>

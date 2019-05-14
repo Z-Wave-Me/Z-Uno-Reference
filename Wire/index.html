@@ -1,0 +1,39 @@
+<div id="page" role="main" itemprop="description">
+    <h1>Wire Library</h1>
+<span class="function_description">Implements I2C on Z-Uno pins 9&ndash;16. Default is 9 for SCL and 10 for SDA.</span>
+<span class="function_description_more"><ul>
+    <li><span class="function_ref" link="Wire/begin">begin</span>()</li>
+	<li><span class="function_ref" link="Wire/requestFrom">requestFrom</span>()</li>
+	<li><span class="function_ref" link="Wire/beginTransmission">beginTransmission</span>()</li>
+	<li><span class="function_ref" link="Wire/endTransmission">endTransmission</span>()</li>
+	<li><span class="function_ref" link="Wire/write">write</span>()</li>
+	<li><span class="function_ref" link="Wire/available">available</span>()</li>
+	<li><span class="function_ref" link="Wire/read">read</span>()</li>
+	<li><span class="function_ref" link="Wire/enableTS">enableTS</span>()</li>
+	<!--
+	<li><span class="function_ref" link="Wire/onReceive">onReceive</span>()</li>
+	<li><span class="function_ref" link="Wire/onRequest">onRequest</span>()</li>
+	-->
+</ul>
+</span>
+
+<span class="function_description_note">Z-Uno can only be I2C master.</span>
+
+<span class="function_description_more">Default pins can be changed during I2C initialization:</span>
+
+<span class="function_example">
+<pre>
+<code class="c">#define SCL_PIN 11
+#define SDA_PIN 12
+
+I2CDriver alternative_I2C(SCL_PIN, SDA_PIN); 
+
+void setup() {
+    // …
+    Wire.bindDriver(&alternative_I2C); // This instructs to use other pins than default
+    // …
+}</code>
+</pre>
+</span>
+
+</div>

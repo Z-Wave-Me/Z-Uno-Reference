@@ -1,0 +1,29 @@
+<div id="page" role="main" itemprop="description">
+    <h4>SPISettings</h4>
+<span class="function_description">
+    The SPISettings object is used to configure the SPI port for your SPI device. All 3 parameters are combined to a single SPISettings object, which is given to SPI.beginTransaction().
+</span>
+<span class="function_syntax">
+    SPISettings spi_settings = SPISettings(speed, dataOrder, spiMode);
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">speed</span>
+        <span class="function_parameters_param_description">8000000, 4000000, 2000000 or 1000000 MHz. Speed of communication. Z-Uno supports only 8MHz, 4MHz, 2MHz and 1MHz. Z-Uno will automatically use the best speed that is equal to or less than one of the supported.</span></br>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">dataOrder</span>
+        <span class="function_parameters_param_description">MSBFIRST or LSBFIRST.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">spiMode</span>
+        <span class="function_parameters_param_description">SPI_MODE0, SPI_MODE1, SPI_MODE2, SPI_MODE3 &mdash; SPI mode number. Please refer to <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus">SPI modes description</a>.</span>
+    </span>
+</span>
+<span class="function_example">
+<code class="c"><pre>
+SPISettings spi_settings = SPISettings(8000000, MSBFIRST, SPI_MODE0);
+SPI.beginTransaction(&spi_settings);
+</pre></code>
+</span>
+</div>

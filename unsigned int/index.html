@@ -1,0 +1,27 @@
+<div id="page" role="main" itemprop="description">
+    <h1>unsigned int</h1>
+
+<span class="function_description">The difference between <i>unsigned ints</i> and (signed) <i><span class="function_ref" link="int">ints</span></i>, lies in the way the highest bit, sometimes refered to as the "sign" bit, is interpreted. With <i>unsigned int</i> sign bit have no special value, hence number from 0 to 65535 can be represented.</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">unsigned int var = val;
+</code></pre>
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">unsigned int ledPin = 13;
+</code></pre>
+</span>
+
+<span class="function_coding_tip">When variables are made to exceed their maximum capacity they "roll over" back to their minimum capacitiy, note that this happens in both directions.
+
+<pre>
+<code class"c">unsigned int x
+x = 0;
+x = x - 1;       // x now contains 65535 - rolls over in neg direction
+x = x + 1;       // x now contains 0 - rolls over
+</code></pre>
+</span>
+</div>

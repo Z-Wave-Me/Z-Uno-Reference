@@ -1,0 +1,29 @@
+<div id="page" role="main" itemprop="description">
+    <h4>Wire.requestFrom()</h4></br>
+<span class="function_description">
+    Used by the master to request bytes from a slave device. The bytes may then be retrieved with the available() and read() functions.</br>
+
+RequestFrom() accepts a boolean argument changing its behavior for compatibility with certain I2C devices.</br>
+
+- If true, requestFrom() sends a stop message after the request, releasing the I2C bus.</br>
+
+- If false, requestFrom() sends a restart message after the request. The bus will not be released, which prevents another master device from requesting between messages. This allows one master device to send multiple requests while in control.</br>
+
+The default value is true.
+</span>
+<span class="function_syntax">
+    Wire.requestFrom(address, quantity)</br>
+    Wire.requestFrom(address, quantity, stop)</br>
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param_name">address:</span>
+    <span class="function_parameters_param_description">the 7-bit address of the device ti request bytes from</span></br>
+    <span class="function_parameters_param_name">quantity:</span>
+    <span class="function_parameters_param_description">the number of bytes to request</span></br>
+    <span class="function_parameters_param_name">stop:</span>
+    <span class="function_parameters_param_description">boolean. true will send a stop message after request, releasing the bus. false will continually send a restart after the request, keeping the connection active.</span>
+</span>
+<span class="function_returns">
+    byte &mdash; the number of bytes returned from the slave device
+</span>
+</div>

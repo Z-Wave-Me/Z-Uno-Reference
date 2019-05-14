@@ -1,0 +1,68 @@
+<div id="page" role="main" itemprop="description">
+    <h1>tone() and noTone()</h1>
+
+<span class="function_description">
+Produces a tone with the specified frequency on a pin. noTone() turns off the tone leaving the pin in output low state. Those functions are usefull to produce audio feedback to the user. tone() is not blocking - the tone is produced by the timer (GPT) as a background process.
+</span>
+
+<span class="function_description_note">
+    Functions tone()/noTone() requires Tone.h include file.
+</span>
+
+<span class="function_description_note">
+    tone() works only with fast pins defined via <span class="function_ref">s_pin</span> data type and hence can work only on pins 9&ndash;16.
+</span>
+
+<span class="function_description_note">
+    tone() uses <span class="function_ref">GPT</span>, so GPT can not be used simultaneously with tone().
+</span>
+
+<span class="function_syntax">tone(pin, frequency);</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">frequency</span>
+        <span class="function_parameters_param_description">frequency of the tone in Hertz</span>
+    </span>
+</span>
+
+<span class="function_returns">
+none
+</span>
+
+<span class="function_syntax">noTone(pin);</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin</span>
+        <span class="function_parameters_param_description">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+    </span>
+</span>
+
+<span class="function_returns">
+none
+</span>
+
+
+<span class="function_example">
+<pre>
+<code class="c">#include "Tone.h"
+
+void setup() {
+}
+
+void loop() {
+  tone(11, 440);
+  delay(1000);
+  noTone(11);
+  delay(4000);
+}
+</code>
+</pre>
+</span>
+ 
+</div>

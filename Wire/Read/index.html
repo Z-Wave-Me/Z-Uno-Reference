@@ -1,0 +1,38 @@
+<div id="page" role="main" itemprop="description">
+    <h4>Wire.read()</h4> 
+<span class="function_description">
+  Reads a byte that was transmitted from a slave device to a master after a call to requestFrom() or was transmitted from a master to a slave. read() inherits from the Stream utility class.
+</span>
+<span class="function_syntax">
+    Wire.read()
+</span>
+<span class="function_parameters">
+    None
+</span>
+<span class="function_returns">
+    The next byte receive
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">#include &lt;Wire.h&gt;
+
+void setup() {
+  Wire.begin();              // join i2c bus (address optional for master)
+  Serial.begin();            // start serial for output
+}
+
+void loop()
+{
+  Wire.requestFrom(2, 6);    // request 6 bytes from slave device #2
+
+  while(Wire.available()) {  // slave may send less than requested
+    char c = Wire.read();    // receive a byte as character
+    Serial.print(c);         // print the character
+  }
+
+  delay(500);
+}
+</code>
+</pre>
+</span>
+</div>

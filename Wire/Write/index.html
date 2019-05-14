@@ -1,0 +1,56 @@
+<div id="page" role="main" itemprop="description">
+    <h2>write()</h2>
+    <span class="function_description">
+Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <a href="../../Serial/Print/index.html">Print()</a> function instead.     </span>
+</span>
+<span class="function_syntax"><pre><code lang="c">Wire.write(value)
+Wire.write(string)
+Wire.write(data, length)
+</code></pre></span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">value</span>
+        <span class="function_parameters_param_description">a value to send as a single byte</br></span>
+    </span>    
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">string</span>
+        <span class="function_parameters_param_description">a value to send as a series of bytes</br></span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">data</span>
+        <span class="function_parameters_param_description">an array to send as bytes</span>
+    </span>
+    <span class="function_parameters_param">    
+        <span class="function_parameters_param_name">length</span>
+        <span class="function_parameters_param_description">the number of bytes to transmit</span>
+    </span>
+    </span>
+</span>
+<span class="function_returns">
+byte: write() will return the number of bytes written, though reading that number is optional
+</span>
+<span class="function_example">
+<pre>
+<code class="c">#include "Wire.h"
+
+byte val = 0;
+
+void setup() {
+  Wire.begin(); // join i2c bus
+}
+
+void loop() {
+  Wire.beginTransmission(44); // transmit to device #44 (0x2c)
+                              // device address is specified in datasheet
+  Wire.write(val);            // sends value byte  
+  Wire.endTransmission();     // stop transmitting
+
+  val++;           // increment value
+  if (val == 64) { // if reached 64th position (max)
+    val = 0;       // start over from lowest value
+  }
+  delay(500);
+}
+</code></pre>
+</span>  
+</div>

@@ -1,0 +1,34 @@
+<div id="page" role="main" itemprop="description">
+    <h1>volatile</h1>
+
+<span class="function_description">volatile is a keyword known as a variable qualifier, it is usually used before the datatype of a variable, to modify the way in which the compiler and subsequent program treats the variable.</span>
+
+<span class="function_description_more">Declaring a variable volatile is a directive to the compiler. The compiler is software which translates your C/C++ code into the machine code.</span>
+
+<span class="function_description_more">Specifically, it directs the compiler to load the variable from RAM and not from a storage register, which is a temporary memory location where program variables are stored and manipulated. Under certain conditions, the value for a variable stored in registers can be inaccurate.</span>
+
+<span class="function_description_more">A variable should be declared volatile whenever its value can be changed by something beyond the control of the code section in which it appears, such as a concurrently executing thread. In the Z-Uno, the only place that this is likely to occur is in sections of code associated with interrupts, called an interrupt service routine.</span>
+
+<span class="function_example">
+<pre>
+<code class="c">// toggles LED when interrupt pin changes state
+
+int pin = 13;
+volatile int state = LOW;
+
+void setup() {
+  pinMode(pin, OUTPUT);
+  attachInterrupt(0, blink, CHANGE);
+}
+
+void loop() {
+  digitalWrite(pin, state);
+}
+
+void blink()
+{
+  state = !state;
+}
+</code></pre>
+</span>
+</div>
