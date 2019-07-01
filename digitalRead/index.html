@@ -3,7 +3,7 @@
 <span class="function_description">Reads the value from a specified digital pin, either <span class="function_ref">HIGH</span> or <span class="function_ref">LOW</span></a>.</span>
 
 <span class="function_description_more">
-Check <a href="../technical/pinout.html">Z-Uno pinout</a>
+Check <a href="/technical/pinout">Z-Uno pinout</a>
 </span>
 
 <span class="function_syntax">digitalRead(pin)</span>
@@ -44,7 +44,7 @@ Z-Uno pin control is pretty slow, typical digitalRead() call will take itself ab
 
 <span class="function_example">
 <pre>
-<code class="c">s_pin my_pin = 9;
+<code class="c">{literal}s_pin my_pin = 9;
 
 void setup() {
   pinMode(my_pin, INPUT);
@@ -81,7 +81,7 @@ void loop() {
   another_pin = 10;
   length = readPulseLength(another_pin);   // or call via function
 }
-</code>
+{/literal}</code>
 </pre>
 </span>  
 

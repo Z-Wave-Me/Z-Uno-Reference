@@ -22,7 +22,7 @@
 
 <span class="function_example">
 <pre>
-<code class="c">#define SCL_PIN 11
+<code class="c">{literal}#define SCL_PIN 11
 #define SDA_PIN 12
 
 I2CDriver alternative_I2C(SCL_PIN, SDA_PIN); 
@@ -31,7 +31,7 @@ void setup() {
     // …
     Wire.bindDriver(&alternative_I2C); // This instructs to use other pins than default
     // …
-}</code>
+}{/literal}</code>
 </pre>
 </span>
 

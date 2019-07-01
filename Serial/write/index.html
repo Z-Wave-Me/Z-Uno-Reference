@@ -27,3 +27,54 @@ void loop() {
 }
 </code></pre>
 </span>  
+<h2>write()</h2>
+    <span class="function_description">
+Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <a href="http://z-uno.z-wave.me/Reference/Serial/Print/">Print()</a> function instead.     </span>
+</span>
+<span class="function_syntax">
+<br>Serial.write(val)</br>
+<br>Serial.write(str)</br>
+<br>Serial.write(buf, len)</br>
+
+<br> Z-Uno board also supports Serial0 and Serial1.</br>
+    
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">val:</span>
+        <span class="function_parameters_param_description">a value to send as a single byte</br></span>
+    </span>    
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">str:</span>
+        <span class="function_parameters_param_description">a value to send as a string of bytes</br></span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">buf:</span>
+        <span class="function_parameters_param_description">a value to send a array of bytes</span>
+    </span>
+    <span class="function_parameters_param">    
+        <span class="function_parameters_param_name">len:</span>
+        <span class="function_parameters_param_description">the length of the buffer</span>
+    </span>
+    </span>
+</span>
+<span class="function_returns">
+<br>byte</br>
+<br>write() will return the number of bytes written, though reading that number is optional</br>
+    
+</span>
+<span class="function_example">
+    <pre>
+        <code class="c">void setup(){
+  Serial.begin();
+}
+
+void loop(){
+  Serial.write(45); // send a byte with the value 45
+
+   int bytesSent = Serial.write(“hello”); //send the string “hello” and return the length of the string.
+}
+
+        </code>
+    </pre>
+</span>  

@@ -12,7 +12,7 @@ This librariry provides access to internal 360 kB non-volatile EEPROM. Data writ
 </span>
 
 <span class="function_example">
-<pre><code lang="c">#include "EEPROM.h"
+<pre><code lang="c">{literal}#include "EEPROM.h"
 
 BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
 BYTE read_data[5];
@@ -48,7 +48,7 @@ void loop() {
     res = EEPROM.put(addr, &some_data, sizeof(some_data));
     
     delay(5000); // don't write to much in the EEPROM not to kill it
-}
+}{/literal}
 </code></pre>
 </span>
 
