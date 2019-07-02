@@ -4,6 +4,16 @@
 This macro is used to setup multilevel switch channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
 </span>
 
+There are two ways of defining the channel:
+
+Via variable:
+<span class="function_syntax">ZUNO_SWITCH_MULTILEVEL(variable, NULL)</span>
+
+The variable will be mapped to the channel value. It will be updated when
+new value is received from the Z-Wave network. It will be used to send a
+report on a request or on <span class="function_ref">zunoSendReport</span>().
+
+Via getter and setter:
 <span class="function_syntax">ZUNO_SWITCH_MULTILEVEL(getter, setter)</span>
 
 <span class="function_parameters">
