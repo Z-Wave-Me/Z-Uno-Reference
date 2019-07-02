@@ -1,3 +1,0 @@
-grep 'Reference/' site_page.sql | awk -F"'" '{ print $10 }' | xargs -l mkdir -p
-grep 'Reference/' site_page.sql | sed "s/([0-9][0-9]*, [0-9][0-9]*, '[^']*', '[^']*', '[^']*', '[^']*', '\([^']*\)', '\(.*\)', '....-..-.. ..:..:..', '....-..-.. ..:..:..', [0-9]*, [0-9]*, [0-9]*, [0-9NUL]*)[,;]/\1_____\2/" | sed "s/''/'/g" | awk -F "_____" '{ print $2 > ($1 "/index.html") }'
-find Reference/ -name index.html | xargs -l sed -i -e 's/\\r\\n/\r\n/g'
