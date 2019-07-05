@@ -16,7 +16,7 @@ Z-Uno supports up to 32 configurable parameters.
         <span class="function_parameters_param_name">config_parameter_changed</span>
         <span class="function_parameters_param_description">Function to be called on parameters changed from the Z-Wave network. Function prototype is:
             <br/>
-            <code>void config_parameter_changed(byte param, word * value)</code>
+            <code>void config_parameter_changed(byte param, word value)</code>
             <br/>
             param is the parameter number.
             <br/>
@@ -85,9 +85,9 @@ void setup() {
   zunoLoadCFGParam(64, &amp;paramValue);
 }
 
-void config_parameter_changed(byte param, word * value) {
+void config_parameter_changed(byte param, word value) {
     if(param == 64) { // The first user-defined parameter 
-      paramValue = *value;  
+      paramValue = value;  
     }
 }
 
