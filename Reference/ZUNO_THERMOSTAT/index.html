@@ -61,7 +61,7 @@ Functions setterTemp accepts a WORD representing the new temperature for a speci
 </span>
 <span class="function_syntax">void setterTemp(BYTE mode, WORD temp)</span>
 
-<span class="function_note">
+<span class="function_description_note">
 The temperature is represented by a WORD (2 bytes) with one digit precision. This means value 105 = 10.5°, 235 = 23.5°, 300 = 30° etc.
 </span>
 
@@ -98,4 +98,8 @@ void setterTemp(BYTE mode, WORD temp) {
     ...
 }</code>
     </pre>
+</span>
+
+<span class="function_description_note">
+This type of channel do not support mapping on a variable.
 </span>
