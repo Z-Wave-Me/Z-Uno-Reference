@@ -1,0 +1,34 @@
+<h1>ZUNO_ENABLE() and ZUNO_DISABLE()</h1>
+<span class="function_description">
+Those macro tunes Z-Uno compiler to access advanced features.
+ZUNO_ENABLE() enabled and ZUNO_DISABLE() disables features that can be used in the sketch or in dynamic channels.
+</span>
+
+<span class="function_syntax">
+    ZUNO_ENABLE(capabilities)
+    ZUNO_DISABLE(capabilities)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">capabilities</span>
+        <span class="function_parameters_param_description">a space separated list of features
+        </span>
+    </span>
+</span>
+
+<span class="function_description_note">
+For dynamic channels you need to define every user Command Class that might be used. By default none are compiled in to save code space.
+</span>
+
+<span class="function_description_note">
+In fact each feature from the list is a <i>C define</i>.
+</span>
+
+<span class="function_example">
+<pre><code class="c">ZUNO_DISABLE(WITH_CC_SENSOR_BINARY); // For a binary sensor you can suppress SensorBinary or Notification
+ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
+ZUNO_DISABLE(SERVICE_LEDS); // Disable Service LEDs to save battry and remove unwanted blinks
+ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
+</code></pre>
+</span>
