@@ -4,6 +4,22 @@ This macro is a generic macro to be used to setup binary sensor channel for Z-Un
 This type (and 3 other) affects only the display on the controller.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter function and
+using a variable.
+</span>
+
+<span class="function_description_more">
+With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested.
+This allows to do some calculus before returning a value.
+</span>
+
+<span class="function_description_more">
+With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status.
+This allows to minimize your code.
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">
     ZUNO_SENSOR_BINARY(type, getter)
 </span>
@@ -24,11 +40,6 @@ Functions getter should return 0 for non-triggered state and any non-zero for tr
 </span>
 <span class="function_syntax">BYTE getter(void)</span>
 
-<span class="function_tip">
-Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SENSOR_NOTIFICATION / SPECIFIC_TYPE_NOTIFICATION_SENSOR
- with Notification and Sensor Binary (for legacy suport) Command Classes.
-</span>
-
 <span class="function_example">
        <pre>
            <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY(ZUNO_SENSOR_BINARY_TYPE_SMOKE, getterFunction));
@@ -48,21 +59,61 @@ byte getterFunction() {
     </pre>
 </span>
 
+<a name="variable-definition"></a>
+<span class="function_syntax">
+    ZUNO_SENSOR_BINARY(type, variable)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">type of channel like ZUNO_SENSOR_BINARY_TYPE_DOOR, ZUNO_SENSOR_BINARY_TYPE_SMOKE,.. etc. Used to correctly display the sensor in the Z-Wave controller. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> and starts with ZUNO_SENSOR_BINARY_TYPE_</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that contains the current value for this channel. Should be 0 for non-triggered state and any non-zero for triggered state. </span>
+    </span>
+</span>
+
+<span class="function_example">
+       <pre>
+           <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY(ZUNO_SENSOR_BINARY_TYPE_SMOKE, variableSmoke));
+       
+byte variableSmoke = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    variableSmoke = ...;
+    ...
+}
+        </code>
+    </pre>
+</span>
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SENSOR_NOTIFICATION / SPECIFIC_TYPE_NOTIFICATION_SENSOR
+ with Notification and Sensor Binary (for legacy suport) Command Classes.
+</span>
+
 <span class="function_description_more">
 Popular sensor types have pre-defined macro. Few are listed below. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> file and starts with ZUNO_SENSOR_BINARY_
 </span>
 
 <span class="function_syntax">
-ZUNO_SENSOR_BINARY_GENERAL_PURPOSE(getter)<br/>
-ZUNO_SENSOR_BINARY_SMOKE(getter)<br/>
-ZUNO_SENSOR_BINARY_CO(getter)<br/>
-ZUNO_SENSOR_BINARY_CO2(getter)<br/>
-ZUNO_SENSOR_BINARY_HEAT(getter)<br/>
-ZUNO_SENSOR_BINARY_WATER(getter)<br/>
-ZUNO_SENSOR_BINARY_FREEZE(getter)<br/>
-ZUNO_SENSOR_BINARY_TAMPER(getter)<br/>
-ZUNO_SENSOR_BINARY_DOOR_WINDOW(getter)<br/>
-ZUNO_SENSOR_BINARY_MOTION(getter)<br/>
-ZUNO_SENSOR_BINARY_GLASSBREAK(getter)
+ZUNO_SENSOR_BINARY_GENERAL_PURPOSE(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_SMOKE(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_CO(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_CO2(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_HEAT(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_WATER(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_FREEZE(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_TAMPER(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_DOOR_WINDOW(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_MOTION(getter or variable)<br/>
+ZUNO_SENSOR_BINARY_GLASSBREAK(getter or variable)
 </span>
 
