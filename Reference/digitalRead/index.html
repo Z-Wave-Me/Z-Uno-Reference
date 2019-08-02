@@ -39,7 +39,9 @@ void loop() {
 </code></pre></span>
 
 <span class="function_description_note">
-Z-Uno pin control is pretty slow, typical digitalRead() call will take itself about 1 ms. Hence it is not possible to do fast pin operations except on pins 9&ndash;16 that allows special "fast mode". To use this fast mode one need to specify pin number via <span class="function_ref">s_pin</span> variable type. Z-Uno compiler will detect it and use fast mode for such digitalRead() calls. In this case the call will take about 1&ndash;2 μs for indirect call (via function) and 0.5 μs for direct (see example below).
+Z-Uno pin control is pretty slow, typical digitalRead() call will take itself about 1 ms.
+Fast operations are allowed in special special "fast mode". To use this fast mode one need to specify pin number via <span class="function_ref">s_pin</span> variable type. Z-Uno compiler will detect it and use fast mode for such digitalRead() calls. In this case the call will take about 1&ndash;2 μs for indirect call (via function) and 0.5 μs for direct (see example below).
+By default pins 9-16 are fast. You can change this using <span class="function_ref" link="s_pin">ZUNO_REMAP_SPINS</span>()
 </span>
 
 <span class="function_example">

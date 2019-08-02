@@ -2,7 +2,7 @@
 
 <span class="function_description">Defines pin number for fast pin mode operations.</span>
 
-<span class="function_description_more"><i>s_pin</i> data type is like an integer constant, but compiler will handle it to optimize <span class="function_ref">digitalWrite</span>() and <span class="function_ref">digitalRead</span>() to make faster operations on pins 9&ndash;16.</span>
+<span class="function_description_more"><i>s_pin</i> data type is like an integer constant, but compiler will handle it to optimize <span class="function_ref">digitalWrite</span>() and <span class="function_ref">digitalRead</span>() to make faster operations on pins.</span>
 
 <span class="function_description_more">Direct reference will take about 0.5 μs, while indirect will take about 1-2 μs. See examples for <span class="function_ref">digitalWrite</span>() and <span class="function_ref">digitalRead</span>().</span>
 
@@ -10,4 +10,29 @@
 <pre>
 <code class="c">s_pin var = number;
 </code></pre>
+</span>
+
+<span class="function_description_note">
+By default pins 9&mdash;16 can be used in fast mode. ZUNO_REMAP_SPINS() can be used to change to another range.
+</span>
+
+<span class="function_syntax">ZUNO_REMAP_SPINS(portName)</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">portName</span>
+        <span class="function_parameters_param_description">FAST_Px constant</span>
+    </span>
+</span>
+<span class="function_returns">
+none
+</span>
+
+<span class="function_description_more">
+<table>
+<tr><th>FAST_Px constant</th><th>pin range</th><th><span class="function_ref" link="Wire">I2C pins</span></th></tr>
+<tr><td>FAST_P0 (default)</td><td>9&mdash;16</td><td>SCL=9 SDA=10</td></tr>
+<tr><td>FAST_P1</td><td>17&mdash;23</td><td>SCL=17 SDA=18</td></tr>
+<tr><td>FAST_P2</td><td>0&mdash;2</td><td>SCL=0 SDA=2</td></tr>
+<tr><td>FAST_P3</td><td>3&mdash;6</td><td>SCL=3 SDA=4</td></tr>
+</table>
 </span>

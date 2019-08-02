@@ -1,5 +1,6 @@
 <h1>Wire Library</h1>
-<span class="function_description">Implements I2C on Z-Uno pins 9&ndash;16. Default is 9 for SCL and 10 for SDA.</span>
+<span class="function_description">Implements I2C on Z-Uno pins 9&ndash;16. Default is 9 for SCL and 10 for SDA.
+Other pin range can be selected using <span class="function_ref" link="s_pin">ZUNO_REMAP_SPINS</span>()</span>
 <span class="function_description_more"><ul>
     <li><span class="function_ref" link="Wire/begin">begin</span>()</li>
 	<li><span class="function_ref" link="Wire/requestFrom">requestFrom</span>()</li>
@@ -18,7 +19,7 @@
 
 <span class="function_description_note">Z-Uno can only be I2C master.</span>
 
-<span class="function_description_more">Default pins can be changed during I2C initialization:</span>
+<span class="function_description_more">Default pins can be changed during I2C initialization, but they should be in <span class="function_ref" link="s_pin">fast mode</span>)</span>:
 
 <span class="function_example">
 <pre>
