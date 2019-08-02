@@ -4,6 +4,19 @@
 This macro is used to setup multilevel switch channel with type blinds for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter function and using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested. This allows to do some calculus before returning a value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">ZUNO_BLINDS(getter, setter)</span>
 
 <span class="function_parameters">
@@ -52,6 +65,39 @@ BYTE getterFunction() {
 }
 
 void setterFunction(BYTE newValue) {
+    ...
+}
+        </code>
+    </pre>
+</span>
+
+<a name="variable-definition"></a>
+<span class="function_syntax">ZUNO_BLINDS(variable, NULL)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that storeas the current value for this channel. 0-99, where 0 is Closed and 99 is Open</span>
+    </span>
+</span>
+
+<span class="function_description_more">
+Variable change can be detected using function <span class="function_ref">zunoIsChannelUpdated</span>(channelNum).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_BLINDS(shadesLevel, NULL))
+
+byte shadesLevel = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    shadesLevel = ...;
     ...
 }
         </code>

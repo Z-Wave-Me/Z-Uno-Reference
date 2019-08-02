@@ -5,22 +5,18 @@ This macro is used to setup multilevel switch channel for Z-Uno board using <spa
 </span>
 
 <span class="function_description_more">
-There are two ways of defining the channel. Via variable:
+Z-Uno understands two ways to define a channel: using getter function and using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested. This allows to do some calculus before returning a value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
 </span>
 
-<span class="function_syntax">ZUNO_SWITCH_MULTILEVEL(variable, NULL)</span>
-
-
-<span class="function_description_more">
-The variable will be mapped to the channel value. It will be updated when
-new value is received from the Z-Wave network. It will be used to send a
-report on a request or on <span class="function_ref">zunoSendReport</span>().
-</span>
-
-<span class="function_description_more">
-Via getter and setter:
-</span>
-
+<a name="getter-definition"></a>
 <span class="function_syntax">ZUNO_SWITCH_MULTILEVEL(getter, setter)</span>
 
 <span class="function_parameters">
@@ -48,10 +44,6 @@ Functions setter accepts values 0-99 (0 is Off, 99 is maximal value) and 255 (us
 Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SWITCH_MULTILEVEL / SPECIFIC_TYPE_POWER_SWITCH_MULTILEVEL with Switch Multilevel Command Class.
 </span>
 
-<span class="function_description_note">
-This type is allowed only in ZUNO_SLEEPING_MODE_ALWAYS_AWAKE power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
-</span>
-
 <span class="function_example">
     <pre>
         <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getterFunction, setterFunction))
@@ -69,6 +61,39 @@ BYTE getterFunction() {
 }
 
 void setterFunction(BYTE newValue) {
+    ...
+}
+        </code>
+    </pre>
+</span>
+
+<a name="variable-definition"></a>
+<span class="function_syntax">ZUNO_SWITCH_MULTILEVEL(variable, NULL)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that stores the current value for this channel. 0-99, where 0 is Off and 99 is maximal brightness</span>
+    </span>
+</span>
+
+<span class="function_description_more">
+Variable change can be detected using function <span class="function_ref">zunoIsChannelUpdated</span>(channelNum).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerState, NULL))
+
+byte dimmerState = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    dimmerState = ...;
     ...
 }
         </code>

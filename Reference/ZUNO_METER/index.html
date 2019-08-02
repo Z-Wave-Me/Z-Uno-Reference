@@ -4,6 +4,19 @@
 This macro is a generic macro to be used to setup meter channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>. Instead we suggest to use one of the specific macro ZUNO_METER_* from the list below.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter function and using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested. This allows to do some calculus before returning a value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">
     ZUNO_METER(type, resettable, scale, size, precision, getter, resetter)
 </span>
@@ -96,6 +109,67 @@ DWORD getterFunction() {
 
 void resetterFunction() {
     currentValue = 0;
+}
+</code>
+</pre>
+</span>
+
+<a name="variable-definition"></a>
+<span class="function_syntax">
+    ZUNO_METER(type, resettable, scale, size, precision, variable, NULL)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">type of channel like ZUNO_METER_TYPE_ELECTRIC, ZUNO_METER_TYPE_GAS or ZUNO_METER_TYPE_WATER. Used to correctly display the meter in the Z-Wave controller. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> and starts with ZUNO_METER_TYPE_</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">resettable</span>
+        <span class="function_parameters_param_description">METER_RESET_ENABLE (value can be set to zero via Z-Wave) or METER_RESET_DISABLE (value can not be set to zero).</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">scale</span>
+        <span class="function_parameters_param_description">specific scale used for meter type. See <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> for the full list.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">size</span>
+        <span class="function_parameters_param_description">size: 1, 2 or 4 bytes.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">precision</span>
+        <span class="function_parameters_param_description">precision (number of decimals after dot).</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that stores pointer the current value for this channel. variable type should correspond to size: BYTE (for size = 1), WORD (for size = 2) or DWORD (for size = 4). In almost all most used macros the size is 4 and value type is DWORD.</span>
+    </span>
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">ZUNO_SETUP_CHANNELS(
+    ZUNO_METER(
+        ZUNO_METER_TYPE_WATER,
+        METER_RESET_ENABLE,
+        ZUNO_METER_WATER_SCALE_METERS3,
+        METER_SIZE_FOUR_BYTES,
+        METER_PRECISION_THREE_DECIMALS,
+        meterValue,
+        NULL
+    )
+);
+
+DWORD meterValue = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    meterValue++;
+    ...
 }
 </code>
 </pre>

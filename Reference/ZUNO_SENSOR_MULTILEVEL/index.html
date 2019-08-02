@@ -4,6 +4,20 @@
 This macro is a generic macro to be used to setup multilevel sensor channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>. Instead we suggest to use one of the specific macro ZUNO_SENSOR_MULTILEVEL_* from the list below.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter function and
+using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested. This allows to do some calculus before returning a value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">
     ZUNO_SENSOR_MULTILEVEL(type, scale_size_precision, getter)
 </span>
@@ -51,10 +65,6 @@ for size 2 and precision 1, value 65535 represents -0.1 = (65535 - 65536) / 10,<
 for size 2 and precision 2, value 65535 represents -0.01 = (65535 - 65536) / 100.
 </span>
 
-<span class="function_tip">
-Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SENSOR_MULTILEVEL / SPECIFIC_TYPE_ROUTING_SENSOR_MULTILEVEL with Sensor Multilevel Command Class.
-</span>
-
 <span class="function_example">
        <pre>
            <code class="c">ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_ONE_BYTE, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, GETTER)
@@ -74,43 +84,86 @@ byte getterFunction() {
     </pre>
 </span>
 
+<a name="variable-definition"></a>
+<span class="function_syntax">
+    ZUNO_SENSOR_MULTILEVEL(type, scale_size_precision, variable)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">type of channel like ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, ZUNO_SENSOR_MULTILEVEL_TYPE_DEW_POINT,.. etc. Used to correctly display the sensor in the Z-Wave controller. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> and starts with ZUNO_SENSOR_MULTILEVEL_TYPE_</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">scale_size_precision</span>
+        <span class="function_parameters_param_description">specific scale used for sensor type, size (1, 2 or 4 bytes) and precision (number of decimals after dot). This should be packed in one byte. Use SENSOR_MULTILEVEL_PROPERTIES_COMBINER() macro to pack.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that contains the current value for this channel. Variable type (byte, word or dword) should correspond to the size (1, 2 or 4)</span>
+    </span>
+</span>
+
+<span class="function_example">
+       <pre>
+           <code class="c">ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_ONE_BYTE, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, variableTemperature)
+
+byte variableTemperature = 0;
+           
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    variableTemperature = ...;
+    ...
+}
+        </code>
+    </pre>
+</span>
+
+<span class="function_tip">
+Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SENSOR_MULTILEVEL / SPECIFIC_TYPE_ROUTING_SENSOR_MULTILEVEL with Sensor Multilevel Command Class.
+</span>
+
 <span class="function_description_more">
 Popular sensor types have pre-defined macro. Few are listed below. Full list is defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> file and starts with ZUNO_SENSOR_MULTILEVEL_
 </span>
 
 <span class="function_syntax">
-ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_GENERAL_PURPOSE_VALUE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_LUMINANCE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_POWER(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_HUMIDITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_VELOCITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_DIRECTION(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ATMOSPHERIC_PRESSURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_BAROMETRIC_PRESSURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_SOLAR_RADIATION(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_DEW_POINT(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_RAIN_RATE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_TIDE_LEVEL(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_WEIGHT(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_VOLTAGE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_CURRENT(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_CO2_LEVEL(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_AIR_FLOW(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_TANK_CAPACITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_DISTANCE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ANGLE_POSITION(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ROTATION(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_WATER_TEMPERATURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_SOIL_TEMPERATURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_SEISMIC_INTENSITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_SEISMIC_MAGNITUDE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ULTRAVIOLET(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ELECTRICAL_RESISTIVITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_ELECTRICAL_CONDUCTIVITY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_LOUDNESS(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_MOISTURE(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_FREQUENCY(getter)<br/>
-ZUNO_SENSOR_MULTILEVEL_TIME(getter)
+ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_GENERAL_PURPOSE_VALUE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_LUMINANCE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_POWER(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_HUMIDITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_VELOCITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_DIRECTION(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ATMOSPHERIC_PRESSURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_BAROMETRIC_PRESSURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_SOLAR_RADIATION(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_DEW_POINT(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_RAIN_RATE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_TIDE_LEVEL(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_WEIGHT(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_VOLTAGE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_CURRENT(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_CO2_LEVEL(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_AIR_FLOW(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_TANK_CAPACITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_DISTANCE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ANGLE_POSITION(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ROTATION(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_WATER_TEMPERATURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_SOIL_TEMPERATURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_SEISMIC_INTENSITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_SEISMIC_MAGNITUDE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ULTRAVIOLET(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ELECTRICAL_RESISTIVITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_ELECTRICAL_CONDUCTIVITY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_LOUDNESS(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_MOISTURE(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_FREQUENCY(getter or variable)<br/>
+ZUNO_SENSOR_MULTILEVEL_TIME(getter or variable)
 </span>
 

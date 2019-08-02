@@ -4,6 +4,19 @@
 This macro is used to setup door lock channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter/setter functions and using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter/setter</a> definition the getter functions is called each time a value is requested and setter each time a new value is received. This allows to do some calculus before returning a value as well as to handle the incoming value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">ZUNO_DOORLOCK(getter, setter)</span>
 
 <span class="function_parameters">
@@ -58,74 +71,37 @@ void setterFunction(BYTE newValue) {
     </pre>
 </span>
 
-<h1>ZUNO_DOORLOCK()</h1>
-
-<span class="function_description">
-This macro is used to setup binary switch channel of type door lock for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
-</span>
-
-<span class="function_description_note">
-Door lock requires security. It will work only if included securely in your Z-Wave controller (see <span class="function_ref">Security</span> section).
-</span>
-
-<span class="function_syntax">ZUNO_DOORLOCK(getter, setter)</span>
+<a name="variable-definition"></a>
+<span class="function_syntax">ZUNO_DOORLOCK(variable, NULL)</span>
 
 <span class="function_parameters">
     <span class="function_parameters_param">
-        <span class="function_parameters_param_name">getter</span>
-        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current value for this channel.</span>
-    </span>
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">setter</span>
-        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new value is received for this channel. </span>
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that holds the current door lock mode for this channel.</span>
     </span>
 </span>
 
-<span class="function_description">
-Functions getter should return 0 for Closed and any non-zero value for Open
-</span>
-<span class="function_syntax">BYTE getter(void)</span>
-
-<span class="function_description">
-Functions setter accepts next values:
-<ul>
-    <li>0 for closed</li>
-    <li>1-99 for open</li>
-    <li>>=100 - reserved value</li>
-</ul>
-</span>
-<span class="function_syntax">void setter(BYTE value)</span>
-
-<span class="function_tip">
-Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_ENTRY_CONTROL / SPECIFIC_TYPE_DOOR_LOCK with Switch Binary Command Class.
-</span>
-
-<span class="function_tip">
-You can make a battery power door lock using FLiRS power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
-</span>
-
-<span class="function_description_note">
-This type is allowed only in ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE and ZUNO_SLEEPING_MODE_ALWAYS_AWAKE power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
+<span class="function_description_more">
+Variable change can be detected using function <span class="function_ref">zunoIsChannelUpdated</span>(channelNum).
 </span>
 
 <span class="function_example">
     <pre>
-        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_DOORLOCK(getterFunction, setterFunction));
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_DOORLOCK(lockStatus, NULL))
            
+byte lockStatus = 0;
+
 void setup() {
     ...
 }
 
 void loop() {
     ...
+    lockStatus = ...;
+    ...
 }
 
 BYTE getterFunction() {
-    return currentValue;
-}
-
-void setterFunction(BYTE newValue) {
-    ...
 }
         </code>
     </pre>

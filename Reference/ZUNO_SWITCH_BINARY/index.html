@@ -4,6 +4,19 @@
 This macro is used to setup binary switch channel for Z-Uno board using <span class="function_ref">ZUNO_SETUP_CHANNELS</span>.
 </span>
 
+<span class="function_description_more">
+Z-Uno understands two ways to define a channel: using getter function and using a variable.
+<ul>
+    <li>
+    With <a href="#getter-definition">getter</a> definition the getter function is called each time a value is requested. This allows to do some calculus before returning a value.
+    </li>
+    <li>
+    With <a href="#variable-definition">variable</a> definition Z-Uno will automatically return the variable status. This allows to minimize your code.
+    </li>
+</ul>
+</span>
+
+<a name="getter-definition"></a>
 <span class="function_syntax">ZUNO_SWITCH_BINARY(getter, setter)</span>
 
 <span class="function_parameters">
@@ -31,13 +44,8 @@ Functions setter accepts next values:
 </span>
 <span class="function_syntax">void setter(BYTE value)</span>
 
-
 <span class="function_tip">
 Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_SWITCH_BINARY / SPECIFIC_TYPE_POWER_SWITCH_BINARY with Switch Binary Command Class.
-</span>
-
-<span class="function_description_note">
-This type is allowed only in ZUNO_SLEEPING_MODE_ALWAYS_AWAKE power mode (see <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>).
 </span>
 
 <span class="function_example">
@@ -57,6 +65,43 @@ BYTE getterFunction() {
 }
 
 void setterFunction(BYTE newValue) {
+    ...
+}
+        </code>
+    </pre>
+</span>
+
+<a name="variable-definition"></a>
+<span class="function_syntax">ZUNO_SWITCH_BINARY(variable, NULL)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">variable</span>
+        <span class="function_parameters_param_description">variable that stores the current value for this channel. 0 for Off and any non-zero value for On.</span>
+    </span>
+</span>
+
+<span class="function_description_more">
+Variable change can be detected using function <span class="function_ref">zunoIsChannelUpdated</span>(channelNum).
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_BINARY(lightStatus, NULL));
+
+byte lightStatus = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    if (zunoIsChannelUpdated(1)) {
+        // Do something on new value received via Z-Wave
+    }
+    ...
+    lightStatus = ...;
     ...
 }
         </code>

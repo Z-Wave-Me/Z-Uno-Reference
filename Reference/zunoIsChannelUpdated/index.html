@@ -1,0 +1,41 @@
+<h1>zunoIsChannelUpdated()</h1>
+
+<span class="function_description">
+This function helps to track changes of the variable associated with the channel. Instead of tracking the the variable change you can use zunoIsChannelUpdated(channelNumber) that returns true if new value is received via Z-Wave.
+</span>
+
+<span class="function_syntax">
+    zunoIsChannelUpdated(channelNumber)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">channelNumber</span>
+        <span class="function_parameters_param_description">Number of channel as defined in <span class="function_ref">ZUNO_SETUP_CHANNELS</span>() staring from 1.</span>
+    </span>
+</span>
+
+<span class="function_description_note">
+This function tracks only changes comming from the Z-Wave network. It does not track changes of the variable in your sketch. It is the responsibility of your sketch to call <span class="function_ref">zunoSendReport</span>(channelNumber) when the value is changed in your sketch.
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_BINARY(lightStatus, NULL));
+
+byte lightStatus = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    if (zunoIsChannelUpdated(1)) {
+        // change relay state
+    }
+    ...
+}
+        </code>
+    </pre>
+</span>
