@@ -1,0 +1,23 @@
+<h1>ZUNO_SETUP_S2ACCESS()</h1>
+<span class="function_description">
+    This macro defines which security keys Z-Uno will request from the controller during Z-Wave Security S2 inclusion process.
+    Note that Doorlock channel is supported only if S2 Access is requested and granted by the controller.
+</span>
+<span class="function_syntax">
+    ZUNO_SETUP_S2ACCESS(modes_bitmask)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">modes_bitmask</span>
+        <span class="function_parameters_param_description">ORed modes:
+        <ul>
+            <li>SKETCH_FLAG_S2_UNAUTHENTICATED_BIT &mdash; S2 Unauthenticated &mdash; no PIN code will be asked</li>
+            <li>SKETCH_FLAG_S2_AUTHENTICATED_BIT &mdash; S2 Authenticated &mdash; PIN code is required to include this device (used for important devices)</li>
+            <li>SKETCH_FLAG_S2_ACCESS_BIT &mdash; S2 Access &mdash; PIN code is required to include this device (used for door/entrace/access control only)</li>
+        </ul>
+        </span>
+    </span>
+</span>
+
+<span class="function_example">ZUNO_SETUP_S2ACCESS(SKETCH_FLAG_S2_UNAUTHENTICATED_BIT|SKETCH_FLAG_S2_AUTHENTICATED_BIT);</span>
