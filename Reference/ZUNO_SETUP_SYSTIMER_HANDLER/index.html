@@ -1,0 +1,30 @@
+<h1>ZUNO_SETUP_SYSTIMER_HANDLER()</h1>
+<span class="function_description">
+    Defines a 10 ms timer for easier async handling of buttons, LEDs and encoders.
+</span>
+
+<span class="function_syntax">
+    ZUNO_SETUP_SYSTIMER_HANDLER(sys_timer)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">sys_timer</span>
+        <span class="function_parameters_param_description">function fired every 10 ms</span>
+    </span>
+</span>
+
+<span class="function_syntax">
+    void sys_timer() { ... }
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_SYSTIMER_HANDLER(sys_timer);
+
+void sys_timer(){
+        digitalToggle(13);
+}
+        </code>
+    </pre>
+</span>
