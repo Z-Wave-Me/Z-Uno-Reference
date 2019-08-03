@@ -26,11 +26,11 @@ Z-Uno supports up to 32 configurable parameters.
 </span>
 
 <span class="function_description_more">
-Configuration parameters are automatically saved to the EEPROM. You can get them from the EEPROM at any time (even after reboot) using zunoLoadCFGParam(param, &value) or save (to be reported back to the controller upon request) using zunoSaveCFGParam(param, &value)
+Configuration parameters are automatically saved to the EEPROM. You can get them from the EEPROM at any time (even after reboot) using zunoLoadCFGParam(param) or save (to be reported back to the controller upon request) using zunoSaveCFGParam(param, value)
 </span>
 
 <span class="function_syntax">
-    zunoLoadCFGParam(byte param, word * value);
+    word value = zunoLoadCFGParam(byte param);
 </span>
 
 <span class="function_parameters">
@@ -39,15 +39,10 @@ Configuration parameters are automatically saved to the EEPROM. You can get them
         <span class="function_parameters_param_description">Number of the parameter to be loaded from the EEPROM (starts from 64)</code>
         </span>
     </span>
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">value</span>
-        <span class="function_parameters_param_description">reference to the word variable to load the value to</code>
-        </span>
-    </span>
 </span>
 
 <span class="function_syntax">
-    zunoSaveCFGParam(byte param, word * value);
+    zunoSaveCFGParam(byte param, word value);
 </span>
 
 <span class="function_parameters">
@@ -58,7 +53,7 @@ Configuration parameters are automatically saved to the EEPROM. You can get them
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">value</span>
-        <span class="function_parameters_param_description">reference to the word variable to take the value from</code>
+        <span class="function_parameters_param_description">word variable to store</code>
         </span>
     </span>
 </span>
@@ -72,6 +67,10 @@ Note that Configuration parameters are signed values when defined in the Z-Wave 
 </span>
 
 <span class="function_description_note">
+Since 2.1.5 zunoSaveCFGParam accepts and zunoLoadCFGParam returns a value instead of a pointer.
+</span>
+
+<span class="function_description_note">
 Prior to version 2.1.4 parameters were 4 bytes (dword). Starting from 2.1.4 parameters are now two bytes (word).
 </span>
 
@@ -81,17 +80,20 @@ Prior to version 2.1.4 parameters were 4 bytes (dword). Starting from 2.1.4 para
 
 ZUNO_SETUP_CFGPARAMETER_HANDLER(config_parameter_changed);
 
-void setup() {
-  zunoLoadCFGParam(64, &amp;paramValue);
-}
+word paramValue;
 
-void config_parameter_changed(byte param, word value) {
-    if(param == 64) { // The first user-defined parameter 
-      paramValue = value;  
-    }
+void setup() {
+  paramValue = zunoLoadCFGParam(64);
 }
 
 void loop() {
+  zunoSaveCFGParam(64, paramValue);
+}
+
+void config_parameter_changed(byte param, word value) {
+    if (param == 64) { // The first user-defined parameter
+      paramValue = value;
+    }
 }</code></pre>
  </span> 
 
