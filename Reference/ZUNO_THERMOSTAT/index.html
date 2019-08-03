@@ -25,11 +25,11 @@ This macro is used to setup thermostat channel for Z-Uno board using <span class
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">getterMode</span>
-        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current mode: THERMOSTAT_MODE_OFF, THERMOSTAT_MODE_HEAT, THERMOSTAT_MODE_COOL or THERMOSTAT_MODE_AUTO.</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is supposed to return current mode.</span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">setterMode</span>
-        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new mode is received for this channel. Setter function will accept one parameter with values: THERMOSTAT_MODE_OFF, THERMOSTAT_MODE_HEAT, THERMOSTAT_MODE_COOL or THERMOSTAT_MODE_AUTO</span>
+        <span class="function_parameters_param_description">pointer to a user defined function, which is called when new mode is received for this channel. Setter function will accept one parameter with the mode</span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">getterTemp</span>
@@ -67,6 +67,20 @@ The temperature is represented by a WORD (2 bytes) with one digit precision. Thi
 
 <span class="function_tip">
 Channel generated using this macro will have Z-Wave Device Class GENERIC_TYPE_THERMOSTAT / SPECIFIC_TYPE_THERMOSTAT_GENERAL with Thermostat Mode and Thermostat Setpoint Command Classes.
+</span>
+
+<span class="function_description_note">In 2.1.5 some modes have changed. Supported modes are:
+<ul>
+<li>THERMOSTAT_MODE_OFF</li>
+<li>THERMOSTAT_MODE_HEAT</li>
+<li>THERMOSTAT_MODE_COOL</li>
+<li>THERMOSTAT_MODE_FURNACE</li>
+<li>THERMOSTAT_MODE_DRY</li>
+<li>THERMOSTAT_MODE_MOIST</li>
+<li>THERMOSTAT_MODE_FULL_POWER</li>
+<li>THERMOSTAT_MODE_AUTO_CHANGEOVER (old name was THERMOSTAT_MODE_AUTO)
+</li>
+The full list is available in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>
 </span>
 
 <span class="function_example">
