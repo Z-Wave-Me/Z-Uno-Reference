@@ -1,0 +1,56 @@
+<h1>ZUNO_SETUP_SYSEVENT_HANDLER()</h1>
+<span class="function_description">
+    Set up a handler for Z-Uno system events such as: inclusion start/stop, firmware update start, Z-Uno boot and go into sleep as well as system faults like stack overflow or blocked packets due to the policy to debug.
+</span>
+<span class="function_syntax">
+    ZUNO_SETUP_SYSEVENT_HANDLER(handler)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">handler</span>
+        <span class="function_parameters_param_description">function that handles events</span>
+    </span>
+</span>
+
+<span class="function_syntax">
+    void sys_event(byte event, byte param) { ... }
+</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">event</span>
+        <span class="function_parameters_param_description">event type from the list ZUNO_LOGGING_EVENT_*</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">param</span>
+        <span class="function_parameters_param_description">additional parameter for the event</span>
+    </span>
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">ZUNO_SETUP_SYSEVENT_HANDLER(sys_event);
+
+void sys_event(byte event, byte param) {
+  switch(event) {
+    case ZUNO_LOGGING_EVENT_LEARNSTART:
+      // some action
+      break;
+    case ZUNO_LOGGING_EVENT_LEARNCOMPLETE:
+      // some action
+      break;
+    case ZUNO_LOGGING_EVENT_FWAUTH:
+      // some action
+      break;
+    case ZUNO_LOGGING_EVENT_STACKOVERFLOW:
+      // OOOPS! Error handling
+      break;
+  } 
+}
+        </code>
+    </pre>
+</span>
+
+<span class="function_description_more">
+Full list of events is available in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> (search for ZUNO_LOGGING_EVENT_).
+</span>
