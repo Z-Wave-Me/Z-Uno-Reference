@@ -21,21 +21,38 @@ Z-Uno dynamic configuration uses the following functions:
 </ul>
 </span>
 
+<span class="function_description_note">
+Do not forget to enable all channel types you will use in your sketch with <span class="function_ref">ZUNO_ENABLE</sapn>(WITH_CC_...);
+</span>
+
+<span class="function_description_more">
+In runtime you can get channel values using variable <b>g_channels_data</b>. Values of channels are referred via:
+<ul>
+<li>for one byte channels like SwitchBinary/SwitchMultilevel/SensorBinary/FlowStop/Siren/Doorlock/Blinds: g_channels_data[CH_NUMBER].bParam</li>
+<li>for Meter/SensorMultilevel depending on the size of the value in the channel: g_channels_data[CH_NUMBER].bParam, g_channels_data[CH_NUMBER].wParam or g_channels_data[CH_NUMBER].dwParam</li>
+<li>for SwitchColor: g_channels_data[CH_NUMBER].buffParam[color], color is SWITCH_COLOR_COMPONENT_* constant</li>
+<li>for Thermostat: g_channels_data[CH_NUMBER].thermoParam.mode, g_channels_data[CH_NUMBER].thermoParam.temperature[i], where i = 0 for Heat, i = 1 for Cool, ...</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+You can check if new value arrived via Z-Wave using <span class="function_ref">zunoIsChannelUpdated()</span>.
+</sapn>
+
 <span class="function_see_also">
-Good examples of usage of dynamic configuration can be found in <a href="/examples/z-uno-as-a-modem/">Modem example</a> or <a href="/examples/multiple-dynamic-1-wire-ds18b20-temperature-sensors">multiple DS18B20 temperature sensors</a>.
+Good examples of usage of dynamic configuration are <a href="/examples/z-uno-as-a-modem/">Modem example</a> and <a href="/examples/multiple-dynamic-1-wire-ds18b20-temperature-sensors">multiple DS18B20 temperature sensors</a>.
+More examples in <a href="https://github.com/Z-Wave-Me/Z-Uno-Test-Sketches/tree/master/multichannel_2.15">our GitHub repository</a>.
 </span>
 
 <span class="example_code">
-Below is the Radio Blink sketch from Z-Uno paper manual made in static style
+Below is the Radio Blink sketch from Z-Uno paper manual made in static getter/setter style
 <pre>
-<code class="c">{literal}
-byte dimmerValue=0xFF;
+<code class="c">{literal}byte dimmerValue = 99;
 
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  dimmerValue = 100;
 }
 
 void loop() {
@@ -51,6 +68,26 @@ void setSwitchMultilevelValue(byte newValue) {
 
 byte getSwitchMultilevelValue(void) {
   return dimmerValue;
+}{/literal}
+</code></pre>
+</span>
+
+<span class="example_code">
+Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable style
+<pre>
+<code class="c">{literal}byte dimmerValue = 99;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
 }{/literal}
 </code></pre>
 </span>
@@ -58,8 +95,7 @@ byte getSwitchMultilevelValue(void) {
 <span class="example_code">
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic style
 <pre>
-<code class="c">{literal}
-byte dimmerValue=0xFF;
+<code class="c">{literal}ZUNO_ENABLE(WITH_CC_SWITCH_BINARY);
 
 void setup() {
   ZUNO_START_CONFIG();
@@ -67,39 +103,14 @@ void setup() {
   ZUNO_COMMIT_CONFIG();
 
   pinMode(LED_BUILTIN, OUTPUT);
-  dimmerValue = 100;
+  g_channels_data[0].bParam = 0xFF;
 }
 
 void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(dimmerValue*10);
+  delay(g_channels_data[0].bParam * 10);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(dimmerValue*10);
-}
-
-void setSwitchMultilevelValue(byte newValue) {
-  dimmerValue = newValue;
-}
-
-byte getSwitchMultilevelValue(void) {
-  return dimmerValue;
-}
-
-void zunoCallback(void) {
-    switch(callback_data->type) {
-       case  ZUNO_CHANNEL1_GETTER:
-          callback_data->param.bParam = getSwitchMultilevelValue();
-          break;
-       case  ZUNO_CHANNEL1_SETTER:
-          setSwitchMultilevelValue(callback_data->param.bParam);
-          break;
-
-        default:
-          break;
-    }
+  delay(g_channels_data[0].bParam * 10);
 }{/literal}
 </code></pre>
 </span>
-
-
-
