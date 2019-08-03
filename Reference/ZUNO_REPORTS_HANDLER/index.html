@@ -22,30 +22,30 @@ This macro is used to setup up a handler for incoming reports from other sensors
 <span class="function_tip">
 There are few helpful marco to parse the reported data inside the report handler:
 <ul>
-    <li type="disc"><b>Generic</b></li>
+    <li type="circle"><b>Generic</b></li>
     <li>REPORT_GROUP_ID() returns the first group containing the sender or 255 if the sender is not present in any group</li>
     <li>REPORT_NODE_ID() returns the sender Node Id</li>
 
-    <li type="disc">><b>Basic</b></li>
+    <li type="circle"><b>Basic</b></li>
     <li>REPORT_BASIC_VALUE() returns the value</li>
     
-    <li type="disc">><b>Switch Multilevel</b></li>
+    <li type="circle"><b>Switch Multilevel</b></li>
     <li>REPORT_SWITCH_MULTILEVEL_VALUE() returns the value</li>
     
-    <li type="disc">><b>Switch Binary</b></li>
+    <li type="circle"><b>Switch Binary</b></li>
     <li>REPORT_SWITCH_BINARY_VALUE() returns the value</li>
     
-    <li type="disc">><b>Notification (Alarm)</b></li>
+    <li type="circle"><b>Notification (Alarm)</b></li>
     <li>REPORT_NOTIFICATION_TYPE() returns notification type</li>
     <li>REPORT_NOTIFICATION_EVENT() returns notification event</li>
     <li>REPORT_NOTIFICATION_EVENT_PARAM(i) returns notification parameters</li>
     <li>REPORT_NOTIFICATION_STATUS() returns notification status</li>
 
-    <li type="disc">><b>Sensor Binary</b></li>
+    <li type="circle"><b>Sensor Binary</b></li>
     <li>REPORT_SENSOR_BINARY_TYPE() returns sensor type</li>
     <li>REPORT_SENSOR_BINARY_VALUE() returns the value</li>
     
-    <li type="disc">><b>Sensor Multilevel</b></li>
+    <li type="circle"><b>Sensor Multilevel</b></li>
     <li>REPORT_SENSOR_MULTILEVEL_TYPE() returns sensor type</li>
     <li>REPORT_SENSOR_MULTILEVEL_SCALE() returns sensor scale</li>
     <li>REPORT_SENSOR_MULTILEVEL_UNITS() returns sensor units</li>
@@ -55,7 +55,7 @@ There are few helpful marco to parse the reported data inside the report handler
     <li>REPORT_SENSOR_MULTILEVEL_VALUE_2B() returns the WORD value for size = 2 bytes</li>
     <li>REPORT_SENSOR_MULTILEVEL_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
     
-    <li type="disc">><b>Meter</b></li>
+    <li type="circle"><b>Meter</b></li>
     <li>REPORT_METER_TYPE() returns sensor type</li>
     <li>REPORT_METER_RATE() returns sensor type</li>
     <li>REPORT_METER_SCALE() returns sensor scale</li>
@@ -66,7 +66,7 @@ There are few helpful marco to parse the reported data inside the report handler
     <li>REPORT_METER_VALUE_2B() returns the WORD value for size = 2 bytes</li>
     <li>REPORT_METER_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
     
-    <li type="disc">><b>Battery</b></li>
+    <li type="circle"><b>Battery</b></li>
     <li>REPORT_BATTERY_VALUE() returns battery level</li>
     
     <!--
