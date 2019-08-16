@@ -11,6 +11,8 @@ Raw mode can be used in any case, while vendor mode is for popular encodings whe
 <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/IRController.h">IRController.h</a> defines supported vendors encodings and settings for raw mode.
 </span>
 
+<span class="function_description_note">IR controller is only available in unsecure or S0 security mode. S2 security mode can be supported on demand - write us.</span>
+
 <span class="function_description_more">
 To set up IR controller use <span class="function_ref" link="IR/begin">IR.begin</span>(ir_params). Depending in object passed to IR.begin() IR controller will be configure accordingly. Possible objects are <span class="function_ref" link="IR/IRReceiverParams">IRReceiverParams</span> or <span class="function_ref" link="IR/IRTransmitterParams">IRTransmitterParams</span>.
 </span>
