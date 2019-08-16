@@ -31,5 +31,5 @@ ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
 ZUNO_DISABLE(SERVICE_LEDS); // Disable Service LEDs to save battry and remove unwanted blinks
 ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
 ZUNO_DISABLE(NO_MULTIBINARY_SWITCH0); // Force Switch Mulitilevel and Switch Binary to be in channels even if can be outside of channels (some controllers require it).
-</code></pre>
+ZUNO_ENABLE(NO_LOOP_MINIMALDELAY); // Disable the default 20 ms minial delay between loops - don't forget to add own delay()</code></pre>
 </span>
