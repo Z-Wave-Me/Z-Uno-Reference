@@ -1,0 +1,30 @@
+<h1>ZUNO_SET_ZWCHANNEL()</h1>
+<span class="function_description">
+Put a command class in a specific channel number.
+</span>
+
+<span class="function_description_more">
+Call ZUNO_SET_ZWCHANNEL() to choose channel, then call ZUNO_ADD_CHANNEL() to add command class to channel.
+</span>
+
+<span class="function_syntax">
+<pre><code class="c">#define MAP_TO_ZEROCHANNEL 0x80
+ZUNO_SET_ZWCHANNEL(MAP_TO_ZEROCHANNEL)</code></pre>
+</span>
+
+<span class="function_example">
+<pre><code class="c">#define MAP_TO_ZEROCHANNEL 0x80
+void setup(){
+// Channel setup code 
+ZUNO_START_CONFIG();
+ZUNO_SET_ZWCHANNEL(1| MAP_TO_ZEROCHANNEL); // <- this channel will be provided via 1 & 0 channels
+ZUNO_ADD_CHANNEL(ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER, ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_PROPERTIES_COMBINER( SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_ONE_BYTE, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS));
+ZUNO_SET_ZWCHANNEL(MAP_TO_ZEROCHANNEL + 1);
+ZUNO_ADD_CHANNEL(ZUNO_FLOWSTOP_CHANNEL_NUMBER, 0, 0);
+ZUNO_SET_ZWCHANNEL(MAP_TO_ZEROCHANNEL + 2);
+ZUNO_ADD_CHANNEL(ZUNO_SENSOR_BINARY_CHANNEL_NUMBER, ZUNO_SENSOR_BINARY_TYPE_WATER, 0xFF);
+ZUNO_SET_ZWCHANNEL(MAP_TO_ZEROCHANNEL + 3);
+ZUNO_COMMIT_CONFIG();
+// ... Another code
+}</code></pre>
+</span>
