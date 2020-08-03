@@ -43,7 +43,7 @@ If you need an absolute measured value in Volts and not relative to Vcc, use BAT
 </span>
 
 <span class="function_description_note">
-If BATTERY is used, the reported value is the position of 1.21V (internal reference voltage) between 0 and battery voltage (3V pin voltage). For 10-bits precision the battery voltage equals to <code>1.21 V * 1024 / value</code> or for 8-bits to <code>1.21 V * 256 / value = 30976 / value</code>. The accurace of the internal reference voltage is about 10%. You might need to calibrate this calculation for your Z-Uno.
+If BATTERY is used, the reported value is the position of 1.21V (internal reference voltage) between 0 and battery voltage (3V pin voltage). For 10-bits precision the battery voltage equals to <code>1.21 V * value / 1024</code> or for 8-bits to <code>1.21 V * value / 256 = 30976 / value</code>. The accurace of the internal reference voltage is about 10%. You might need to calibrate this calculation for your Z-Uno.
 </span>
 
 
