@@ -62,30 +62,31 @@ User parameters are also stored in the EEPROM. Design your layout not to overrid
 <br/><br/>
 </span>
 
-<span class="function_description_more" zunoVersion="v1">
-User memory layout:
-<br/>
-<table>
-    <tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
-    <tr><td>0x0000</td><td>0x1FFF</td><td>8 kB</td><td>User memory</td></tr>
-    <tr><td>0x2000</td><td>0x20FF</td><td>256 B</td><td>User configuration parameters</td></tr>
-    <tr><td>0x2100</td><td>0x3FFFF</td><td>248 kB</td><td>User memory</td></tr>
-</table>
-</span>
-
-<span class="function_description_more">
-You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
-</span>
+<span zunoVersion="v1">
+	<span class="function_description_more">
+		User memory layout:
+		<br/>
+		<table>
+			<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
+			<tr><td>0x0000</td><td>0x1FFF</td><td>8 kB</td><td>User memory</td></tr>
+			<tr><td>0x2000</td><td>0x20FF</td><td>256 B</td><td>User configuration parameters</td></tr>
+			<tr><td>0x2100</td><td>0x3FFFF</td><td>248 kB</td><td>User memory</td></tr>
+		</table>
+		</span>
+		
+		<span class="function_description_more">
+		You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
+		</span>
 </span>
 
 <span class="function_description_more" zunoVersion="v2">
-User memory layout:
-<br/>
-<table>
-    <tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
-    <tr><td>0x0000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
-    <tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Настройки для команд класса Notification</td></tr>
-    <tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Настройки для команд класса Wakeup</td></tr>
-    <tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
-</table>
+	User memory layout:
+	<br/>
+	<table>
+		<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
+		<tr><td>0x0000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
+		<tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Настройки для команд класса Notification</td></tr>
+		<tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Настройки для команд класса Wakeup</td></tr>
+		<tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
+	</table>
 </span>
