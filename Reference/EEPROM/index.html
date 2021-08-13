@@ -1,14 +1,19 @@
 <h1>EEPROM Library</h1>
 
 <span class="function_description">
-This librariry provides access to internal 360 kB non-volatile EEPROM. Data written to EEPROM is saved even if Z-Uno is not powered. Use it to store data in battery and FLiRS devices that should survive battery unplug.
-<ul>
-    <li><span class="function_ref" link="EEPROM/put">put</span></li>
-    <li><span class="function_ref" link="EEPROM/get">get</span></li>
-    <li><span class="function_ref" link="EEPROM/read">read</span></li>
-    <li><span class="function_ref" link="EEPROM/update">update</span></li>
-    <li><span class="function_ref" link="EEPROM/write">write</span></li>
-</ul>
+	<span zunoVersion="v1">
+		This librariry provides access to internal 360 kB non-volatile EEPROM. Data written to EEPROM is saved even if Z-Uno is not powered. Use it to store data in battery and FLiRS devices that should survive battery unplug.
+	</span>
+	<span zunoVersion="v2">
+		Data written to EEPROM is saved even if Z-Uno is not powered. Use it to store data in battery and FLiRS devices that should survive battery unplug.
+	</span>
+	<ul>
+		<li><span class="function_ref" link="EEPROM/put">put</span></li>
+		<li><span class="function_ref" link="EEPROM/get">get</span></li>
+		<li><span class="function_ref" link="EEPROM/read">read</span></li>
+		<li><span class="function_ref" link="EEPROM/update">update</span></li>
+		<li><span class="function_ref" link="EEPROM/write">write</span></li>
+	</ul>
 </span>
 
 <span class="function_example">
@@ -57,8 +62,7 @@ User parameters are also stored in the EEPROM. Design your layout not to overrid
 <br/><br/>
 </span>
 
-<span class="function_description_more" zunoVersion="v1"></span>
-<span class="function_description_more">
+<span class="function_description_more" zunoVersion="v1">
 User memory layout:
 <br/>
 <table>
@@ -74,8 +78,7 @@ You can also pre-load some data in the EEPROM via USB cable. Check <a href="/too
 </span>
 </span>
 
-<span class="function_description_more" zunoVersion="v2"></span>
-<span class="function_description_more">
+<span class="function_description_more" zunoVersion="v2">
 User memory layout:
 <br/>
 <table>
@@ -85,6 +88,4 @@ User memory layout:
     <tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Настройки для команд класса Wakeup</td></tr>
     <tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
 </table>
-</span>
-
 </span>
