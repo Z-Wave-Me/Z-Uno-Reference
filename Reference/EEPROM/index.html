@@ -16,9 +16,8 @@
 	</ul>
 </span>
 
-<span class="function_example">
-<pre>
-<code lang="c" zunoVersion="v1">{literal}#include "EEPROM.h"
+<span class="function_example" zunoVersion="v1">
+<pre><code lang="c">#include "EEPROM.h"
 
 BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
 BYTE read_data[5];
@@ -54,10 +53,13 @@ void loop() {
     res = EEPROM.put(addr, &some_data, sizeof(some_data));
     
     delay(5000); // don't write to much in the EEPROM not to kill it
-}{/literal}
-</code>
-<code lang="c" zunoVersion="v2">{literal}#include "EEPROM.h"
+}
+</code></pre>
+</span>
 
+<span class="function_example" zunoVersion="v2">
+	<pre><code lang="c">#include "EEPROM.h"
+	
 	BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
 	BYTE read_data[5];
 	
@@ -68,7 +70,7 @@ void loop() {
 	void loop() {
 		byte i;
 		word res;
-		dword addr = 0x0;
+		dword addr = 0x800;
 	
 	
 		Serial.println("Reading 128 Bytes one by one from EEPROM...");
@@ -92,10 +94,9 @@ void loop() {
 		res = EEPROM.put(addr, &some_data, sizeof(some_data));
 		
 		delay(5000); // don't write to much in the EEPROM not to kill it
-	}{/literal}
-	</code>
-</pre>
-</span>
+	}
+	</code></pre>
+	</span>
 
 <span class="function_description_note">
 User parameters are also stored in the EEPROM. Design your layout not to override them!
@@ -124,7 +125,7 @@ User parameters are also stored in the EEPROM. Design your layout not to overrid
 	<br/>
 	<table>
 		<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
-		<tr><td>0x000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
+		<tr><td>0x0000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
 		<tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Настройки для команд класса Notification</td></tr>
 		<tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Настройки для команд класса Wakeup</td></tr>
 		<tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
