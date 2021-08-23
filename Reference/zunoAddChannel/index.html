@@ -1,0 +1,62 @@
+<h1>ZUNO_ADD_CHANNEL()</h1>
+<span class="function_description">
+This function instructs Z-Uno to add one more channel during dynamic configuration.
+</span>
+
+<span class="function_description_more">
+This function can be called many times to add more channels. Channels are numbered from 1 to 32. Make sure to execute <span class="function_ref">ZUNO_START_CONFIG</span> before the first call of ZUNO_ADD_CHANNEL().
+</span>
+
+<span class="function_description_note">
+Z-Uno supports up to 32 channels. But you can lower this limit to save sketch memory using <span class="function_ref" link="#ZUNO_DYNAMIC_CHANNELS">ZUNO_DYNAMIC_CHANNELS</span>().
+</span>
+
+<span class="function_syntax">ZUNO_ADD_CHANNEL(type, sensor_type, size_precision_parameters)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">channel type (defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>):
+            <ol>
+                <li>ZUNO_SWITCH_BINARY_CHANNEL_NUMBER</li>
+                <li>ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER</li>
+                <li>ZUNO_SENSOR_BINARY_CHANNEL_NUMBER</li>
+                <li>ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER</li>
+                <li>ZUNO_METER_CHANNEL_NUMBER</li>
+                <li>ZUNO_DOORLOCK_CHANNEL_NUMBER (not supported yet, for future use)</li>
+                <li>ZUNO_FLOWSTOP_CHANNEL_NUMBER</li>
+                <li>ZUNO_SIREN_CHANNEL_NUMBER</li>
+                <li>ZUNO_BLINDS_CHANNEL_NUMBER</li>
+                <li>ZUNO_THERMOSTAT_CHANNEL_NUMBER</li>
+                <li>ZUNO_SWITCH_COLOR_CHANNEL_NUMBER</li>
+                <li>ZUNO_END_OF_SUPPORTED_CC_NUM</li>
+            </ol>
+        </span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">sensor_type</span>
+        <span class="function_parameters_param_description">Sensor type. Applicable only for ZUNO_SENSOR_BINARY_CHANNEL_NUMBER, ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER and ZUNO_METER_CHANNEL_NUMBER.</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">size_precision_parameters</span>
+        <span class="function_parameters_param_description">One byte defining value size and value precision. Applicable only for ZUNO_SENSOR_BINARY_CHANNEL_NUMBER, ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER and ZUNO_METER_CHANNEL_NUMBER. Check <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> for more details.</span>
+    </span>
+</span>
+
+<span class="function_description_note">
+Do not forget to enable all channel types you will use in your sketch with <span class="function_ref">ZUNO_ENABLE</span>(WITH_CC_...);
+</span>
+
+<a name="ZUNO_DYNAMIC_CHANNELS"></a>
+<span class="function_syntax">ZUNO_DYNAMIC_CHANNELS</span>(channelMaxNumber)
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">channelMaxNumber</span>
+        <span class="function_parameters_param_description">Maximal number of dynamic channels that your sketch can add using ZUNO_ADD_CHANNEL(). In range of 1-32.</span>
+    </span>
+</span>
+
+<span class="function_see_also">
+Examples can be found in the description of <span class="function_ref">ZUNO_START_CONFIG</span>.
+</span>
