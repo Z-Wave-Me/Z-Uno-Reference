@@ -41,22 +41,22 @@ Below is the Radio Blink sketch from Z-Uno paper manual made in static getter/se
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
 
 void setup() {
-	pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(dimmerValue*10);
-	digitalWrite(LED_BUILTIN, LOW);
-	delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
 }
 
 void setSwitchMultilevelValue(byte newValue) {
-	dimmerValue = newValue;
+  dimmerValue = newValue;
 }
 
 byte getSwitchMultilevelValue(void) {
-	return dimmerValue;
+  return dimmerValue;
 }
 </code></pre>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic getter/setter style
@@ -67,32 +67,33 @@ ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
 
 byte dimmerValue = 99;
 
+// В данной структуре храняться для удобства указатели на хендлерры для getter и setter
 static zuno_handler_single_gettersetter_t __hdata_getSwitchMultilevelValue={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
 
 void setup() {
-	if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-		zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в индекс канал типа SWITCH_MULTILEVEL, без каких доп параметров
-		zunoSetZWChannel(0x0, 0x0);//Указываем номер канала
-		zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
-	}
-	zunoAppendChannelHandler(0x0, 0x1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Устанавливаем хендлеры для getter и setter - что бы код мог их использовать. Это нужно устанавливать каждый раз.
+  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в индекс канал типа SWITCH_MULTILEVEL, без каких доп параметров
+    zunoSetZWChannel(0x0, 0x0);//Указываем номер канала
+    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+  }
+  zunoAppendChannelHandler(0x0, 0x1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Устанавливаем хендлеры для getter и setter - что бы код мог их использовать. Это нужно устанавливать каждый раз.
 
-	pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(dimmerValue*10);
-	digitalWrite(LED_BUILTIN, LOW);
-	delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
 }
 
 static void setSwitchMultilevelValue(byte newValue) {
-	dimmerValue = newValue;
+  dimmerValue = newValue;
 }
 
 static byte getSwitchMultilevelValue(void) {
-	return dimmerValue;
+  return dimmerValue;
 }
 </code></pre>
 </span>
@@ -105,37 +106,39 @@ Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 
 void setup() {
-	pinMode(LED_BUILTIN, OUTPUT);
-}
-
-void loop() {
-	digitalWrite(LED_BUILTIN, HIGH);
-	delay(dimmerValue*10);
-	digitalWrite(LED_BUILTIN, LOW);
-	delay(dimmerValue*10);
-}
-</code></pre>
-</span>
-
-<span class="example_code">
-Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic style
-<pre>
-<code class="c">{literal}ZUNO_ENABLE(WITH_CC_SWITCH_BINARY);
-
-void setup() {
-  zunoStartDeviceConfiguration();
-  ZUNO_ADD_CHANNEL(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0);
-  ZUNO_COMMIT_CONFIG();
-
   pinMode(LED_BUILTIN, OUTPUT);
-  g_channels_data[0].bParam = 0xFF;
 }
 
 void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(g_channels_data[0].bParam * 10);
+  delay(dimmerValue*10);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(g_channels_data[0].bParam * 10);
-}{/literal}
+  delay(dimmerValue*10);
+}
+</code></pre>
+Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic vartiable style
+<pre>
+<code class="c">// Указываем что будем использовать. В нашем случае это два команд класса, если их не указать то код для этих команд классов не собереться.
+ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
+
+byte dimmerValue = 99;
+
+void setup() {
+  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в индекс канал типа SWITCH_MULTILEVEL, без каких доп параметров
+    zunoSetZWChannel(0x0, 0x0);//Указываем номер канала
+    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+  }
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Указываем адресс для переменной - что бы код мог ее использовать. Это нужно устанавливать каждый раз.
+
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(dimmerValue*10);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(dimmerValue*10);
+}
 </code></pre>
 </span>
