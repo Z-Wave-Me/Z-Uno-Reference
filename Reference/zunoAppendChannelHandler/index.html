@@ -1,0 +1,48 @@
+<span zunoVersion="v2"></span>
+<h1>zunoAppendChannelHandler()</h1>
+<span class="function_description">
+Данная функция добавляет в канал обработчик во время динамическай конфигурации каналов.
+</span>
+
+<span class="function_description_more">
+В отличии от других функций используемых во время динамическай конфигурации, данную функцию нужно вызывать каждый раз - не зависимо включненно устройство или нет.
+</span>
+
+<span class="function_syntax">zunoAppendChannelHandler(ch, value_size, type, *handler)</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ch</span>
+		<span class="function_parameters_param_description">канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">value_size</span>
+		<span class="function_parameters_param_description">размер данных используемых в getter/setter или переменной.</span>
+	</span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">type</span>
+        <span class="function_parameters_param_description">тип хендлера:
+            <ul>
+				<li>CHANNEL_HANDLER_SINGLE_GETTER</li>
+				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER</li>
+				<li>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</li>
+				<li>CHANNEL_HANDLER_MULTI_GETTER</li>
+				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER</li>
+				<li>CHANNEL_HANDLER_MULTI_MAPPER</li>
+				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</li>
+				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</li>
+				<li>CHANNEL_HANDLER_SINGLE_THERMOSTAT</li>
+				<li>CHANNEL_HANDLER_MULTI_THERMOSTAT</li>
+            </ul>
+        </span>
+    </span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">handler</span>
+		<span class="function_parameters_param_description">указатель на структуру содержающая хендлеры или же указатель на переменную</span>
+	</span>
+</span>
+
+<span class="function_see_also">
+Examples can be found in the description of <span class="function_ref">zunoStartDeviceConfiguration</span>.
+</span>
+
