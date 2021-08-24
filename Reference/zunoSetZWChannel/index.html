@@ -1,3 +1,4 @@
+<span zunoVersion="v2"></span>
 <h1>zunoSetZWChannel()</h1>
 <span class="function_description">
 Присваивает каналу zwave канал.
@@ -11,13 +12,17 @@
 <pre><code class="c">zunoSetZWChannel(ch, zw_channel)</code></pre>
 </span>
 
-<span class="function_description_more">
-	<ul>
-		<li><b>ch</b> канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</li>
-		<li><b>zw_channel</b> - zwave канал может формироваться двумя способами: кластерно или не кластерно.В случае если не используеться кластаризация то каждый zwave канал уникальный, так же к каждому первому каналу одного типа
-		добавляеться еще и <b>ZWAVE_CHANNEL_MAPPED_BIT</b> - <b>zunoSetZWChannel(0x0, 0x01 | ZWAVE_CHANNEL_MAPPED_BIT)</b>. В случае использования кластаризации все тоже самое, но можно каждому каналу тип которого есть в одном только
-		количстве то присваиваеться <b>zw_channel</b> нуллю - <b>zunoSetZWChannel(0x0, 0x0)</b>.</li>
-	</ul>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">ch</span>
+        <span class="function_parameters_param_description">канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">zw_channel</span>
+        <span class="function_parameters_param_description">zwave канал может формироваться двумя способами: кластерно или не кластерно.В случае если не используеться кластаризация то каждый zwave канал уникальный, так же к каждому первому каналу одного типа
+			добавляеться еще и <b>ZWAVE_CHANNEL_MAPPED_BIT</b> - <b>zunoSetZWChannel(0x0, 0x01 | ZWAVE_CHANNEL_MAPPED_BIT)</b>. В случае использования кластаризации все тоже самое, но можно каждому каналу тип которого есть в одном только
+			количстве то присваиваеться <b>zw_channel</b> нуллю - <b>zunoSetZWChannel(0x0, 0x0)</b>.</span>
+    </span>
 </span>
 
 <span class="function_example">
