@@ -16,6 +16,7 @@ Z-Uno dynamic configuration uses the following functions:
 <ul>
     <li>zunoStartDeviceConfiguration(),</li>
     <li><span class="function_ref">zunoAddChannel</span>(),</li>
+    <li><span class="function_ref">zunoSetZWChannel</span>(),</li>
     <li><span class="function_ref">zunoCommitCfg</span>(),</li>
 </ul>
 </span>
@@ -25,16 +26,17 @@ Do not forget to enable all channel types you will use in your sketch with <span
 </span>
 
 <span class="function_description_more">
-In runtime you can get channel values using macro <b>ZUNO_CFG_CHANNEL(CH_INDEX)</b>:
+In runtime you can get channel values using macro <b>ZUNO_CFG_CHANNEL(CHANNEL)</b>:
 	<ul>
-		<li><b>CH_INDEX</b> индекс от <b>0x0</b> до <b>ZUNO_CFG_CHANNEL_COUNT</b>.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CH_INDEX).type</b> - указывает на тип канала.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CH_INDEX).sub_type</b> и <b>ZUNO_CFG_CHANNEL(CH_INDEX).params[0x0]</b> - допалнительные параметры. Их описание можно посмотреть в описании типов каналов.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CH_INDEX).zw_channel & 0x3F</b> - хранит zwave канал.</li>
+		<li><b>CHANNEL</b> канал от <b>0x0</b> до <b>31</b>, узнать сколько каналов можно с помощью <b>ZUNO_CFG_CHANNEL_COUNT</b>.</li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).type</b> - указывает на тип канала.</li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).sub_type</b> и <b>ZUNO_CFG_CHANNEL(CHANNEL).params[0x0]</b> - допалнительные параметры. Их описание можно посмотреть в описании типов каналов.</li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).zw_channel & 0x3F</b> - хранит zwave канал.</li>
 	</ul>
 </span>
 
 <span class="example_code">
+<b>Пример №1</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in static getter/setter style
 <pre>
 <code class="c">byte dimmerValue = 99;
@@ -73,8 +75,8 @@ static zuno_handler_single_gettersetter_t __hdata_getSwitchMultilevelValue={(voi
 
 void setup() {
   if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в индекс канал типа SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x0);//Указываем номер канала
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
+    zunoSetZWChannel(0x0, 0x0);//Указываем zwave канал
     zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
   }
   zunoAppendChannelHandler(0x0, 0x1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Устанавливаем хендлеры для getter и setter - что бы код мог их использовать. Это нужно устанавливать каждый раз.
@@ -100,6 +102,7 @@ static byte getSwitchMultilevelValue(void) {
 </span>
 
 <span class="example_code">
+<b>Пример №2</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable style
 <pre>
 <code class="c">byte dimmerValue = 99;
@@ -126,8 +129,8 @@ byte dimmerValue = 99;
 
 void setup() {
   if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в индекс канал типа SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x0);//Указываем номер канала
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
+    zunoSetZWChannel(0x0, 0x0);//Указываем zwave канал
     zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
   }
   zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Указываем адресс для переменной - что бы код мог ее использовать. Это нужно устанавливать каждый раз.
