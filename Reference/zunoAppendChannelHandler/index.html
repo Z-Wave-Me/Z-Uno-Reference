@@ -28,7 +28,6 @@
 				<li>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</li>
 				<li>CHANNEL_HANDLER_MULTI_GETTER</li>
 				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER</li>
-				<li>CHANNEL_HANDLER_MULTI_MAPPER</li>
 				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</li>
 				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</li>
 				<li>CHANNEL_HANDLER_SINGLE_THERMOSTAT</li>
@@ -42,7 +41,64 @@
 	</span>
 </span>
 
+<span class="function_example">
+<b>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</b> - данный тип использзуеться когда нужно напрямую использовать переменную без функций.
+
+<pre><code class="c">
+byte dimmerValue = 99;
+
+//ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
+
+void setup() {
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Напрямую указатель на переменную
+}
+</code></pre>
+</span>
+
+<span class="function_example">
+<b>CHANNEL_HANDLER_SINGLE_GETTER</b> - данный тип использзуеться когда используеться только getter.
+
+<pre><code class="c">
+byte dimmerValue = 99;
+
+//ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
+
+void setup() {
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTER, (void*)&getterFunctionSensorBinary);//Напрямую указатель на функцию
+}
+
+BYTE getterFunctionSensorBinary() {
+    return (0x0);
+}
+</code></pre>
+</span>
+
+<span class="function_example">
+<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b> - данный тип использзуеться когда используеться getter и setter.
+
+<pre><code class="c">
+byte dimmerValue = 99;
+
+//ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
+
+//Устанавливаем в струтуру указатели на хендлеры getter и setter
+zuno_handler_single_gettersetter_t __hdata_getSwitchMultilevelValue={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
+
+void setup() {
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Тут уже передаюм указатель на структуру
+}
+
+void setSwitchMultilevelValue(byte newValue) {
+	dimmerValue = newValue;
+  }
+  
+  byte getSwitchMultilevelValue(void) {
+	return dimmerValue;
+  }
+</code></pre>
+</span>
+
 <span class="function_see_also">
-Examples can be found in the description of <span class="function_ref">zunoStartDeviceConfiguration</span>.
+Общий пример использования можно найти в <span class="function_ref">zunoStartDeviceConfiguration</span>.
 </span>
 
