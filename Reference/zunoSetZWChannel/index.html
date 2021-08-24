@@ -11,6 +11,15 @@
 <pre><code class="c">zunoSetZWChannel(ch, zw_channel)</code></pre>
 </span>
 
+<span class="function_description_more">
+	<ul>
+		<li><b>ch</b> канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</li>
+		<li><b>zw_channel</b> - zwave канал может формироваться двумя способами: кластерно или не кластерно.В случае если не используеться кластаризация то каждый zwave канал уникальный, так же к каждому первому канал одного типа
+		добавляеться еще и <b>ZWAVE_CHANNEL_MAPPED_BIT</b> - <b>zunoSetZWChannel(0x0, 0x01 | ZWAVE_CHANNEL_MAPPED_BIT)</b>. В случае использования кластаризации все тоже самое, но можно каждому каналу тип которого есть в одном только
+		количстве то присваиваеться <b>zw_channel</b> нуллю - <b>zunoSetZWChannel(0x0, 0x0)</b>.</li>
+	</ul>
+</span>
+
 <span class="function_example">
 <pre><code class="c">#define MAP_TO_ZEROCHANNEL 0x80
 void setup(){
