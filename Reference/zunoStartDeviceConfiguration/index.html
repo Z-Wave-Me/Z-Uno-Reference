@@ -62,6 +62,10 @@ byte getSwitchMultilevelValue(void) {
   return dimmerValue;
 }
 </code></pre>
+</span>
+
+<span class="example_code">
+<b>Пример №2</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic getter/setter style
 <pre>
 <code class="c">
@@ -102,7 +106,7 @@ static byte getSwitchMultilevelValue(void) {
 </span>
 
 <span class="example_code">
-<b>Пример №2</b>
+<b>Пример №3</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable style
 <pre>
 <code class="c">byte dimmerValue = 99;
@@ -120,6 +124,10 @@ void loop() {
   delay(dimmerValue*10);
 }
 </code></pre>
+</span>
+
+<span class="example_code">
+<b>Пример №4</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic vartiable style
 <pre>
 <code class="c">// Указываем что будем использовать. В нашем случае это два команд класса, если их не указать то код для этих команд классов не собереться.
