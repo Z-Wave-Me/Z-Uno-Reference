@@ -169,11 +169,9 @@ void thermPointSetterC(BYTE mode,WORD point){
 
 <span class="function_example">
 <b>CHANNEL_HANDLER_MULTI_GETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER_2P, CHANNEL_HANDLER_MULTI_THERMOSTAT</b> - аналогичны вариантам с <b>SINGLE</b>, но тут добавляеться в функции доп параметр <b>ch</b>
-позволяющий с помощью одной функции обрабатывать множество каналов, вместо того что бы для каждого канала назначать свой отдельный хендлер.
+позволяющий с помощью одной функции обрабатывать множество каналов, вместо того что бы для каждого канала назначать свой отдельный хендлер. В отличии от <b>SINGLE</b> у струтур есть доп поле <b>offset</b> которое нужно выставить в ноль.
 
 <pre><code class="c">
-byte dimmerValue = 99;
-
 zuno_handler_multi_getter_t __hdata_getterFunctionSwitchBinary={(void*)&getterFunctionSensorBinary,0};
 
 // Статичный вариант.
@@ -189,6 +187,52 @@ BYTE getterFunctionSensorBinary(byte ch) {
   return (0x0);
 }
 </code></pre>
+</span>
+
+<span class="function_description_more">
+	Таблица для удобства
+	<table>
+		<tr>
+			<th>Тип</th>
+			<th>Структура</th>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_SINGLE_GETTER</td>
+			<td>CHANNEL_HANDLER_SINGLE_GETTER</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_SINGLE_GETTERSETTER</td>
+			<td>CHANNEL_HANDLER_SINGLE_GETTERSETTER</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</td>
+			<td>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_MULTI_GETTER</td>
+			<td>CHANNEL_HANDLER_MULTI_GETTER</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_MULTI_GETTERSETTER</td>
+			<td>CHANNEL_HANDLER_MULTI_GETTERSETTER</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</td>
+			<td>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</td>
+			<td>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_SINGLE_THERMOSTAT</td>
+			<td>CHANNEL_HANDLER_SINGLE_THERMOSTAT</td>
+		</tr>
+		<tr>
+			<td>CHANNEL_HANDLER_MULTI_THERMOSTAT</td>
+			<td>CHANNEL_HANDLER_MULTI_THERMOSTAT</td>
+		</tr>
+	</table>
 </span>
 
 <span class="function_see_also">
