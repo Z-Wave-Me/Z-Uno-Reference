@@ -47,6 +47,7 @@
 <pre><code class="c">
 byte dimmerValue = 99;
 
+// Статичный вариант.
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 
 void setup() {
@@ -61,6 +62,7 @@ void setup() {
 <pre><code class="c">
 byte dimmerValue = 99;
 
+// Статичный вариант.
 //ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
 
 void setup() {
@@ -68,7 +70,7 @@ void setup() {
 }
 
 BYTE getterFunctionSensorBinary() {
-    return (0x0);
+  return (0x0);
 }
 </code></pre>
 </span>
@@ -79,6 +81,7 @@ BYTE getterFunctionSensorBinary() {
 <pre><code class="c">
 byte dimmerValue = 99;
 
+// Статичный вариант.
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
 
 //Устанавливаем в струтуру указатели на хендлеры getter и setter
@@ -89,12 +92,102 @@ void setup() {
 }
 
 void setSwitchMultilevelValue(byte newValue) {
-	dimmerValue = newValue;
-  }
+  dimmerValue = newValue;
+}
   
-  byte getSwitchMultilevelValue(void) {
-	return dimmerValue;
-  }
+ byte getSwitchMultilevelValue(void) {
+  return dimmerValue;
+}
+</code></pre>
+</span>
+
+<span class="function_example">
+<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</b> - данный тип использзуеться когда используеться getter и setter, но в данных функциях есть доп параметр в отличии от <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b>.
+
+<pre><code class="c">
+uint8_t _color[10] = {0};
+
+// Статичный вариант.
+//ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunctionColor, setterFunctionColor));
+
+//Устанавливаем в струтуру указатели на хендлеры getter и setter
+zuno_handler_single_gettersetter_t __hdata_getterFunctionColor={(void*)&getterFunctionColor,(void*)&setterFunctionColor};
+
+void setup() {
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P, (void*)&__hdata_getterFunctionColor);//Тут уже передаюм указатель на структуру
+}
+
+BYTE getterFunctionColor(BYTE component) {
+  return (_color[component]);
+}
+
+void setterFunctionColor(BYTE component, BYTE newValue) {
+  _color[component] = newValue;
+}
+</code></pre>
+</span>
+
+<span class="function_example">
+<b>CHANNEL_HANDLER_SINGLE_THERMOSTAT</b> - данный тип использзуеться только для команд класса <b>THERMOSTAT</b>.
+
+<pre><code class="c">
+BYTE g_therm_mode = THERMOSTAT_MODE_OFF;
+int g_therm_point;
+BYTE g_update = FALSE;
+
+// Статичный вариант.
+//ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunctionColor, setterFunctionColor));
+
+//Устанавливаем в струтуру указатели на хендлеры getter и setter
+zuno_handler_single_thermostat_t __hdata_thermModeGetterC={(void*)&thermModeGetterC, (void*)&thermModeSetterC, (void*)&thermPointGetterC, (void*)&thermPointSetterC};
+
+void setup() {
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_THERMOSTAT, (void*)&__hdata_thermModeGetterC);//Тут уже передаюм указатель на структуру
+}
+
+BYTE thermModeGetterC(){
+  return g_therm_mode;
+}
+
+void thermModeSetterC(BYTE mode){
+  g_therm_mode = mode;
+  g_update = TRUE;
+}
+
+WORD thermPointGetterC(BYTE mode){
+  return g_therm_point;
+  (void)mode;
+}
+
+void thermPointSetterC(BYTE mode,WORD point){
+  g_update = TRUE;
+  g_therm_point = point;
+  (void)mode;
+}
+</code></pre>
+</span>
+
+<span class="function_example">
+<b>CHANNEL_HANDLER_MULTI_GETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER_2P, CHANNEL_HANDLER_MULTI_THERMOSTAT</b> - аналогичны вариантам с <b>SINGLE</b>, но тут добавляеться в функции доп параметр <b>ch</b>
+позволяющий с помощью одной функции обрабатывать множество каналов, вместо того что бы для каждого канала назначать свой отдельный хендлер.
+
+<pre><code class="c">
+byte dimmerValue = 99;
+
+zuno_handler_multi_getter_t __hdata_getterFunctionSwitchBinary={(void*)&getterFunctionSensorBinary,0};
+
+// Статичный вариант.
+//ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
+
+void setup() {
+  zunoAppendChannelHandler( 0x0, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&__hdata_getterFunctionSwitchBinary);//Тут уже передаюм указатель на структуру
+  zunoAppendChannelHandler( 0x1, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&__hdata_getterFunctionSwitchBinary);//Тут уже передаюм указатель на структуру
+}
+
+BYTE getterFunctionSensorBinary(byte ch) {
+  // Сдесь в зависимости от канала будем обрабатывать и возращать нужное значение
+  return (0x0);
+}
 </code></pre>
 </span>
 
