@@ -33,5 +33,55 @@ nothing
 </span>  
 </span>
 <span zunoVersion="v2">
+<h1>Serial.begin()</h1>
+<span class="function_description">Sets the data rate in bits per second (baud) for serial data transmission. For communicating with Serial Monitor, make sure to use one of the baud rates listed in the menu at the bottom right corner of its screen. 
+You can, however, specify other rates.<br></span>
 
+<span class="function_description_more">An optional second argument configures the data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
+
+<span class="function_syntax">
+Serial.begin()<br>
+Serial.begin(speed)<br>
+Serial.begin(speed, config)<br>
+Serial.begin(speed, config, rx, tx)<br>
+Serial.begin(speed, config, rx, tx, *buffer, len)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">speed:</span>
+		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">config:</span>
+		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:<br></span>
+		<ul>
+			<li>SERIAL_8N1 (the default)</li>
+			<li>SERIAL_8N2</li>
+			<li>SERIAL_9N1</li>
+			<li>SERIAL_9N2</li>
+			<li>SERIAL_8E1: even parity</li>
+			<li>SERIAL_8E2</li>
+			<li>SERIAL_9E1</li>
+			<li>SERIAL_9E2</li>
+			<li>SERIAL_8O1: odd parity</li>
+			<li>SERIAL_8O2</li>
+			<li>SERIAL_9O1</li>
+			<li>SERIAL_9O2</li>
+		</ul>
+	</span>
+</span>
+
+<span class="function_returns">
+nothing
+</span>
+
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+    Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
+    Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
+}
+</code></pre>
+</span>  
 </span>
