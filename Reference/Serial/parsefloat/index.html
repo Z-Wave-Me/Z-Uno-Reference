@@ -1,9 +1,20 @@
 <h2>parseFloat()</h2>
-    <span class="function_description">
-Serial.parseFloat() returns the first valid floating point number from the Serial buffer. Characters that are not digits (or the minus sign) are skipped. parseFloat() is terminated by the first character that is not a floating point number.
+<span class="function_description">
+Serial.parseFloat() returns the first valid floating point number from the Serial buffer. parseFloat() is terminated by the first character that is not a floating point number. 
+The function terminates if it times out (see <span class="function_ref" link="Serial/setTimeout">setTimeout</a>()).
 </span>
-<span class="function_syntax">
-<br>Serial.parseFloat()</span>
+
+<span class="function_syntax" zunoVersion="v1">
+<br>Serial.parseFloat()<br>
+</span>
+<span class="function_syntax" zunoVersion="v2">
+<br>
+	Serial.parseFloat()
+	Serial.parseFloat(lookahead)
+	Serial.parseFloat(lookahead, ignore)
+<br>
+</span>
+
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">none</span>
