@@ -129,18 +129,8 @@ void setup() {
 }
 
 void loop() {
-  // read the analog input on pin 0:
-  analogValue = analogRead(0);
-
-  // print it out in many formats:
-  Serial.println(analogValue);       // print as an ASCII-encoded decimal
-  Serial.println(analogValue, DEC);  // print as an ASCII-encoded decimal
-  Serial.println(analogValue, HEX);  // print as an ASCII-encoded hexadecimal
-  Serial.println(analogValue, OCT);  // print as an ASCII-encoded octal
-  Serial.println(analogValue, BIN);  // print as an ASCII-encoded binary
-
-  // delay 10 milliseconds before the next reading:
-  delay(10);
+  Serial0.printf("**%5d**%5.3d**%05d**%05.3d**\n", 6, 6, 6, 6);
+  delay(1000);
 }
 </code>
 </pre>
