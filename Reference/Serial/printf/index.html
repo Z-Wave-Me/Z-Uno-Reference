@@ -13,29 +13,29 @@
 			<ul>
 				<li>
 					<b>Format of the format string:</b><br>
-					The format string is a character string, beginning and ending in its initial shift state, if any.   The  format  string  is
-					composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and con‐
-					version specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification
-					is  introduced  by  the character %, and ends with a conversion specifier.  In between there may be (in this order) zero or
-					more flags, an optional minimum field width, an optional precision and an optional length modifier.
-			 
-					The arguments must correspond properly (after type promotion) with the conversion specifier.  By default, the arguments are
-					used  in  the  order given, where each '*' (see Field width and Precision below) and each conversion specifier asks for the
-					next argument (and it is an error if insufficiently many arguments are given).  One can also specify explicitly which argu‐
-					ment is taken, at each place where an argument is required, by writing "%m$" instead of '%' and "*m$" instead of '*', where
-					the decimal integer m denotes the position in the argument list of the desired argument, indexed starting from 1.  Thus,
-			 
-						printf("%*d", width, num);
-			 
-					and
-			 
-						printf("%2$*1$d", width, num);
-			 
-					are equivalent.  The second style allows repeated references to the same argument.  The C99 standard does not  include  the
-					style  using '$', which comes from the Single UNIX Specification.  If the style using '$' is used, it must be used through‐
-					out for all conversions taking an argument and all width and precision arguments, but it may be mixed  with  "%%"  formats,
-					which  do  not  consume an argument.  There may be no gaps in the numbers of arguments specified using '$'; for example, if
-					arguments 1 and 3 are specified, argument 2 must also be specified somewhere in the format string.
+			The format string is a character string, beginning and ending in its initial shift state, if any.   The  format  string  is
+			composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and con‐
+			version specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification
+			is  introduced  by  the character %, and ends with a conversion specifier.  In between there may be (in this order) zero or
+			more flags, an optional minimum field width, an optional precision and an optional length modifier.
+		
+			The arguments must correspond properly (after type promotion) with the conversion specifier.  By default, the arguments are
+			used  in  the  order given, where each '*' (see Field width and Precision below) and each conversion specifier asks for the
+			next argument (and it is an error if insufficiently many arguments are given).  One can also specify explicitly which argu‐
+			ment is taken, at each place where an argument is required, by writing "%m$" instead of '%' and "*m$" instead of '*', where
+			the decimal integer m denotes the position in the argument list of the desired argument, indexed starting from 1.  Thus,<br>
+			<br>
+			    printf("%*d", width, num);<br>
+				<br>
+			and<br>
+			<br>
+			    printf("%2$*1$d", width, num);<br>
+				<br>
+			are equivalent.  The second style allows repeated references to the same argument.  The C99 standard does not  include  the
+			style  using '$', which comes from the Single UNIX Specification.  If the style using '$' is used, it must be used through‐
+			out for all conversions taking an argument and all width and precision arguments, but it may be mixed  with  "%%"  formats,
+			which  do  not  consume an argument.  There may be no gaps in the numbers of arguments specified using '$'; for example, if
+			arguments 1 and 3 are specified, argument 2 must also be specified somewhere in the format string.
 				</li>
 			</ul>
 		</span>
