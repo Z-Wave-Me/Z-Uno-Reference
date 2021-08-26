@@ -54,7 +54,8 @@ Serial.begin(speed, config, rx, tx, *buffer, len)<br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">config:</span>
-		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:<br></span>
+		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:</span>
+		<br>
 		<ul>
 			<li>SERIAL_8N1 (the default)</li>
 			<li>SERIAL_8N2</li>
@@ -70,17 +71,37 @@ Serial.begin(speed, config, rx, tx, *buffer, len)<br>
 			<li>SERIAL_9O2</li>
 		</ul>
 	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">rx:</span>
+		<span class="function_parameters_param_description"> пин RX.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">tx:</span>
+		<span class="function_parameters_param_description"> пин TX.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">buffer:</span>
+		<span class="function_parameters_param_description"> указатель для буфера получаемых данных.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">len:</span>
+		<span class="function_parameters_param_description"> размер буфера в байтах.</span>
+	</span>
 </span>
 
 <span class="function_returns">
-nothing
+nothing/код ошибки
 </span>
 
 <span class="function_example">
 <pre>
 <code class="c">void setup() {
+    static uint8_t buf[256];
     Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
     Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
+    Serial0.begin(115200, SERIAL_8N1);//Установим режим работы
+    Serial0.begin(115200, SERIAL_8N1, 9, 10);//Установим какие пины использовать
+    Serial0.begin(115200, SERIAL_8N1, 9, 10, buf, sizeof(buf));//Установим свой буфер
 }
 </code></pre>
 </span>  
