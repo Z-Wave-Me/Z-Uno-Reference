@@ -1,14 +1,27 @@
- <h2>readStringUntil()</h2>
-    <span class="function_description">
-readStringUntil() reads characters from the serial buffer into a string. The function terminates if the terminator character is detected or it times out 
+<span zunoVersion="v1"></span>
+<h2>readStringUntil()</h2>
+<span class="function_description">
+readStringUntil() reads characters from the serial buffer into a String. The function terminates if it times out (see <a class="function_ref" link="Serial/setTimeout">setTimeout</a>()).
 </span>
+
 <span class="function_syntax">
-<br>Serial.readStringUntil(terminator)</span>
+<br>Serial.readStringUntil(terminator)<br>
+</span>
+
 <span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">terminator:</span>
-        <span class="function_parameters_param_description">the character to search for (char)
-</br></span>
+	<br>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">terminator:</span>
+		<span class="function_parameters_param_description"> the character to search for. Allowed data types: char.</span>
+	</span>
+</br>
+</span>
+
 <span class="function_returns">
-<br>The entire string read from the serial buffer, until the terminator character is detected</br>
+<br>The entire String read from the serial buffer, up to the terminator character</br>
+</span>
+
+
+<span class="function_description_note">
+The terminator character is discarded from the serial buffer.
 </span>
