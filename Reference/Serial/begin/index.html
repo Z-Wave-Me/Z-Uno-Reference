@@ -101,7 +101,7 @@ nothing/код ошибки
     Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
     Serial0.begin(115200, SERIAL_8N1);//Установим режим работы
     Serial0.begin(115200, SERIAL_8N1, 9, 10);//Установим какие пины использовать
-    Serial0.begin(115200, SERIAL_8N1, 9, 10, buf, sizeof(buf));//Установим свой буфер
+    Serial0.begin(115200, SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));//Установим свой буфер
 }
 </code></pre>
 </span>  
