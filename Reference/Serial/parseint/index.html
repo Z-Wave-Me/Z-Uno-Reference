@@ -3,14 +3,15 @@
 Looks for the next valid integer in the incoming serial stream. parseInt() inherits from the Stream utility class.
 
 In particular:
-    <span>
-    <ul>
-<li>Initial characters that are not digits or a minus sign, are skipped;</li>
-<li>Parsing stops when no characters have been read for a configurable time-out value, or a non-digit is read;</li>
-<li>If no valid digits were read when the time-out (see Serial.setTimeout()) occurs, 0 is returned;</li>    
-    </ul>
-    </span>
+	<span>
+		<ul>
+			<li>Initial characters that are not digits or a minus sign, are skipped;</li>
+			<li>Parsing stops when no characters have been read for a configurable time-out value, or a non-digit is read;</li>
+			<li>If no valid digits were read when the time-out (see <a class="function_ref" link="Serial/setTimeout">setTimeout</a>()) occurs, 0 is returned;</li>
+		</ul>
+	</span>
 </span>
+
 <span class="function_syntax">
 <br>Serial.parseInt()</br>
 <br>Serial.parseInt(char skipChar)</br>
