@@ -3,12 +3,18 @@
 Serial.find() reads data from the serial buffer until the target string of given length is found. The function returns true if target string is found, false if it times out.
 </span>
 <span class="function_syntax">
-<br>Serial.find(target)</span>
+<br>Serial.find(target)
+<br>Serial.find(target, length)
+</span>
+
 <span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">target:</span>
-        <span class="function_parameters_param_description">the string to search for (char)
-</br></span>
+<span class="function_parameters_param">
+	<span class="function_parameters_param_name">target:</span>
+	<span class="function_parameters_param_description">the string to search for (char)</br></span>
+	<span class="function_parameters_param_name">length:</span>
+	<span class="function_parameters_param_description">length of the target. Allowed data types: size_t</br></span>
+</span>
+
 <span class="function_returns">
 <br>boolean</br>
 </span>
