@@ -9,18 +9,40 @@ The function terminates if it times out (see <span class="function_ref" link="Se
 </span>
 <span class="function_syntax" zunoVersion="v2">
 <br>
-	Serial.parseFloat()
-	Serial.parseFloat(lookahead)
+	Serial.parseFloat()<br>
+	Serial.parseFloat(lookahead)<br>
 	Serial.parseFloat(lookahead, ignore)
 <br>
 </span>
 
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">none</span>
+<span class="function_parameters" zunoVersion="v1">
+	<br>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">none</span>
+	</span>
+	<br>
 </span>
-    </span>
-        </span>
+
+<span class="function_parameters" zunoVersion="v2">
+	<br>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">lookahead:</span>
+		<span class="function_parameters_param_description"> the mode used to look ahead in the stream for a floating point number. Allowed data types: LookaheadMode.</br> Allowed lookahead values:</br>
+			<ul>
+				<li><b>SKIP_ALL:</b> all characters other than a minus sign, decimal point, or digits are ignored when scanning the stream for a floating point number. This is the default mode.</li>
+				<li><b>SKIP_NONE:</b> Nothing is skipped, and the stream is not touched unless the first waiting character is valid.</li>
+				<li><b>SKIP_WHITESPACE:</b> Only tabs, spaces, line feeds, and carriage returns are skipped.</li>
+			</ul>
+		<br>
+		</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ignore:</span>
+		<span class="function_parameters_param_description"> used to skip the indicated char in the search. Used for example to skip thousands divider. Allowed data types: char.</br></span>
+	</span>
+	<br>
+</span>
+
 <span class="function_returns">
 <br>float</br>
 </span>
