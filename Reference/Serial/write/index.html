@@ -2,36 +2,6 @@
 <span class="function_description">Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <span class="function_ref" link="Serial/print">Serial.print</span>() function instead.</span>
 
 <span class="function_syntax">
-<pre>
-<code class="c">Serial.write(val)
-</code></pre>
-</span>
-
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">val</span>
-        <span class="function_parameters_param_description">a value to send as a single byte</span>
-    </span>
-</span>
-
-<span class="function_returns">returns the number of bytes written, though reading that number is optional</span>
-
-<span class="function_example">
-<pre>
-<code class="c">void setup() {
-    Serial.begin();
-}
-
-void loop() {
-    Serial.write(45); // send a byte with the value 45
-}
-</code></pre>
-</span>  
-<h2>write()</h2>
-    <span class="function_description">
-Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <a href="http://z-uno.z-wave.me/Reference/Serial/Print/">Print()</a> function instead.     </span>
-</span>
-<span class="function_syntax">
 <br>Serial.write(val)</br>
 <br>Serial.write(str)</br>
 <br>Serial.write(buf, len)</br>
