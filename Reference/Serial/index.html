@@ -1,5 +1,4 @@
 <span zunoVersion="v1"></span>
-<span zunoVersion="v2"></span>
 <h1>Serial</h1>
 <span class="function_description">Used for communication between the Z-Uno board and another microcontroller or a computer via UART or USB.</span>
 <span class="function_description_more">Z-Uno boards have the following serial interfaces:
@@ -262,6 +261,37 @@
 			<td>Yes</td>
 		</tr>
 	</table>
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Обратите внимание, что <b>Serial</b> использует разделяемую перифирию, которую могут использовать и другие биоблитеке: <span class="function_ref">SPI</span>...<br>
+Когда библиотеки используют одну и туже перифирию - совместное использование их в таком случае не возможно.
+</span>
+
+<span class="function_description_more" zunoVersion="v2">
+Используемая перифирия:
+	<table>
+		<tr>
+			<th>Serial ports</th>
+			<th>Перифирия</th>
+		</tr>
+		<tr>
+			<td>Serial</td>
+			<td>USART2</td>
+		</tr>
+		<tr>
+			<td>Serial0</td>
+			<td>USART0</td>
+		</tr>
+		<tr>
+			<td>Serial1</td>
+			<td>USART1</td>
+		</tr>
+	</table>
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Обратите внимание, что <b>Serial ports</b>  начинает постоянно использовать для приема один <b>DMA канал</b> от <span class="function_ref" link="Serial/begin">begin</a>()</span> до <span class="function_ref" link="Serial/begin">end</a>()</span>
 </span>
 
 <span class="function_description_more">All Serial ports have the following methods supported:
