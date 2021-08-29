@@ -242,6 +242,14 @@ void setup() {
 </span>
 
 <span class="function_description_note">
+Обратите внимание, что <b>Wire</b> использует 7 bit адресса(от 0 до 127 - 0 и 127 имеют особое значение).
+</span>
+
+<span class="function_description_note">
+Обратите внимание, что <b>Wire</b> использует буфер размером в 32 байта, если его не достаточно то можете в <span class="function_ref" link="Wire/begin">begin</a>()</span> - указать свой.
+</span>
+
+<span class="function_description_note">
 Обратите внимание, что <b>Wire</b> покуда может работать только в режиме master - возможность работы в режиме slave покуда в разработке.
 </span>
 
