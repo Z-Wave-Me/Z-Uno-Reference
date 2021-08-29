@@ -1,3 +1,4 @@
+<span zunoVersion="v1">
 <h4>Wire.begin()</h4></br>
 <span class="function_description">
     Initiate the Wire library and join the I2C bus as a master. This should normally be called only once. Slave mode is not supported yet.
@@ -14,3 +15,50 @@
 <span class="function_returns">
     None
 </span>
+</span>
+
+<span zunoVersion="v2">
+<h4>Wire.begin()</h4></br>
+<span class="function_description">
+Initiate the Wire library and join the I2C bus as a master or slave. This should normally be called only once.
+</span>
+
+<span class="function_syntax">
+	<pre><code lang="c">
+		Wire.begin()<br>
+		Wire.begin(address)<br>
+		Wire.begin(address, scl, sda) - код ошибки возращает.<br>
+		Wire.begin(address, scl, sda, *buffer, len) - код ошибки возращает.<br>
+	</code></pre>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">address:</span>
+		<span class="function_parameters_param_description"> the 7-bit slave address (optional); if not specified, join the bus as a master. Так же если адресс 0ч0 то тоже как мастер.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">scl:</span>
+		<span class="function_parameters_param_description"> пин SCL.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sda:</span>
+		<span class="function_parameters_param_description"> пин SDA.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">buffer:</span>
+		<span class="function_parameters_param_description"> указатель для буфера - в случае мастера это буфер для отправки данныйх slave; в случае slave половинна этого буффера используеться для отправки а другая для получения.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">len:</span>
+		<span class="function_parameters_param_description"> размер буфера в байтах.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	nothing/код ошибки
+</span>
+
+</span>
+
+
