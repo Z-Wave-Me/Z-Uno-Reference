@@ -1,3 +1,4 @@
+<span zunoVersion="v1">
 <h1>Wire Library</h1>
 <span class="function_description">Implements I2C on Z-Uno pins 9&ndash;16. Default is 9 for SCL and 10 for SDA.
 Other pin range can be selected using <span class="function_ref" link="s_pin">ZUNO_REMAP_SPINS</span>()</span>
@@ -35,4 +36,226 @@ void setup() {
 }{/literal}</code>
 </pre>
 </span>
+</span>
 
+<span zunoVersion="v2">
+<h1>Wire Library</h1>
+<span class="function_description">This library allows you to communicate with I2C devices.</span>
+<span class="function_description_more">Z-Uno boards have the following wire interfaces:
+<ul>
+    <li>Wire &mdash; i2c on SCL(9) and SDA(10) pins</li>
+    <li>Wire1 &mdash; i2c on SCL1(23) and SDA1(25) pins</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+	Кроме пинов по умолчанию можно использовать и другие пины, устанавливаеться это с помощью метода <span class="function_ref" link="Wire/begin">begin</a>()</span><br>
+	<a href="https://z-uno.z-wave.me/technical/pinout/">Распиновка</a><br>
+	Таблица совместимости:
+	<table>
+		<tr>
+			<th>Пин</th>
+			<th>Wire SCL</th>
+			<th>Wire SDA</th>
+			<th>Wire1 SCL</th>
+			<th>Wire1 SDA</th>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+			<td>3</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+			<td>9</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+			<td>15</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>16</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>17</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>18</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>19</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>20</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+			<td>21</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>22</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>23</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td>24</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>25</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>Yes</td>
+		</tr>
+	</table>
+</span>
+
+<span class="function_description_note">
+Обратите внимание, что <b>Wire</b> покуда может работать только в режиме master - возможность работы в режиме slave покуда в разработке.
+</span>
+
+<span class="function_description_note">
+Обратите внимание, что <b>Wire</b>  начинает постоянно использовать в режиме slave для приема один <b>DMA канал</b> от <span class="function_ref" link="Wire/begin">begin</a>()</span> до <span class="function_ref" link="Wire/end">end</a>()</span><br>
+Так же один <b>DMA канал</b> используеться во время передачи данных и во время приема в случае мастера.
+</span>
+
+<span class="function_description_more">All Wire have the following methods supported:
+	<ul>
+		<li><span class="function_ref" link="Wire/available">available</a>()</li>
+		<li><span class="function_ref" link="Wire/begin">begin</a>()</li>
+		<li><span class="function_ref" link="Wire/end">end</a>()</li>
+	</ul>
+</span>
+
+</span>
