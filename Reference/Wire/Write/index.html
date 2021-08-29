@@ -1,9 +1,29 @@
+<span zunoVersion="v1">
 <h2>write()</h2>
     <span class="function_description">
-Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <a href="/Reference/Serial/Print/">Print()</a> function instead.     </span>
+Writes binary data to the serial port. This data is sent as a byte or series of bytes; to send the characters representing the digits of a number use the <a href="/Reference/Serial/Print/">Print()</a> function instead.
 </span>
 <span class="function_syntax"><pre><code lang="c">Wire.write(value)
 </code></pre></span>
+</span>
+
+<span zunoVersion="v2">
+<h1>Wire.write()</h1> 
+
+<span class="function_description">
+	Writes data from a slave device in response to a request from a master, or queues bytes for transmission from a master to slave device (in-between calls to 
+	<span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span> and <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>).
+</span>
+
+<span class="function_syntax">
+	<pre><code lang="c">
+Wire.write(value)<br>
+Wire.write(string)<br>
+Wire.write(data, length)<br>
+	</code></pre>
+</span>
+</span>
+
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">value</span>
@@ -22,7 +42,7 @@ Writes binary data to the serial port. This data is sent as a byte or series of 
         <span class="function_parameters_param_description">the number of bytes to transmit</span>
     </span>
     </span>
-</span>
+
 <span class="function_returns">
 byte: write() will return the number of bytes written, though reading that number is optional
 </span>
