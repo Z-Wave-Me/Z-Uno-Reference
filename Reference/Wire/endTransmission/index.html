@@ -1,9 +1,11 @@
+<span zunoVersion="v1"></span>
 <h4>Wire.endTransmission(address)</h4></br>
 <span class="function_description">
     Ends a transmission to a slave device that was begun by beginTransmission() and transmits the bytes that were queued by write().</br>
     endTransmission() accepts a boolean argument changing its behavior for compatibility with certain I2C devices.</br>
     If true, endTransmission() sends a stop message after transmission, releasing the I2C bus.</br>
-    If false, endTransmission() sends a restart message after transmission. The bus will not be released, which prevents another master device from transmitting between messages. This allows one master device to send multiple transmissions while in control.
+    If false, endTransmission() sends a restart message after transmission. The bus will not be released, which prevents another master device from transmitting between messages. This allows one master device to send multiple transmissions while in control.<br>
+	The default value is true.
 </span>
 <span class="function_syntax">
     <br>Wire.endTransmission()</br>
@@ -21,4 +23,5 @@
     </li><li>2:received NACK on transmit of address</li>
     </li><li>3:received NACK on transmit of data</li>
     </li><li>4:other error</li>
+	</li zunoVersion="v2"><li  zunoVersion="v2">5:таймаут</li>
 </span>  
