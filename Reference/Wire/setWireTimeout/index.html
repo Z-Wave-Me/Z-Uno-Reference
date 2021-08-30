@@ -1,0 +1,23 @@
+<span zunoVersion="v2"></span>
+<h1>Wire.setWireTimeout()</h1>
+<span class="function_description">Данная функция устанавливает таймаут для I2C, по умолчанию значение 25 милисекунд. Данный таймаут позволяет "потупить" slave но в тоже время не дает master стопарнуться при проблеммах. 
+При возниковении таймаута происходит сброс шины мастером.
+</span>
+
+<span class="function_syntax">
+<pre>
+<code class="c">Wire.setWireTimeout(timeout)
+</code></pre>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">timeout:</span>
+        <span class="function_parameters_param_description"> значение таймаута в милисекундах.</br></span>
+    </span>    
+</span>
+
+<span class="function_returns">
+    nothing
+</span>
+
