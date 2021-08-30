@@ -1,0 +1,78 @@
+<span zunoVersion="v2"></span>
+<h1>Wire.transfer()</h1> 
+
+<span class="function_description">
+	Данный метод заменяет сразу три функции <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span>, <span class="function_ref" link="Wire/Write">write</a>()</span> и <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>.
+	Другими его цель в первую очередь удобство.
+</span>
+
+<span class="function_syntax">
+	<pre><code lang="c">
+transfer(address, *buffer);<br>
+transfer(address, *buffer, count);<br>
+transfer(address, *buffer, sendStop);<br>
+transfer(address, *buffer, count, sendStop);<br>
+	</code></pre>
+</span>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">address:</span>
+        <span class="function_parameters_param_description"> the 7-bit address of the device to transmit to slave.</br></span>
+    </span>    
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">buffer:</span>
+        <span class="function_parameters_param_description"> указатель на данные которые нужно отправить - это двоичные данные или указатель на строку обычную.</br></span>
+    </span>
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">count:</span>
+        <span class="function_parameters_param_description"> количество передоваемых данных.</span>
+    </span>
+    <span class="function_parameters_param">    
+        <span class="function_parameters_param_name">sendStop:</span>
+        <span class="function_parameters_param_description"> true will send a stop message, releasing the bus after transmission. false will send a restart, keeping the connection active.</span>
+    </span>
+    </span>
+
+<span class="function_returns">
+
+    byte, which indicates the status of the transmission:
+    </li><li>0:success</li>
+    </li><li>1:data too long to fit in transmit buffer</li>
+    </li><li>2:received NACK on transmit of address</li>
+    </li><li>3:received NACK on transmit of data</li>
+    </li><li>4:other error</li>
+	</li zunoVersion="v2"><li  zunoVersion="v2">5:таймаут</li>
+</span>  
+
+<span class="function_example">
+Пример с <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span> и  его аналогия с помощью <b>transfer</b>
+<pre>
+<code class="c">#include <Wire.h>
+
+void setup() {
+  Wire.begin();
+}
+
+void loop() {
+  Wire.beginTransmission(8);
+  Wire.write("12345678");        // sends five bytes
+  Wire.endTransmission();
+  delay(500);
+}
+</code></pre>
+
+<pre>
+<code class="c">#include <Wire.h>
+
+void setup() {
+  Wire.begin();
+}
+
+void loop() {
+  Wire.transfer(8, "12345678");        // sends five bytes
+  delay(500);
+}
+</code></pre>
+</span>
