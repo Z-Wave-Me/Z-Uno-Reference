@@ -57,7 +57,7 @@ void setup() {
 
 void loop() {
   Wire.beginTransmission(8);
-  Wire.write("12345678");        // sends five bytes
+  Wire.write("12345678");
   Wire.endTransmission();
   delay(500);
 }
@@ -71,7 +71,7 @@ void setup() {
 }
 
 void loop() {
-  Wire.transfer(8, "12345678");        // sends five bytes
+  Wire.transfer(8, "12345678");
   delay(500);
 }
 </code></pre>
