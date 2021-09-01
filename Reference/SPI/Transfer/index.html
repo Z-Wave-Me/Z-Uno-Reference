@@ -1,3 +1,4 @@
+<span zunoVersion="v1">
 <h4>transfer()</h4>
 <span class="function_description">
     SPI transfer is based on a simultaneous send and recieve: the received data is returned in receivedVal. In case of buffer transfer the received data is stored in the buffer in-place (the old data is replaced with the data received)
@@ -15,3 +16,41 @@
 <span class="function_returns">
     the received data
 </span>
+</span>
+
+<span zunoVersion="v2">
+<h4>transfer(), transfer16()</h4>
+<span class="function_description">
+    SPI transfer is based on a simultaneous send and recieve: the received data is returned in receivedVal. In case of buffer transfer the received data is stored in the buffer in-place (the old data is replaced with the data received)
+</span>
+<span class="function_syntax">
+    receivedVal = SPI.transfer(val)</br>
+	receivedVal16 = SPI.transfer16(val16)</br>
+    SPI.transfer(buffer)</br>
+    SPI.transfer(buffer, size)</br>
+</span>
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">val:</span>
+		<span class="function_parameters_param_description"> the byte ti send out over the bus.</span></br>
+	</span>    
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">val16:</span>
+		<span class="function_parameters_param_description"> the two bytes variable to send out over the bus.</br></span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">buffer:</span>
+		<span class="function_parameters_param_description"> the array of data to be transferred.</span>
+	</span>
+	<span class="function_parameters_param">    
+		<span class="function_parameters_param_name">size:</span>
+		<span class="function_parameters_param_description"> Размер передаваемых данных.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+    the received data/None
+</span>
+</span>
+
+
