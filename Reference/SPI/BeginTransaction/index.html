@@ -1,3 +1,4 @@
+<span zunoVersion="v1">
 <h4>beginTransaction()</h4>
 <span class="function_description">
     Initializes the SPI bus using the defined SPISettings.
@@ -12,3 +13,41 @@
 <span class="function_returns">
     None
 </span>
+</span>
+
+<span zunoVersion="v2">
+<h4>beginTransaction()</h4>
+<span class="function_description">
+    Initializes the SPI bus.
+</span>
+<span class="function_syntax">
+    SPI.beginTransaction();<br>
+    SPI.beginTransaction(mySettings);<br>
+    SPI.beginTransaction(*mySettings);<br>
+    SPI.beginTransaction(clock, bitOrder, dataMode);<br>
+</span>
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">mySettings:</span>
+		<span class="function_parameters_param_description"> the chosen settings according o <span class="function_ref" link="SPI/SPISettings">SPISettings</a>()</span></sapan></br></span>
+	</span>    
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">clock:</span>
+		<span class="function_parameters_param_description"> the maximum speed of communication.</br></span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bitOrder:</span>
+		<span class="function_parameters_param_description"> MSBFIRST or LSBFIRST.</span>
+	</span>
+	<span class="function_parameters_param">    
+		<span class="function_parameters_param_name">dataMode:</span>
+		<span class="function_parameters_param_description"> SPI_MODE0, SPI_MODE1, SPI_MODE2, or SPI_MODE3.</span>
+	</span>
+	</span>
+</span>
+<span class="function_returns">
+    None
+</span>
+</span>
+
+
