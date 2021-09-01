@@ -1,19 +1,40 @@
 <span zunoVersion="v2"></span>
-<h4>setBitOrder()</h4>
+<h4>setClockDivider()</h4>
 <span class="function_description">
 	<b>This function should not be used in new projects. Use SPISettings with <span class="function_ref" link="SPI/BeginTransaction">beginTransaction</a>()</span> to configure SPI parameters.</b><br>
-	Sets the order of the bits shifted out of and into the SPI bus, either LSBFIRST (least-significant bit first) or MSBFIRST (most-significant bit first).
+	Sets the SPI clock divider relative to the system clock. The default setting is <b>SPI_CLOCK_DIV4</b>, which sets the SPI clock to one-quarter the frequency of the system clock (10 Mhz for the boards at 40 MHz).
 </span>
 
 <span class="function_syntax">
-    SPI.setBitOrder(order)</br>
+    SPI.setClockDivider(divider)</br>
+    SPI.setClockDivider(divider, slaveSelectPin)</br>
 </span>
+
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">order:</span>
+		<span class="function_parameters_param_name">divider:</span>
 		<span class="function_parameters_param_description"> either LSBFIRST or MSBFIRST.</span></br>
 	</span> 
 </span>
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">divider:</span>
+		<ul>
+			<li>SPI_CLOCK_DIV2</li>
+			<li>SPI_CLOCK_DIV4</li>
+			<li>SPI_CLOCK_DIV8</li>
+			<li>SPI_CLOCK_DIV16</li>
+			<li>SPI_CLOCK_DIV32</li>
+			<li>SPI_CLOCK_DIV64</li>
+			<li>SPI_CLOCK_DIV128</li>
+		</ul>
+	</span> 
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">slaveSelectPin:</span>
+		<span class="function_parameters_param_description"> slave device SS pin.</span></br>
+	</span> 
+</span>
+
 <span class="function_returns">
     None
 </span>
