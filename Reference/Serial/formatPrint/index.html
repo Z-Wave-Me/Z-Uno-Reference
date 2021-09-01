@@ -1,16 +1,27 @@
-<h1>Serial.end()</h1>
-<span class="function_description" zunoVersion="v1">Disables serial communication.</span>
-<span class="function_description" zunoVersion="v2">Disables serial communication и освобождает используемые ресурсы.</span>
+<h1>Serial.formatPrint()</h1>
+<span class="function_description">Пичатает число как десятичное, добавляя спереди проблелы что бы выведенно было символов не меньше указанного.</span>
 
 <span class="function_syntax">
 <pre>
-<code class="c">Serial.end()
+<code class="c">
+	Serial.formatPrint(n, format)<br>
 </code></pre>
 </span>
+
 <span class="function_parameters">
-    none
+	<br>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">n:</span>
+		<span class="function_parameters_param_description"> Число которое выводим.</br></span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">format:</span>
+		<span class="function_parameters_param_description"> минимум выводимых символов.</br></span>
+	</span>
+	<br>
 </span>
+
 <span class="function_returns">
-    nothing
+    количество выведенных байт
 </span>
 
