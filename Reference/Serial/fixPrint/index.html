@@ -1,16 +1,28 @@
-<h1>Serial.end()</h1>
-<span class="function_description" zunoVersion="v1">Disables serial communication.</span>
-<span class="function_description" zunoVersion="v2">Disables serial communication и освобождает используемые ресурсы.</span>
+<h1>Serial.fixPrint()</h1>
+<span class="function_description">Печатает дробное число с фексированной дробной частью.</span>
 
 <span class="function_syntax">
 <pre>
-<code class="c">Serial.end()
+<code class="c">
+	Serial.fixPrint(n) <br>
+	Serial.fixPrint(n, precision) <br>
 </code></pre>
 </span>
+
 <span class="function_parameters">
-    none
+	<br>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">n:</span>
+		<span class="function_parameters_param_description"> дробное число которое распечатаем.</br></span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">precision:</span>
+		<span class="function_parameters_param_description"> размер дробной части после запятой - по умолчанию 2.</br></span>
+	</span>
+	<br>
 </span>
+
 <span class="function_returns">
-    nothing
+    количество выведенных байт
 </span>
 
