@@ -1,4 +1,3 @@
-<span zunoVersion="v1">
 <h4>begin()</h4>
 <span clas="function_description">
     Initializes the SPI bus by setting SCK, MOSI, and SS to outputs, pulling SCK and MOSI low, and SS high.
@@ -12,41 +11,36 @@
 <span class="function_returns">
     None
 </span>
-</span>
+
+<span zunoVersion="v1"></span>
 
 <span zunoVersion="v2">
-<h4>begin()</h4>
-<span clas="function_description">
-    Initializes the SPI bus by setting SCK, MOSI, and SS to outputs, pulling SCK and MOSI low, and SS high.
-</span>
-
 <span class="function_syntax">
-	SPI.begin()</br>
-	SPI.begin(sck, miso, mosi, ss) - возращает код с ошибкой</br>
+	SPI.begin(sck, miso, mosi, ss)</br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sck:</span>
-		<span class="function_parameters_param_description"> позволяет указать свой пин для sck.</br></span>
+		<span class="function_parameters_param_description">custom SCK pin</br></span>
 	</span>    
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">miso:</span>
-		<span class="function_parameters_param_description"> позволяет указать свой пин для miso.</br></span>
+		<span class="function_parameters_param_description">custom MISO pin</br></span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">mosi:</span>
-		<span class="function_parameters_param_description"> позволяет указать свой пин для mosi.</span>
+		<span class="function_parameters_param_description">custom MOSI pin</span>
 	</span>
 	<span class="function_parameters_param">    
 		<span class="function_parameters_param_name">ss:</span>
-		<span class="function_parameters_param_description"> позволяет указать свой пин для ss.</span>
+		<span class="function_parameters_param_description">custom SS pin</span>
 	</span>
 	</span>
 </span>
 
 <span class="function_returns">
-    None/Код с ошибкай
+    Error code
 </span>
 </span>
 

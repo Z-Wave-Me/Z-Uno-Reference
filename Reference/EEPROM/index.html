@@ -5,7 +5,7 @@
 		This librariry provides access to internal 360 kB non-volatile EEPROM. Data written to EEPROM is saved even if Z-Uno is not powered. Use it to store data in battery and FLiRS devices that should survive battery unplug.
 	</span>
 	<span zunoVersion="v2">
-		Data written to EEPROM is saved even if Z-Uno is not powered. Use it to store data in battery and FLiRS devices that should survive battery unplug.
+		Data written to the EEPROM is saved even if Z-Uno is not powered. Use it to store data that should survive power unplug or sleeping modes.
 	</span>
 	<ul>
 		<li><span class="function_ref" link="EEPROM/put">put</span></li>
@@ -126,8 +126,8 @@ User parameters are also stored in the EEPROM. Design your layout not to overrid
 	<table>
 		<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
 		<tr><td>0x0000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
-		<tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Настройки для команд класса Notification</td></tr>
-		<tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Настройки для команд класса Wakeup</td></tr>
+		<tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Settings of Notification Command Class</td></tr>
+		<tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Settings of Wakeup Command Class</td></tr>
 		<tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
 	</table>
 </span>
