@@ -29,11 +29,11 @@ void setup() {
 void loop() {
     byte i;
     word res;
-
-<pre><code lang="c" zunoVersion="v1">
+</code></pre>
+<pre zunoVersion="v1"><code lang="c">
     dword addr = 0x800;
 </code></pre>
-<pre><code lang="c" zunoVersion="v1">
+<pre zunoVersion="v2"><code lang="c">
     dword addr = 0x0;
 </code></pre>
 <pre><code lang="c">
@@ -74,17 +74,8 @@ void loop() {
 		<tr><td zunoVersion="v1">0x2000</td><td zunoVersion="v2">0x208</td><td zunoVersion="v1">0x20FF</td><td zunoVersion="v2">0x28C</td><td zunoVersion="v1">256 B</td><td zunoVersion="v2">132 B</td><td>User configuration parameters</td></tr>
 		<tr zunoVersion="v1"><td>0x2100</td><td>0x3FFFF</td><td>248 kB</td><td>User memory</td></tr>
 	</table>
-	</span>
+</span>
 	
-	<span class="function_description_more"  zunoVersion="v1">
-	You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
-	</span>
-
-<span class="function_description_more" zunoVersion="v2">
-	User memory layout:
-	<br/>
-	<table>
-
-		<tr><td>User configuration parameters</td></tr>
-	</table>
+<span class="function_description_more"  zunoVersion="v1">
+You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
 </span>
