@@ -1,0 +1,93 @@
+<span zunoVersion="v2">
+<h1>NeoPixel.addNeo()</h1>
+<span class="function_description">Sets the data rate in bits per second (baud) for serial data transmission. For communicating with Serial Monitor, make sure to use one of the baud rates listed in the menu at the bottom right corner of its screen. 
+You can, however, specify other rates.<br></span>
+
+<span class="function_description_more">An optional second argument configures the data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
+
+<span class="function_syntax">
+NeoPixel.addNeo(neo_pin, count_led)<br>
+NeoPixel.addNeo(neo_pin, count_led, brightness)<br>
+NeoPixel.addNeo(neo_pin, count_led, brightness, option)<br>
+NeoPixel.addNeo(neo_pin, count_led, brightness, option, base)<br>
+</span>
+
+
+
+
+
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">neo_pin:</span>
+		<span class="function_parameters_param_description"> пин к которому будет подключаться светодиодная лента.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">count_led:</span>
+		<span class="function_parameters_param_description"> количество пикселей в ленте.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">brightness:</span>
+		<span class="function_parameters_param_description"> яркость для всей ленты, по умолчанию выставленна на максимум. Даллее можно для каждого пикселя в ленте можно при желании свою выставить.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">option:</span>
+		<span class="function_parameters_param_description"> доп настройки для светодиодной ленты.</span>
+		<br>
+		<span class="function_parameters_param_description"> Параметры контролерующий цветовую гамму: в зависимости от вида светодиодной ленты могут использоваться 4 или 3 цветовая опция.</span>
+		<ul>
+			<li>NEO_RGB</li>
+			<li>NEO_RBG</li>
+			<li>NEO_GRB (the default)</li>
+			<li>NEO_GBR</li>
+			<li>NEO_BRG</li>
+			<li>NEO_BGR</li>
+			<li>NEO_WRGB</li>
+			<li>NEO_WRBG</li>
+			<li>NEO_WGRB</li>
+			<li>NEO_WGBR</li>
+			<li>NEO_WBRG</li>
+			<li>NEO_WBGR</li>
+			<li>NEO_RWGB</li>
+			<li>NEO_RWBG</li>
+			<li>NEO_RGWB</li>
+			<li>NEO_RGBW</li>
+			<li>NEO_RBWG</li>
+			<li>NEO_RBGW</li>
+			<li>NEO_GWRB</li>
+			<li>NEO_GWBR</li>
+			<li>NEO_GRWB</li>
+			<li>NEO_GRBW</li>
+			<li>NEO_GBWR</li>
+			<li>NEO_GBRW</li>
+			<li>NEO_BWRG</li>
+			<li>NEO_BWGR</li>
+			<li>NEO_BRWG</li>
+			<li>NEO_BRGW</li>
+			<li>NEO_BGWR</li>
+			<li>NEO_BGRW</li>
+		</ul>
+		<span class="function_parameters_param_description"> Параметры контролерующий частоту работы с светодиодной лентай.</span>
+		<ul>
+			<li>NEO_KHZ800 (the default)</li>
+			<li>NEO_KHZ400</li>
+		</ul>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">base:</span>
+		<span class="function_parameters_param_description"> указывает какую перифирию использовать.</span>
+		<br>
+		<ul>
+			<li>ZunoNeoBaseUsart0</li>
+			<li>ZunoNeoBaseUsart1 (the default)</li>
+			<li>ZunoNeoBaseUsart2</li>
+			<li>ZunoNeoBaseTimer0</li>
+			<li>ZunoNeoBaseTimer1</li>
+			<li>ZunoNeoBaseWTimer0</li>
+		</ul>
+	</span>
+</span>
+
+<span class="function_returns">
+ркзультат работы функции
+</span>

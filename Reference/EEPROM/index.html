@@ -16,7 +16,7 @@
 	</ul>
 </span>
 
-<span class="function_example" zunoVersion="v1">
+<span class="function_example">
 <pre><code lang="c">#include "EEPROM.h"
 
 BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
@@ -29,49 +29,14 @@ void setup() {
 void loop() {
     byte i;
     word res;
+
+<pre><code lang="c" zunoVersion="v1">
     dword addr = 0x800;
-
-
-    Serial.println("Reading 128 Bytes one by one from EEPROM...");
-    for (i = 0; i < 128; i++) {
-        Serial.print(EEPROM.read(addr + i),HEX);
-        if (((i % 0x10) == 0) && (i != 0))
-          Serial.println();
-        else
-          Serial.print(' ');
-    }
-
-    Serial.println();
-
-    Serial.println("Reading buffer from EEPROM...");
-    res = EEPROM.get(addr, &read_data, sizeof(read_data));
-    Serial.print("Read ");
-    Serial.print(res);
-    Serial.println(" Bytes");
-
-    // write data to a specific address
-    res = EEPROM.put(addr, &some_data, sizeof(some_data));
-    
-    delay(5000); // don't write to much in the EEPROM not to kill it
-}
 </code></pre>
-</span>
-
-<span class="function_example" zunoVersion="v2">
-<pre><code lang="c">#include "EEPROM.h"
-
-BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
-BYTE read_data[5];
-
-void setup() {
-  Serial.begin();
-}
-
-void loop() {
-    byte i;
-    word res;
+<pre><code lang="c" zunoVersion="v1">
     dword addr = 0x0;
-
+</code></pre>
+<pre><code lang="c">
 
     Serial.println("Reading 128 Bytes one by one from EEPROM...");
     for (i = 0; i < 128; i++) {
@@ -96,38 +61,30 @@ void loop() {
     delay(5000); // don't write to much in the EEPROM not to kill it
 }
 </code></pre>
-</span
-
-<span class="function_description_note">
-User parameters are also stored in the EEPROM. Design your layout not to override them!
-<br/><br/>
 </span>
 
-<span zunoVersion="v1">
-	<span class="function_description_more">
-		User memory layout:
-		<br/>
-		<table>
-			<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
-			<tr><td>0x0000</td><td>0x1FFF</td><td>8 kB</td><td>User memory</td></tr>
-			<tr><td>0x2000</td><td>0x20FF</td><td>256 B</td><td>User configuration parameters</td></tr>
-			<tr><td>0x2100</td><td>0x3FFFF</td><td>248 kB</td><td>User memory</td></tr>
-		</table>
-		</span>
-		
-		<span class="function_description_more">
-		You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
-		</span>
-</span>
+<span class="function_description_more">
+	User memory layout:
+	<br/>
+	<table>
+		<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
+		<tr><td>0x0000</td><td zunoVersion="v1">0x1FFF</td><td zunoVersion="v2">0x200</td><td zunoVersion="v1">8 kB</td><td zunoVersion="v2">512 B</td><td>User memory</td></tr>
+		<tr zunoVersion="v2"><td>0x200</td><td>0x204</td><td>4 B</td><td>Settings of Notification Command Class</td></tr>
+		<tr zunoVersion="v2"><td>0x204</td><td>0x208</td><td>4 B</td><td>Settings of Wakeup Command Class</td></tr>
+		<tr><td zunoVersion="v1">0x2000</td><td zunoVersion="v2">0x208</td><td zunoVersion="v1">0x20FF</td><td zunoVersion="v2">0x28C</td><td zunoVersion="v1">256 B</td><td zunoVersion="v2">132 B</td><td>User configuration parameters</td></tr>
+		<tr zunoVersion="v1"><td>0x2100</td><td>0x3FFFF</td><td>248 kB</td><td>User memory</td></tr>
+	</table>
+	</span>
+	
+	<span class="function_description_more"  zunoVersion="v1">
+	You can also pre-load some data in the EEPROM via USB cable. Check <a href="/tools/#EEPROM">tools section</a>.
+	</span>
 
 <span class="function_description_more" zunoVersion="v2">
 	User memory layout:
 	<br/>
 	<table>
-		<tr><th>Start address</th><th>End address</th><th>Size</th><th>Description</th></tr>
-		<tr><td>0x0000</td><td>0x200</td><td>512 B</td><td>User memory</td></tr>
-		<tr><td>0x200</td><td>0x204</td><td>4 B</td><td>Settings of Notification Command Class</td></tr>
-		<tr><td>0x204</td><td>0x208</td><td>4 B</td><td>Settings of Wakeup Command Class</td></tr>
-		<tr><td>0x208</td><td>0x28C</td><td>132 B</td><td>User configuration parameters</td></tr>
+
+		<tr><td>User configuration parameters</td></tr>
 	</table>
 </span>
