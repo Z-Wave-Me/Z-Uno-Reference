@@ -1,34 +1,24 @@
-<span zunoVersion="v1">
-<h4>Wire.begin()</h4></br>
-<span class="function_description">
-    Initiate the Wire library and join the I2C bus as a master. This should normally be called only once. Slave mode is not supported yet.
-</span>
-<span class="function_syntax"><pre><code lang="c">Wire.begin();
-</code></pre>
-</span>
 <!-- for slave
 <span class="function_parameters">
     <span class="function_parameters_param_name">address</span>
     <span class="function_parameters_param_description">the 7-bit slave address (optional); if not specified, join the bus as a master</span>
 </span>
 -->
-<span class="function_returns">
-    None
-</span>
-</span>
-
-<span zunoVersion="v2">
 <h4>Wire.begin()</h4></br>
+
 <span class="function_description">
-Initiate the Wire library and join the I2C bus as a master or slave. This should normally be called only once.
+Initiate the Wire library and join the I2C bus as a master or slave. This should normally be called only once.<span zunoVersion="v1"> Slave mode is not supported yet</span>
 </span>
 
 <span class="function_syntax">
 	<pre><code lang="c">
 Wire.begin()<br>
-Wire.begin(address)<br>
-Wire.begin(address, scl, sda) - код ошибки возращает.<br>
-Wire.begin(address, scl, sda, *buffer, len) - код ошибки возращает.<br>
+<span zunoVersion="v2">
+	Wire.begin(address)<br>
+	Wire.begin(address, scl, sda) - код ошибки возращает.<br>
+	Wire.begin(address, scl, sda, *buffer, len) - код ошибки возращает.<br>
+</span>
+
 	</code></pre>
 </span>
 
@@ -56,9 +46,5 @@ Wire.begin(address, scl, sda, *buffer, len) - код ошибки возраща
 </span>
 
 <span class="function_returns">
-	nothing/код ошибки
+	nothing<span zunoVersion="v2">/код ошибки</span>
 </span>
-
-</span>
-
-
