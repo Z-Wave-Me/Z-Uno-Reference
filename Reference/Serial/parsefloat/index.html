@@ -4,28 +4,22 @@ Serial.parseFloat() returns the first valid floating point number from the Seria
 The function terminates if it times out (see <a class="function_ref" link="Serial/setTimeout">setTimeout</a>()).
 </span>
 
-<span class="function_syntax" zunoVersion="v1">
-<br>Serial.parseFloat()<br>
-</span>
-<span class="function_syntax" zunoVersion="v2">
+<span class="function_syntax">
 <br>
 	Serial.parseFloat()<br>
+	<span zunoVersion="v2">
 	Serial.parseFloat(lookahead)<br>
 	Serial.parseFloat(lookahead, ignore)
+	</span>
 <br>
 </span>
 
-<span class="function_parameters" zunoVersion="v1">
-	<br>
-	<span class="function_parameters_param">
+<span class="function_parameters">
+	<span class="function_parameters_param" zunoVersion="v1">
 		<span class="function_parameters_param_name">none</span>
 	</span>
 	<br>
-</span>
-
-<span class="function_parameters" zunoVersion="v2">
-	<br>
-	<span class="function_parameters_param">
+	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">lookahead:</span>
 		<span class="function_parameters_param_description"> the mode used to look ahead in the stream for a floating point number. Allowed data types: LookaheadMode.</br> Allowed lookahead values:</br>
 			<ul>
@@ -36,7 +30,7 @@ The function terminates if it times out (see <a class="function_ref" link="Seria
 		<br>
 		</span>
 	</span>
-	<span class="function_parameters_param">
+	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">ignore:</span>
 		<span class="function_parameters_param_description"> used to skip the indicated char in the search. Used for example to skip thousands divider. Allowed data types: char.</br></span>
 	</span>

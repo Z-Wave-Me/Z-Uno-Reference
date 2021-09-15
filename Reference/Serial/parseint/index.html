@@ -12,30 +12,27 @@ In particular:
 	</span>
 </span>
 
-<span class="function_syntax" zunoVersion="v1">
-<br>Serial.parseInt()</br>
-<br>Serial.parseInt(char skipChar)</br>
-<br>Z-Uno also supports UART0, UART1 communication &mdash; Serial0.perseInt(), Serial1.parseInt()
-</br></span>
-
-<span class="function_syntax" zunoVersion="v2">
+<span class="function_syntax">
 <br>
 	Serial.parseInt()<br>
-	Serial.parseInt(lookahead)<br>
-	Serial.parseInt(lookahead, ignore)
+	<span zunoVersion="v1">
+		<br>Serial.parseInt(char skipChar)</br>
+		<br>Z-Uno also supports UART0, UART1 communication &mdash; Serial0.perseInt(), Serial1.parseInt()
+	</span>
+	<span zunoVersion="v2">
+		Serial.parseInt(lookahead)<br>
+		Serial.parseInt(lookahead, ignore)
+	</span>
 <br>
 </span>
 
-<span class="function_parameters" zunoVersion="v1">
-    <span class="function_parameters_param">
+<span class="function_parameters">
+    <span class="function_parameters_param" zunoVersion="v1">
         <span class="function_parameters_param_name">skipChar</span>
         <span class="function_parameters_param_description">used to skip the indicated char in the search. Used for example to skip thousands divider.</span>
     </span>
-</span>
-
-<span class="function_parameters" zunoVersion="v2">
 	<br>
-	<span class="function_parameters_param">
+	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">lookahead:</span>
 		<span class="function_parameters_param_description"> the mode used to look ahead in the stream for an integer. Allowed data types: LookaheadMode.</br> Allowed lookahead values:</br>
 			<ul>
@@ -46,7 +43,7 @@ In particular:
 		<br>
 		</span>
 	</span>
-	<span class="function_parameters_param">
+	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">ignore:</span>
 		<span class="function_parameters_param_description"> used to skip the indicated char in the search. Used for example to skip thousands divider. Allowed data types: char.</br></span>
 	</span>
