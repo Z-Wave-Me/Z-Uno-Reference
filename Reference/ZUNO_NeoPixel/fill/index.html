@@ -1,6 +1,6 @@
 <span zunoVersion="v2"></span>
 <h1>NeoPixel.fill()</h1>
-<span class="function_description">Функция  передает данные в ленту, ее необходимо вызывать каждый раз после того, как вы изменили цвета пикселей.</span>
+<span class="function_description">Позволяет задать определённый цвет группе светодиодов ленты.</span>
 
 <span class="function_syntax">
 NeoPixel.fill(neo_pin, first_id_led, count, color)<br>
@@ -12,10 +12,25 @@ NeoPixel.fill(neo_pin, first_id_led, count, color, brightness)<br>
 		<span class="function_parameters_param_name">neo_pin:</span>
 		<span class="function_parameters_param_description"> пин к которому была подключенна светодиодная лента.</span>
 	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">first_id_led:</span>
+		<span class="function_parameters_param_description"> первый номер группы светодиодав в ленте - отсчёт с 0.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">count:</span>
+		<span class="function_parameters_param_description"> количество светодиотов в группе.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">color:</span>
+		<span class="function_parameters_param_description"> RGB/RGBW цвет который формируеться с помощью  <a href="/Reference/ZUNO_NeoPixel/RGB/">RGB</a>/ <a href="/Reference/ZUNO_NeoPixel/RGBW/">RGBW</a> - в зависимости от ленты.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">brightness:</span>
+		<span class="function_parameters_param_description"> яркость - она перебивает глобальную яркость.</span>
+	</span>
 </span>
 
 
 <span class="function_returns">
     nothing
 </span>
-
