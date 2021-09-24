@@ -3,17 +3,17 @@
 <span class="function_description">Данный тип хендлера позволяет привязать свою функцию к системному тайммеру. Вызов будет происходить каждыйе 10мс.</span>
 
 <span class="function_description_more">
-В данном событие `sub_type` устанавливаеться в 0 обычно, но можно использовать любое число.
+В данном событие `sub_type` устанавливаеться в 0x0.
 </span>
 
 <span class="function_syntax">
-	handlerSysTimer(ms)<br>
+	handlerSysTimer(tick)<br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">ms:</span>
-		<span class="function_parameters_param_description"> number of milliseconds since the Z-Uno board began running the current program.</span>
+		<span class="function_parameters_param_name">tick:</span>
+		<span class="function_parameters_param_description"> number of tick since the Z-Uno board began running the current program. Что бы получитиь мс достаточно умножить на 10</span>
 	</span>
 </span>
 
@@ -31,8 +31,10 @@ byte dimmerValue=100;
 size_t glob;
 
 // Функция обработчика
-void handlerSysTimer(size_t ms) {
-	ms = millis();
+void handlerSysTimer(size_t tick) {
+	size_t				ms;
+
+	ms = tick * 10;
 	if (ms >= glob)//Провераем нужно ли управлять пином
 	{
 		glob = ms + dimmerValue*10;

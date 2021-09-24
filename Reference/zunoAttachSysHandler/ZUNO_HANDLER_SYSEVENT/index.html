@@ -1,0 +1,55 @@
+<span zunoVersion="v2"></span>
+<h1>Type ZUNO_HANDLER_SYSEVENT</h1>
+<span class="function_description">Данный тип хендлера позволяет привязать свою функцию к специальным системным событиям. Вызов будет происходить когда данное событие сработает.</span>
+
+<span class="function_description_more">
+В данном событие `sub_type` устанавливаеться в 0x0.
+</span>
+
+<span class="function_syntax">
+	handlerSysEvent(ev)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ev:</span>
+		<span class="function_parameters_param_description"> указатеель на структуру ZUNOSysEvent_t</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	nothing
+</span>
+
+<span class="function_syntax">
+	typedef struct ZUNOSysEvent_s{
+		uint8_t event;
+		uint32_t params[2];
+	}ZUNOSysEvent_t;
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_description">
+			<ul>
+				<li>ZUNO_HANDLER_IRQ</li>
+				<li>ZUNO_HANDLER_SLEEP</li>
+				<li>ZUNO_HANDLER_WUP</li>
+				<li>ZUNO_HANDLER_DEBUGPRINT</li> 
+				<li>ZUNO_HANDLER_ZW_CFG</li>
+				<li>ZUNO_HANDLER_ZW_BATTERY</li>
+				<li>ZUNO_HANDLER_REPORT</li>
+				<li>ZUNO_HANDLER_EXTINT</li>
+				<li>ZUNO_HANDLER_GPT</li>
+				<li>ZUNO_HANDLER_NOTIFICATON_TIME_STAMP</li>
+			</ul>
+		</span>
+	</span>
+</span>
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+		</code>
+	</pre>
+</span>
