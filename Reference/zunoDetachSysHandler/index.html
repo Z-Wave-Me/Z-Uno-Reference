@@ -1,9 +1,9 @@
 <span zunoVersion="v2"></span>
-<h1>zunoAttachSysHandler()</h1>
-<span class="function_description">Позволяет привязать к событию вызав своей функции.</span>
+<h1>zunoDetachSysHandler()</h1>
+<span class="function_description">Позволяет отвязать от событию свою функцию.</span>
 
 <span class="function_syntax">
-zunoAttachSysHandler(type, sub_type, handler)<br>
+zunoDetachSysHandler(type, sub_type, handler)<br>
 </span>
 
 <span class="function_parameters">
@@ -28,17 +28,17 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sub_type:</span>
-		<span class="function_parameters_param_description"> зависит от `type`.</span>
+		<span class="function_parameters_param_description"> описание смотрите в <a href="/Reference/zunoAttachSysHandler/">zunoAttachSysHandler</a>.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">handler:</span>
-		<span class="function_parameters_param_description"> указатель на функцию которая будети вызвана по событию.</span>
+		<span class="function_parameters_param_description"> указатель на функцию которую отвязываем от события.</span>
 	</span>
 </span>
 
 <span class="function_returns">
 	<ul>
 		<li>ZunoErrorOk - все хорошо.</li>
-		<li>ZunoErrorAttachSysHandler - не удалось привязать так как не достаточно места в `стеке функций` - в обычных сценариях такое не возникает.</li>
+		<li>ZunoErrorAttachSysHandler - такую функцию не привязывали.</li>
 	</ul>
 </span>
