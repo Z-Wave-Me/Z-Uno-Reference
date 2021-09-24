@@ -11,7 +11,7 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 		<span class="function_parameters_param_name">type:</span>
 		<span class="function_parameters_param_description">
 			<ul>
-				<li>ZUNO_HANDLER_SYSTIMER</li>
+				<li><a href="/Reference/zunoAttachSysHandler/ZUNO_HANDLER_SYSTIMER/">ZUNO_HANDLER_SYSTIMER</a></li>
 				<li>ZUNO_HANDLER_SYSEVENT</li>
 				<li>ZUNO_HANDLER_IRQ</li>
 				<li>ZUNO_HANDLER_SLEEP</li>
@@ -41,4 +41,8 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 		<li>ZunoErrorOk - все хорошо.</li>
 		<li>ZunoErrorAttachSysHandler - не удалось привязать так как не достаточно места в `стеке функций` - в обычных сценариях такое не возникает.</li>
 	</ul>
+</span>
+
+<span class="function_description_note">
+	Обратите внимание, что в данных функциях не рекомендованно долго находиться/вызывать тяжелые функции
 </span>
