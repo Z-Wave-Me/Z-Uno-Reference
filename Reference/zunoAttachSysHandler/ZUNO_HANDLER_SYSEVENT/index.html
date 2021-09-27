@@ -22,26 +22,22 @@
 </span>
 
 <span class="function_syntax">
-	typedef struct ZUNOSysEvent_s{
-		uint8_t event;
-		uint32_t params[2];
-	}ZUNOSysEvent_t;
+	<pre>
+		<code class="c">
+typedef struct ZUNOSysEvent_s{
+	uint8_t event;
+	uint32_t params[2];
+}ZUNOSysEvent_t;
+		</code>
+	</pre>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_description">
 			<ul>
-				<li>ZUNO_HANDLER_IRQ</li>
-				<li>ZUNO_HANDLER_SLEEP</li>
-				<li>ZUNO_HANDLER_WUP</li>
-				<li>ZUNO_HANDLER_DEBUGPRINT</li> 
-				<li>ZUNO_HANDLER_ZW_CFG</li>
-				<li>ZUNO_HANDLER_ZW_BATTERY</li>
-				<li>ZUNO_HANDLER_REPORT</li>
-				<li>ZUNO_HANDLER_EXTINT</li>
-				<li>ZUNO_HANDLER_GPT</li>
-				<li>ZUNO_HANDLER_NOTIFICATON_TIME_STAMP</li>
+				<li>ZUNO_SYS_EVENT_SETDEFAULT - </li>
+				<li>ZUNO_SYS_EVENT_LEARNSTATUS</li>
 			</ul>
 		</span>
 	</span>
