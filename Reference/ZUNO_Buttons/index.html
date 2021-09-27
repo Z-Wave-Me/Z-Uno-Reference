@@ -1,0 +1,106 @@
+<span zunoVersion="v2"></span>
+<h1>Zuno Buttons Library</h1>
+
+<span class="function_description">
+	Библиотека предназначена для работы с обычными кнопками и емкаснымим.
+</span>
+
+<span class="function_description_more">
+	Биоблетка подерживает работу с множеством кнопак.
+</span>
+
+<span class="function_description_more">
+	Биоблетека может работать с любим пином - в случае с обычной кнопкой если выбранн режим <b>BtnButtonModeExtInt</b> то есть определленные ограничения более подробней смотрите: <a href="/Reference/ZUNO_NeoPixel/addButton/">addButton</a>
+</span>
+
+<span class="function_description_more">
+For more infomation about pins of Z-Uno <a href="http://z-uno.z-wave.me/technical/pinout/">here</a>
+</span>
+
+<span class="function_description_reference">
+	<ul>
+		<li><a href="/Reference/ZUNO_NeoPixel/addButton/">addButton</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/deleteButton/">deleteButton</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isDoubleClick/">isDoubleClick</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isFree/">isFree</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isLongClick/">isLongClick</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isReleased/">isReleased</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isSingleClick/">isSingleClick</a></li>
+		<li><a href="/Reference/ZUNO_NeoPixel/isTripleClick/">isTripleClick</a></li>
+	</ul>
+</span>
+
+
+<span class="function_description_note">
+Note that Buttons uses 2 <b>DMA channel</b> в случае емкаснай кнопки.
+</span>
+
+<span class="function_example">
+	<pre><code class="c">
+#include "Arduino.h"
+#include "ZUNO_Buttons.h"
+
+#define MY_SERIAL Serial0
+
+#define BUTTON		23
+
+uint8_t dimmerValue = 100;
+
+// the setup function runs once, when you press reset or power the board
+void setup() {
+	MY_SERIAL.begin();
+	MY_SERIAL.println("Setup");
+	pinMode(LED_BUILTIN, OUTPUT);
+	Btn.addButton(BUTTON);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+	digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)
+	delay(dimmerValue*10);           // wait for timeout
+	digitalWrite(LED_BUILTIN, LOW);  // turn the LED off by making the voltage LOW
+	delay(dimmerValue*10);           // wait for timeout
+	process_buttons();
+	MY_SERIAL.println("Loop");
+}
+
+void process_buttons() {
+	if(Btn.isSingleClick(BUTTON)) {
+		MY_SERIAL.println("isSingleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isTripleClick(BUTTON)) {
+		MY_SERIAL.println("isTripleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isLongClick(BUTTON)) {
+		MY_SERIAL.println("isLongClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isDoubleClick(BUTTON)) {
+		MY_SERIAL.println("isDoubleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isSingleClick(2)) {
+		MY_SERIAL.println("isSingleClick");
+		Btn.deleteButton(2);
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+}
+	</code></pre>
+</span>  

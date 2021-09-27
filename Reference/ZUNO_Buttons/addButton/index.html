@@ -1,0 +1,78 @@
+<span zunoVersion="v2"></span>
+<h1>Btn.addButton()</h1>
+<span class="function_description">
+Данная функция позволяет добавить и настроить светодиодную ленту.<br>
+</span>
+
+<span class="function_syntax">
+Btn.addButton(pin)<br>
+Btn.addButton(pin, type)<br>
+Btn.addButton(pin, init)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">pin:</span>
+		<span class="function_parameters_param_description"> пин к которому будет подключаться кнопка.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">type:</span>
+		<span class="function_parameters_param_description"> позволдяет указать тип кнопки.
+			<ul>
+				<li>BtnTypeButton (the default) - обычная кнопка</li>
+				<li>BtnTypeTouch - емкастная кнопка</li>
+			</ul>
+		</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">init:</span>
+		<span class="function_parameters_param_description"> указатель на <b>ZunoBtnButtonInit_t</b> позволяющую более продвинуто настроить поведение кнопки.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+ркзультат работы функции - если не ZunoErrorOk то значит ошибка, ошибка например может возникнуть при нехватки памяти
+</span>
+
+
+<span class="function_syntax">
+	<span class="function_example">
+			<pre>
+				<code class="c">
+typedef struct							ZunoBtnDelayInit_s// Данная структура позволяет задать временные интервалла
+{
+	uint16_t							delayDebounce;// Время в мс указывающее какой отрезак временной считать ложным срабатыванием - по умолчанию BTN_DELAY_DEBOUNCE_MILLIS_DEFAULT
+	uint16_t							delaySingleClick;// Время в мс указывающее какой отрезак временной считать единичным срабатыванием - по умолчанию BTN_DELAY_SINGLECLICK_MILLIS_DEFAULT - данный параметр так же воияет на двойной и тройной клик
+	uint16_t							delayLongClick;// Время в мс указывающее какой отрезак временной считать долгим срабатыванием - по умолчанию BTN_DELAY_LONGCLICK_MILLIS_DEFAULT
+	uint16_t							delayFree;// Время в мс указывающее какой отрезак временной считать что кнопка отпущенна - по умолчанию BTN_DELAY_FREE_MILLIS_DEFAULT
+}										ZunoBtnDelayInit_t;
+
+typedef enum// Перечисление режимы работы для обычных кнопок
+{
+	BtnButtonModeAuto,//Данный режим выбирает BtnButtonModeTimer или BtnButtonModeExtInt - в зависимости от режима сна - по умолчанию он используеться
+	BtnButtonModeTimer,// Использует системный таймер
+	BtnButtonModeExtInt// Использует внешние прерывания
+} ZunoButtonMode_t;
+
+typedef struct							ZunoBtnButtonInit_s// Структура иницилизации для обычных кнопок
+{
+	ZunoBtnDelayInit_t					delay;//first always must be
+	ZunoButtonMode_t					mode;
+	uint8_t								bInvert;// Указывает на режим работы пинов - по умолчанию  - true
+}										ZunoBtnButtonInit_t;
+
+typedef struct							ZunoBtnTouchInit_s// Структура иницилизации для емкостных кнопок
+{
+	ZunoBtnDelayInit_t					delay;//first always must be
+	uint8_t								clickPower;//% - мощность емкосной кнопки - влияющее на чуствительность - максимальное значение 100 - по умолчанию 1
+}										ZunoBtnTouchInit_t;
+
+				</code>
+			</pre>
+		</span>
+</span>
+
+<span class="function_description_note">
+Обрати внимание, что в случае обычной кнопки и ее режима работы <b>BtnButtonModeExtInt</b> есть ограничения по пинам, а именно то что пины разделенны по группам и из одной группы одновременно может использоваться в данном режиме только один.
+
+</span>
