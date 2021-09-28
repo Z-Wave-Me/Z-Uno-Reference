@@ -36,9 +36,8 @@ Btn.addButton(pin, init)<br>
 
 
 <span class="function_syntax">
-	<span class="function_example">
-			<pre>
-				<code class="c">
+	<pre>
+		<code class="c">
 typedef struct							ZunoBtnDelayInit_s// Данная структура позволяет задать временные интервалла
 {
 	uint16_t							delayDebounce;// Время в мс указывающее какой отрезак временной считать ложным срабатыванием - по умолчанию BTN_DELAY_DEBOUNCE_MILLIS_DEFAULT
@@ -66,13 +65,87 @@ typedef struct							ZunoBtnTouchInit_s// Структура иницилиза�
 	ZunoBtnDelayInit_t					delay;//first always must be
 	uint8_t								clickPower;//% - мощность емкосной кнопки - влияющее на чуствительность - максимальное значение 100 - по умолчанию 1
 }										ZunoBtnTouchInit_t;
-
-				</code>
-			</pre>
-		</span>
+		</code>
+	</pre>
 </span>
 
 <span class="function_description_note">
-Обрати внимание, что в случае обычной кнопки и ее режима работы <b>BtnButtonModeExtInt</b> есть ограничения по пинам, а именно то что пины разделенны по группам и из одной группы одновременно может использоваться в данном режиме только один.
-
+Обратите внимание, что в случае обычной кнопки и ее режима работы <b>BtnButtonModeExtInt</b> есть ограничения по пинам, а именно то что некоторые пины можно использовать 'или' а не 'и':
+0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24)
 </span>
+
+<span class="function_example">
+Переработанный пример, но уже с параметрами не по умолчанию, так как мы не хотим все значения то используем макрос <b>BTN_BUTTON_INIT_DEFAULT</b>, есть аналогичный для емкосной кнопки <b>BTN_TOUCH_INIT_DEFAULT</b>:
+	<pre><code class="c">
+#include "Arduino.h"
+#include "ZUNO_Buttons.h"
+
+#define MY_SERIAL Serial0
+
+#define BUTTON		23
+
+uint8_t dimmerValue = 100;
+
+// the setup function runs once, when you press reset or power the board
+void setup() {
+	ZunoBtnButtonInit_t			init;
+
+	MY_SERIAL.begin();
+	MY_SERIAL.println("Setup");
+	pinMode(LED_BUILTIN, OUTPUT);
+	init = BTN_BUTTON_INIT_DEFAULT;
+	init.delay.delaySingleClick = 60;//Установим значение для одиночного клика
+	init.mode = BtnButtonModeTimer;//Указываем явно что нужно использовать системный таймер
+	Btn.addButton(BUTTON, &init);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+	digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)
+	delay(dimmerValue*10);           // wait for timeout
+	digitalWrite(LED_BUILTIN, LOW);  // turn the LED off by making the voltage LOW
+	delay(dimmerValue*10);           // wait for timeout
+	process_buttons();
+	MY_SERIAL.println("Loop");
+}
+
+void process_buttons() {
+	if(Btn.isSingleClick(BUTTON)) {
+		Serial0.println("isSingleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isTripleClick(BUTTON)) {
+		Serial0.println("isTripleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isLongClick(BUTTON)) {
+		Serial0.println("isLongClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isDoubleClick(BUTTON)) {
+		Serial0.println("isDoubleClick");
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+	if(Btn.isSingleClick(2)) {
+		Serial0.println("isSingleClick");
+		Btn.deleteButton(2);
+		if (dimmerValue == 5)
+			dimmerValue = 100;
+		else
+			dimmerValue = 5;
+	}
+}
+	</code></pre>
+</span> 
