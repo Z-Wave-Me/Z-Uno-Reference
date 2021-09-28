@@ -1,0 +1,32 @@
+<span zunoVersion="v2"></span>
+<h1>realloc()</h1>
+<span class="function_description">
+The function changes the size of the memory block pointed to by ptr to size bytes. The contents will be unchanged in the range from the start of the region up to the minimum of the old and new sizes. 
+If the new size is larger than the old size, the added memory will not be initialized. If ptr is NULL, then the call is equivalent to <span class="function_ref" link="free">malloc</a></span>(size), 
+for all values of size; if size is equal to zero, and ptr is not NULL, then the call is equivalent to <span class="function_ref" link="free">free</a></span>(ptr). 
+Unless ptr is NULL, it must have been returned by an earlier call to <span class="function_ref" link="free">malloc</a>()</span>, <span class="function_ref" link="free">сalloc</a>()</span>, or <span class="function_ref" link="free">reallocarray</a>()</span>. 
+If the area pointed to was moved, a <span class="function_ref" link="free">free</a></span>(ptr) is done.
+</span>
+
+<span class="function_syntax">
+realloc(ptr, size)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ptr:</span>
+		<span class="function_parameters_param_description"> указатель на ранее выделенную память.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">size:</span>
+		<span class="function_parameters_param_description"> размер в байтах памяти которую нужно выделить.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+The function returns a pointer to the newly allocated memory, which is suitably aligned for any built-in type, or NULL if the request failed. 
+The returned pointer may be the same as ptr if the allocation was not moved (e.g., there was room to expand the allocation in-place), or different from ptr if the allocation was moved to a new address. 
+If size was equal to 0, either NULL or a pointer suitable to be passed to <span class="function_ref" link="free">free</a></span>() is returned. If fails, the original block is left untouched; it is not freed or moved.
+</span>
+
