@@ -1,0 +1,32 @@
+<span zunoVersion="v2"></span>
+<h1>reallocarray()</h1>
+<span class="function_description">
+The function changes the size of the memory block pointed to by ptr to be large enough for an array of nmemb elements, each of which is size bytes. 
+It is equivalent to the call <span class="function_ref" link="free">realloc</a></span>(ptr, nmemb * size);
+</span>
+
+<span class="function_syntax">
+reallocarray(ptr, nmemb, size)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ptr:</span>
+		<span class="function_parameters_param_description"> указатель на ранее выделенную память.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">nmemb:</span>
+		<span class="function_parameters_param_description"> количество элементов.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">size:</span>
+		<span class="function_parameters_param_description"> размер в байтах элемента.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+On success, the function returns a pointer to the newly allocated memory. 
+On failure, it returns NULL and the original block of memory is left untouched.
+</span>
+
