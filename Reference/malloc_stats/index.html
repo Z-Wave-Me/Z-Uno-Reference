@@ -2,17 +2,16 @@
 <h1>malloc_stats()</h1>
 <span class="function_description">
 Отображает информацию об используемой памяти <span class="function_ref" link="malloc">malloc</a>()</span>
-Отображает с помощью Serial, предварительно нужно иницилизировать с помощью <span class="function_ref" link="Serial/begin">begin</a>()</span>
+Отображает с помощью Serial0, предварительно нужно иницилизировать с помощью <span class="function_ref" link="Serial/begin">begin</a>()</span>
 </span>
 
 <span class="function_syntax">
-malloc_stats(fd)<br>
+malloc_stats()<br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">fd:</span>
-		<span class="function_parameters_param_description"> указывает какой Serial использовать от 0 до 2.</span>
+		<span class="function_parameters_param_name">nothing</span>
 	</span>
 </span>
 
@@ -32,7 +31,7 @@ void setup() {
 }
 
 void loop() {
-	malloc_stats(0);//Указываем что в Serial0 нужно выводить и выводим
+	malloc_stats();
 	Serial0.println();
 	delay(1000);
 }
