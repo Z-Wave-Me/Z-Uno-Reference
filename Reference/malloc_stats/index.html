@@ -1,0 +1,38 @@
+<span zunoVersion="v2"></span>
+<h1>malloc_stats()</h1>
+<span class="function_description">
+Отображает информацию об используемой памяти <span class="function_ref" link="free">malloc</a>()</span>
+Отображает с помощью Serial, предварительно нужно иницилизировать с помощью <span class="function_ref" link="Serial/begin">begin</a>()</span>
+</span>
+
+<span class="function_syntax">
+malloc_stats(fd)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">fd:</span>
+		<span class="function_parameters_param_description"> указывает какой Serial использовать от 0 до 2.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+nothing
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+void setup() {
+	Serial0.begin(115200);//Иницилизируем Serial0 для вывода информации
+}
+
+void loop() {
+	malloc_stats(0);//Указываем что в Serial0 нужно выводить и выводим
+	Serial0.println();
+	delay(1000);
+}
+		</code>
+	</pre>
+</span>
