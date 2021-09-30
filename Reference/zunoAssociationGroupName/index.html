@@ -1,0 +1,54 @@
+<span zunoVersion="v2"></span>
+<h1>zunoAssociationGroupName()</h1>
+<span class="function_description">
+Позволит для групп установить свое имя иначе будет использованно имя группы типа "User group 01", "User group 02"...
+</span>
+
+<span class="function_syntax">
+zunoAssociationGroupName(groupIndex)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">groupIndex:</span>
+		<span class="function_parameters_param_description"> индекс группы асоциации, начинаеться он с CTRL_GROUP_1...</span>
+	</span>
+</span>
+
+<span class="function_returns">
+указатель на Си строку распаложенную в постоянной памяти и длинной не более 42 байта
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM)
+
+void setup() {
+}
+
+const char *zunoAssociationGroupName(uint8_t groupIndex) {
+	const char				*tmp;
+
+	switch (groupIndex) {
+		case CTRL_GROUP_1:
+			tmp = "ZUNO_ASSOCIATION_GROUP_SET_VALUE";
+			break;
+		case CTRL_GROUP_2:
+			tmp = "ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM";
+			break;
+		default:
+			tmp = NULL;
+			break;
+	}
+	return (tmp);
+}
+
+void loop() {
+}
+
+		</code>
+	</pre>
+</span>
