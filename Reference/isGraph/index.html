@@ -1,0 +1,35 @@
+<span zunoVersion="v2"></span>
+<h1>isGraph()</h1>
+<span class="function_description">
+	Analyse if a char is printable with some content (space is printable but has no content). Returns true if thisChar is printable.
+</span>
+
+<span class="function_syntax">
+	isGraph(thisChar)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">thisChar:</span>
+		<span class="function_parameters_param_description"> variable. Allowed data types: char.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+	true: if thisChar is printable.
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+if (isGraph(myChar)) {  // tests if myChar is a printable character but not a blank space.
+  Serial.println("The character is printable");
+}
+else {
+  Serial.println("The character is not printable");
+}
+		</code>
+	</pre>
+</span>
