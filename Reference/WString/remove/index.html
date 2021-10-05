@@ -1,0 +1,39 @@
+<span zunoVersion="v2"></span>
+<h1>remove()</h1>
+<span class="function_description">
+	Modify in place a String removing chars from the provided index to the end of the String or from the provided index to index plus count.
+</span>
+
+<span class="function_syntax">
+	myString.remove(index)<br>
+	myString.remove(index, count)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">myString:</span>
+		<span class="function_parameters_param_description"> a variable of type String.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">index:</span>
+		<span class="function_parameters_param_description"> The position at which to start the remove process (zero indexed). Allowed data types: unsigned int.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">count:</span>
+		<span class="function_parameters_param_description"> The number of characters to remove. Allowed data types: unsigned int.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+	Nothing
+</span>
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+String greeting = "hello";
+greeting.remove(2, 2);  // greeting now contains "heo"
+		</code>
+	</pre>
+</span>

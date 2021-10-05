@@ -1,0 +1,145 @@
+<span zunoVersion="v2"></span>
+<h1>String()</h1>
+<span class="function_description">
+Constructs an instance of the String class. There are multiple versions that construct Strings from different data types (i.e. format them as sequences of characters), including:
+<ul>
+	<li>a constant string of characters, in double quotes (i.e. a char array)</li>
+	<li>a single constant character, in single quotes</li>
+	<li>another instance of the String object</li>
+	<li>a constant integer or long integer</li>
+	<li>a constant integer or long integer, using a specified base</li>
+	<li>an integer or long integer variable</li>
+	<li>an integer or long integer variable, using a specified base</li>
+	<li>a float or double, using a specified decimal places</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+Constructing a String from a number results in a string that contains the ASCII representation of that number. The default is base ten, so
+</span>
+
+
+<span class="function_example">
+	<pre><code class="c">
+String thisString = String(13);
+	</code></pre>
+</span>
+
+
+<span class="function_description_more">
+gives you the String "13". You can use other bases, however. For example,
+</span>
+
+
+<span class="function_example">
+	<pre><code class="c">
+String thisString = String(13, HEX);
+	</code></pre>
+</span>
+
+
+<span class="function_description_more">
+gives you the String "d", which is the hexadecimal representation of the decimal value 13. Or if you prefer binary,
+</span>
+
+
+<span class="function_example">
+	<pre><code class="c">
+String thisString = String(13, BIN);
+	</code></pre>
+</span>
+
+<span class="function_description_more">
+gives you the String "1101", which is the binary representation of 13.
+</span>
+
+
+<span class="function_syntax">
+String(val)<br>
+String(val, base)<br>
+String(val, decimalPlaces)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">val:</span>
+		<span class="function_parameters_param_description"> a variable to format as a String. Allowed data types: string, char, byte, int, long, unsigned int, unsigned long, float, double.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">base:</span>
+		<span class="function_parameters_param_description"> (optional) the base in which to format an integral value.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">decimalPlaces:</span>
+		<span class="function_parameters_param_description"> <b>only if val is float or double.</b> The desired decimal places.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+An instance of the String class.
+</span>
+
+<span class="function_description_note">
+Данный класс активно выделяет RAM так что обратите внимание, на то что бы ее было достаточно для коректной работы.  Более подробней про память: <span class="function_ref" link="malloc">malloc()</span>
+</span>
+
+<span class="function_description_more">All String have the following functions supported:
+	<ul>
+		<li><span class="function_ref" link="WString/charAt">charAt</span>()</li>
+		<li><span class="function_ref" link="WString/compareTo">compareTo</span>()</li>
+		<li><span class="function_ref" link="WString/c_str">c_str</span>()</li>
+		<li><span class="function_ref" link="WString/endsWith">endsWith</span>()</li>
+		<li><span class="function_ref" link="WString/equals">equals</span>()</li>
+		<li><span class="function_ref" link="WString/equalsIgnoreCase">equalsIgnoreCase</span>()</li>
+		<li><span class="function_ref" link="WString/getBytes">getBytes</span>()</li>
+		<li><span class="function_ref" link="WString/indexOf">indexOf</span>()</li>
+		<li><span class="function_ref" link="WString/lastIndexOf">lastIndexOf</span>()</li>
+		<li><span class="function_ref" link="WString/length">length</span>()</li>
+		<li><span class="function_ref" link="WString/remove">remove</span>()</li>
+		<li><span class="function_ref" link="WString/replace">replace</span>()</li>
+		<li><span class="function_ref" link="WString/reserve">reserve</span>()</li>
+		<li><span class="function_ref" link="WString/setCharAt">setCharAt</span>()</li>
+		<li><span class="function_ref" link="WString/startsWith">startsWith</span>()</li>
+		<li><span class="function_ref" link="WString/substring">substring</span>()</li>
+		<li><span class="function_ref" link="WString/toCharArray">toCharArray</span>()</li>
+		<li><span class="function_ref" link="WString/toDouble">toDouble</span>()</li>
+		<li><span class="function_ref" link="WString/toInt">toInt</span>()</li>
+		<li><span class="function_ref" link="WString/toFloat">toFloat</span>()</li>
+		<li><span class="function_ref" link="WString/toLowerCase">toLowerCase</span>()</li>
+		<li><span class="function_ref" link="WString/toUpperCase">toUpperCase</span>()</li>
+		<li><span class="function_ref" link="WString/trim">trim</span>()</li>
+	</ul>
+</span>
+
+
+<span class="function_description_more">All String have the following operators supported:
+	<ul>
+		<li><span class="function_ref" link="WString/element_access)">[]</span>()</li>
+		<li><span class="function_ref" link="WString/concatenation)">+</span>()</li>
+		<li><span class="function_ref" link="WString/append)">+=</span>()</li>
+		<li><span class="function_ref" link="WString/comparison)">==</span>()</li>
+		<li><span class="function_ref" link="WString/greaterthan)">&gt;</span>()</li>
+		<li><span class="function_ref" link="WString/greaterthanorequalto)">&gt;=</span>()</li>
+		<li><span class="function_ref" link="WString/lessthan)">&lt;</span>()</li>
+		<li><span class="function_ref" link="WString/lessthanorequalto)">&lt;=</span>()</li>
+		<li><span class="function_ref" link="WString/differentfrom)">!=</span>()</li>
+	</ul>
+</span>
+
+<span class="function_example">
+All of the following are valid declarations for Strings.
+	<pre>
+		<code class="c">
+String stringOne = "Hello String";                    // using a constant String
+String stringOne = String('a');                       // converting a constant char into a String
+String stringTwo = String("This is a string");        // converting a constant string into a String object
+String stringOne = String(stringTwo + " with more");  // concatenating two strings
+String stringOne = String(13);                        // using a constant integer
+String stringOne = String(analogRead(0), DEC);        // using an int and a base
+String stringOne = String(45, HEX);                   // using an int and a base (hexadecimal)
+String stringOne = String(255, BIN);                  // using an int and a base (binary)
+String stringOne = String(millis(), DEC);             // using a long and a base
+String stringOne = String(5.698, 3);                  // using a float and the decimal places
+		</code>
+	</pre>
+</span>

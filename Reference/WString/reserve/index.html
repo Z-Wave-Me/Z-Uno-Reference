@@ -1,0 +1,51 @@
+<span zunoVersion="v2"></span>
+<h1>reserve()</h1>
+<span class="function_description">
+	The String reserve() function allows you to allocate a buffer in memory for manipulating Strings.
+</span>
+
+<span class="function_syntax">
+	myString.reserve(size)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">myString:</span>
+		<span class="function_parameters_param_description"> a variable of type String.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">size:</span>
+		<span class="function_parameters_param_description"> the number of bytes in memory to save for String manipulation. Allowed data types: unsigned int.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+	Nothing
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+String myString;
+
+void setup() {
+  // initialize serial and wait for port to open:
+  Serial.begin(115200);
+
+  myString.reserve(26);
+  myString = "i=";
+  myString += "1234";
+  myString += ", is that ok?";
+
+  // print the String:
+  Serial.println(myString);
+}
+
+void loop() {
+  // nothing to do here
+}
+		</code>
+	</pre>
+</span>

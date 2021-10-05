@@ -1,0 +1,25 @@
+<span zunoVersion="v2"></span>
+<h1>c_str()</h1>
+<span class="function_description">
+	Converts the contents of a String as a C-style, null-terminated string. Note that this gives direct access to the internal String buffer and should be used with care. In particular, you should never modify the string through the pointer returned. When you modify the String object, or when it is destroyed, any pointer previously returned by c_str() becomes invalid and should not be used any longer.
+</span>
+
+<span class="function_syntax">
+	myString.c_str()<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">myString:</span>
+		<span class="function_parameters_param_description"> a variable of type String.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">parameter:</span>
+		<span class="function_parameters_param_description"> Allowed data types: String, string, char, byte, int, unsigned int, long, unsigned long, float, double.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+	A pointer to the C-style version of the invoking String.
+</span>
