@@ -7,8 +7,12 @@ General Purpose Timer (GPT) allows to measure precisely time and execute actions
 To set up a user handler function to be called by GPT define it as described <span class="function_ref" link="Interrupts">here</span> using ZUNO_SETUP_ISR_GPTIMER macro.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 <span class="function_ref" link="analogWrite">PWM/analogWrite()</span> can not be used when GPT is enabled!
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Для свой работы используеться WTIMER0
 </span>
 
 <span class="function_description_more">GPT is configured using the following functions:
