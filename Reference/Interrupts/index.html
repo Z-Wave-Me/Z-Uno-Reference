@@ -1,5 +1,5 @@
 <h1>Interrupts</h1>
-<span class="function_description">
+<span class="function_description" zunoVersion="v1">
 Z-Uno uses hardware interrupts of Z-Wave chip as well as software generated interrupts provide users simple experience. Currently Z-Uno supports the following interrupts:
 <ul>
     <li><span class="function_ref" link="zunoExtIntMode">INT0</span> (pin 17)</li>
@@ -10,15 +10,20 @@ Z-Uno uses hardware interrupts of Z-Wave chip as well as software generated inte
 </ul>
 </span>
 
-<span class="function_description_more">
+<span class="function_description" zunoVersion="v2">
+Z-Uno подерживает все пины доступны для внешних прерываний с не большим ограничением, а именно то что некоторые пины можно использовать 'или' а не 'и':
+0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24)
+</span>
+
+<span class="function_description_more" zunoVersion="v1">
 Interrupt handler functions should be defined in user sketch and &laquo;announced&raquo; using the corresponding <code>ZUNO_SETUP_ISR_*(<i>my_handler_func</i>)</code> macro, where <i>my_handler_func</i> is the name of the handler function.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below. Also don't use local variables &mdash; use global variables instead!
 </span>
 
-<table>
+<table zunoVersion="v1">
     <tr><th>Function allowed in interrupt handler</th><th>Limitations</th></tr>
     <tr><td><span class="function_ref">digitalRead</span>(pin)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
     <tr><td><span class="function_ref">digitalWrite</span>(pin, value)</td><td>pin: a constant or variable of type <span class="function_ref">s_pin</span></td></tr>
@@ -30,6 +35,18 @@ The code in the user interrupt handler function should be as fast as possible an
     <tr><td><span class="function_ref" link="zunoFastPWM">zunoFastPWMEnable</span></span></span>(mode)</td><td>mode: a constant</td></tr>
     <tr><td><span class="function_ref" link="zunoFastPWM">zunoFastPWMSet(a, b)</td><td>-</td></tr>
     <tr><td><span class="function_ref">millis</span>()</td><td>(starting from 2.1.5)</td></tr>
+</table>
+
+<span class="function_description_note" zunoVersion="v2">
+The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below.
+</span>
+
+<table zunoVersion="v2">
+    <tr><th>Function allowed in interrupt handler</th><th>Limitations</th></tr>
+    <tr><td><span class="function_ref">digitalRead</span>(pin)</td><td>pin: a constant or variable</td></tr>
+    <tr><td><span class="function_ref">digitalWrite</span>(pin, value)</td><td>pin: a constant or variable</td></tr>
+    <tr><td><span class="function_ref">pinMode</span>(pin, mode)</td><td>pin: a constant or variable</td></tr>
+    <tr><td><span class="function_ref">millis</span>()</td><td>-</td></tr>
 </table>
 
 <span class="function_syntax">ZUNO_SETUP_ISR_*(my_handler_func)</span>
@@ -57,4 +74,3 @@ The code in the user interrupt handler function should be as fast as possible an
 </tr>
 </table>
 </span>
-
