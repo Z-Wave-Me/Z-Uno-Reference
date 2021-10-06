@@ -1,0 +1,62 @@
+<h1>attachInterrupt()</h1>
+
+<span class="function_description">
+Interrupts are useful for making things happen automatically in microcontroller programs and can help solve timing problems. Good tasks for using an interrupt may include reading a rotary encoder, or monitoring user input.
+If you wanted to ensure that a program always caught the pulses from a rotary encoder, so that it never misses a pulse, it would make it very tricky to write a program to do anything else, because the program would need to constantly poll the sensor 
+lines for the encoder, in order to catch pulses when they occurred. Other sensors have a similar interface dynamic too, such as trying to read a sound sensor that is trying to catch a click, or an infrared slot sensor (photo-interrupter) trying to 
+catch a coin drop. In all of these situations, using an interrupt can free the microcontroller to get some other work done while not missing the input.
+</span>
+
+<span class="function_syntax">
+attachInterrupt(interruptPin, userFunc, mode)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">interruptPin:</span>
+		<span class="function_parameters_param_description">  the pin number.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">userFunc:</span>
+		<span class="function_parameters_param_description"> the ISR to call when the interrupt occurs; this function must take no parameters and return nothing. This function is sometimes referred to as an interrupt service routine.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">mode:</span>
+		<span class="function_parameters_param_description"> defines when the interrupt should be triggered. Four constants are predefined as valid values:
+			<ul>
+				<li><b>LOW</b> to trigger the interrupt whenever the pin is low</li>
+				<li><b>CHANGE</b> to trigger the interrupt whenever the pin changes value</li>
+				<li><b>RISING</b> to trigger when the pin goes from low to high</li>
+				<li><b>FALLING</b> for when the pin goes from high to low</li>
+			</ul>
+		</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	Nothing
+</span>
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+const byte ledPin = 13;
+const byte interruptPin = 2;
+volatile byte state = LOW;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(interruptPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, CHANGE);
+}
+
+void loop() {
+  digitalWrite(ledPin, state);
+}
+
+void blink() {
+  state = !state;
+}
+		</code>
+	</pre>
+</span>

@@ -248,7 +248,10 @@ float modff(float x, float * y)
 			<li>
 			    <span class="function_ref" link="Interrupts">External interrupts</span><br/>(INT0, INT1, ZEROX)
 			    <ul>
-			        <li><span class="function_ref">zunoExtIntMode</span>()</li>
+			        <li zunoVersion="v2"><span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>()</li>
+			        <li zunoVersion="v2"><span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>()</li>
+			        <li zunoVersion="v1"><span class="function_ref">zunoExtIntMode</span>()</li>
+			        <li zunoVersion="v2"><span class="function_ref">zunoExtIntMode</span>() - deprecated</li>
 			        <li><span class="function_ref" link="Interrupts">ZUNO_SETUP_ISR_INT0</span>()</li>
 			        <li><span class="function_ref" link="Interrupts">ZUNO_SETUP_ISR_INT1</span>()</li>
 			        <li><span class="function_ref" link="Interrupts">ZUNO_SETUP_ISR_ZEROX</span>()</li>
