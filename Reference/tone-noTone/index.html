@@ -12,8 +12,12 @@ Produces a tone with the specified frequency on a pin. noTone() turns off the to
     tone() works only with fast pins defined via <span class="function_ref">s_pin</span> data type and hence can work only on pins 9&ndash;16.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
     tone() uses <span class="function_ref">GPT</span>, so GPT can not be used simultaneously with tone().
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Используеться для работы TIMER0 - поддерживаються все доступные пины
 </span>
 
 <span class="function_syntax">tone(pin, frequency);</span>
@@ -21,7 +25,8 @@ Produces a tone with the specified frequency on a pin. noTone() turns off the to
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">pin</span>
-        <span class="function_parameters_param_description">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+        <span class="function_parameters_param_description" zunoVersion="v1">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+        <span class="function_parameters_param_description" zunoVersion="v2">the number of the pin on which you want to produce a tone</span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">frequency</span>
@@ -38,7 +43,8 @@ none
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">pin</span>
-        <span class="function_parameters_param_description">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+        <span class="function_parameters_param_description" zunoVersion="v1">the number of the pin on which you want to produce a tone (<span class="function_ref">s_pin</span> type)</span>
+        <span class="function_parameters_param_description" zunoVersion="v2">the number of the pin on which you want to produce a tone</span>
     </span>
 </span>
 
