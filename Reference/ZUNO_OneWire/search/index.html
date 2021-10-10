@@ -1,0 +1,31 @@
+<span zunoVersion="v2"></span>
+<h1>search()</h1>
+<span class="function_description">
+	Search for the next device. The newAddr is an 8 byte array. If a device is found, newAddr is filled with the device's address and true is returned. If no more devices are found, false is returned.
+</span>
+
+<span class="function_description_more">
+Returns 1 if a new address has been returned. A zero might mean that the bus is shorted, there are no devices, or you have already retrieved all of them. 
+It might be a good idea to check the CRC to make sure you didn't get garbage.  The order is deterministic. You will always get the same devices in the same order.
+</span>
+
+<span class="function_syntax">
+	myWire.search(newAddr)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">myWire:</span>
+		<span class="function_parameters_param_description"> a variable of type OneWire.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">newAddr:</span>
+		<span class="function_parameters_param_description"> указатель на массив из 8 байт.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+    bool
+</span>
+
