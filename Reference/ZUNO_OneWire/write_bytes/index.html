@@ -1,0 +1,37 @@
+<span zunoVersion="v2"></span>
+<h1>write_bytes()</h1>
+<span class="function_description">
+Write a массив байт. If 'power' is one then the wire is held high at the end for parasitically powered devices. You are responsible for eventually depowering it by calling <span class="function_ref" link="ZUNO_OneWire/depower">depower</span>() or doing another read or write.
+</span>
+
+<span class="function_description_more">
+	Issue a 1-Wire rom skip command, to address all on bus.
+</span>
+
+<span class="function_syntax">
+	myWire.write_bytes(buf, count, power)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">myWire:</span>
+		<span class="function_parameters_param_description"> a variable of type OneWire.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">buf:</span>
+		<span class="function_parameters_param_description"> указатель на буффер передаваемых данных.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">count:</span>
+		<span class="function_parameters_param_description"> количество байт которые передаем устройству.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">power:</span>
+		<span class="function_parameters_param_description"> 1 или 0 - указывает оставить питание или нет по умолчанию 0 - не оставляет питание.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+    nothing
+</span>
+
