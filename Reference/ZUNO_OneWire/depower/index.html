@@ -1,7 +1,7 @@
 <span zunoVersion="v2"></span>
 <h1>depower()</h1>
 <span class="function_description">
-Stop forcing power onto the bus. You only need to do this if you used the 'power' flag to <span class="function_ref" link="ZUNO_OneWire/write">write</span>() or used a <span class="function_ref" link="ZUNO_OneWire/write">write_bit</span>() call and aren't about to do another read or write. 
+Stop forcing power onto the bus. You only need to do this if you used the 'power' flag to <span class="function_ref" link="ZUNO_OneWire/write">write</span>() call and aren't about to do another read or write. 
 You would rather not leave this powered if you don't have to, just in case someone shorts your bus. 
 Write a byte. If 'power' is one then the wire is held high at the end for parasitically powered devices. You are responsible for eventually depowering it by calling () or doing another read or write.
 </span>
