@@ -1,0 +1,25 @@
+<span zunoVersion="v2"></span>
+<h1>getRawData()</h1>
+<span class="function_description">
+Позволяет проччитать RAW данные(2 байта влажности + 2 байта температуры + 1 байт crc2). Читает последние данные полученные от датчика.
+</span>
+
+<span class="function_syntax">
+	dht_sensor.getRawData(ptr)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">dht_sensor:</span>
+		<span class="function_parameters_param_description"> a variable of type DHT.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ptr:</span>
+		<span class="function_parameters_param_description"> Указателшь на буффер который примет RAW данные. Размер не менее 5 байт.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	nothing
+</span>
+
