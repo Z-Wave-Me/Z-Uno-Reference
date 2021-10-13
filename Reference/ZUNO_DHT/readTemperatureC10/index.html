@@ -1,0 +1,26 @@
+<span zunoVersion="v2"></span>
+<h1>readTemperature()</h1>
+<span class="function_description">
+	Read temperature in 10 th of Celsius.
+</span>
+
+<span class="function_syntax">
+	dht_sensor.readTemperatureC10(S, bForce)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">dht_sensor:</span>
+		<span class="function_parameters_param_description"> a variable of type DHT.</span>
+	</span>
+
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bForce:</span>
+		<span class="function_parameters_param_description"> false/true - по умолчанию false. Если true то пытаеться считать данные даже если не прошло нужное время прежде чем датчик сможет ответить.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	int16_t - Celcius - если ошибка то 0x7FFF
+</span>
+

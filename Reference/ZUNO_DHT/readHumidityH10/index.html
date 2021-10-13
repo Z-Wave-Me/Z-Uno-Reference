@@ -1,0 +1,26 @@
+<span zunoVersion="v2"></span>
+<h1>readHumidityH10()</h1>
+<span class="function_description">
+	Read Humidity in 10 th of percent.
+</span>
+
+<span class="function_syntax">
+	dht_sensor.readHumidityH10(bForce)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">dht_sensor:</span>
+		<span class="function_parameters_param_description"> a variable of type DHT.</span>
+	</span>
+
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bForce:</span>
+		<span class="function_parameters_param_description"> false/true - по умолчанию false. Если true то пытаеться считать данные даже если не прошло нужное время прежде чем датчик сможет ответить.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	int16_t - если ошибка то 0x7FFF
+</span>
+
