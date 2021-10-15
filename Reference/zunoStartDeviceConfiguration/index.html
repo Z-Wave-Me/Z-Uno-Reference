@@ -30,16 +30,16 @@ Do not forget to enable all channel types you will use in your sketch with <span
 <span class="function_description_more">
 In runtime you can get channel values using macro <b>ZUNO_CFG_CHANNEL(CHANNEL)</b>:
 	<ul>
-		<li><b>CHANNEL</b> канал от <b>0x0</b> до <b>31</b>, узнать сколько каналов можно с помощью <b>ZUNO_CFG_CHANNEL_COUNT</b>.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).type</b> - указывает на тип канала.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).sub_type</b> и <b>ZUNO_CFG_CHANNEL(CHANNEL).params[0x0]</b> - допалнительные параметры. Их описание можно посмотреть в описании типов каналов.</li>
-		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).zw_channel & 0x3F</b> - хранит zwave канал.</li>
+		<li><b>CHANNEL</b> Z-Uno channel number. Value in range [<b>0</b>;<b>31</b>]. You can examine how many channels you have using macro <b>ZUNO_CFG_CHANNEL_COUNT</b>.</li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).type</b> Represents channel type. See types list in <span class="function_ref">zunoAddChannel</span> description. </li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).sub_type</b> and <b>ZUNO_CFG_CHANNEL(CHANNEL).params</b> - optional parameters for some channel types</li>
+		<li><b>ZUNO_CFG_CHANNEL(CHANNEL).zw_channel</b> Represent Z-Wave Multichannel intance of described channel.</li>
 	</ul>
 </span>
 
 <span class="example_code">
-<b>Пример №1</b>
-Below is the Radio Blink sketch from Z-Uno paper manual made in static getter/setter style
+<b>Example #1</b>
+Below is the Radio Blink sketch from Z-Uno paper manual made in a static getter/setter style
 <pre>
 <code class="c">byte dimmerValue = 99;
 
@@ -68,28 +68,31 @@ byte getSwitchMultilevelValue(void) {
 </span>
 
 <span class="example_code">
-<b>Пример №2</b>
+<b>Example 2</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic getter/setter style
 <pre>
 <code class="c">
-// Указываем что будем использовать. В нашем случае это два команд класса, если их не указать то код для этих команд классов не собереться.
+// Define special command class macroses
+// We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
 
 byte dimmerValue = 99;
 
-// В данной структуре храняться для удобства указатели на хендлерры для getter и setter
-static zuno_handler_single_gettersetter_t __hdata_getSwitchMultilevelValue={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
+// create a structure to store getter & setter handlers 
+static zuno_handler_single_gettersetter_t switch_multilevel_handlers={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
 
 void setup() {
-  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x0);//Указываем zwave канал
-    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_NUMBER, 0);//Добавляем группу асоциации
-    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER, 0);//Добавляем группу асоциации
-    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+ 
+  if(zunoStartDeviceConfiguration()) {  // Check if we are able to reconfigure the device. 
+                                        // Device can change its characterictics ONLY if it's not included
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0); // Add SWITCH_MULTILEVEL channel. It doesn't require any optional parameters.
+    zunoSetZWChannel(0, 0);  // Setup Z-Wave Multichannel instance, 0 - main EndPoint
+    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_NUMBER, 0);// Add Association for Basic control 
+    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER, 0);// Add Association for Basic and SwitchMultilevel control 
+    zunoCommitCfg(); // Apply settings ^^^
   }
-  zunoAppendChannelHandler(0x0, 0x1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Устанавливаем хендлеры для getter и setter - что бы код мог их использовать. Это нужно устанавливать каждый раз.
-
+  // Bind handler functions for 0 channel. You have to setup handler every time device powers on
+  zunoAppendChannelHandler(0, 1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&switch_multilevel_handlers);
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
@@ -109,13 +112,13 @@ static byte getSwitchMultilevelValue(void) {
 }
 </code></pre>
 </span>
-
 <span class="example_code">
-<b>Пример №3</b>
-Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable style
+<b>Example 3</b>
+Below is the Radio Blink sketch from Z-Uno paper manual made in static variable style
 <pre>
-<code class="c">byte dimmerValue = 99;
-
+<code class="c">
+  
+byte dimmerValue = 99;
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM)
 
@@ -133,27 +136,31 @@ void loop() {
 </span>
 
 <span class="example_code">
-<b>Пример №4</b>
+<b>Example 4</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic vartiable style
 <pre>
-<code class="c">// Указываем что будем использовать. В нашем случае это два команд класса, если их не указать то код для этих команд классов не собереться.
+<code class="c">/
+
+// Define special command class macroses
+// We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
 
 byte dimmerValue = 99;
 
 void setup() {
-  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x0);//Указываем zwave канал
-    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_NUMBER, 0);//Добавляем группу асоциации
-    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER, 0);//Добавляем группу асоциации
-    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+ 
+  if(zunoStartDeviceConfiguration()) {  // Check if we are able to reconfigure the device. 
+                                        // Device can change its characterictics ONLY if it's not included
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0); // Add SWITCH_MULTILEVEL channel. It doesn't require any optional parameters.
+    zunoSetZWChannel(0, 0);  // Setup Z-Wave Multichannel instance, 0 - main EndPoint
+    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_NUMBER, 0);// Add Association for Basic control 
+    zunoAddAssociation(ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER, 0);// Add Association for Basic and SwitchMultilevel control 
+    zunoCommitCfg(); // Apply settings ^^^
   }
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Указываем адресс для переменной - что бы код мог ее использовать. Это нужно устанавливать каждый раз.
-
+  // Bind variable "dimmerValue" for 0 channel. You have to map the variable every time the device powers on
+  zunoAppendChannelHandler(0, 1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);
   pinMode(LED_BUILTIN, OUTPUT);
 }
-
 void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(dimmerValue*10);
