@@ -1,16 +1,13 @@
 <span zunoVersion="v2"></span>
 <h1>analogWriteFrequency()</h1>
 <span class="function_description">
-Данная функция меняет частоту работы <span class="function_ref">analogWrite</span>(). Вызывать нужно до первого использование <span class="function_ref">analogWrite</span>(), что бы повлияло.
-
+This function tweaks carrier frequency of PWM controller is used for <span class="function_ref">analogWrite</span>(). You have to call this function before you call <b>analogWrite</b> to apply setting.
 </span>
-
 <span class="function_syntax">analogWriteFrequency(freq)</span>
-
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">freq:</span>
-        <span class="function_parameters_param_description"> Новая частота для <span class="function_ref">analogWrite</span>(), от 488 до 8000000</span>
+        <span class="function_parameters_param_description"> New PWM frequency in Hz units. The range is [488;8000000] Hz.</span>
     </span>
 </span>
 

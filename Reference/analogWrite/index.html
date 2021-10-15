@@ -11,6 +11,7 @@ After a call to analogWrite(), the pin will generate a steady square wave of the
 
 <span class="function_description_more" zunoVersion="v1">
 PWM 1-4 works at 488 Hz. If you need faster operation, use <span class="function_ref">zunoFastPWM</span>() on A0.
+Check <a href="/technical/pinout">Z-Uno pinout</a>
 </span>
 <span class="function_description_more" zunoVersion="v2">
 By default Z-Uno2 works at 488 Hz for backward compatibilty. You can tweak carrier frequency youself in wide range using <span class="function_ref">analogWriteFrequency</span>.
@@ -20,9 +21,6 @@ By default Z-Uno2 works at 488 Hz for backward compatibilty. You can tweak carri
 <b>analogWrite</b> occupies TIMER1 hardware. You are able to use only 4 channels simylteniously.
 </span>
 
-<span class="function_description_more">
-Check <a href="/technical/pinout">Z-Uno pinout</a>
-</span>
 
 <span class="function_syntax">analogWrite(pin, value)</span>
 <span class="function_parameters">
