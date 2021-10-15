@@ -1,11 +1,12 @@
 <span zunoVersion="v2"></span>
 <h1>zunoSetZWChannel()</h1>
 <span class="function_description">
-Присваивает каналу zwave канал.
+Binds device channel to Z-Wave multichannel instance.
 </span>
 
 <span class="function_description_more">
-Сначала добавте канал с помощью <span class="function_ref">zunoAddChannel</span>, а потом установите zwave канал с помощью <b>zunoSetZWChannel</b>.
+First you have to add desired channel using <span class="function_ref">zunoAddChannel</span>, and then you are able to set its multichannel instance via <b>zunoSetZWChannel</b>.
+You can bind device channel directly to the main end point, to any multichannel end point, or both to main end point and to some of availiable multichannel end points. You can't bind two channels of the same type to the main endpoint. Each multichannel endpoint represents only one channel of device. It's hightly recommended to bind only the general functionality of the device to main endpoint. For example if you have relay device with energy metering map SwitchBinary to main endpoint, SensorMultilevel channel bind to the first multichannel endpoint.   
 </span>
 
 <span class="function_syntax">
@@ -15,31 +16,34 @@
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">ch</span>
-        <span class="function_parameters_param_description">канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</span>
+        <span class="function_parameters_param_description"> Device channel in range [<b>0</b>;<b>31</b>]. Each call to <span class="function_ref">zunoAddChannel</span> adds one channel to device. Numbering starts from 0. So for example if you call <b>zunoAddChannel</b> you will have 2 channels: <b>0</b> and <b>1</b>.</span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">zw_channel</span>
-        <span class="function_parameters_param_description">zwave канал может формироваться двумя способами: кластерно или не кластерно.В случае если не используеться кластаризация то каждый zwave канал уникальный, так же к каждому первому каналу одного типа
-			добавляеться еще и <b>ZWAVE_CHANNEL_MAPPED_BIT</b> - <b>zunoSetZWChannel(0x0, 0x01 | ZWAVE_CHANNEL_MAPPED_BIT)</b>. В случае использования кластаризации все тоже самое, но можно каждому каналу тип которого есть в одном только
-			количстве то присваиваеться <b>zw_channel</b> нуллю - <b>zunoSetZWChannel(0x0, 0x0)</b>.</span>
+        <span class="function_parameters_param_description"> Intance of Z-Wave multichannel class. Expected values: <b>0</b> - binds channel only to the main end point, value from range [<b>1</b>;<b>31</b>] - binds channel to selected multichannel endpoint, value from range [<b>1</b>;<b>31</b>] ored with ZWAVE_CHANNEL_MAPPED_BIT - binds channel both to main and multichannel end point.</span>
     </span>
 </span>
 
 <span class="function_example">
-В <b>Примере №4</b> <span class="function_ref">zunoStartDeviceConfiguration</span> используеться <b>zunoSetZWChannel</b> без класторизации, переделаем уже с кластеризацией:
-<pre><code class="c">// Указываем что будем использовать. В нашем случае это два команд класса, если их не указать то код для этих команд классов не собереться.
+<b>Example 1</b> Creates one channel and binds it both to main end point and to multichannel endpoint #1.
+<pre><code class="c">
+  
+// Define special command class macroses
+// We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
 
 byte dimmerValue = 99;
 
 void setup() {
-  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x1 | ZWAVE_CHANNEL_MAPPED_BIT);//Указываем zwave канал
-    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+  if(zunoStartDeviceConfiguration()) {// Check if we are able to reconfigure the device. 
+                                      // Device can change its characterictics ONLY if it's not included
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0);// Add SWITCH_MULTILEVEL channel. It doesn't require any optional parameters.
+    zunoSetZWChannel(0x0, 0x1 | ZWAVE_CHANNEL_MAPPED_BIT); // Bind channel both to main endpoint and to 1st multichannel endpoint.
+                                                           // The device will have Multichannel command class in its capabilities and only 1 instance is providen via Multichannel
+                                                           // If you use 0 instead of this the device will have only main endpoint
+    zunoCommitCfg();//  
   }
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Указываем адресс для переменной - что бы код мог ее использовать. Это нужно устанавливать каждый раз.
-
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
@@ -52,7 +56,8 @@ void loop() {
 </span>
 
 <span class="function_example">
-Вот чисто для демонстрации работы <b>zunoSetZWChannel</b>, статическая реализация:
+<b>Example 2</b> Create 2 channel dimmer and one relay. The first dimmer is avaliable via main end point and via 1-st multichannel end point, the second dimmer is avaliable only via 2-nd multichannel end point, relay is avaliable via 3-d multichannel end point.
+In short words it imitates this static-style code:
 <pre><code class="c">
   ZUNO_SETUP_CHANNELS(
     ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
@@ -60,28 +65,17 @@ void loop() {
     ZUNO_SWITCH_BINARY(switchValue2, NULL)
   );
 </code></pre>
-Динамическая реализация кластерно:
 <pre><code class="c">
-  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x1 | ZWAVE_CHANNEL_MAPPED_BIT);//Указываем zwave канал
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x1, 0x2);//Указываем zwave канал
-    zunoAddChannel(ZUNO_SWITCH_BINARY_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_BINARY, без каких доп параметров
-    zunoSetZWChannel(0x2, 0x0);//Указываем zwave канал
-    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
-  }
-</code></pre>
-Динамическая реализация без кластеризации:
-<pre><code class="c">
-  if(zunoStartDeviceConfiguration()) {//Провераем включенно устройство в сеть или нет, если не включенно то настраиваем каналлы.
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x0, 0x1 | ZWAVE_CHANNEL_MAPPED_BIT);//Указываем zwave канал
-    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_MULTILEVEL, без каких доп параметров
-    zunoSetZWChannel(0x1, 0x2);//Указываем zwave канал
-    zunoAddChannel(ZUNO_SWITCH_BINARY_CHANNEL_NUMBER, 0x0, 0x0);//Добавляем в канал тип SWITCH_BINARY, без каких доп параметров
-    zunoSetZWChannel(0x2, 0x3 | ZWAVE_CHANNEL_MAPPED_BIT);//Указываем zwave канал
-    zunoCommitCfg();//Применяем настройки - настройки сохраняються во флеш поэтому уже включенное устройство не нужно повторно настраивать.
+  if(zunoStartDeviceConfiguration()) {
+                                      // Check if we are able to reconfigure the device. 
+                                      // Device can change its characterictics ONLY if it's not included
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0);// Add first dimmer channel by means of SWITCH_MULTILEVEL.
+    zunoSetZWChannel(0, 1 | ZWAVE_CHANNEL_MAPPED_BIT);// First dimmer is availiable via 1st multichannel end point and it's mapped to main end point
+    zunoAddChannel(ZUNO_SWITCH_MULTILEVEL_CHANNEL_NUMBER, 0, 0);// Add second dimmer channel by means of SWITCH_MULTILEVEL.
+    zunoSetZWChannel(1, 2);// Second dimmer is availiable via 2nd multichannel end point 
+    zunoAddChannel(ZUNO_SWITCH_BINARY_CHANNEL_NUMBER, 0, 0); // Add realye  channel by means of SWITCH_BINARY
+    zunoSetZWChannel(2, 3);// relay is availiable via 3-d multichannel end point 
+    zunoCommitCfg();// Apply settings ^^^
   }
 </code></pre>
 </span>
