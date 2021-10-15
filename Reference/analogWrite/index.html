@@ -12,9 +12,12 @@ After a call to analogWrite(), the pin will generate a steady square wave of the
 <span class="function_description_more" zunoVersion="v1">
 PWM 1-4 works at 488 Hz. If you need faster operation, use <span class="function_ref">zunoFastPWM</span>() on A0.
 </span>
+<span class="function_description_more" zunoVersion="v2">
+By default Z-Uno2 works at 488 Hz for backward compatibilty. You can tweak carrier frequency youself in wide range using <span class="function_ref">analogWriteFrequency</span>.
+</span>
 
 <span class="function_description_note" zunoVersion="v2">
-Используеться для работы TIMER1 - поддерживаються все доступные пины
+<b>analogWrite</b> occupies TIMER1 hardware. You are able to use only 4 channels simylteniously.
 </span>
 
 <span class="function_description_more">
@@ -26,11 +29,12 @@ Check <a href="/technical/pinout">Z-Uno pinout</a>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">pin</span>
         <span class="function_parameters_param_description" zunoVersion="v1">the pin to write to: PWM1, PWM2, PWM3 and PWM4</span>
-        <span class="function_parameters_param_description" zunoVersion="v2">the pin to write to</span>
+        <span class="function_parameters_param_description" zunoVersion="v2">the pin to write to. You can use any pin for this functionality, but up to 4 channels simylteniously.<b></b> </span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">value</span>
-        <span class="function_parameters_param_description">the duty cycle: between 0 (always off) and 255 (always on) (see <span class="function_ref">analogWriteResolution</span>() for more details)</span>
+        <span class="function_parameters_param_description" zunoVersion="v1">the duty cycle: between 0 (always off) and 255 (always on) (see <span class="function_ref">analogWriteResolution</span>() for more details)</span>
+        <span class="function_parameters_param_description" zunoVersion="v2">the duty cycle: between 0 (always off) and 255 (always on) (see <span class="function_ref">analogWriteResolution</span>() for more details). Use 0 to release one of occupied PWM channels.</span>
     </span>
     
 </span>
@@ -41,11 +45,10 @@ None
 
 <span class="function_example">
 Sets the output to the LED proportional to the value read from the potentiometer. 
-<pre><code class="c">int val = 0;                   // variable to store the read value
-
+<pre><code class="c">
+int val = 0;                   // variable to store the read value
 void setup() {
 }
-
 void loop() {
   val = analogRead(A3);        // read the input pin
   analogWrite(PWM1, val / 4);  // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
@@ -55,4 +58,5 @@ void loop() {
 
 <span class="function_see_also">
 <span class="function_ref">analogWriteResolution</span>()
+<span class="function_ref" zunoVersion="v2">analogWriteFrequency</span>()
 </span>

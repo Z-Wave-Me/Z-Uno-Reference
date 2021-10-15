@@ -1,65 +1,70 @@
 <h1>Fast PWM</h1>
+<span zunoVersion="v1">
+    <span class="function_description">
+    Fast PWM works only on pin A0 (digital pin 3) and allows to run PWM on a higher frequency compared to that <span class="function_ref">analogWrite</span>() provides.
+    </span>
+    <span class="function_description_more">
+    Check <a href="/technical/pinout">Z-Uno pinout</a>
+    </span>
 
-<span class="function_description">
-Fast PWM works only on pin A0 (digital pin 3) and allows to run PWM on a higher frequency compared to that <span class="function_ref">analogWrite</span>() provides.
-</span>
+    <span class="function_syntax">zunoFastPWMInit(prescale)</span>
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">prescale</span>
+            <span class="function_parameters_param_description">0 for 4 MHz (timer tick is 0.25 μs) and ZUNO_GPT_SCALE1024 for 31.25 kHz (timer tick is 32 μs)</span>
+        </span>
+    </span>
+    <span class="function_returns">
+    none
+    </span>
 
-<span class="function_description_more">
-Check <a href="/technical/pinout">Z-Uno pinout</a>
-</span>
+    <span class="function_syntax">zunoFastPWMSet(low_ticks, high_ticks)</span>
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">low_ticks</span>
+            <span class="function_parameters_param_description">low level time in timer ticks. Ticks depend on the speed set by zunoFastPWMInit()</span>
+        </span>
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">high_ticks</span>
+            <span class="function_parameters_param_description">high level time in timer ticks. Ticks depend on the speed set by zunoFastPWMInit()</span>
+        </span>
+    </span>
+    <span class="function_returns">
+    none
+    </span>
 
-<span class="function_syntax">zunoFastPWMInit(prescale)</span>
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">prescale</span>
-        <span class="function_parameters_param_description">0 for 4 MHz (timer tick is 0.25 μs) and ZUNO_GPT_SCALE1024 for 31.25 kHz (timer tick is 32 μs)</span>
+    <span class="function_syntax">zunoFastPWMEnable(value)</span>
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">value</span>
+            <span class="function_parameters_param_description">FALSE to turn Fast PWM off and TRUE to turn on</span>
+        </span>
+    </span>
+    <span class="function_returns">
+    none
+    </span>
+
+
+    <span class="function_description_note">
+    After changing parameters of Fast PWM you need to disable and then enable PWM again.
+    </span>
+
+    <span class="function_example">
+    <pre>
+    <code class="c">
+        pinMode(A0, OUTPUT);
+        zunoFastPWMInit(0);       // 0 for 4 MHz (tick is 0.25 μs) and ZUNO_GPT_SCALE1024 for 31.25 kHz (tick is 32 μs)
+        zunoFastPWMSet(100, 100); // Low and high level time in timer ticks.
+        zunoFastPWMEnable(1);     // Start
+        ...
+        zunoFastPWMEnable(0);     // Turn off once not needed anymore
+    </code></pre>
+    </span> 
+</span> 
+<span zunoVersion="v2">
+    <span class="function_description">
+    Z-Uno2 doesn't implements this functions, because its builtin PWM controller supports wide range of carrier frequencies. You are able to archive "FastPWM" functionality using <span class="function_ref">analogWrite</span>  and  <span class="function_ref">analogWriteFrequency</span> functions. 
     </span>
 </span>
-<span class="function_returns">
-none
-</span>
-
-<span class="function_syntax">zunoFastPWMSet(low_ticks, high_ticks)</span>
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">low_ticks</span>
-        <span class="function_parameters_param_description">low level time in timer ticks. Ticks depend on the speed set by zunoFastPWMInit()</span>
-    </span>
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">high_ticks</span>
-        <span class="function_parameters_param_description">high level time in timer ticks. Ticks depend on the speed set by zunoFastPWMInit()</span>
-    </span>
-</span>
-<span class="function_returns">
-none
-</span>
-
-<span class="function_syntax">zunoFastPWMEnable(value)</span>
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">value</span>
-        <span class="function_parameters_param_description">FALSE to turn Fast PWM off and TRUE to turn on</span>
-    </span>
-</span>
-<span class="function_returns">
-none
-</span>
-
-
-<span class="function_description_note">
-After changing parameters of Fast PWM you need to disable and then enable PWM again.
-</span>
-
-<span class="function_example">
-<pre>
-<code class="c">pinMode(A0, OUTPUT);
-zunoFastPWMInit(0);       // 0 for 4 MHz (tick is 0.25 μs) and ZUNO_GPT_SCALE1024 for 31.25 kHz (tick is 32 μs)
-zunoFastPWMSet(100, 100); // Low and high level time in timer ticks.
-zunoFastPWMEnable(1);     // Start
-
-...
-
-zunoFastPWMEnable(0);     // Turn off once not needed anymore
-</code></pre>
-</span>  
+ 
 
