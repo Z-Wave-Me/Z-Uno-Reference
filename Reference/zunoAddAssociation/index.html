@@ -1,16 +1,16 @@
-<span zunoVersion="v2"></span>
+<span zunoVersion="v2">
 <h1>zunoAddAssociation()</h1>
 <span class="function_description">
 This function instructs Z-Uno to add one more association group during dynamic configuration.
 </span>
 
 <span class="function_description_more">
-This function can be called many times to add more groups. Association groups are numbered from 2 to 6 (1 is Life Line, see <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>() for more info).
-Обычно асоциации добавляют когда устройство не включенно. Чтобы успешно добавилось не забываем финилизировать с помощью <span class="function_ref">zunoCommitCfg</span>
+This function can be called many times to add more groups. Association groups are numbered from 2 to 32 (1 is Life Line, see <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>() for more info).
+You have to call this function between <span class="function_ref">zunoStartDeviceConfiguration</span> and <span class="function_ref">zunoCommitCfg</span> calls</span>
 </span>
 
 <span class="function_description_note">
-Z-Uno supports up to 5 association groups
+Z-Uno supports up to 32 association groups
 </span>
 
 <span class="function_syntax">zunoAddAssociation(type, params)</span>
@@ -20,7 +20,7 @@ Z-Uno supports up to 5 association groups
         <span class="function_parameters_param_name">type</span>
         <span class="function_parameters_param_description">association group type:
             <ul>
-                <li>ZUNO_ASSOC_BASIC_SET_NUMBER</li>
+                <li>ZUNO_ASSOC_BASIC_SET_NUMBER</li> 
                 <li>ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER</li>
                 <li>ZUNO_ASSOC_SCENE_ACTIVATION_NUMBER</li>
                 <li>ZUNO_ASSOC_DOORLOCK_CONTROL_NUMBER</li>
@@ -29,11 +29,12 @@ Z-Uno supports up to 5 association groups
     </span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">params</span>
-		<span class="function_parameters_param_description">на данный момент не реализованно</span>
+		<span class="function_parameters_param_description">Reserved. Set 0.</span>
 	</span>
 </span>
 
 <span class="function_see_also">
 Examples can be found in the description of <span class="function_ref">zunoStartDeviceConfiguration</span>.
+</span>
 </span>
 
