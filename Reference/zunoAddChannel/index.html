@@ -1,11 +1,11 @@
-<span zunoVersion="v2"></span>
+<span zunoVersion="v2">
 <h1>zunoAddChannel()</h1>
 <span class="function_description">
 This function instructs Z-Uno to add one more channel during dynamic configuration.
 </span>
 
 <span class="function_description_more">
-This function can be called many times to add more channels. Максимальное поддержмваемое количество каналов - 32(от 0x0 до 31). Обычно каналы добавляют когда устройство не включенно. Чтобы успешно добавилось не забываем финилизировать с помощью <span class="function_ref">zunoCommitCfg</span>
+This function can be called many times to add more channels. Z-Uno supports up to 32 channels. You have to call this function between <span class="function_ref">zunoStartDeviceConfiguration</span> and <span class="function_ref">zunoCommitCfg</span> calls.
 </span>
 
 <span class="function_syntax">zunoAddChannel(type, subtype, options)</span>
@@ -29,11 +29,11 @@ This function can be called many times to add more channels. Максималь�
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">subtype</span>
-        <span class="function_parameters_param_description">Для большей информации смотрице описание каждого отдельного команд класса.</span>
+        <span class="function_parameters_param_description">Sensor type. Applicable only for ZUNO_SENSOR_BINARY_CHANNEL_NUMBER, ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER and ZUNO_METER_CHANNEL_NUMBER.</span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">options</span>
-        <span class="function_parameters_param_description">Для большей информации смотрице описание каждого отдельного команд класса</span>
+        <span class="function_parameters_param_description">One byte defining value size and value precision. Applicable only for ZUNO_SENSOR_BINARY_CHANNEL_NUMBER, ZUNO_SENSOR_MULTILEVEL_CHANNEL_NUMBER and ZUNO_METER_CHANNEL_NUMBER. Check <a href="https://github.com/Z-Wave-Me/Z-Uno-G2-Core/tree/master/hardware/arduino/zunoG2/cores/ZWSupport">ZWSupport directory</a> for more details.</span>
     </span>
 </span>
 
@@ -43,4 +43,5 @@ Do not forget to enable all channel types you will use in your sketch with <span
 
 <span class="function_see_also">
 Examples can be found in the description of <span class="function_ref">zunoStartDeviceConfiguration</span>.
+</span>
 </span>
