@@ -6,7 +6,7 @@ This function instructs Z-Uno to add one more association group during dynamic c
 
 <span class="function_description_more">
 This function can be called many times to add more groups. Association groups are numbered from 2 to 32 (1 is Life Line, see <span class="function_ref">ZUNO_SETUP_ASSOCIATIONS</span>() for more info).
-You have to call this function between <span class="function_ref">zunoStartDeviceConfiguration</span> and <span class="function_ref">zunoCommitCfg</span> calls</span>
+You have to call this function between <span class="function_ref">zunoStartDeviceConfiguration</span> and <span class="function_ref">zunoCommitCfg</span> calls.</span>
 </span>
 
 <span class="function_description_note">
@@ -20,10 +20,10 @@ Z-Uno supports up to 32 association groups
         <span class="function_parameters_param_name">type</span>
         <span class="function_parameters_param_description">association group type:
             <ul>
-                <li>ZUNO_ASSOC_BASIC_SET_NUMBER</li> 
-                <li>ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER</li>
-                <li>ZUNO_ASSOC_SCENE_ACTIVATION_NUMBER</li>
-                <li>ZUNO_ASSOC_DOORLOCK_CONTROL_NUMBER</li>
+                <li>ZUNO_ASSOC_BASIC_SET_NUMBER</li> - sends Basic On/Off commands.
+                <li>ZUNO_ASSOC_BASIC_SET_AND_DIM_NUMBER</li> - sends Basic On/Off commands and SwitchMultilevel StartLevelChange/StopLevelChange commands 
+                <li>ZUNO_ASSOC_SCENE_ACTIVATION_NUMBER</li> - sends SceneActivation commands
+                <li>ZUNO_ASSOC_DOORLOCK_CONTROL_NUMBER</li> - sends DoorLock Open/Close commands
             </ul>
         </span>
     </span>

@@ -1,96 +1,96 @@
 <span zunoVersion="v2"></span>
 <h1>zunoAppendChannelHandler()</h1>
 <span class="function_description">
-Данная функция добавляет в канал обработчик во время динамическай конфигурации каналов.
+This functions binds handler to Z-Uno channel.  This function is used for "dynamic" channel defintion. You have to bind handler to channel each time you power your device.
 </span>
 
-<span class="function_description_more">
-В отличии от других функций используемых во время динамическай конфигурации, данную функцию нужно вызывать каждый раз - не зависимо включненно устройство или нет.
-</span>
 
 <span class="function_syntax">zunoAppendChannelHandler(ch, value_size, type, *handler)</span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">ch</span>
-		<span class="function_parameters_param_description">канал от <b>0x0</b> до <b>31</b> после первого использовании <span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</span>
+		<span class="function_parameters_param_description"> Z-Uno channel number in range [0;31]<span class="function_ref">zunoAddChannel</span> у вас есть канал <b>0x0</b>, после второго у вас уже <b>0x0</b> и <b>0x1</b>...</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">value_size</span>
-		<span class="function_parameters_param_description">размер данных используемых в getter/setter или переменной.</span>
+		<span class="function_parameters_param_description">Size of values in getter/setter (or for mapped variables) in bytes.</span>
 	</span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">type</span>
-        <span class="function_parameters_param_description">тип хендлера:
+        <span class="function_parameters_param_description"> type of needed handler
             <ul>
-				<li>CHANNEL_HANDLER_SINGLE_GETTER</li>
-				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER</li>
-				<li>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</li>
-				<li>CHANNEL_HANDLER_MULTI_GETTER</li>
-				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER</li>
-				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</li>
-				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</li>
-				<li>CHANNEL_HANDLER_SINGLE_THERMOSTAT</li>
-				<li>CHANNEL_HANDLER_MULTI_THERMOSTAT</li>
+				<li>CHANNEL_HANDLER_SINGLE_GETTER</li> binds single-instance getter function to the desired channel. Is suitable for sensors.
+				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER</li> binds single-instance getter and setter functions to the desired channel. Is suitable for relay/dimmers and etc.
+				<li>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</li> binds single-variable to the desired channel. Is suitable for sensors.
+				<li>CHANNEL_HANDLER_MULTI_GETTER</li> binds multi-instance getter function to the desired channel. You can handle many channels in one function. Number of channel is passed as the first parameter. Is suitable for multi-instance sensors. For example if you have a number of temperature sensors this approach will reduce your code size and gives good code visualization.
+				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER</li> binds multi-instance getter and setter functions to the desired channel. Is suitable for something like multi relays/ multi dimmer devices. Reduces code size.
+				<li>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</li> binds single-instance getter and setter for 2 parameters command class. Is suitable for command classes like SwitchColor.
+				<li>CHANNEL_HANDLER_MULTI_GETTERSETTER_2P</li> binds multi-instance getter and setter for 2 parameters command class. Is suitable for command classes like SwitchColor. Multi-instance version.
+				<li>CHANNEL_HANDLER_SINGLE_THERMOSTAT</li> binds single-instance getter and setter to thermostat command class.
+				<li>CHANNEL_HANDLER_MULTI_THERMOSTAT</li> binds multi-instance getter and setter to thermostat command class. Multi-instance version.
             </ul>
         </span>
     </span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">handler</span>
-		<span class="function_parameters_param_description">указатель на структуру содержающая хендлеры или же указатель на переменную</span>
+		<span class="function_parameters_param_description">Pointer to structure/function-type pointer</span>
 	</span>
 </span>
 
 <span class="function_example">
-<b>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</b> - данный тип использзуеться когда нужно напрямую использовать переменную без функций.
+<b>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</b> - Use a direct variable mapping without getter/setter function.
 
 <pre><code class="c">
 byte dimmerValue = 99;
 
-// Статичный вариант.
+// Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 
 void setup() {
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue);//Напрямую указатель на переменную
+  // ...
+  // Here you have to start configuration / define channel / commit configuration
+  // ...
+  // Just a variable binding
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue); // direct pointer to value that is mapped to this channel 
 }
 </code></pre>
 </span>
 
 <span class="function_example">
-<b>CHANNEL_HANDLER_SINGLE_GETTER</b> - данный тип использзуеться когда используеться только getter.
-
+<b>CHANNEL_HANDLER_SINGLE_GETTER</b> Binding getter function to the channel
 <pre><code class="c">
 byte dimmerValue = 99;
-
-// Статичный вариант.
+// Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
-
 void setup() {
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTER, (void*)&getterFunctionSensorBinary);//Напрямую указатель на функцию
+   // ...
+   // Here you have to start configuration / define channel / commit configuration
+   // ...
+   zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTER, (void*)&getterFunctionSensorBinary);// Direct pointer to getter function
 }
-
 BYTE getterFunctionSensorBinary() {
-  return (0x0);
+  return dimmerValue; // We can return any value here. Just shows a proxy getter for "dimmerValue"
 }
 </code></pre>
 </span>
-
 <span class="function_example">
-<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b> - данный тип использзуеться когда используеться getter и setter.
-
+<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b> Binding for getter и setter functions.
 <pre><code class="c">
 byte dimmerValue = 99;
-
-// Статичный вариант.
+// Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
-
-//Устанавливаем в струтуру указатели на хендлеры getter и setter
-zuno_handler_single_gettersetter_t __hdata_getSwitchMultilevelValue={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
+// We use special proxy-structure to fill both pointers
+zuno_handler_single_gettersetter_t gettersetter={(void*)&getSwitchMultilevelValue,(void*)&setSwitchMultilevelValue};
 
 void setup() {
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&__hdata_getSwitchMultilevelValue);//Тут уже передаюм указатель на структуру
+  // ...
+  // Here you have to start configuration / define channel / commit configuration
+  // ...
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER, (void*)&gettersetter); // Translate structure instance to core-side
 }
-
+// Simple getter/setter for  dimmerValue variable
+// Just for example
 void setSwitchMultilevelValue(byte newValue) {
   dimmerValue = newValue;
 }
@@ -102,25 +102,24 @@ void setSwitchMultilevelValue(byte newValue) {
 </span>
 
 <span class="function_example">
-<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</b> - данный тип использзуеться когда используеться getter и setter, но в данных функциях есть доп параметр в отличии от <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b>.
+
+<b>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</b> is used when command class requires some extra parameter in getter/setter compared to common <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b>.
 
 <pre><code class="c">
 uint8_t _color[10] = {0};
-
-// Статичный вариант.
+// Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunctionColor, setterFunctionColor));
 
-//Устанавливаем в струтуру указатели на хендлеры getter и setter
-zuno_handler_single_gettersetter_t __hdata_getterFunctionColor={(void*)&getterFunctionColor,(void*)&setterFunctionColor};
+// We use special proxy-structure to fill both pointers
+zuno_handler_single_gettersetter_t color_gettersetter={(void*)&getterFunctionColor,(void*)&setterFunctionColor};
 
 void setup() {
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P, (void*)&__hdata_getterFunctionColor);//Тут уже передаюм указатель на структуру
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P, (void*)&color_gettersetter);// Translate structure pointer here
 }
-
+// proxy getter/setter for _color array
 BYTE getterFunctionColor(BYTE component) {
   return (_color[component]);
 }
-
 void setterFunctionColor(BYTE component, BYTE newValue) {
   _color[component] = newValue;
 }
@@ -128,37 +127,40 @@ void setterFunctionColor(BYTE component, BYTE newValue) {
 </span>
 
 <span class="function_example">
-<b>CHANNEL_HANDLER_SINGLE_THERMOSTAT</b> - данный тип использзуеться только для команд класса <b>THERMOSTAT</b>.
+<b>CHANNEL_HANDLER_SINGLE_THERMOSTAT</b> specific thermostat command class hadler.
 
 <pre><code class="c">
+// Thermostat requires variables for current mode and its temperature
 BYTE g_therm_mode = THERMOSTAT_MODE_OFF;
 int g_therm_point;
 BYTE g_update = FALSE;
 
-// Статичный вариант.
+// Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunctionColor, setterFunctionColor));
 
-//Устанавливаем в струтуру указатели на хендлеры getter и setter
-zuno_handler_single_thermostat_t __hdata_thermModeGetterC={(void*)&thermModeGetterC, (void*)&thermModeSetterC, (void*)&thermPointGetterC, (void*)&thermPointSetterC};
+// Fill structure instance
+zuno_handler_single_thermostat_t thermostat_handler = {(void*)&thermModeGetterC, (void*)&thermModeSetterC, (void*)&thermPointGetterC, (void*)&thermPointSetterC};
 
 void setup() {
-  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_THERMOSTAT, (void*)&__hdata_thermModeGetterC);//Тут уже передаюм указатель на структуру
+  // bind structure to channel
+  zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_THERMOSTAT, (void*)&thermostat_handler);// translate pointer to structure
 }
 
+// Calls when user requests mode  from Z-Wave controller
 BYTE thermModeGetterC(){
   return g_therm_mode;
 }
-
+// Calls when user changes mode (Heat/Cool/Off and etc) from Z-Wave controller
 void thermModeSetterC(BYTE mode){
   g_therm_mode = mode;
   g_update = TRUE;
 }
-
+// Calls when user requests temperature for desired mode from Z-Wave controller
 WORD thermPointGetterC(BYTE mode){
   return g_therm_point;
   (void)mode;
 }
-
+// Calls when user changes temperature for desired mode from Z-Wave controller
 void thermPointSetterC(BYTE mode,WORD point){
   g_update = TRUE;
   g_therm_point = point;
@@ -168,37 +170,35 @@ void thermPointSetterC(BYTE mode,WORD point){
 </span>
 
 <span class="function_example">
-<b>CHANNEL_HANDLER_MULTI_GETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER, CHANNEL_HANDLER_MULTI_GETTERSETTER_2P, CHANNEL_HANDLER_MULTI_THERMOSTAT</b> - аналогичны вариантам с <b>SINGLE</b>, но тут добавляеться в функции доп параметр <b>ch</b>
-позволяющий с помощью одной функции обрабатывать множество каналов, вместо того что бы для каждого канала назначать свой отдельный хендлер. В отличии от <b>SINGLE</b> у струтур есть доп поле <b>offset</b> которое нужно выставить в ноль.
-
+<b> Multiinstance example. Lets try to imagine we have 2 montion sensor in one z-wave device.
 <pre><code class="c">
-zuno_handler_multi_getter_t __hdata_getterFunctionSwitchBinary={(void*)&getterFunctionSensorBinary,0};
+zuno_handler_multi_getter_t multi_sen_getter={(void*)&getterFunctionSensorBinary,0}; // 0 is the index of first channel
 
-// Статичный вариант.
-//ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
+// Immitates static declaration like this
+//ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary), ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
 
 void setup() {
-  zunoAppendChannelHandler( 0x0, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&__hdata_getterFunctionSwitchBinary);//Тут уже передаюм указатель на структуру
-  zunoAppendChannelHandler( 0x1, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&__hdata_getterFunctionSwitchBinary);//Тут уже передаюм указатель на структуру
+  zunoAppendChannelHandler( 0, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&multi_sen_getter);// Use the same pointer to the same structure
+  zunoAppendChannelHandler( 1, 1, CHANNEL_HANDLER_MULTI_GETTER, (void*)&multi_sen_getter);// Use the same pointer to the same structure
 }
 
 BYTE getterFunctionSensorBinary(byte ch) {
-  // Сдесь в зависимости от канала будем обрабатывать и возращать нужное значение
+  // Just a stub. Always returns idle. You can add any logic you want :)
   return (0x0);
 }
 </code></pre>
 </span>
 
 <span class="function_description_more">
-	Таблица для удобства
+	Table of required types
 	<table>
 		<tr>
-			<th>Тип</th>
-			<th>Структура</th>
+			<th>Handler type</th>
+			<th>Translating variable type</th>
 		</tr>
 		<tr>
 			<td>CHANNEL_HANDLER_SINGLE_GETTER</td>
-			<td>Структура не используеться - на прямую передаеться указатель на функцию</td>
+			<td>Function pointer.</td>
 		</tr>
 		<tr>
 			<td>CHANNEL_HANDLER_SINGLE_GETTERSETTER</td>
@@ -206,7 +206,7 @@ BYTE getterFunctionSensorBinary(byte ch) {
 		</tr>
 		<tr>
 			<td>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</td>
-			<td>Структура не используеться - на прямую передаеться указатель на переменную</td>
+			<td>Variable pointer.</td>
 		</tr>
 		<tr>
 			<td>CHANNEL_HANDLER_MULTI_GETTER</td>
@@ -236,10 +236,10 @@ BYTE getterFunctionSensorBinary(byte ch) {
 </span>
 
 <span class="function_description_more">
-Описание структур находиться в <a href="https://github.com/Z-Wave-Me/Z-Uno-G2-Core/blob/master/hardware/arduino/zunoG2/cores/includes/ZUNO_SysTypes.h">ZUNO_SysTypes.h</a>.
+Structures types are defined here <a href="https://github.com/Z-Wave-Me/Z-Uno-G2-Core/blob/master/hardware/arduino/zunoG2/cores/includes/ZUNO_SysTypes.h">ZUNO_SysTypes.h</a>.
 </span>
 
 <span class="function_see_also">
-Общий пример использования можно найти в <span class="function_ref">zunoStartDeviceConfiguration</span>.
+Common examples of channel definitions you are able to find here <span class="function_ref">zunoStartDeviceConfiguration</span>.
 </span>
 
