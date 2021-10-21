@@ -1,6 +1,6 @@
 <span zunoVersion="v2"></span>
 <h1>zunoDetachSysHandler()</h1>
-<span class="function_description">Позволяет отвязать от событию свою функцию.</span>
+<span class="function_description">Unlinks handler function from system event.</span>
 
 <span class="function_syntax">
 zunoDetachSysHandler(type, sub_type, handler)<br>
@@ -10,35 +10,33 @@ zunoDetachSysHandler(type, sub_type, handler)<br>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">type:</span>
 		<span class="function_parameters_param_description">
-			<ul>
-				<li>ZUNO_HANDLER_SYSTIMER</li>
-				<li>ZUNO_HANDLER_SYSEVENT</li>
-				<li>ZUNO_HANDLER_IRQ</li>
-				<li>ZUNO_HANDLER_SLEEP</li>
-				<li>ZUNO_HANDLER_WUP</li>
-				<li>ZUNO_HANDLER_DEBUGPRINT</li> 
-				<li>ZUNO_HANDLER_ZW_CFG</li>
-				<li>ZUNO_HANDLER_ZW_BATTERY</li>
-				<li>ZUNO_HANDLER_REPORT</li>
-				<li>ZUNO_HANDLER_EXTINT</li>
-				<li>ZUNO_HANDLER_GPT</li>
-				<li>ZUNO_HANDLER_NOTIFICATON_TIME_STAMP</li>
-			</ul>
+		Type of system event. See below.
 		</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sub_type:</span>
-		<span class="function_parameters_param_description"> описание смотрите в <a href="/Reference/zunoAttachSysHandler/">zunoAttachSysHandler</a>.</span>
+		<span class="function_parameters_param_description">depends on `type` parameter. See below.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">handler:</span>
-		<span class="function_parameters_param_description"> указатель на функцию которую отвязываем от события.</span>
+		<span class="function_parameters_param_description"> Pointer to function which is binded to specified system event.</span>
 	</span>
 </span>
+Please look for <b>type</b> and <b>sub_type</b> detailed descriptions to <span class="function_ref">zunoAttachSysHandler</span> function page.
 
 <span class="function_returns">
 	<ul>
-		<li>ZunoErrorOk - все хорошо.</li>
-		<li>ZunoErrorAttachSysHandler - такую функцию не привязывали.</li>
+		<li>ZunoErrorOk - it's all right. Handler succesfuly attached.</li>
+		<li>ZunoErrorAttachSysHandler. There is no binded function.</li>
 	</ul>
 </span>
+To attach handler function use
+<span class="function_see_also">
+	<span class="function_ref">zunoAttachSysHandler</span>.
+</span>
+To unlink handlerfunction from all the subtypes at once use
+<span class="function_see_also">
+	<span class="function_ref">zunoDetachSysHandlerAllSubType</span>.
+</span>
+
+

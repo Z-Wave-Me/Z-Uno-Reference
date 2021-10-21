@@ -27,11 +27,11 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sub_type:</span>
-		<span class="function_parameters_param_description"> зависит от `type`.</span>
+		<span class="function_parameters_param_description">depends on `type` parameter.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">handler:</span>
-		<span class="function_parameters_param_description"> указатель на функцию которая будети вызвана по событию.</span>
+		<span class="function_parameters_param_description"> Pointer to function which is binded to specified system event.</span>
 	</span>
 </span>
 
@@ -46,15 +46,27 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 	Please note that it's not recommended to do heavy staff inside handlers. This can lead to degradation of the system.
 </span>
 
+Hi side proxy-functions provide more comfortable interface. 
 <span class="function_see_also">
-	Hi side proxy-functions provide more comfortable interface. 
 	<span class="function_ref">attachInterrupt</span> attaches interrupt handler to needed pin.
-	Static macros that bind handlers 
-	<span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span> Setups battery level handler (Z-Wave command class Battery).
-	<span class="function_ref">ZUNO_SETUP_SYSTIMER_HANDLER</span> Setups system timer handler.
-	<span class="function_ref">ZUNO_SETUP_SYSEVENT_HANDLER</span> Setups system runtime events handler.
-	<span class="function_ref">ZUNO_SETUP_ISR_GPTIMER</span> Setups General Puspose Timer's interrupt handler.
-	<span class="function_ref">ZUNO_REPORTS_HANDLER</span> Setups incoming Z-Wave report handler.
-	<span class="function_ref">ZUNO_SETUP_CFGPARAMETER_HANDLER</span> Setups configuration parameters handler (Z-Wave command class Configuration).
-	
 </span>
+Static macros that bind handlers. 
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span> Setups battery level handler (Z-Wave command class Battery).
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_SYSTIMER_HANDLER</span> Setups system timer handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_SYSEVENT_HANDLER</span> Setups system runtime events handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_ISR_GPTIMER</span> Setups General Puspose Timer's interrupt handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_REPORTS_HANDLER</span> Setups incoming Z-Wave report handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_CFGPARAMETER_HANDLER</span> Setups configuration parameters handler (Z-Wave command class Configuration).
+</span>
+	
