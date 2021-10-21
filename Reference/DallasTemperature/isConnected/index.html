@@ -1,0 +1,29 @@
+<span zunoVersion="v2"></span>
+<h1>isConnected()</h1>
+<span class="function_description">
+	Attempt to determine if the device at the given address is connected to the bus also allows for updating the read scratchpad.
+</span>
+
+<span class="function_syntax">
+	sensors.isConnected(deviceAddress, scratchPad)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">scratchPad:</span>
+		<span class="function_parameters_param_description"> указатель на структуру <b>ScratchPad</b> для считывания данных устройства.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - returns true if the device was connected.
+</span>
+
