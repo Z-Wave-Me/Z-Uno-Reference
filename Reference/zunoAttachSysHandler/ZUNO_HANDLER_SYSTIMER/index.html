@@ -1,9 +1,9 @@
 <span zunoVersion="v2"></span>
 <h1>Type ZUNO_HANDLER_SYSTIMER</h1>
-<span class="function_description">Данный тип хендлера позволяет привязать свою функцию к системному тайммеру. Вызов будет происходить каждыйе 10мс.</span>
+<span class="function_description">This type binds handler to system software timer which triggers every 10 milliseconds.</span>
 
 <span class="function_description_more">
-В данном событие `sub_type` устанавливаеться в 0x0.
+<b>`sub_type`</b> must be <b>0</b> for this event.
 </span>
 
 <span class="function_syntax">
@@ -13,7 +13,7 @@
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">tick:</span>
-		<span class="function_parameters_param_description"> number of tick since the Z-Uno board began running the current program. Что бы получитиь мс достаточно умножить на 10</span>
+		<span class="function_parameters_param_description"> number of tick since the Z-Uno board began running the current program. You can get milliseconds from ticks by multiplying by 10. </span>
 	</span>
 </span>
 
@@ -24,34 +24,29 @@
 <span class="function_example">
 	<pre>
 		<code class="c">
-// С помощью события "системный таймер" - делаем мигание диодом
-
+// Blink using system timer
 byte state = HIGH;
 byte dimmerValue=100;
 size_t glob;
-
-// Функция обработчика
+// Handler fuction
 void handlerSysTimer(size_t tick) {
 	size_t				ms;
-
 	ms = tick * 10;
-	if (ms >= glob)//Провераем нужно ли управлять пином
+	if (ms >= glob) //if tick moment has come
 	{
-		glob = ms + dimmerValue*10;
+		glob = ms + dimmerValue*10; // define the next tick moment
 		digitalWrite(LED_BUILTIN, state);
-		state = state == HIGH ? LOW : HIGH;
-	}
-	
+		state = !state; // invert state
+	}	
 }
-
 void setup() {
 	pinMode(LED_BUILTIN, OUTPUT);
-	zunoAttachSysHandler(ZUNO_HANDLER_SYSTIMER, 0x0, (void *)&handlerSysTimer);//Устанавливаем в событие свой обработчик который будет вызываться каждые 10мс
+	// Bind our handler to system timer 
+	zunoAttachSysHandler(ZUNO_HANDLER_SYSTIMER, 0, (void *)&handlerSysTimer);
 	glob = millis() + dimmerValue*10;
 }
-
 void loop() {
-
+	// There is nothing to do. All logic is inside handlerSysTimer()
 }
 		</code>
 	</pre>

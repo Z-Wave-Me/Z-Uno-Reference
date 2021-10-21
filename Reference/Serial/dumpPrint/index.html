@@ -1,5 +1,5 @@
 <h1>Serial.dumpPrint()</h1>
-<span class="function_description">Печатает строку в виде hex символов: "12345" -> 31 32 33 34 35.</span>
+<span class="function_description">Dumps data as one byte hexadecimal values. For example for string "12345" the output will be  "31 32 33 34 35". This function is very helful for debug purposes.</span>
 
 <span class="function_syntax">
 <pre>
@@ -13,20 +13,20 @@
 	<br>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">b:</span>
-		<span class="function_parameters_param_description"> указатель на буффер который нужно распечатать.</br></span>
+		<span class="function_parameters_param_description"> Pointer to needed memory area.</br></span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">count:</span>
-		<span class="function_parameters_param_description"> размер буффера в байтах.</br></span>
+		<span class="function_parameters_param_description"> Size of area in bytes.</br></span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">line_size:</span>
-		<span class="function_parameters_param_description"> число выведеных байт когда нужно вывести перевод строки - по умолчаию 10.</br></span>
+		<span class="function_parameters_param_description"> The number of bytes in one line. By default is 10.</br></span>
 	</span>
 	<br>
 </span>
 
 <span class="function_returns">
-    количество выведенных байт
+    The number of printed symbols.
 </span>
 

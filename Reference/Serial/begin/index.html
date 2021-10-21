@@ -9,15 +9,16 @@ You can, however, specify other rates.<br></span>
 <span class="function_description_more" zunoVersion="v2">An optional second argument configures the data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
 
 <span class="function_syntax">
-<pre zunoVersion="v1"><code class="c">Serial.begin(baudrate) // for UART
-Serial.begin()         // for USB
+<pre zunoVersion="v1"><code class="c">
+Serial.begin(baudrate) // for UART
+Serial.begin()         // for USB-CDC
 </code></pre>
 <span zunoVersion="v2">
 Serial.begin()<br>
 Serial.begin(speed)<br>
 Serial.begin(speed, config)<br>
-Serial.begin(speed, config, rx, tx) - код ошибки возращает.<br>
-Serial.begin(speed, config, rx, tx, *buffer, len) - код ошибки возращает<br>
+Serial.begin(speed, config, rx, tx) - returns error code.<br>
+Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 </span>
 </span>
 
@@ -82,13 +83,13 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - код ошибки возр
 
 <pre><code class="c"  zunoVersion="v2">
      
-    static uint8_t buf[256];
+    static uint8_t buf[256]; // Custom receiving buffer
     
-    Serial0.begin(115200, SERIAL_8N1);//Установим режим работы
+    Serial0.begin(115200, SERIAL_8N1);//  Setup just a bit mode. 8 bita + 1 stopbit
      
-    Serial0.begin(115200, SERIAL_8N1, 9, 10);//Установим какие пины использовать
+    Serial0.begin(115200, SERIAL_8N1, 9, 10);// Define bit mode and move serial0 to pins 9/10
      
-    Serial0.begin(115200, SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));//Установим свой буфер
+    Serial0.begin(115200, SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));// Define bit mode, move serial0 to pins 9/10 and use custom receiving buffer
      
 </code></pre>
 

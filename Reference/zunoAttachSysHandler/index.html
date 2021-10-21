@@ -1,6 +1,6 @@
 <span zunoVersion="v2"></span>
 <h1>zunoAttachSysHandler()</h1>
-<span class="function_description">Позволяет привязать к событию вызав своей функции.</span>
+<span class="function_description">Binds any Z-Uno event to specified callback function. It's a low level Z-Uno core API. In most cases user is able to use upper level functions are based on <b>zunoAttachSysHandler</b>. Follow to "see also" section for details. </span>
 
 <span class="function_syntax">
 zunoAttachSysHandler(type, sub_type, handler)<br>
@@ -11,38 +11,62 @@ zunoAttachSysHandler(type, sub_type, handler)<br>
 		<span class="function_parameters_param_name">type:</span>
 		<span class="function_parameters_param_description">
 			<ul>
-				<li><a href="/Reference/zunoAttachSysHandler/ZUNO_HANDLER_SYSTIMER/">ZUNO_HANDLER_SYSTIMER</a></li>
-				<li><a href="/Reference/zunoAttachSysHandler/ZUNO_HANDLER_SYSEVENT/">ZUNO_HANDLER_SYSEVENT</a></li>
-				<li>ZUNO_HANDLER_IRQ</li>
-				<li>ZUNO_HANDLER_SLEEP</li>
-				<li>ZUNO_HANDLER_WUP</li>
-				<li>ZUNO_HANDLER_DEBUGPRINT</li> 
-				<li>ZUNO_HANDLER_ZW_CFG</li>
-				<li>ZUNO_HANDLER_ZW_BATTERY</li>
-				<li>ZUNO_HANDLER_REPORT</li>
-				<li>ZUNO_HANDLER_EXTINT</li>
-				<li>ZUNO_HANDLER_GPT</li>
-				<li>ZUNO_HANDLER_NOTIFICATON_TIME_STAMP</li>
+				<li><a href="/Reference/zunoAttachSysHandler/ZUNO_HANDLER_SYSTIMER/">ZUNO_HANDLER_SYSTIMER</a></li>System timer event. It triggers every 10 millisecond.
+				<li><a href="/Reference/zunoAttachSysHandler/ZUNO_HANDLER_SYSEVENT/">ZUNO_HANDLER_SYSEVENT</a></li>Z-Uno system runtime events. Triggers when Z-Uno starts learn mode, OTA upgrade and etc...
+				<li>ZUNO_HANDLER_IRQ</li>General interrupt handler. Triggers on any interrupt that is acceptable for user-side of code. <b>sub_type</b> in this case defines interrupt type.
+				<li>ZUNO_HANDLER_SLEEP</li> Triggers just before Z-Uno goes to sleep.
+				<li>ZUNO_HANDLER_WUP</li> Triggers every time Z-Uno wakes up from EM2 mode
+				<li>ZUNO_HANDLER_ZW_CFG</li> Triggers every time user changes Configuration parameters
+				<li>ZUNO_HANDLER_ZW_BATTERY</li> Triggers every time system calls for battery charge value.
+				<li>ZUNO_HANDLER_REPORT</li>Triggers every time Z-Uno gets Z-Wave report (like BasicReport, SwitchBinaryReport and etc..)
+				<li>ZUNO_HANDLER_EXTINT</li>Triggers every time Z-Uno gets external inetrrupt. It's a specific case of ZUNO_HANDLER_IRQ.
+				<li>ZUNO_HANDLER_GPT</li>Triggers every time Z-Uno gets General Purpose Timer (GPT) inetrrupt. It's a specific case of ZUNO_HANDLER_IRQ.
+				<li>ZUNO_HANDLER_NOTIFICATON_TIME_STAMP</li> Triggers every time Z-Uno is called for time paramer value.
 			</ul>
 		</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sub_type:</span>
-		<span class="function_parameters_param_description"> зависит от `type`.</span>
+		<span class="function_parameters_param_description">depends on `type` parameter.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">handler:</span>
-		<span class="function_parameters_param_description"> указатель на функцию которая будети вызвана по событию.</span>
+		<span class="function_parameters_param_description"> Pointer to function which is binded to specified system event.</span>
 	</span>
 </span>
 
 <span class="function_returns">
 	<ul>
-		<li>ZunoErrorOk - все хорошо.</li>
-		<li>ZunoErrorAttachSysHandler - не удалось привязать так как не достаточно места в `стеке функций` - в обычных сценариях такое не возникает.</li>
+		<li>ZunoErrorOk - it's all right. Handler succesfuly attached.</li>
+		<li>ZunoErrorAttachSysHandler. The table is full. System couldn't attach one more handler.</li>
 	</ul>
 </span>
 
 <span class="function_description_note">
-	Обратите внимание, что в данных функциях не рекомендованно долго находиться/вызывать тяжелые функции
+	Please note that it's not recommended to do heavy staff inside handlers. This can lead to degradation of the system.
 </span>
+
+Hi side proxy-functions provide more comfortable interface. 
+<span class="function_see_also">
+	<span class="function_ref">attachInterrupt</span> attaches interrupt handler to needed pin.
+</span>
+Static macros that bind handlers. 
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span> Setups battery level handler (Z-Wave command class Battery).
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_SYSTIMER_HANDLER</span> Setups system timer handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_SYSEVENT_HANDLER</span> Setups system runtime events handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_ISR_GPTIMER</span> Setups General Puspose Timer's interrupt handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_REPORTS_HANDLER</span> Setups incoming Z-Wave report handler.
+</span>
+<span class="function_see_also">
+	<span class="function_ref">ZUNO_SETUP_CFGPARAMETER_HANDLER</span> Setups configuration parameters handler (Z-Wave command class Configuration).
+</span>
+	
