@@ -13,44 +13,124 @@
     </span>
 </span>
 
-<span class="function_syntax">
-    void sys_event(byte event, byte param) { ... }
-</span>
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">event</span>
-        <span class="function_parameters_param_description">event type from the list ZUNO_LOGGING_EVENT_*</span>
+<span zunoVersion="v1">
+    <span class="function_syntax">
+        void sys_event(byte event, byte param) { ... }
     </span>
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">param</span>
-        <span class="function_parameters_param_description">additional parameter for the event</span>
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">event</span>
+         <span class="function_parameters_param_description">event type from the list ZUNO_LOGGING_EVENT_*</span>
+        </span>
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">param</span>
+            <span class="function_parameters_param_description">additional parameter for the event</span>
+        </span>
+    </span>
+    <span class="function_example">
+        <pre>
+            <code class="c">ZUNO_SETUP_SYSEVENT_HANDLER(sys_event);
+            void sys_event(byte event, byte param) {
+                switch(event) {
+                case ZUNO_LOGGING_EVENT_LEARNSTART:
+                    // some action
+                    break;
+                case ZUNO_LOGGING_EVENT_LEARNCOMPLETE:
+                    // some action
+                    break;
+                case ZUNO_LOGGING_EVENT_FWAUTH:
+                    // some action
+                    break;
+                case ZUNO_LOGGING_EVENT_STACKOVERFLOW:
+                    // OOOPS! Error handling
+                    break;
+                } 
+            }
+            </code>
+       </pre>
+    </span>
+    <span class="function_description_more">
+        Full list of events is available in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> (search for ZUNO_LOGGING_EVENT_).
+    </span>
+    </span>
+<span zunoVersion="v2">
+    <span class="function_syntax">
+        void sys_event(ZUNOSysEvent_t * ev) { ... }<br>
+    </span>
+    
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">ev</span>
+            <span class="function_parameters_param_description"> pointer to type ZUNOSysEvent_t</span>
+        </span>
+    </span>
+    
+    <span class="function_returns">
+        nothing
+    </span>
+    
+    <span class="function_syntax">
+        <pre>
+            <code class="c">
+    typedef struct ZUNOSysEvent_s{
+        uint8_t event;
+        uint32_t params[2];
+    }ZUNOSysEvent_t;
+            </code>
+        </pre>
+    </span>
+    
+    <span class="function_parameters">
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">event</span>
+            <span class="function_parameters_param_description">
+                One of following values:
+                <ul>
+                    <li>ZUNO_SYS_EVENT_QUICKWAKEUP</li> Z-Uno wakes up from EM2 energy mode
+                    <li>ZUNO_SYS_EVENT_LEARNCOMPLETED</li> Z-Uno was added to network or exluded from the network. Learn process has been finished.
+                    <li>ZUNO_SYS_EVENT_LEARNSTARTED</li> Process of network inclusion/exclusion has started. 
+                    <li>ZUNO_SYS_EVENT_SETDEFAULT</li> Configuration of device was cleaned up.
+                    <li>ZUNO_SYS_EVENT_SLEEP_MODEEXC</li> Warning, user tries to go to sleep listening device. Don't call <span class="function_ref">zunoSendDeviceToSleep()</span> for listening devices. 
+                    <li>ZUNO_SYS_EVENT_STACK_OVERFLOW</li>Firmware detected user stack overflow. Be careful with recursion and large amounts of local data inside nested functions.
+                    <li>ZUNO_SYS_EVENT_QUEUE_OVERLOAD</li>IRQ queue is full. System can miss some interrupts.
+                    <li>ZUNO_SYS_EVENT_INVALID_TX_REQUEST</li> Z-Uno tries to send an invalid message.
+                    <li>ZUNO_SYS_EVENT_INVALID_COMMAND</li> User calls unknowm system call number. <b>param[0]</b> is invalid system call vector.
+                    <li>ZUNO_SYS_EVENT_INVALID_CLOCK</li> Unknown peripheral clock source. <b>param[0]</b> is invalid translated clock index.
+                    <li>ZUNO_SYS_EVENT_INVALID_MEMORYAREA_IN_SYSCALL</li> User translates illegal memory pointer to syscall. <b>param[0]</b> is a system call vector number, <b>param[1]</b> is system call parameter number.
+                    <li>ZUNO_SYS_EVENT_INVALID_PARAMNUM_IN_SYSCALL</li> Syscall parameter number doesn't match to reference. <b>param[0]</b> is a system call vector number.
+                    <li>ZUNO_SYS_EVENT_INVALID_SYSCALL_PARAM_VALUE</li> Syscall parameter is invalid. <b>param[0]</b> is a system call vector number, <b>param[1]</b> is system call parameter number.
+                </ul>
+            </span>
+        </span>
+        <span class="function_parameters_param">
+            <span class="function_parameters_param_name">params</span>
+            <span class="function_parameters_param_description">Depands on <b>event</b> field. Represents aditional event data. See above.</span>
+        </span>
+    
+    </span>
+    <span class="function_example">
+        <pre>
+            <code class="c">ZUNO_SETUP_SYSEVENT_HANDLER(sys_event);
+            void sys_event(ZUNOSysEvent_t * e) {
+                switch(e->event) {
+                case ZUNO_LOGGING_EVENT_LEARNSTART:
+                    // some action
+                    break;
+                case ZUNO_LOGGING_EVENT_LEARNCOMPLETE:
+                    // some action
+                    break;
+                case ZUNO_LOGGING_EVENT_STACKOVERFLOW:
+                    // OOOPS! Error handling
+                    break;
+                } 
+            }
+            </code>
+       </pre>
+    </span>
+    <span class="function_see_also">
+        If you need to setup handler "on the run" see below.
+        <span class="function_ref">ZUNO_HANDLER_SYSEVENT</span> 
     </span>
 </span>
 
-<span class="function_example">
-    <pre>
-        <code class="c">ZUNO_SETUP_SYSEVENT_HANDLER(sys_event);
 
-void sys_event(byte event, byte param) {
-  switch(event) {
-    case ZUNO_LOGGING_EVENT_LEARNSTART:
-      // some action
-      break;
-    case ZUNO_LOGGING_EVENT_LEARNCOMPLETE:
-      // some action
-      break;
-    case ZUNO_LOGGING_EVENT_FWAUTH:
-      // some action
-      break;
-    case ZUNO_LOGGING_EVENT_STACKOVERFLOW:
-      // OOOPS! Error handling
-      break;
-  } 
-}
-        </code>
-    </pre>
-</span>
-
-<span class="function_description_more">
-Full list of events is available in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/uCXX_Cores/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a> (search for ZUNO_LOGGING_EVENT_).
-</span>
