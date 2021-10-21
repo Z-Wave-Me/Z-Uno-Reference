@@ -1,0 +1,44 @@
+<span zunoVersion="v2"></span>
+<h1>getResolution()</h1>
+<span class="function_description">
+	Получает глобальное resolution.
+</span>
+
+<span class="function_syntax">
+	sensors.getResolution()<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    uint8_t - 9, 10, 11, or 12 bits
+</span>
+
+
+<span class="function_description">
+	Получает resolution для указанного адресса.
+</span>
+
+<span class="function_syntax">
+	sensors.getResolution(deviceAddress)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    uint8_t - 9, 10, 11, or 12 bits - 0 если ошибка.
+</span>
