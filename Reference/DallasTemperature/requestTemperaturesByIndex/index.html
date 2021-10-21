@@ -1,0 +1,30 @@
+<span zunoVersion="v2"></span>
+<h1>requestTemperaturesByIndex()</h1>
+
+<span class="function_description">
+	Sends command for one device to perform a temp conversion by index.
+</span>
+
+<span class="function_description_more">
+На работу данной функции влияют: <a href="/Reference/DallasTemperature/setCheckForConversion/">setCheckForConversion</a> и <a href="/Reference/DallasTemperature/setWaitForConversion/">setWaitForConversion</a>
+</span>
+
+<span class="function_syntax">
+	sensors.requestTemperaturesByIndex(deviceIndex)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceIndex:</span>
+		<span class="function_parameters_param_description"> индекс устройства.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true - otherwise, false - if device is disconnected
+</span>
+
