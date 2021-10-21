@@ -1,11 +1,11 @@
 <span zunoVersion="v2"></span>
-<h1>isConnected()</h1>
+<h1>readScratchPad()</h1>
 <span class="function_description">
-	Attempt to determine if the device at the given address is connected to the bus also allows for updating the read scratchpad.
+	Считывает с ОЗУ данные датчика устройства.
 </span>
 
 <span class="function_syntax">
-	sensors.isConnected(deviceAddress, scratchPad)<br>
+	sensors.readScratchPad(deviceAddress, scratchPad)<br>
 </span>
 
 <span class="function_parameters">
@@ -19,11 +19,11 @@
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">scratchPad:</span>
-		<span class="function_parameters_param_description"> указатель на структуру <b>ScratchPad</b> для считывания данных устройства.</span><br>
+		<span class="function_parameters_param_description"> указатель на структурру <b>ScratchPad</b> для считывания данных устройства.</span><br>
 	</span>
 </span>
 
 <span class="function_returns">
-    bool - returns true if the device was connected.
+    bool - returns true if данные были успешно считанны.
 </span>
 
