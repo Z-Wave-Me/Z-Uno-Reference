@@ -7,7 +7,7 @@ For this event type `sub_type` always is set to 0.
 </span>
 
 <span class="function_syntax">
-	handlerSysEvent(ev)<br>
+	void handlerSysEvent(ZUNOSysEvent_t * ev) { ... }<br>
 </span>
 
 <span class="function_parameters">
@@ -90,6 +90,6 @@ void loop() {
 </span>
 
 <span class="function_see_also">
-	In most cases use static-defined handler. Look at this for code example:
+	In most cases use static-defined handler.
 	<span class="function_ref">ZUNO_SETUP_SYSEVENT_HANDLER</span> Setups system runtime events handler.
 </span>
