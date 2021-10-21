@@ -1,0 +1,30 @@
+<span zunoVersion="v2"></span>
+<h1>readPowerSupply()</h1>
+<span class="function_description">
+	Read device's power requirements.
+</span>
+
+<span class="function_syntax">
+	sensors.readPowerSupply(deviceAddress)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс - данный параметр можно пропустить.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool
+	<ul>
+		<li>true if parasite mode is used (2 wire)</li>
+		<li>false if normal mode is used (3 wire)</li>
+		<li>if no address is given (or nullptr) it checks if any device on the bus uses parasite mode</li>
+	</ul>
+</span>
+
