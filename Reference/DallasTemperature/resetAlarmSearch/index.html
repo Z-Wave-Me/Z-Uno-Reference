@@ -1,8 +1,8 @@
 <span zunoVersion="v2"></span>
-<h1>getLowAlarmTemp()</h1>
+<h1>resetAlarmSearch()</h1>
 
 <span class="function_description">
-	Returns current low alarm temperature for a device.
+	Resets internal variables used for the alarm search. <a href="/Reference/DallasTemperature/alarmSearch/">alarmSearch</a>
 </span>
 
 <span class="function_description_more">
@@ -10,7 +10,7 @@
 </span>
 
 <span class="function_syntax">
-	sensors.getLowAlarmTemp(deviceAddress)<br>
+	sensors.resetAlarmSearch()<br>
 </span>
 
 <span class="function_parameters">
@@ -18,13 +18,9 @@
 		<span class="function_parameters_param_name">sensors:</span>
 		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
 	</span>
-	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">deviceAddress:</span>
-		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс</span><br>
-	</span>
 </span>
 
 <span class="function_returns">
-    int8_t - valid in the range -55C - 125C or  invalid DEVICE_DISCONNECTED
+    nothing
 </span>
 

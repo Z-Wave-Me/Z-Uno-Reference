@@ -1,8 +1,8 @@
 <span zunoVersion="v2"></span>
-<h1>getLowAlarmTemp()</h1>
+<h1>alarmSearch()</h1>
 
 <span class="function_description">
-	Returns current low alarm temperature for a device.
+	Search the wire for devices with active alarms.
 </span>
 
 <span class="function_description_more">
@@ -10,7 +10,7 @@
 </span>
 
 <span class="function_syntax">
-	sensors.getLowAlarmTemp(deviceAddress)<br>
+	sensors.alarmSearch(deviceAddress)<br>
 </span>
 
 <span class="function_parameters">
@@ -20,11 +20,11 @@
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">deviceAddress:</span>
-		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс</span><br>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив куда будет сохранен адресс.</span><br>
 	</span>
 </span>
 
 <span class="function_returns">
-    int8_t - valid in the range -55C - 125C or  invalid DEVICE_DISCONNECTED
+    bool - true если успешно найденно устройствор, иначе false
 </span>
 
