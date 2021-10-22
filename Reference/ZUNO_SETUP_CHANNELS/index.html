@@ -21,8 +21,10 @@ If you want to define channels dinamically in your code please look at <span zun
     <li>Channel type (Switch Binary, Switch Multilevel, Sensor Binary, Sensor Multilevel, Meter, Siren , Blind, Flow Stop, Color, Door Lock, Thermostat)</li>
     <li>Channel parameter 1 (for sensors and meters it's type, for switches not used)</li>
     <li>Channel parameter 2 (for sensor Multilevel and Meter it's scale, precision and size combined in one byte)</li>
-    <li>Channel setter function (a pointer to any user defined function, which is supposed to parse data, coming to the channel (i.e. for Switch Binary channel a command from another device, containing a new value (On/Off)).</li>
-    <li>Channel getter function (a pointer to any user defined function, which is supposed to return current value for this channel (i.e. for Switch Binary channel request from another device of the current value of the channel (On/Off).</li>
+    <li zunoVersion="v1">Channel setter function (a pointer to any user defined function, which is supposed to parse data, coming to the channel (i.e. for Switch Binary channel a command from another device, containing a new value (On/Off)).</li>
+    <li zunoVersion="v1">Channel getter function (a pointer to any user defined function, which is supposed to return current value for this channel (i.e. for Switch Binary channel request from another device of the current value of the channel (On/Off).</li>
+    <li zunoVersion="v2">Channel setter function or mapped variable(a pointer to any user defined function, which is supposed to parse data, coming to the channel (i.e. for Switch Binary channel a command from another device, containing a new value (On/Off)).</li>
+    <li zunoVersion="v2">Channel getter function or mapped variable(a pointer to any user defined function, which is supposed to return current value for this channel (i.e. for Switch Binary channel request from another device of the current value of the channel (On/Off).</li>
 </ul>
 
 <span class="function_description_more">To make life easier there are simple macro defining popular types of channels: <span class="function_ref">ZUNO_SWITCH_MULTILEVEL</span>, <span class="function_ref">ZUNO_SWITCH_BINARY</span>, <span class="function_ref">ZUNO_SENSOR_MULTILEVEL</span>, <span class="function_ref">ZUNO_SENSOR_BINARY</span>, <span class="function_ref">ZUNO_METER</span>, <span class="function_ref">ZUNO_BLINDS</span>(), <span class="function_ref">ZUNO_FLOWSTOP</span>(), <span class="function_ref">ZUNO_SIREN</span>(), <span class="function_ref">ZUNO_SWITCH_COLOR</span>(), <span class="function_ref">ZUNO_THERMOSTAT</span>(), <span class="function_ref">ZUNO_DOORLOCK</span>() and many others defined in <a href="https://github.com/Z-Wave-Me/Z-Uno-Core/blob/master/hardware/arduino/zuno/cores/zuno/ZUNO_Definitions.h">ZUNO_Definitions.h</a>.</span>
@@ -36,15 +38,141 @@ Z-Uno supports up to 32 channels
 </span>
 
 <span class="function_description_note">
-After changing numer of types of channels Z-Uno must be excluded and included back. Z-Uno will not adopt any channel type change without being excluded. (A <a href="/z-wave/configuration-parameters/">debug configuration parameter</a> can disable this restriction).
+After changing number of types of channels Z-Uno must be excluded and included back. Z-Uno will not adopt any channel type change without being excluded. (A <a href="/z-wave/configuration-parameters/">debug configuration parameter</a> can disable this restriction).
 </span>
 
 <span class="function_example">
+    Defines temperature sensor channel and transmits channel data via getterFunction()
     <pre>
-        <code class="c">ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(getterFunctionAddress))</code>
+        <code class="c">
+            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&getterFunction))
+            int getterFunction(){
+                return 25; // always 25 *C
+            }
+        </code>
     </pre>
 </span>
+<span class="function_example" zunoVersion="v2">
+    Defines temperature sensor channel and transmits channel data via mapped variable
+    <pre>
+        <code class="c">
+            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&temperature));
+            int temperature = 25; 
+        </code>
+    </pre>
+</span>
+<span class="function_example" zunoVersion="v2">
+    Defines multirelay / multidimmer device and uses common channel getter/setter for each type of channel
+    <pre>
+        <code class="c">
+            #define NUM_DIMMER_CHANNELS 4
+            #define NUM_RELAY_CHANNELS  6
+            //Next line sets up Z-Uno channels. 
+            ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue));
+            static const byte PWM_PINS[NUM_DIMMER_CHANNELS]={0,1,2,3};
+            static const byte RELAY_PINS[NUM_RELAY_CHANNELS]={10,11,12,13,14,16};
 
+            byte dimmerValue[NUM_DIMMER_CHANNELS];
+            byte relayValue[NUM_RELAY_CHANNELS];
+
+            // the setup function runs once, when you press reset or power the board
+            void setup() {
+                    int i;
+                    memset(dimmerValue, 0, sizeof(dimmerValue));
+                    memset(relayValue, 0, sizeof(relayValue));
+                    for(i=0;i&lt;NUM_DIMMER_CHANNELS;i++) {
+                            analogWrite(PWM_PINS[i], 0); 
+                    }
+                    for(i=0;i&lt;NUM_RELAY_CHANNELS;i++) {
+                        pinMode(RELAY_PINS[i], OUTPUT);
+                        digitalWrite(RELAY_PINS[i], 0);
+                    }
+    
+            }
+            // the loop function runs over and over again forever
+            void loop() {
+             // nothing to do here...
+            }
+
+            void setSwitchMultilevelValue(byte channel, byte newValue) {
+                        //save new value in a variable
+                        analogWrite(PWM_PINS[channel], newValue);
+                        dimmerValue[channel] = newValue;
+            }
+            //The setSwitchMultilevelValue runs only when the controller asks for the current blink rate by Z-Wave
+            byte getSwitchMultilevelValue(byte channel) {
+                //returns previously saved value
+                return dimmerValue[channel];
+            }
+            void setSwitchBinarylValue(byte channel, byte newValue) {
+                digitalWrite(PWM_PINS[channel], newValue);
+                //save new value in a variable
+                relayValue[channel] = newValue;
+            }
+            byte getSwitchBinaryValue(byte channel) {
+                //return previously saved value
+                return relayValue[channel];
+            }
+        </code>
+    </pre>
+</span>
+<span class="function_example" zunoVersion="v2">
+    Defines multirelay / multidimmer device and uses mapped arrays  for each type of channel.
+    Compare the code size with previous example.
+    <pre>
+        <code class="c">
+            #define NUM_DIMMER_CHANNELS 4
+            #define NUM_RELAY_CHANNELS  6
+
+            byte dimmerValue[NUM_DIMMER_CHANNELS];
+            byte relayValue[NUM_RELAY_CHANNELS];
+
+            ZUNO_ENABLE(LOGGING_DBG);
+
+            //Next line sets up Z-Uno channels. 
+            ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL),
+                                ZUNO_SWITCH_BINARY(relayValue,NULL));
+                                
+            static const byte PWM_PINS[NUM_DIMMER_CHANNELS]={16,17,18,19};
+            static const byte RELAY_PINS[NUM_RELAY_CHANNELS]={10,11,12,13,14,15};
+
+            // the setup function runs once, when you press reset or power the board
+            void setup() {
+                int i;
+                memset(dimmerValue, 0, sizeof(dimmerValue));
+                memset(relayValue, 0, sizeof(relayValue));
+            }
+            // the loop function runs over and over again forever
+            void loop() {
+                int i;
+                for(i=0;i&lt;NUM_DIMMER_CHANNELS;i++) {
+                    analogWrite(PWM_PINS[i], dimmerValue[i]); 
+                }
+                for(i=0;i&lt;NUM_RELAY_CHANNELS;i++) {
+                    pinMode(RELAY_PINS[i], OUTPUT);
+                    digitalWrite(RELAY_PINS[i], relayValue[i]);
+                }
+            }
+        </code>
+    </pre>
+</span>
 <span class="function_see_also">
     Get more information about <span class="function_ref">Z-Wave</span>.
 </span>
