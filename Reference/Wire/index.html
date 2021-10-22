@@ -278,8 +278,10 @@ void setup() {
 #include <Wire.h>
 
 void setup() {
-	Wire.begin(0x0, 0x1, 0x2);   // join i2c bus (address optional for master)
-	Serial.begin(115200);        // start serial for output
+	Wire.begin(0, 1, 2);   // join i2c bus 
+						   // 0 - is a default master address, 
+	                       // We use alternate SCL pin = 1, SDA pin =2
+	Serial.begin(115200);  // start serial for debug output
 }
 
 void loop() {
