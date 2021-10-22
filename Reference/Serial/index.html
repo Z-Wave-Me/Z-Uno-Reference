@@ -3,19 +3,19 @@
 <span class="function_description">Used for communication between the Z-Uno board and another microcontroller or a computer via UART or USB.</span>
 <span class="function_description_more">Z-Uno boards have the following serial interfaces:
 <ul>
-    <li>Serial &mdash; USB port</li>
+    <li>Serial &mdash; By default it's routed to builtin USB2UART (CP2102N) adapter port.</li>
     <li>Serial0 &mdash; UART on TX0(24) and RX0(25) pins</li>
     <li>Serial1 &mdash; UART on TX1(7) and RX1(8) pins</li>
 </ul>
 </span>
 
 <span class="function_description_more" zunoVersion="v2">
-	Кроме пинов по умолчанию можно использовать и другие пины, устанавливаеться это с помощью метода <span class="function_ref" link="Serial/begin">begin</a>()</span><br>
-	<a href="https://z-uno.z-wave.me/technical/pinout/">Распиновка</a><br>
-	Таблица совместимости:
+	You can change default pins of UART interface, using method <span class="function_ref" link="Serial/begin">begin</a>()</span><br>
+	<a href="https://z-uno.z-wave.me/technical/pinout/">Pinout</a><br>
+	Compatibility pin table
 	<table>
 		<tr>
-			<th>Пин</th>
+			<th>Z-Uno pin #</th>
 			<th>Serial TX</th>
 			<th>Serial RX</th>
 			<th>Serial0 TX</th>
@@ -257,20 +257,19 @@
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Serial</b> использует буфер размером в 128 байта для приема, если его не достаточно то можете в <span class="function_ref" link="Wire/begin">begin</a>()</span> - указать свой.
+Please note, that <b>Serial</b> uses 128 bytes receiving buffer. You can use method  <span class="function_ref" link="Serial/begin">begin</a>()</span> to set your own buffer.
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Serial</b> использует разделяемую перифирию, которую могут использовать и другие биоблитеке: <span class="function_ref">SPI</span>...<br>
-Когда библиотеки используют одну и туже перифирию - совместное использование их в таком случае не возможно.
+Please note,  <b>Serial</b> uses sharable peripheral USARTn. <span class="function_ref">SPI</span>...<br> library uses the same peripheral. You are able to use up to 3 UART/SPI simultaneously. For example 2UART+1SPI or 3UART+0SPI or 1UART+2SPI and etc.
 </span>
 
 <span class="function_description_more" zunoVersion="v2">
-Используемая перифирия:
+Serial objects are binded to these peripherals:
 	<table>
 		<tr>
-			<th>Serial ports</th>
-			<th>Перифирия</th>
+			<th>Serial object</th>
+			<th>Cortex peripheral</th>
 		</tr>
 		<tr>
 			<td>Serial</td>
@@ -288,8 +287,8 @@
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Serial ports</b>  начинает постоянно использовать для приема один <b>DMA канал</b> от <span class="function_ref" link="Serial/begin">begin</a>()</span> до <span class="function_ref" link="Serial/end">end</a>()</span><br>
-Так же один <b>DMA канал</b> используеться во время передачи данных.
+Please note, every <b>Serial</b> object occupies one <b>DMA channel</b> for fast data receiving. <b>Serial</b> holds channel from <span class="function_ref" link="Serial/begin">begin</a>()</span> until you free its resources by means of <span class="function_ref" link="Serial/end">end</a>()</span><br>
+When you send data <b>Serial</b> object dynamically occupies another one DMA channel for data transfer time interval. Z-Uno builtin DMA controller supports up to 8 channels. 
 </span>
 
 <span class="function_description_more">All Serial ports have the following methods supported:
