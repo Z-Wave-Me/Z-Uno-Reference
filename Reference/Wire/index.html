@@ -19,20 +19,20 @@ Other pin range can be selected using <span class="function_ref" link="s_pin">ZU
 	-->
 </ul>
 </span>
-<span class="function_description_more" zunoVersion="v2">Z-Uno boards have the following wire interfaces:
+<span class="function_description_more" zunoVersion="v2">Z-Uno boards have the following I2C interfaces:
 <ul>
-    <li>Wire(Wire0) &mdash; i2c on SCL(9) and SDA(10) pins</li>
+    <li>Wire(Wire0) &mdash; i2c on SCL(9) and SDA(10) pins (default)</li>
     <li>Wire1 &mdash; i2c on SCL1(23) and SDA1(25) pins</li>
 </ul>
 </span>
 
 <span class="function_description_more" zunoVersion="v2">
-	Кроме пинов по умолчанию можно использовать и другие пины, устанавливаеться это с помощью метода <span class="function_ref" link="Wire/begin">begin</a>()</span><br>
-	<a href="https://z-uno.z-wave.me/technical/pinout/">Распиновка</a><br>
-	Таблица совместимости:
+	You <span class="function_ref" link="Wire/begin">begin</a>()</span><br>
+	<a href="https://z-uno.z-wave.me/technical/pinout/">Pinout</a><br>
+	Compatibility pin table
 	<table>
 		<tr>
-			<th>Пин</th>
+			<th>Z-Uno pin number</th>
 			<th>Wire0 SCL</th>
 			<th>Wire0 SDA</th>
 			<th>Wire1 SCL</th>
@@ -223,24 +223,22 @@ Other pin range can be selected using <span class="function_ref" link="s_pin">ZU
 
 <span class="function_description_more" zunoVersion="v1">Default pins can be changed during I2C initialization, but they should be in <span class="function_ref" link="s_pin">fast mode</span> pin range:</span>
 
+
+
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Wire</b> использует 7 bit адресса(от 0 до 127 - 0 и 127 имеют особое значение).
+Note, by default <b>Wire</b> uses 32 bytes size received buffer. It it not enough for your task please bind custom buffer by means of <span class="function_ref" link="Wire/begin">begin</a>()</span> method.
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Wire</b> использует буфер размером в 32 байта, если его не достаточно то можете в <span class="function_ref" link="Wire/begin">begin</a>()</span> - указать свой.
+Until this moment <b>Wire</b> is able to operate in master mode only. Slave mode is in development.
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Wire</b> покуда может работать только в режиме master - возможность работы в режиме slave покуда в разработке.
+Note, any <b>Wire</b>  object uses one <b>DMA channel</b> for data receiving. It occupies channel from <span class="function_ref" link="Wire/begin">begin</a>()</span> call. User can release channel and other occupied resources using  <span class="function_ref" link="Wire/end">end</a>()</span> method.<br>
+Also, anothe one channel is engaged for the time of data transmission.
 </span>
 
-<span class="function_description_note" zunoVersion="v2">
-Обратите внимание, что <b>Wire</b>  начинает постоянно использовать в режиме slave для приема один <b>DMA канал</b> от <span class="function_ref" link="Wire/begin">begin</a>()</span> до <span class="function_ref" link="Wire/end">end</a>()</span><br>
-Так же один <b>DMA канал</b> используеться во время передачи данных и во время приема в случае мастера.
-</span>
-
-<span class="function_description_more" zunoVersion="v2">All Wire have the following methods supported:
+<span class="function_description_more" zunoVersion="v2">All Wire objects have the following methods supported:
 	<ul>
 		<li><span class="function_ref" link="Wire/Available">available</a>()</li>
 		<li><span class="function_ref" link="Wire/Begin">begin</a>()</li>
@@ -260,7 +258,8 @@ Other pin range can be selected using <span class="function_ref" link="s_pin">ZU
 
 <span class="function_example" zunoVersion="v1">
 <pre>
-<code class="c">{literal}#define SCL_PIN 11
+<code class="c">
+#define SCL_PIN 11
 #define SDA_PIN 12
 
 I2CDriver alternative_I2C(SCL_PIN, SDA_PIN); 
@@ -269,6 +268,6 @@ void setup() {
     // …
     Wire.bindDriver(&alternative_I2C); // This instructs to use other pins than default
     // …
-}{/literal}</code>
+}</code>
 </pre>
 </span>
