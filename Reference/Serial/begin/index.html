@@ -1,7 +1,7 @@
 <h1>Serial.begin()</h1>
 
 <span class="function_description" zunoVersion="v1">
-Sets the data rate in bits per second (baud) for serial data transmission. For USB baudrate is fixed on 115200 bps, on UART it is possible to select baudrate. Valid values are: 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps</span>
+Sets the data rate in bits per second (baud) for serial data transmission. For USB baudrate is fixed on 115200 bps, on UART it is possible to select baudrate. </span>
 <span class="function_description" zunoVersion="v2">Sets the data rate in bits per second (baud) for serial data transmission. For communicating with Serial Monitor, make sure to use one of the baud rates listed in the menu at the bottom right corner of its screen. 
 You can, however, specify other rates.<br></span>
 
@@ -25,11 +25,11 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 <span class="function_parameters">
     <span class="function_parameters_param" zunoVersion="v1">
         <span class="function_parameters_param_name">baudrate</span>
-        <span class="function_parameters_param_description">baudrate to be used. If omitted, default 115200 bps is used (the only available on USB interface)</span>
+        <span class="function_parameters_param_description">baudrate to be used. Supported values are: 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps. If omitted, default 115200 bps is used (the only available on USB interface)</span>
     </span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">speed:</span>
-		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long.</span>
+		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long. Standart supported values are:  600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps. If omitted, default 115200 bps is used.</span>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">config:</span>
@@ -52,48 +52,42 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">rx:</span>
-		<span class="function_parameters_param_description"> пин RX.</span>
+		<span class="function_parameters_param_description"> pin RX.</span>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">tx:</span>
-		<span class="function_parameters_param_description"> пин TX.</span>
+		<span class="function_parameters_param_description"> pin TX.</span>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">buffer:</span>
-		<span class="function_parameters_param_description"> указатель для буфера получаемых данных.</span>
+		<span class="function_parameters_param_description"> pointer to receiving buffer.</span>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">len:</span>
-		<span class="function_parameters_param_description"> размер буфера в байтах.</span>
+		<span class="function_parameters_param_description"> size of buffer in bytes.</span>
 	</span>
 </span>
 
 <span class="function_returns">
-<span>nothing</span><span zunoVersion="v2">/код ошибки</span>
+<span zunoVersion="v1">nothing</span>
+<span zunoVersion="v2">error code. 0 means sucsess.</span>
 </span>
 
 <span class="function_example">
-<pre><code class="c">void setup() {
-     
-    Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
-     
-    Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
-    
-</code></pre>
-
-<pre><code class="c"  zunoVersion="v2">
-     
-    static uint8_t buf[256]; // Custom receiving buffer
-    
-    Serial0.begin(115200, SERIAL_8N1);//  Setup just a bit mode. 8 bita + 1 stopbit
-     
-    Serial0.begin(115200, SERIAL_8N1, 9, 10);// Define bit mode and move serial0 to pins 9/10
-     
-    Serial0.begin(115200, SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));// Define bit mode, move serial0 to pins 9/10 and use custom receiving buffer
-     
-</code></pre>
-
+Simple variants of begin() method.	
 <pre><code class="c">
-}
+	void setup() {
+    	Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
+    	Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
+	}	
+</code></pre>
+</span>
+<span class="function_example" zunoVersion="v2">
+Advanced variants of begin() method.	
+<pre><code class="c" >
+    static uint8_t buf[256]; // Custom receiving buffer
+    Serial0.begin(115200, SERIAL_8N1);//  Setup just a bit mode. 8 bita + 1 stopbit
+    Serial0.begin(115200, SERIAL_8N1, 9, 10);// Define bit mode and move serial0 to pins 9/10
+    Serial0.begin(115200, SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));// Define bit mode, move serial0 to pins 9/10 and use custom receiving buffer
 </code></pre>
 </span>
