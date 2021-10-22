@@ -5,8 +5,7 @@ Sets the data rate in bits per second (baud) for serial data transmission. For U
 <span class="function_description" zunoVersion="v2">Sets the data rate in bits per second (baud) for serial data transmission. For communicating with Serial Monitor, make sure to use one of the baud rates listed in the menu at the bottom right corner of its screen. 
 You can, however, specify other rates.<br></span>
 
-<span class="function_description_more" zunoVersion="v1">For lower baudrates use <span class="function_ref" link="Software-Serial">Software Serial</span></span>
-<span class="function_description_more" zunoVersion="v2">An optional second argument configures the data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
+<span class="function_description_more" zunoVersion="v2">An optional second argument configures the number of data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
 
 <span class="function_syntax">
 <pre zunoVersion="v1"><code class="c">
@@ -25,7 +24,7 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 <span class="function_parameters">
     <span class="function_parameters_param" zunoVersion="v1">
         <span class="function_parameters_param_name">baudrate</span>
-        <span class="function_parameters_param_description">baudrate to be used. Supported values are: 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps. If omitted, default 115200 bps is used (the only available on USB interface)</span>
+        <span class="function_parameters_param_description">baudrate to be used. Supported values are: 9600, 14400, 19200, 38400, 57600, 115200, 230400 bps. If omitted, default 115200 bps is used (the only available on USB interface). For lower baudrates use <span class="function_ref" link="Software-Serial">Software Serial</span></span>
     </span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">speed:</span>
@@ -33,8 +32,7 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">config:</span>
-		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:</span>
-		<br>
+		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:
 		<ul>
 			<li>SERIAL_8N1 (the default)</li>
 			<li>SERIAL_8N2</li>
@@ -49,6 +47,7 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 			<li>SERIAL_9O1</li>
 			<li>SERIAL_9O2</li>
 		</ul>
+		</span>
 	</span>
 	<span class="function_parameters_param" zunoVersion="v2">
 		<span class="function_parameters_param_name">rx:</span>
@@ -76,10 +75,8 @@ Serial.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 <span class="function_example">
 Simple variants of begin() method.	
 <pre><code class="c">
-	void setup() {
     	Serial.begin();      // opens serial port on USB, sets data rate to 115200 bps
-    	Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps
-	}	
+    	Serial1.begin(9600); // opens serial port on UART1, sets data rate to 9600 bps	
 </code></pre>
 </span>
 <span class="function_example" zunoVersion="v2">
