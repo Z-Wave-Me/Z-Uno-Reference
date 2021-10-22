@@ -16,11 +16,14 @@ Z-Uno supports up to 32 configurable parameters.
         <span class="function_parameters_param_name">config_parameter_changed</span>
         <span class="function_parameters_param_description">Function to be called on parameters changed from the Z-Wave network. Function prototype is:
             <br/>
-            <code>void config_parameter_changed(byte param, word value)</code>
+            <code zunoVersion="v1">void config_parameter_changed(byte param, word value)</code>
+            <code zunoVersion="v2">void config_parameter_changed(uint8_t param, uint32_t value)</code>
             <br/>
             param is the parameter number.
             <br/>
-            value is the new value in 2-bytes representation 
+            <span zunoVersion="v1"> value is the new value in 2-bytes representation  </span>
+            <span zunoVersion="v2"> value is the new value in 4-bytes representation  </span>
+            
         </span>
     </span>
 </span>
@@ -29,8 +32,11 @@ Z-Uno supports up to 32 configurable parameters.
 Configuration parameters are automatically saved to the EEPROM. You can get them from the EEPROM at any time (even after reboot) using zunoLoadCFGParam(param) or save (to be reported back to the controller upon request) using zunoSaveCFGParam(param, value)
 </span>
 
-<span class="function_syntax">
+<span class="function_syntax" zunoVersion="v1">
     word value = zunoLoadCFGParam(byte param);
+</span>
+<span class="function_syntax" zunoVersion="v2">
+    uint32_t value = zunoLoadCFGParam(byte param);
 </span>
 
 <span class="function_parameters">
@@ -41,8 +47,11 @@ Configuration parameters are automatically saved to the EEPROM. You can get them
     </span>
 </span>
 
-<span class="function_syntax">
+<span class="function_syntax" zunoVersion="v1">
     zunoSaveCFGParam(byte param, word value);
+</span>
+<span class="function_syntax" zunoVersion="v2">
+    zunoSaveCFGParam(uint8_t param, uint32_t value);
 </span>
 
 <span class="function_parameters">
@@ -53,7 +62,8 @@ Configuration parameters are automatically saved to the EEPROM. You can get them
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">value</span>
-        <span class="function_parameters_param_description">word variable to store</code>
+        <span class="function_parameters_param_description" zunoVersion="v1">word variable to store</code>
+        <span class="function_parameters_param_description" zunoVersion="v2">dword variable to store</code>
         </span>
     </span>
 </span>
@@ -66,15 +76,15 @@ Parameters on the Z-Wave controller side are numbered from 64 to 96.
 Note that Configuration parameters are signed values when defined in the Z-Wave controller.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 Since 2.1.5 zunoSaveCFGParam accepts and zunoLoadCFGParam returns a value instead of a pointer.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 Prior to version 2.1.4 parameters were 4 bytes (dword). Starting from 2.1.4 parameters are now two bytes (word).
 </span>
 
-<span class="function_example">
+<span class="function_example" zunoVersion="v1">
      <pre>
          <code class="c">word paramValue;
 
@@ -96,6 +106,29 @@ void config_parameter_changed(byte param, word value) {
     }
 }</code></pre>
  </span> 
+
+ <span class="function_example" zunoVersion="v2">
+    <pre>
+        <code class="c">uint32_t paramValue;
+
+ZUNO_SETUP_CFGPARAMETER_HANDLER(config_parameter_changed);
+
+uint32_t paramValue;
+
+void setup() {
+ paramValue = zunoLoadCFGParam(64);
+}
+
+void loop() {
+ zunoSaveCFGParam(64, paramValue);
+}
+
+void config_parameter_changed(uint8_t param, uint32_t value) {
+   if (param == 64) { // The first user-defined parameter
+     paramValue = value;
+   }
+}</code></pre>
+</span> 
 
 <span class="function_description_note">
     Configuration parameters values are stored in the <span class="function_ref">EEPROM</span>.
