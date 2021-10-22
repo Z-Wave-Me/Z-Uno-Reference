@@ -275,11 +275,11 @@ void setup() {
 <span class="function_example"  zunoVersion="v2">
 	<pre>
 		<code class="c">
-#include <Wire.h>
+#include "Wire.h"
 
 void setup() {
 	Wire.begin(0, 1, 2);   // join i2c bus 
-						   // 0 - is a default master address, 
+						    // 0 - is a default master address, 
 	                       // We use alternate SCL pin = 1, SDA pin =2
 	Serial.begin(115200);  // start serial for debug output
 }
