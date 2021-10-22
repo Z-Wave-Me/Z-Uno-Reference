@@ -2,8 +2,8 @@
 <h1>Wire.transfer()</h1> 
 
 <span class="function_description">
-	Данный метод заменяет сразу три функции <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span>, <span class="function_ref" link="Wire/Write">write</a>()</span> и <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>.
-	Другими его цель в первую очередь удобство.
+	This method replaces these 3 functions <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span>, <span class="function_ref" link="Wire/Write">write</a>()</span> и <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>.
+	This approach can reduce your code in some cases.
 </span>
 
 <span class="function_syntax">
@@ -23,11 +23,11 @@ transfer(address, *buffer, count, sendStop);<br>
     </span>    
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">buffer:</span>
-        <span class="function_parameters_param_description"> указатель на данные которые нужно отправить - это двоичные данные или указатель на строку обычную.</br></span>
+        <span class="function_parameters_param_description"> pointer to data to be transmit</br></span>
     </span>
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">count:</span>
-        <span class="function_parameters_param_description"> количество передоваемых данных.</span>
+        <span class="function_parameters_param_description"> number of transmitting data in bytes.</span>
     </span>
     <span class="function_parameters_param">    
         <span class="function_parameters_param_name">sendStop:</span>
@@ -43,11 +43,11 @@ transfer(address, *buffer, count, sendStop);<br>
     </li><li>2:received NACK on transmit of address</li>
     </li><li>3:received NACK on transmit of data</li>
     </li><li>4:other error</li>
-	</li zunoVersion="v2"><li  zunoVersion="v2">5:таймаут</li>
+	</li zunoVersion="v2"><li  zunoVersion="v2">5:timeout</li>
 </span>  
 
 <span class="function_example">
-Пример с <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span> и  его аналогия с помощью <b>transfer</b>
+There is example from <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span> and its equivalent using <b>transfer</b> method.
 <pre>
 <code class="c">#include <Wire.h>
 

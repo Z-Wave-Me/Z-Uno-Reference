@@ -14,37 +14,36 @@ Initiate the Wire library and join the I2C bus as a master or slave. This should
 	<pre><code lang="c">
 Wire.begin()<br>
 <span zunoVersion="v2">
-	Wire.begin(address)<br>
-	Wire.begin(address, scl, sda) - код ошибки возращает.<br>
-	Wire.begin(address, scl, sda, *buffer, len) - код ошибки возращает.<br>
+	Wire.begin(address);<br>
+	Wire.begin(address, scl, sda);<br>
+	Wire.begin(address, scl, sda, *buffer, len);<br>
 </span>
-
-	</code></pre>
+</code></pre>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">address:</span>
-		<span class="function_parameters_param_description"> the 7-bit slave address (optional); if not specified, join the bus as a master. Так же если адресс 0x0 то тоже как мастер.</span>
+		<span class="function_parameters_param_description"> the 7-bit slave address (optional); if not specified, join the bus as a master. For master device the default address is 0.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">scl:</span>
-		<span class="function_parameters_param_description"> пин SCL.</span>
+		<span class="function_parameters_param_description"> pin SCL.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sda:</span>
-		<span class="function_parameters_param_description"> пин SDA.</span>
+		<span class="function_parameters_param_description"> pin SDA.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">buffer:</span>
-		<span class="function_parameters_param_description"> указатель для буфера - в случае мастера это буфер для отправки данныйх slave; в случае slave половинна этого буффера используеться для отправки а другая для получения.</span>
+		<span class="function_parameters_param_description"> pointer to memory buffer. In case of master device buffer is used for outgoing data; In case of slave device the half of buffer is used for incoming data and the second half is used for outgoing data. </span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">len:</span>
-		<span class="function_parameters_param_description"> размер буфера в байтах.</span>
+		<span class="function_parameters_param_description"> buffer size in bytes.</span>
 	</span>
 </span>
 
 <span class="function_returns">
-	nothing<span zunoVersion="v2">/код ошибки</span>
+	nothing<span zunoVersion="v2">returns error code. 0 means success.</span>
 </span>
