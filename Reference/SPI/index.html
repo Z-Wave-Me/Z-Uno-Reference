@@ -49,7 +49,7 @@ With most SPI devices, after SPI.beginTransaction(), you will write the slave se
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Note that SPI uses one <b>DMA channel</b>.
+Note, every SPI object uses one <b>DMA channel</b>. It occupies the channel from <b>begin()</b> call to <b>end()</b> call. 
 </span>
 
 <span class="function_description_reference">
