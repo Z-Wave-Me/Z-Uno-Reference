@@ -291,13 +291,14 @@ Shared peripherals
 #include "Spi.h"
 
 void setup(){
-	SPI.begin(0x1, 0x2, 0x3, 0x4);// join spi bus
+	SPI.begin(1, 2, 3, 4);	// join SPI bus as a slave
+						// We use pins sck=1, miso=2, mosi=3, slave_select = 4
 }
 void loop(){
-	SPI.beginTransaction();//Starting a transaction
-	SPI.transfer("Hello!! you?");// Send a string to the slave
-	SPI.transfer(0xAF);//Sending a stop symbol slave
-	SPI.endTransaction();//Finishing the transaction
+	SPI.beginTransaction();//Starts a transaction
+	SPI.transfer("Hello!! you?");	// Sends a string to the slave
+	SPI.transfer(0xAF);				// Sends a byte o slave
+	SPI.endTransaction();// Finishes the transaction
 	delay(2000);
 }
 		</code>
