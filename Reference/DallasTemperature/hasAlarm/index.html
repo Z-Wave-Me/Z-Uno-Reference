@@ -1,0 +1,53 @@
+<span zunoVersion="v2"></span>
+<h1>hasAlarm()</h1>
+<span class="function_description">
+	Проверает есть ли хоть одно устройство на шине поддерживаещее alarm.
+</span>
+
+<span class="function_description_more">
+	Данная функция актуальна при не выключенном <b>REQUIRESALARMS</b>
+</span>
+
+<span class="function_syntax">
+	sensors.hasAlarm()<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true - есть устройство, иначе false
+</span>
+
+
+<span class="function_description">
+	Проверает подерживает устройство с данным адрессом alarm или нет.
+</span>
+
+
+<span class="function_description_more">
+Данная функция актуальна при не выключенном <b>REQUIRESALARMS</b>
+</span>
+
+<span class="function_syntax">
+	sensors.hasAlarm(deviceAddress)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true - устройство поддерживает, иначе false
+</span>

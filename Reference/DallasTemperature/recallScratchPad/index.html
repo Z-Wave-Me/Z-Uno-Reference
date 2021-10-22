@@ -1,0 +1,26 @@
+<span zunoVersion="v2"></span>
+<h1>recallScratchPad()</h1>
+
+<span class="function_description">
+	Sends command to one or more devices to recall values from EEPROM to scratchpad.
+</span>
+
+<span class="function_syntax">
+	sensors.recallScratchPad(deviceAddress)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс или 0x0 - тогда отправляеться на все устройства. по умолчанию 0x0</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true if no errors were encountered, false indicates failure
+</span>
+

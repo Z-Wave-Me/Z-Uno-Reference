@@ -1,0 +1,31 @@
+<span zunoVersion="v2"></span>
+<h1>getTempFByIndex()</h1>
+
+<span class="function_description">
+	Get temperature in degrees F (slow)
+</span>
+
+
+<span class="function_syntax">
+	sensors.getTempFByIndex(deviceAddressб deviceIndex)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sensors:</span>
+		<span class="function_parameters_param_description"> a variable of type DallasTemperature.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceAddress:</span>
+		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">deviceIndex:</span>
+		<span class="function_parameters_param_description"> индекс устройства.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    float - temperature in degrees F or DEVICE_DISCONNECTED_F if the device's scratch pad cannot be read successfully.
+</span>
+
