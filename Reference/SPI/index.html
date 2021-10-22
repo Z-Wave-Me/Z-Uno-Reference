@@ -284,3 +284,22 @@ Shared peripherals
 		</tr>
 	</table>
 </span>
+
+<span class="function_example"  zunoVersion="v2">
+	<pre>
+		<code class="c">
+#include "Spi.h"
+
+void setup(){
+	SPI.begin(0x1, 0x2, 0x3, 0x4);// join spi bus
+}
+void loop(){
+	SPI.beginTransaction();//Starting a transaction
+	SPI.transfer("Hello!! you?");// Send a string to the slave
+	SPI.transfer(0xAF);//Sending a stop symbol slave
+	SPI.endTransaction();//Finishing the transaction
+	delay(2000);
+}
+		</code>
+	</pre>
+</span>
