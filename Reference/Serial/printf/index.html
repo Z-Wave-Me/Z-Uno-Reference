@@ -1,14 +1,14 @@
 <span zunoVersion="v2"></span>
 <h2>printf()</h2>
-<span class="function_description">Функция для форматированного вывода текста.</span>
+<span class="function_description">Advanced text formate function. This is like standard printf() function.</span>
 
 <span class="function_syntax">
-<br>Serial.printf(*format)</br>
+<br>Serial.printf(format_string, ...)</br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">format:</span>
+		<span class="function_parameters_param_name">format_string:</span>
 		<span class="function_parameters_param_description"><br>
 			<ul>
 				<li>
@@ -121,6 +121,10 @@
     Upon successful return, these functions return the number of characters printed (excluding the null byte used to end output to strings).
 </span>
 
+<span class="function_description_note">
+	Please note, this method uses much more stack memeory compared to ordinary <span class="function_ref" link="Serial/print">print</a>()</span> method.
+</span>
+
 <span class="function_example">
 <pre>
 	<code class="c">
@@ -130,7 +134,7 @@ void setup() {
 }
 
 void loop() {
-  Serial0.printf("**%5d**%5.3d**%05d**%05.3d**\n", 6, 6, 6, 6);
+  Serial0.printf("**%5d**%5.3d**%05d**%05.3d**\n", 7, 7, 7, 7);
   delay(1000);
 }
 	</code>
