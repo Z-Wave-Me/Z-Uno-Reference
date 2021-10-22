@@ -2,8 +2,8 @@
 <h1>Wire.transfer()</h1> 
 
 <span class="function_description">
-	This method replaces these 3 functions <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span>, <span class="function_ref" link="Wire/Write">write</a>()</span> и <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>.
-	This approach can reduce your code in some cases.
+	Method <b>transfer()</b> replaces these 3 functions call <span class="function_ref" link="Wire/BeginTransmission">beginTransmission</a>()</span>, <span class="function_ref" link="Wire/Write">write</a>()</span> и <span class="function_ref" link="Wire/endTransmission">endTransmission</a>()</span>.
+	This approach helps to reduce your code in some cases.
 </span>
 
 <span class="function_syntax">
@@ -36,14 +36,13 @@ transfer(address, *buffer, count, sendStop);<br>
     </span>
 
 <span class="function_returns">
-
     byte, which indicates the status of the transmission:
-    </li><li>0:success</li>
-    </li><li>1:data too long to fit in transmit buffer</li>
-    </li><li>2:received NACK on transmit of address</li>
-    </li><li>3:received NACK on transmit of data</li>
-    </li><li>4:other error</li>
-	</li zunoVersion="v2"><li  zunoVersion="v2">5:timeout</li>
+    <li>0:success</li>
+    <li>1:data too long to fit in transmit buffer</li>
+    <li>2:received NACK on transmit of address</li>
+    <li>3:received NACK on transmit of data</li>
+    <li>4:other error</li>
+	  <li>5:timeout</li>
 </span>  
 
 <span class="function_example">
