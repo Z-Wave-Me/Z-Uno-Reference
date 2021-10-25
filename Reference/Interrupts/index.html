@@ -24,14 +24,14 @@ Z-Uno v2 is able to handle some of hardware interrupts of Z-Wave chip in user co
 </span>
 
 <span class="function_description_more" zunoVersion="v2"></span>
-External interrupts.<br> You can use any pin of Z-Uno as the source of external interrupt.
+<b>External interrupts.</b><br> You can use any pin of Z-Uno as the source of external interrupt.
 Some of pins are not compatible to each other. Below is a list of pins, in a brackets are the pins which you unable to attach together:
 0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24).<br>
 The builtin interrupt controller supports up to 16 external interrupts. 
 You are able to attach/detach handlers for external interrupts dinamically using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() and  <span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>() fuctions.
 </span>
 <span class="function_description_more" zunoVersion="v2"></span>
-Peripheral interrupts.<br>  
+<b>Peripheral interrupts.</b><br>  
 You can bind your handlers dinamically for this type of interrupts using <span class="function_ref">zunoAttachSysHandler</span>() fuction.
 Use this syntax to bind your <b>ISRHandlerFunction</b> to interrupt type <b>ZUNO_IRQVEC_</b>:
 <code class="c">zunoAttachSysHandler(ZUNO_HANDLER_IRQ, ZUNO_IRQVEC_..., (void*) &ISRHandlerFunction);</code>
@@ -114,21 +114,13 @@ The code in the user interrupt handler function should be as fast as possible an
     <tr><td><span class="function_ref">millis</span>()</td><td>(starting from 2.1.5)</td></tr>
 </table>
 
-<span class="function_description_more" zunoVersion="v1">
-Old-fashioned static style definitions is available for Z-Uno v2 too. See section below.
-</span> 
 <span class="function_description_note" zunoVersion="v2">
-The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below.
+    The code in the user interrupt handler function should be as fast as possible. ZUno uses the deferred interrupt method. Interrupts are stored in a list of special events, and then processed by an exclusive thread with high priority. If you configure the peripheral device to create interrupts too often, this will cause your Z-Uno to hang. Therefore, it is not recommended to setup cyclic timers with intervals of less than 50 microseconds.
 </span>
 
-<table zunoVersion="v2">
-    <tr><th>Function allowed in interrupt handler</th><th>Limitations</th></tr>
-    <tr><td><span class="function_ref">digitalRead</span>(pin)</td><td>pin: a constant or variable</td></tr>
-    <tr><td><span class="function_ref">digitalWrite</span>(pin, value)</td><td>pin: a constant or variable</td></tr>
-    <tr><td><span class="function_ref">pinMode</span>(pin, mode)</td><td>pin: a constant or variable</td></tr>
-    <tr><td><span class="function_ref">millis</span>()</td><td>-</td></tr>
-</table>
-
+<span class="function_description_more" zunoVersion="v2">
+Old-fashioned static style definitions is available for Z-Uno v2 too. See section below.
+</span> 
 
 <span class="function_syntax">ZUNO_SETUP_ISR_*(my_handler_func)</span>
 <span class="function_parameters">
