@@ -11,20 +11,90 @@ Z-Uno uses hardware interrupts of Z-Wave chip as well as software generated inte
 </span>
 
 <span class="function_description" zunoVersion="v2">
-You can use any pin of Z-Uno as the source of external interrupt.
-Some of pins is not compatible to each other. Below is a list of pins, in a brackets are the pins which you unable to attach together. 
-0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24)
-On the other hand the builtin controller supports up to 16 external interrupts. 
+Z-Uno v2 is able to handle some of hardware interrupts of Z-Wave chip in user code. There is a list of supported interrupt types:
+<ul>
+    <li>ZUNO_IRQVEC_GPIO_ODD and ZUNO_IRQVEC_GPIO_EVEN</li> External interrupts of odd/even pins. See below about external interrupt handlers.
+    <li>ZUNO_IRQVEC_I2C0 and ZUNO_IRQVEC_I2C1</li> I2C peripheral receive interrupts.
+    <li>ZUNO_IRQVEC_TIMER0 and ZUNO_IRQVEC_TIMER1</li> 16Bit timers peripheral interrupts.
+    <li>ZUNO_IRQVEC_WTIMER0</li> 32Bit timer peripheral interrupts.
+    <li>ZUNO_IRQVEC_CSEN</li> Capacitive sensor peripheral interrupt.
+    <li>ZUNO_IRQVEC_USART&ltn&gt_RX</li> USART peripheral receive interrupts.
+    <li>ZUNO_IRQVEC_LEUART0_RX</li> Low energy UART peripheral receive interrupt.
+</ul>
 </span>
 
+<span class="function_description_more" zunoVersion="v2"></span>
+External interrupts.<br> You can use any pin of Z-Uno as the source of external interrupt.
+Some of pins are not compatible to each other. Below is a list of pins, in a brackets are the pins which you unable to attach together:
+0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24).<br>
+The builtin interrupt controller supports up to 16 external interrupts. 
+You are able to attach/detach handlers for external interrupts dinamically using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() and  <span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>() fuctions.
+</span>
+<span class="function_description_more" zunoVersion="v2"></span>
+Peripheral interrupts.<br>  
+You can bind your handlers dinamically for this type of interrupts using <span class="function_ref">zunoAttachSysHandler</span>() fuction.
+Use this syntax to bind your <b>ISRHandlerFunction</b> to interrupt type <b>ZUNO_IRQVEC_</b>:
+<code class="c">zunoAttachSysHandler(ZUNO_HANDLER_IRQ, ZUNO_IRQVEC_..., (void*) &ISRHandlerFunction);</code>
+</span>
+
+<span class="function_example" zunoVersion="v2">
+<pre> Peripheral interrupt example1. Bind user-defined handler to USART0 RX interrupt.
+<code class="c">
+    uint32_t num_bytes_received = 0;
+    void UARTRxInt(uint32_t p){
+        // p parameter is incoming symbol
+        // Code just counts received bytes
+        num_bytes_received++;
+    }
+    void setup(){
+        Serial.begin(115200);
+        // It's not evident, but Serial is binded to USART2 peripheral
+        // Bind function
+        zunoAttachSysHandler(ZUNO_HANDLER_IRQ, ZUNO_IRQVEC_USART2_RX, (void*) &UARTRxInt);
+    }
+    
+    void loop(){
+        if(num_bytes_received){
+            Serial.print("RECEIVED:");
+            Serial.print(num_bytes_received);
+        }
+        delay(1000);
+    }
+		</code>
+	</pre>
+</span>
+<span class="function_example" zunoVersion="v2">
+    <pre> Peripheral interrupt example2. GPT interrupt example.
+    <code class="c">
+
+volatile unsigned long count_gpt = 0;
+void gpt_handler() {
+    count_gpt++;
+}
+void setup() {
+    Serial.begin(115200);
+    // setup handler dynamically
+    // GPT is maped to 32bit timer known as WTIMER
+    zunoAttachSysHandler(ZUNO_HANDLER_IRQ, ZUNO_IRQVEC_WTIMER0, (void*) &gpt_handler);
+    // setup GPT timer
+    zunoGPTInit(ZUNO_GPT_SCALE1024|ZUNO_GPT_CYCLIC);	// divider and cyclic mode
+    zunoGPTSet(10); // In 1024 tick units
+    zunoGPTEnable(1); // start a timer    
+}
+
+void loop() {
+    Serial0.print("Current GPT value:");
+    Serial0.println(count_gpt);
+    
+    delay(1000);
+}
+            </code>
+        </pre>
+    </span>
+    
 <span class="function_description_more" zunoVersion="v1">
 Interrupt handler functions should be defined in user sketch and &laquo;announced&raquo; using the corresponding <code>ZUNO_SETUP_ISR_*(<i>my_handler_func</i>)</code> macro, where <i>my_handler_func</i> is the name of the handler function.
-</span>
-
-<span class="function_description_more" zunoVersion="v2">
-Interrupt handler functions should be defined in user sketch. You are able to attach/detach handlers dinamically using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() and  <span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>() fuctions. </span>    
-</span>
-    
+</span>    
 
 <span class="function_description_note" zunoVersion="v1">
 The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below. Also don't use local variables &mdash; use global variables instead!
@@ -44,6 +114,9 @@ The code in the user interrupt handler function should be as fast as possible an
     <tr><td><span class="function_ref">millis</span>()</td><td>(starting from 2.1.5)</td></tr>
 </table>
 
+<span class="function_description_more" zunoVersion="v1">
+Old-fashioned static style definitions is available for Z-Uno v2 too. See section below.
+</span> 
 <span class="function_description_note" zunoVersion="v2">
 The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below.
 </span>
@@ -56,8 +129,8 @@ The code in the user interrupt handler function should be as fast as possible an
     <tr><td><span class="function_ref">millis</span>()</td><td>-</td></tr>
 </table>
 
-<span class="function_syntax">ZUNO_SETUP_ISR_*(my_handler_func)</span>
 
+<span class="function_syntax">ZUNO_SETUP_ISR_*(my_handler_func)</span>
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">*</span>
@@ -81,3 +154,29 @@ The code in the user interrupt handler function should be as fast as possible an
 </tr>
 </table>
 </span>
+
+<span class="function_example" zunoVersion="v2">
+<pre> Static ISR definition. GPT interrupt handler example.
+<code class="c">
+volatile unsigned long count_gpt = 0;
+// special static macro-binding
+ZUNO_SETUP_ISR_GPTIMER(gpt_handler);
+void gpt_handler() {
+    count_gpt++;
+}
+void setup() {
+    Serial.begin(115200);
+    // setup GPT timer
+    zunoGPTInit(ZUNO_GPT_SCALE1024|ZUNO_GPT_CYCLIC);	// divider and cyclic mode
+    zunoGPTSet(10); // In 1024 tick units
+    zunoGPTEnable(1); // start a timer    
+}
+void loop() {
+    Serial0.print("Current GPT value:");
+    Serial0.println(count_gpt);
+    delay(1000);
+}
+</code>
+</pre>
+</span>
+
