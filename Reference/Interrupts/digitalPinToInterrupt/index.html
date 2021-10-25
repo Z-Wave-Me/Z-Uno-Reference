@@ -1,0 +1,44 @@
+<h1 zunoVersion="v2">digitalPinToInterrupt()</h1>
+
+<span class="function_description">
+Converts Z-Uno pin number to interrupt index.
+</span>
+
+<span class="function_syntax">
+digitalPinToInterrupt(pin)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">pin:</span>
+		<span class="function_parameters_param_description"> Z-Uno pin number. Look at the <a href="http://z-uno.z-wave.me/technical/pinout/">pinout page</a> for more details.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	interrupt index
+</span>
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+const byte ledPin = 13;
+const byte interruptPin = 2;
+volatile byte state = LOW;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(interruptPin, INPUT_PULLUP);
+  attachInterrupt(<b>digitalPinToInterrupt(interruptPin)</b>, blink, CHANGE);
+}
+
+void loop() {
+  digitalWrite(ledPin, state);
+}
+
+void blink() {
+  state = !state;
+}
+		</code>
+	</pre>
+</span>

@@ -1,4 +1,4 @@
-<h1>attachInterrupt()</h1>
+<h1 zunoVersion="v2">attachInterrupt()</h1>
 
 <span class="function_description">
 Interrupts are useful for making things happen automatically in microcontroller programs and can help solve timing problems. Good tasks for using an interrupt may include reading a rotary encoder, or monitoring user input.
@@ -7,14 +7,128 @@ lines for the encoder, in order to catch pulses when they occurred. Other sensor
 catch a coin drop. In all of these situations, using an interrupt can free the microcontroller to get some other work done while not missing the input.
 </span>
 
+<span class="function_description_note">
+You are able to attach up to 16 interrupts simultaneously. Each pin has to have different pin index in its port. You can't use the same pin index for different ports. For example if you attach interrupt to PC7 then you are unable to attach interrupt to PA7 or to PB7. Please check the pin table below.
+</span>
+Z-Uno v2 pin to port mapping.
+<table>
+	<tr>
+		<th>Z-Uno pin #</th>
+		<th>Cortex port & pin name</th>
+	</tr>
+	<tr>
+		<td>0</td>
+		<td>PC8</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>PC9</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>PF2</td>
+	</tr>
+	<tr>
+		<td>24(TX0)</td>
+		<td>PD13</td>
+	</tr>
+	<tr>
+		<td>25(RX0)</td>
+		<td>PC11</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>PF6</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>PF7</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>PD9</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>PD10</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>PF4</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>PF5</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>PD11</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>PD12</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>PD14</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>PD15</td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td>PA0</td>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td>PA1</td>
+	</tr>
+	<tr>
+		<td>15</td>
+		<td>PA2</td>
+	</tr>
+	<tr>
+		<td>16</td>
+		<td>PA3</td>
+	</tr>
+	<tr>
+		<td>17</td>
+		<td>PA4</td>
+	</tr>
+	<tr>
+		<td>18</td>
+		<td>PB13</td>
+	</tr>
+	<tr>
+		<td>19</td>
+		<td>PB12</td>
+	</tr>
+	<tr>
+		<td>20</td>
+		<td>PB11</td>
+	</tr>
+	<tr>
+		<td>21</td>
+		<td>PC6</td>
+	</tr>
+	<tr>
+		<td>22</td>
+		<td>PC7</td>
+	</tr>
+	<tr>
+		<td>23</td>
+		<td>PC10</td>
+	</tr>
+</table>>
 <span class="function_syntax">
-attachInterrupt(interruptPin, userFunc, mode)<br>
+attachInterrupt(interrupti, userFunc, mode)<br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">interruptPin:</span>
-		<span class="function_parameters_param_description">  the pin number.</span>
+		<span class="function_parameters_param_name">interrupti:</span>
+		<span class="function_parameters_param_description">  the interrupt index.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">userFunc:</span>
@@ -59,4 +173,8 @@ void blink() {
 }
 		</code>
 	</pre>
+</span>
+<span class="function_see_also">
+detachInterrupt<span class="function_ref">interrupts/detachInterrupt</span>()
+digitalPinToInterrupt<span class="function_ref">interrupts/digitalPinToInterrupt</span>()
 </span>

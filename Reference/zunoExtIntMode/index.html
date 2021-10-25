@@ -1,7 +1,11 @@
-<h1 zunoVersion="v1">zunoExtIntMode()</h1>
-<h1 zunoVersion="v2">zunoExtIntMode() - deprecated</h1>
-<span class="function_description">
+<h1>zunoExtIntMode()</h1>
+
+<span class="function_description" >
 External Interrupts pins are INT0 (pin 17), INT1 (pin 18) and ZEROX (pin 3). Z-Uno can execute a user defined code on an action on those pins. zunoExtIntMode() function allows to configure interrupt trigger event.
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+zunoExtIntMode() is deprecated. Use  <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() fuction instead.
 </span>
 
 <span class="function_description_more">
@@ -53,7 +57,6 @@ void int0_handler() {
 
 void setup() {
     zunoExtIntMode(ZUNO_EXT_INT0, FALLING);
-
     Serial.begin(115200);
 }
 
