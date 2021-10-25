@@ -1,7 +1,8 @@
 <span zunoVersion="v2"></span>
 <h1>zunoAssociationGroupName()</h1>
 <span class="function_description">
-Позволит для групп установить свое имя иначе будет использованно имя группы типа "User group 01", "User group 02"...
+Callback function that returns name of desired group. By default names of groups are 
+"User group 01", "User group 02" and etc... Z-Uno core calls this function when Z-Wave controller asks for group information by means of Association Group Information (AGI) command class.
 </span>
 
 <span class="function_syntax">
@@ -11,12 +12,12 @@ zunoAssociationGroupName(groupIndex)<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">groupIndex:</span>
-		<span class="function_parameters_param_description"> индекс группы асоциации, начинаеться он с CTRL_GROUP_1...</span>
+		<span class="function_parameters_param_description">index of needed group. It starts from CTRL_GROUP_1...</span>
 	</span>
 </span>
 
 <span class="function_returns">
-указатель на Си строку распаложенную в постоянной памяти и длинной не более 42 байта
+Pointer to nullterminated C-string. The maximum length of group name is 42 symbols! 
 </span>
 
 
@@ -28,7 +29,7 @@ ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP
 
 void setup() {
 }
-
+// returns custom names for association groups
 const char *zunoAssociationGroupName(uint8_t groupIndex) {
 	const char				*tmp;
 

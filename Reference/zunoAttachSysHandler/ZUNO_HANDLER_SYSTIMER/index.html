@@ -41,7 +41,7 @@ void handlerSysTimer(size_t tick) {
 }
 void setup() {
 	pinMode(LED_BUILTIN, OUTPUT);
-	// Bind our handler to system timer 
+	// Bind our handler to system timer ˜
 	zunoAttachSysHandler(ZUNO_HANDLER_SYSTIMER, 0, (void *)&handlerSysTimer);
 	glob = millis() + dimmerValue*10;
 }
