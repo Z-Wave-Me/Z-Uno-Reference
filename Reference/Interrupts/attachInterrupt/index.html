@@ -149,7 +149,10 @@ attachInterrupt(interrupti, userFunc, mode)<br>
 </span>
 
 <span class="function_returns">
-	Nothing
+	<ul>
+		<li><b>ZunoErrorExtInt</b> Can't attach handler the interrupt index is busy</li>
+		<li><b>ZunoErrorOk</b> Attached successfuly</li>
+	</ul>
 </span>
 
 <span class="function_example">
@@ -176,6 +179,6 @@ void blink() {
 	</pre>
 </span>
 <span class="function_see_also">
-<span class="function_ref" link="Interrupts/attachInterrupt">detachInterrupt</span>() fuction 
+<span class="function_ref" link="Interrupts/attachInterrupt">detachInterrupt</span>() function <br>
 <span class="function_ref" link="Interrupts/digitalPinToInterrup">digitalPinToInterrupt</span>() function
 </span>
