@@ -10,7 +10,7 @@ catch a coin drop. In all of these situations, using an interrupt can free the m
 <span class="function_description_note">
 You are able to attach up to 16 interrupts simultaneously. Each pin has to have different pin index in its port. You can't use the same pin index for different ports. For example if you attach interrupt to PC7 then you are unable to attach interrupt to PA7 or to PB7. Please check the pin table below.
 </span>
-Z-Uno v2 pin to port mapping.
+
 <table>
 	<tr>
 		<th>Z-Uno pin #</th>
@@ -120,7 +120,8 @@ Z-Uno v2 pin to port mapping.
 		<td>23</td>
 		<td>PC10</td>
 	</tr>
-</table>>
+</table>
+
 <span class="function_syntax">
 attachInterrupt(interrupti, userFunc, mode)<br>
 </span>
@@ -128,7 +129,7 @@ attachInterrupt(interrupti, userFunc, mode)<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">interrupti:</span>
-		<span class="function_parameters_param_description">  the interrupt index.</span>
+		<span class="function_parameters_param_description">  the interrupt index. Use <b>digitalPinToInterrupt()</b> to convert pin to its interrupt index.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">userFunc:</span>
@@ -175,6 +176,6 @@ void blink() {
 	</pre>
 </span>
 <span class="function_see_also">
-detachInterrupt<span class="function_ref">interrupts/detachInterrupt</span>()
-digitalPinToInterrupt<span class="function_ref">interrupts/digitalPinToInterrupt</span>()
+<span class="function_ref" link="Interrupts/attachInterrupt">detachInterrupt</span>() fuction 
+<span class="function_ref" link="Interrupts/digitalPinToInterrup">digitalPinToInterrupt</span>() function
 </span>

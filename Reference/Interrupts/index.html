@@ -11,13 +11,20 @@ Z-Uno uses hardware interrupts of Z-Wave chip as well as software generated inte
 </span>
 
 <span class="function_description" zunoVersion="v2">
-Z-Uno подерживает все пины доступны для внешних прерываний с не большим ограничением, а именно то что некоторые пины можно использовать 'или' а не 'и':
+You can use any pin of Z-Uno as the source of external interrupt.
+Some of pins is not compatible to each other. Below is a list of pins, in a brackets are the pins which you unable to attach together. 
 0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24)
+On the other hand the builtin controller supports up to 16 external interrupts. 
 </span>
 
 <span class="function_description_more" zunoVersion="v1">
 Interrupt handler functions should be defined in user sketch and &laquo;announced&raquo; using the corresponding <code>ZUNO_SETUP_ISR_*(<i>my_handler_func</i>)</code> macro, where <i>my_handler_func</i> is the name of the handler function.
 </span>
+
+<span class="function_description_more" zunoVersion="v2">
+Interrupt handler functions should be defined in user sketch. You are able to attach/detach handlers dinamically using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() and  <span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>() fuctions. </span>    
+</span>
+    
 
 <span class="function_description_note" zunoVersion="v1">
 The code in the user interrupt handler function should be as fast as possible and <b>should not contain ANY function calls</b> except few listed below. Also don't use local variables &mdash; use global variables instead!
