@@ -1,0 +1,50 @@
+<span zunoVersion="v2"></span>
+<h1>setBaseline()</h1>
+<span class="function_description">
+	Set the baseline for the sensor.
+</span>
+
+<span class="function_description_more">
+There is a mechanism within CCS811 to manually save and restore a previously saved baseline value using the BASELINE register.
+</span>
+
+<span class="function_description_more">
+The correct time to save the baseline will depend on the customer use-case and application.
+</span>
+
+<span class="function_description_more">
+	For devices which are powered for >24 hours at a time:
+<ul>
+	<li>During the first 500 hours – save the baseline every 24-48 hours.</li>
+	<li>After the first 500 hours – save the baseline every 5-7 days.</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+For devices which are powered <24 hours at a time:
+<ul>
+	<li>If the device is run in, save the baseline before power down.</li>
+	<li>If multiple operating modes are used, a separate baseline should be stored for each.</li>
+	<li>The baseline should only be restored when the resistance is stable (typically 20-30 minutes).</li>
+	<li>If changing from a low to high power mode (without spending at least 10 minutes in idle), the sensor resistance should be allowed to settle again before restoring the baseline.</li>
+</ul>
+</span>
+
+<span class="function_syntax">
+	ccs.setBaseline(baseline)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ccs:</span>
+		<span class="function_parameters_param_description"> a variable of type ZUNO_CCS811.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">baseline:</span>
+		<span class="function_parameters_param_description"> the baseline to be set. Has to be a value retrieved by <a href="/Reference/ZUNO_CCS811/getBaseline/">getBaseline</a>.</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    nothing
+</span>
