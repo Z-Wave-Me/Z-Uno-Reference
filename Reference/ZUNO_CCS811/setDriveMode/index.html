@@ -1,0 +1,54 @@
+<span zunoVersion="v2"></span>
+<h1>setDriveMode()</h1>
+<span class="function_description">
+	Set sample rate of the sensor. In <a href="/Reference/ZUNO_CCS811/begin/">begin</a> set default CCS811_DRIVE_MODE_1SEC.
+</span>
+
+<span class="function_description_more">
+	In Modes CCS811_DRIVE_MODE_1SEC, CCS811_DRIVE_MODE_10SEC, CCS811_DRIVE_MODE_60SEC, the equivalent CO2 concentration (ppm) and TVOC concentration (ppb) are calculated for every sample.
+	<ul>
+		<li>Mode CCS811_DRIVE_MODE_1SEC reacts fastest to gas presence, but has a higher operating current</li>
+		<li>Mode CCS811_DRIVE_MODE_60SEC reacts more slowly to gas presence but has the lowest average operating current.</li>
+	</ul>
+</span>
+
+<span class="function_description_more">
+	When a sensor operating mode is changed to a new mode with a lower sample rate (e.g. from Mode CCS811_DRIVE_MODE_1SEC to Mode CCS811_DRIVE_MODE_60SEC), it should be placed in Mode 0 (Idle) for at least 10 minutes before enabling the new mode. 
+	When a sensor operating mode is changed to a new mode with a higher sample rate (e.g. from Mode CCS811_DRIVE_MODE_60SEC to Mode CCS811_DRIVE_MODE_1SEC), there is no requirement to wait before enabling the new mode.
+</span>
+
+<span class="function_description_more">
+	Mode CCS811_DRIVE_MODE_250MS is intended for systems where an external host system wants to run an algorithm with raw data and this mode provides new sample data every 250ms
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+	Mode timings are subject to typical 2% tolerance due to accuracy of internal clock
+</span>
+
+
+<span class="function_syntax">
+	ccs.setDriveMode(mode)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ccs:</span>
+		<span class="function_parameters_param_description"> a variable of type ZUNO_CCS811.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">mode:</span>
+		<span class="function_parameters_param_description">
+			<ul>
+				<li>CCS811_DRIVE_MODE_IDLE – Idle (Measurements are disabled in this mode)</li>
+				<li>CCS811_DRIVE_MODE_1SEC – Constant power mode, IAQ measurement every second</li>
+				<li>CCS811_DRIVE_MODE_10SEC - Pulse heating mode IAQ measurement every 10 seconds</li>
+				<li>CCS811_DRIVE_MODE_60SEC – Low power pulse heating mode IAQ measurement every 60 seconds</li>
+				<li>CCS811_DRIVE_MODE_250MS - Constant power mode, sensor measurement every 250ms</li>
+			</ul>
+		</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    nothing
+</span>
