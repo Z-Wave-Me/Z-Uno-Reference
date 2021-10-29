@@ -1,0 +1,132 @@
+<img src="/wa-data/public/photos/12/14/1412/1412.300.jpg" class="img_right"/>
+
+<h3>Unveil your imagination to create:</h3>
+<ul>
+    <li>battery powered in-wall remote switch</li>
+    <li>rotary dimmer control</li>
+    <li>temperature/soil humidity/luminosity/voltage/distance or any other sensors as well as dry contact sensor or tick counter</li>
+    <li>low voltage switch</li>
+    <li>IR blaster</li>
+    <li>LED driver</li>
+    <li>motor driver</li>
+    <li>battery powered keypad</li>
+    <li>converter from any protocol to Z-Wave (using SPI/UART/I2C/1-wire bus)</li>
+    <li>... or any other device you dreamed about</li>
+</ul>
+
+<h3>Make your own Z-Wave device:</h3>
+<ul>
+    <li>control any Arduino compatible peripherals</li>
+    <li>define your own logic by modifying your sketch</li>
+    <li>use Arduino IDE and language to write and upload sketches</li>
+    <li>easy to use</li>
+    <li>requires no knowledge of Z-Wave protocol</li>
+    <li>complete DIY solution</li>
+</ul>
+
+<h3 link="HardwareSpec">Hardware specification:</h3>
+<ul>
+    <li>28 kB Flash memory for your sketches</li>
+    <li>2 kB RAM available</li>
+    <li>Z-Wave RF transmitter at 9.6/40/100 kbps</li>
+    <li>26 GPIO (overlaps with special hardware controllers)</li>
+    <li>4 <span class="function_ref" link="analogRead">ADC</span></li>
+    <li>5 <span class="function_ref" link="analogWrite">PWM</span></li>
+    <li>2 <span class="function_ref" link="Serial">UART</span></li>
+    <li>1 <span class="function_ref" link="Serial">USB</span> (serial port)</li>
+    <li>16 kB <span class="function_ref">EEPROM</span></li>
+    <li>1 <span class="function_ref">SPI</span> (master or slave)</li>
+    <li>4 IR controllers, 1 IR learn capability</li>
+    <li>1 TRIAC/ZEROX to control dimmer</li>
+    <li>3 Interrupts</li>
+    <li>1 Timer 4 MHz</li>
+    <li><span class="function_ref" link="Wire">I2C</span> (software)</li>
+    <li><span class="function_ref">1-Wire</span> (software)</li>
+    <li>8x6 <span class="function_ref" link="zunoSetupKeyScannerWU">Keypad Scanner</span> (software)</li>
+    <li>2 service LED, 1 service button</li>
+    <li>1 user test LED</li>
+</ul>
+
+<h3 link="PowerModes">Power modes:</h3>
+<ul>
+    <li>USB 5 V, external 5 or 3 V, external 7-18 V or battery (via MU-2F connector, included)</li>
+    <li>always on, sleeping or FLiRS (Frequently Listening)</li>
+</ul>
+
+<h3 link="Z-WaveFeatures">Z-Wave supported features:</h3>
+<ul>
+    <li>Z-Wave Plus compliant</li>
+    <li>all Z-Wave frequencies (check availability)</li>
+    <li>out of the box support of AES 128 bit Security (S0 and S2)</li>
+    <li>upgrade via USB or radio (Z-Wave OTA)</li>
+    <li>Multichannel (32 channels)</li>
+    <li>5 Association groups</li>
+    <li>controls switches, dimmers, door locks and scenes</li>
+    <li>works with gateways and/or directly with other Z-Wave devices</li>
+</ul>
+
+<h3 link="ChannelTypes">Channel types:</h3>
+<ul>
+    <li>Binary Switch</li>
+    <li>Multilevel Switch</li>
+    <li>Color Switch</li>
+    <li>Binary Sensor</li>
+    <li>Multilevel Sensor</li>
+    <li>Meter</li>
+    <li>Door Lock</li>
+    <li>Water Valve</li>
+    <li>Siren</li>
+    <li>Thermostat</li>
+</ul>
+
+<h3 link="Dimensions">Dimensions:</h3>
+<ul>
+    <li>L×W×H: 39×20×16 mm (PCB dimentions with all compinents)</li>
+    <li>L×W×H: 39×20×7 mm (PCB dimentions with PLS and battery connectors removed)</li>
+    <li>Antenna lenght: 86 mm (89 mm with isolation), can be bent to better fit your dimensions</li>
+    <li>Wigth: 7 g</li>
+</ul>
+
+<h3 link="Antenna">Antenna:</h3>
+<ul>
+    <li>Antenna type: wire antenna 86 mm for 865-870 MhZ</li>
+    <li>Alternative antenna: optional u.fl connector can be soldered (to RF2 pads)</li>
+</ul>
+
+
+<h3 link="Electrical">Electrical characteristics:</h3>
+<ul>
+    <li>Digital pin in logical 1: > 2.1 V, leakage current 10 μA</li>
+    <li>Digital pin in logical 0: < 0.9 V, leakage current 10 μA or 40&ndash;120 μA (with internal pull-up enabled)</li>
+    <li>Internal pullup resistor: 15&ndash;20 kΩ (at +25°C)</li>
+    <li>Digital pin out logical 1: > 2.4 V, max current sourcing 8 mA (16 mA for digital pins 3-6)</li>
+    <li>Digital pin out logical 0: < 0.4 V, max current sinking 8 mA (16 mA for digital pins 3-6)</li>
+    <li>Total max current sourcing from GPIO pins: 120 mA</li>
+    <li>Power consumption on 3.3 V:
+        <ul style="margin-bottom: 0;">
+            <li>in always listening mode 50 mA</li>
+            <li>in sleep mode 1 mA (about 7 μA if DC-DC is turned off by unsoldering R12)</li>
+            <li>in FLiRS mode 1 mA (about 70 μA if DC-DC is turned off by unsoldering R12)</li>
+        </ul>
+    </li>
+    <li>Power consumption on 5 V: in always listening mode &sim; 30 mA (can be lowered by using external switching DC-DC)</li>
+    <li>Power consumption on 7&ndash;18 V: in always listening mode &sim; 35 mA (can be lowered by using external switching DC-DC)</li>
+    <li>DC-DC installed:
+        <ul style="margin-bottom: 0;">
+            <li>7&ndash;18 V &rarr; 5 V: NCP1117ST50T3G, max current sourcing from 5V pin 900 mA</li>
+            <li>5 V &rarr; 3 V: MCP1700, max current sourcing from 3V pin 200 mA</li>
+        </ul>
+    </li>
+</ul>
+<p>See <a href="/technical/power-supply">Z-Uno power supply schematics</a> for more info.</p>
+
+<h3 link="Pinout">Pinout</h3>
+<a href="/technical/pinout/"><img src="/files/z-uno/pinout/Z-Uno pinout.svg" width="50%"/></a>
+<p><a href="/technical/pinout/">Click to enlarge</a></p>
+
+<h3 link="CAD">CAD libraries</h3>
+<p>Download <img src="/wa-data/public/photos/21/14/1421/1421.20.png" style="vertical-align: middle;"/> <a href="/files/z-uno/pinout/Z-Uno 2.0 2016-08-17.fzpz">Fritzing</a>, <img src="/wa-data/public/photos/25/15/1525/1525.20.png" style="vertical-align: middle;"/> <a href="/files/z-uno/pinout/adafruit-eagle.zip">Eagle</a><sup style="font-size: smaller;">1</sup> and <img src="/wa-data/public/photos/24/15/1524/1524.20.png" style="vertical-align: middle;"/> <a href="/files/z-uno/pinout/KiCad_ZUno_Lib.zip">KiCAD</a><sup style="font-size: smaller;">2</sup> part files.</p>
+<p><sup style="font-size: smaller;">1</sup> &mdash; community contribution by user schmidmi. <sup style="font-size: smaller;">2</sup> &mdash; community contribution by user droll.</p>
+
+<h3>Deeper insight</h3>
+<p>Know more about <a href="/technical/insight">Z-Uno internals</a>.</p>

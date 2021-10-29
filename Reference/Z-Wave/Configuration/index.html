@@ -1,0 +1,92 @@
+<h1>Z-Uno configuration parameters</h1>
+
+<p>Z-Uno have many different parameters and options to give you full power of Z-Wave. Some configurations are defined via Arduino IDE menu (i.e. enabling security).</p>
+
+<p>Z-Uno also allows some parameters to be configured via Z-Wave Configurations. Here is the descriptions of parameters and possible values:</p>
+<table>
+    <tr>
+        <th>#</th>
+        <th width="65%">Description</th>
+        <th>Size</th>
+        <th>Default value</th>
+        <th>Possible values</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Debug mode to apply channels, associations and power mode changes on the fly without exclusion-inclusion sequence. <b>Use for debugging only!</b></td>
+        <td>1&nbsp;byte</td>
+        <td>0&nbsp;(No)</td>
+        <td><ul><li>0 &mdash; No</li><li>1 &mdash; Yes</li></ul></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Blink with service LED during operation</td>
+        <td>1&nbsp;byte</td>
+        <td>1&nbsp;(Yes)</td>
+        <td><ul><li>0 &mdash; No</li><li>1 &mdash; Yes</li></ul></td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Enable or disable Security S0 during inclusion (requires re-inclusion)<br/>Same as changing Tools &rarr; Security in the Arduino IDE</td>
+        <td>1&nbsp;byte</td>
+        <td>1&nbsp;(Enable)</td>
+        <td><ul><li>0 &mdash; Disable</li><li>1 &mdash; Enable</li></ul></td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Enable or disable logging via Z-Wave<br/>Same as changing Tools &rarr; Logging in the Arduino IDE</td>
+        <td>1&nbsp;byte</td>
+        <td>1&nbsp;(Enable)</td>
+        <td><ul><li>0 &mdash; Disable</li><li>1 &mdash; Enable</li></ul></td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Set Z-Wave frequency and reboot<br/>Same as changing Tools &rarr; Frequency in the Arduino IDE<br/><i>Note that after issuing this command the device will stop change frequency and your controller will loose communications with it!</i></td>
+        <td>2 bytes</td>
+        <td>&mdash;</td>
+        <td>
+            <ul>
+                <li>0&nbsp;&mdash;&nbsp;Don't change, just reboot</li>
+                <li>255&nbsp;&mdash;&nbsp;EU</li>
+                <li>510&nbsp;&mdash;&nbsp;RU</li>
+                <li>765&nbsp;&mdash;&nbsp;IN</li>
+                <li>1020&nbsp;&mdash;&nbsp;US</li>
+                <li>1275&nbsp;&mdash;&nbsp;ANZ</li>
+                <li>1530&nbsp;&mdash;&nbsp;HK</li>
+                <li>1785&nbsp;&mdash;&nbsp;CN</li>
+                <li>2040&nbsp;&mdash;&nbsp;JP</li>
+                <li>2295&nbsp;&mdash;&nbsp;KR</li>
+                <li>2550&nbsp;&mdash;&nbsp;IL</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>Minimal time (in seconds) between Sensor Multilevel reports. See <span class="function_ref">zunoSendReport</span>().
+            <br><i>Values less than 30 should not be used to conform to Z-Wave Plus, use them for debug only!</i></td>
+        <td>1&nbsp;byte</td>
+        <td>30</td>
+        <td><ul><li>0 &mdash; send immediately</li><li>1&ndash;255 &mdash; time in seconds</li></ul></td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>Change channel type from Notification to legacy Sensor Binary to help Fibaro Home Center, Vera and some other controllers having problems with the latest Z-Wave Plus to understand the channel type</td>
+        <td>1&nbsp;byte</td>
+        <td>0</td>
+        <td><ul><li>0 &mdash; Notification channel type</li><li>1 &mdash; Switch Binary channel type</li></ul></td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>Confirmation of <a href="/z-wave/ota/">OTA operations</a> (for bootloader and sketch upgrades)<br>Do it right before or right after initiating the firmware upgrade process</td>
+        <td>4&nbsp;bytes</td>
+        <td>&mdash;</td>
+        <td><ul><li>1 &mdash; confirm OTA</li></ul></td>
+    </tr>
+    <tr>
+        <td><nobr>64&ndash;96</nobr></td>
+        <td>User defined parameters (<span class="function_ref">ZUNO_SETUP_CFGPARAMETER_HANDLER</span>)</td>
+        <td>2&nbsp;bytes</td>
+        <td>&mdash;</td>
+        <td>User defined</td>
+    </tr>
+</table>
