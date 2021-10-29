@@ -1,0 +1,22 @@
+<h1>Over-the-Air upgrade</h1>
+
+<p>Z-Uno allows Over-the-Air (OTA) upgrade of the Z-Uno bootloader as well as user sketch. Your controller should be capable of sending new firmwares to Z-Wave devices (using Firmware Update Command Class).</p>
+
+<h3>Updating Z-Uno bootloader</h3>
+<p>Normally one would use Arduino IDE (Tools &rarr; Burn bootloader menu item) to upgrade Z-Uno bootloader via USB. But if your Z-Uno is already enclosed in some box, you can also do it wirelessly using OTA. To do this you need to use your Z-Wave controller to select corresponding <i>.bin</i> file, select <b>target 0</b> and start the process.</p>
+
+<p>Z-Uno will require confirmation from user (for security reasons). This can be done by <b>triple click</b> right after process start or by setting any value to <b><a href="/z-wave/configuration-parameters/">parameter #20</a> just before</b> the process.</p>
+
+<p>The <i>.bin</i> file can be found in the <a href="/getting-started/troubleshooting#WhereIsArduinoFolder">user arduino folder</a>/packages/Z-Uno/hardware/zw8051/x.y.z/bootloaders/ (x.y.z is your current version of Z-Uno software installed, for example, 2.0.6). You will find there files called like <i>zuno_bootloader_AAAABBBB011501100001<b>0043</b>EFF27E20.bin</i>. The part in bold (here it is 0043) should match the version installed on your Z-Uno (here it is 0.67, 0x00 = 0, 0x43 = 67). This file should be used to update Z-Uno (in our example from 0.67 to x.yz).</p>
+
+<p>Note that user sketch will be lost after bootloader upgrade!</p>
+
+<h3>Updating Z-Uno sketch</h3>
+<p>Normally one would use Arduino IDE (Upload button) to load user sketch via USB. But like with bootloader, you can use OTA to update your sketch too. To do this you need to use your Z-Wave controller to select corresponding <i>.bin</i> file, select <b>target 1</b> and start the process.</p>
+
+<p>To locate the <i>.bin</i> file you need first to enable verbose mode in Arduino IDE (File &rarr; Preferences &rarr; Show verbose output during &rarr; Compilation). To compile your sketch press Verify button. During compilation you will see somthing like: <br/>
+<code>Making firmware file: <b>/tmp/build6366042106180249572.tmp/sketch_sep28a-0206.hex</b> ...packihx: read 137 lines, wrote 255: OK.</code></p>
+
+<p>Z-Uno will require confirmation to start the process, see above.</p>
+
+<p>The file with same name as in bold, but with <i>.bin</i> instead of <i>.hex</i> is the one you need (in this example it will be /tmp/build6366042106180249572.tmp/sketch_sep28a-0206.bin).</p>
