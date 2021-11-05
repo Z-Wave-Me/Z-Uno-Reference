@@ -23,6 +23,6 @@ malloc(size)<br>
 
 
 <span class="function_description_note">
-Обратите внимание, RAM доступно 8192 байта, <b>malloc</b> использует данную память на равне со скетчем, но по остаточному принципу. Например скетч использует: 805 байта RAM, тогда malloc останеться 7387 байта.
-malloc использует для своих нужд при выдилении 4 байта, а так же выравнивает на 4 байта любое выдиление. Например если есть жилание выделить 1 байт памяти, то по факту malloc использует 8 байт RAM
+Note, up to 16kb RAM is avaliable for users, <b>malloc</b> shares this area with sketch static/global variables. For example if your sketch occupies 805 bytes for static data of RAM then malloc can use up to 15579 bytes of data.
+This realisation of <b>malloc</b> reserves 4 bytes for every allocated region for internal data. It aligns the allocated area by 4 bytes.
 </span>
