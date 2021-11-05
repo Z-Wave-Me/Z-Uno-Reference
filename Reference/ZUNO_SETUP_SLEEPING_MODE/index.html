@@ -30,19 +30,42 @@ There is only three possible values available:
 </span>
 
 <span class="function_tip">
-In <b>sleeping</b> mode periodical wakeup is configured via the Z-Wave controller using the Wake Up Command Class. The period is a factor of 4 minutes, minumum is 4 minutes. Interrupt can wake up the device at any time.
+In <b>sleeping</b> mode periodical wakeup is configured via the Z-Wave controller using the Wake Up Command Class. <span zunoVersion="v1">The period is a factor of 4 minutes, minumum is 4 minutes.</span> Interrupt can wake up the device at any time.
+    <span  zunoVersion="v2">
+    User can configurate custom wakeup interval using <span class="function_ref">zunoSetCustomWUPTimer</span>() function for <b>FLiRS</b> and <b>sleeping</b> modes.
+    From sleeping EM2 or FLIRS mode device you are able to wake up device using any pin, you need just to bind this pin to interrupt controller using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() function. By default pins <b>#18</b> and <b>BTN</b> are already binded.
+    If you need to wakeup device from sleeping EM4 mode you are able to do it only by means of these pins: <b>#2, #4(A1), #11, #16(PW4), #18, #23(BTN)</b>. You can add needed pin to "wakeup" list by means of <span class="function_ref" link="zunoEM4EnablePinWakeup">zunoEM4EnablePinWakeup</span>() function.
+    </span>
+
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 Note that in sleeping and FLiRS mode devices should be explicitely sent into sleeping state. This is done using <b><span class="function_ref">zunoSendDeviceToSleep</span>()</b> function. Once called, loop will not be called anymore and Z-Uno will finalize all jobs to go into sleep mode.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 Note that in sleeping and FLiRS mode during power consumption (deep sleep) state Z-Uno memory is not maintained. Hence it is cleaned all the time. If you want to keep some variables across sleeps you have to use <b><span class="function_ref">NZRAM</span></b> memory (very fast and do not consume enery) or <b><span class="function_ref">EEPROM</span></b> (slow and takes energy to read and write, but survive even during power off - this is a so called non-volatile memory).
 </span>
 
-<span class="function_tip">
+<span class="function_description_note" zunoVersion="v2">
+ Note that if you selected sleeping EM4 mode and the device wasn't included to network it doesn't go deeper then EM2 mode because of <b>SmartStart</b> technology. So it doesn't call <b>setup()</b> function on each wakeup as it described below. </span>. 
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Note that in sleeping EM2 and FLiRS modes during power consumption (deep sleep) state Z-Uno memory is not cleaned. So your logic doesn't stop and you don't need to save & restore you variables in <b>EEPROM</b>. The <b>setup()</b> function doesn't call when devices wakes up, because you don't need to reinitialize hardware. If you need to call your code when device wakes up please use system handler <span class="function_ref" link="zunoAttachSysHandler">ZUNO_HANDLER_WUP</span>. 
+</span>
+<span class="function_description_note" zunoVersion="v2">
+Note that in sleeping EM4 mode during power consumption (deep sleep) state Z-Uno memory is not maintained. 
+Hence it is cleaned all the time. If you want to keep some variables across 
+sleeps you have to use  <b><span class="function_ref">EEPROM</span></b>. This memory survives even during power off - this is a so called non-volatile memory. 
+</span>
+
+<span class="function_tip" zunoVersion="v1">
 If device is in sleeping mode, the USB port is not available for uploading new sketch. Device should be woken up or turned into <a href="/getting-started/troubleshooting">rescue mode</a> before uploading new sketch.
+</span>
+
+<span class="function_tip" zunoVersion="v2">
+If device is in sleeping mode, the USB port is available if you connect to it, because Z-Uno 2 has separate USB controller. Device will be booted into bootloader mode when you try to open its serial port. You don't need to make any special things to flash sketch inside sleeping or FLIRS device.
 </span>
 
 <span class="function_description_note">
@@ -82,27 +105,108 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
     </tr>
     <tr>
         <td>ZUNO_SLEEPING_MODE_SLEEPING</td>
-        <td>on each wake up</td>
+        <td zunoVersion="v1">on each wake up</td>
+        <td zunoVersion="v2">on each wake up if user selected <b>EM4</b> mode or once after power on if selected <b>EM2</b> mode.</td>
         <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
-        <td align="center">Yes</td>
-        <td align="center">Yes</td>
+        <td align="center" zunoVersion="v1">Yes</td>
+        <td align="center" zunoVersion="v1">Yes</td>
         <td align="center">No</td>
         <td align="center">No</td>
         <td></td>
     </tr>
     <tr>
         <td>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</td>
-        <td>on each wake up</td>
+        <td zunoVersion="v1">on each wake up</td>
+        <td zunoVersion="v2">once after power on</td>
+        
         <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
         <td align="center">Yes</td>
-        <td align="center">No</td>
+        <td align="center" zunoVersion="v1">No</td>
+        <td align="center" zunoVersion="v2">Yes</td>
         <td align="center">Yes</td>
         <td align="center">No</td>
         <td></td>
     </tr>
 </table>
 
+
+<span class="function_example" zunoVersion="v2">
+    Multichannel sleeping sensor example. This wakes up every 300 seconds using custom wakeup timer interval and sends reports to controller. You can try EM4/EM2 modes. 
+    <pre><code class="c">
+
+#define SLEEP_MODE SLEEP_MODE_EM4 // You can select from SLEEP_MODE_EM2, SLEEP_MODE_EM4
+#define WAKEUP_CUSTOM_INTERVAL 300 // Every 300 seconds
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING); // It's sleeping device 
+// This is a sample of 3-channel sensor
+ZUNO_SETUP_CHANNELS(
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS, getterTemp),
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_RELATIVE_HUMIDITY, SENSOR_MULTILEVEL_SCALE_PERCENTAGE_VALUE, SENSOR_MULTILEVEL_PRECISION_ONE_DECIMAL, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, getterHum),
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_BAROMETRIC_PRESSURE, SENSOR_MULTILEVEL_SCALE_KILO_PASCAL, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, getterBarPa),
+);
+
+#define MY_SERIAL Serial // You can use any UART for output you want, just modify this line
+uint32_t loop_count = 0; // variable that illustrates that RAM is alive during EM2 
+
+// core will call this function every time zuno wakes from EM2 mode
+// instead of setup()
+void _wakeHandler(void){
+    // Timer doesn't stop 
+    MY_SERIAL.print("EM2 wakeup time =");
+    MY_SERIAL.println(millis());
+    // Check what is the reason of wakeup from EM2
+    MY_SERIAL.print("WAKEUP REASON:");
+    MY_SERIAL.println(zunoGetWakeReason(), HEX);
+}
+void setup() {
+  // Set UART to output debug data
+  MY_SERIAL.begin(115200);
+  MY_SERIAL.println("SETUP WAS CALLED");
+  // Check what is the reason of startup/wakeup from EM4
+  MY_SERIAL.print("WAKEUP REASON:");
+  MY_SERIAL.println(zunoGetWakeReason(), HEX);
+  // setup handler for EM2 mode
+  zunoAttachSysHandler(ZUNO_HANDLER_WUP, 0, (void*) &_wakeHandler);
+}
+void loop() {
+  MY_SERIAL.print("uptime =");
+  MY_SERIAL.println(millis());
+  MY_SERIAL.print("loop count =");
+  MY_SERIAL.println(loop_count);
+ 
+ if(zunoIsSleepLocked()) { // Does sleep latch is locked?
+    // Here we do all sleep uninterruptable logic
+    // Report all the channels
+    zunoSendReport(1); // Report will block sleep anyway
+    zunoSendReport(2);
+    zunoSendReport(3);
+    zunoSetCustomWUPTimer(WAKEUP_CUSTOM_INTERVAL);
+    MY_SERIAL.println("I am ready to sleep!");
+    zunoSendDeviceToSleep(SLEEP_MODE); // This just says I am ready but it doesn't stop usercode momentally & completely
+                                        // User sleep latch is opened
+ }
+ // Here you can do something that could be interrupted by sleep mode
+ // ...
+ loop_count++; // Increment variable
+ delay(1000);
+}
+// Getters 
+int getterTemp1() {
+  return 2100+rand()%1000;
+}
+int getterHum() {
+  return rand()%100;
+}
+int getterBarPa() {
+  return rand()%10000;
+}
+
+    </code></pre>
+</span>
 <span class="function_see_also">
+    <span zunoVersion="v2"><span class="function_ref" link="zunoAttachSysHandler">zunoAttachSysHandler</span>()</span>
+    <span zunoVersion="v2"><span class="function_ref">zunoEM4EnablePinWakeup</span>()</span> 
+    <span><span class="function_ref">zunoSendDeviceToSleep</span>()</span> 
+    <span zunoVersion="v2"><span class="function_ref">zunoSetCustomWUPTimer</span>()</span>
     Get more information about <span class="function_ref">Z-Wave</span>.
 </span>
 
