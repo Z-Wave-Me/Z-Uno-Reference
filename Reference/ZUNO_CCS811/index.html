@@ -1,0 +1,99 @@
+<span zunoVersion="v2"></span>
+<h1>Zuno CCS811 Library</h1>
+
+<span class="function_description">
+	This is a library for the <a href="https://cdn.sparkfun.com/assets/learn_tutorials/1/4/3/CCS811_Datasheet-DS000459.pdf">CCS811</a> I2C gas sensor breakout. <a href="https://cdn.sparkfun.com/assets/learn_tutorials/1/4/3/CCS811_Datasheet-DS000459.pdf">CCS811</a> is a gas sensor that can detect a wide range of Volatile Organic Compounds (VOCs) and is intended for indoor air quality monitoring.
+</span>
+
+<span class="function_description_more">
+	The CCS811 has a 'standard' hot-plate MOX sensor, as well as a small microcontroller that controls power to the plate, reads the analog voltage, and provides an I2C interface to read from.
+</span>
+
+<span class="function_description_more">
+	This part will measure eCO2 (equivalent calculated carbon-dioxide) concentration within a range of 400 to 8192 parts per million (ppm), and TVOC (Total Volatile Organic Compound) concentration within a range of 0 to 1187 parts per billion (ppb). According to the fact sheet it can detect Alcohols, Aldehydes, Ketones, Organic Acids, Amines, Aliphatic and Aromatic Hydrocarbons.
+</span>
+
+
+<span class="function_description_more">
+	Please note, this sensor, like all VOC/gas sensors, has variability and to get precise measurements you will want to calibrate it against known sources! That said, for general environmental sensors, it will give you a good idea of trends and comparisons.
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+	AMS recommends that you run this sensor for 48 hours when you first receive it to "burn it in", and then 20 minutes in the desired mode every time the sensor is in use. This is because the sensitivity levels of the sensor will change during early use
+</span>
+
+
+<span class="function_description_more">
+	Биоблетека работает с сенсором с помощью <a href="/Reference/Wire/">Wire</a> в описании даннай биоблетеки смотрите используемую перефирию и используемые пины.
+</span>
+
+<span class="function_description_reference">
+	<ul>
+		<li><a href="/Reference/ZUNO_CCS811/available/">available</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/begin/">begin</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/checkError/">checkError</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/disableInterrupt/">disableInterrupt</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/enableInterrupt/">enableInterrupt</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/getBaseline/">getBaseline</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/getCurrentSelected/">getCurrentSelected</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/geteCO2/">geteCO2</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/getRawADCreading/">getRawADCreading</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/getTVOC/">getTVOC</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/readData/">readData</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/setBaseline/">setBaseline</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/setDriveMode/">setDriveMode</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/setThresholds/">setThresholds</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/SWReset/">SWReset</a></li>
+		<li><a href="/Reference/ZUNO_CCS811/ZUNO_CCS811/">ZUNO_CCS811</a></li>
+	</ul>
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+#include "Arduino.h"
+#include "ZUNO_CCS811.h"
+
+#define MY_SERIAL		Serial
+
+ZUNO_CCS811 ccs;
+
+void setup() {
+	MY_SERIAL.begin(115200);
+
+	MY_SERIAL.println("CCS811 test");
+	delay(100);
+	if(!ccs.begin()){
+		MY_SERIAL.println("Failed to start sensor! Please check your wiring.");
+		while(1)
+			delay(100);
+	}
+	MY_SERIAL.println("begin ok");
+
+	// Wait for the sensor to be ready
+	while(!ccs.available()){
+		delay(100);
+	};
+}
+
+void loop() {
+	if(ccs.available()){
+		if(!ccs.readData()){
+			MY_SERIAL.print("CO2: ");
+			MY_SERIAL.print(ccs.geteCO2());
+			MY_SERIAL.print("ppm, TVOC: ");
+			MY_SERIAL.println(ccs.getTVOC());
+		}
+		else{
+			MY_SERIAL.println("ERROR!");
+			while(1)
+				delay(100);
+		}
+		
+	}
+	delay(500);
+}
+		</code>
+	</pre>
+</span>  

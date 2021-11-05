@@ -1,0 +1,81 @@
+<span zunoVersion="v2"></span>
+<h1>Zuno BMP280/BME280 Library</h1>
+
+<span class="function_description">
+	Данная биоблетека работает с <a href="https://cdn-shop.adafruit.com/datasheets/BST-BMP280-DS001-11.pdf">BMP280</a> и <a href="https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf">BME280</a> платами.
+	Позволя получать температуру, давление и влажность в случае BME280.
+</span>
+
+<span class="function_description_more">
+	Биоблетека работает с платами с помощью <a href="/Reference/Wire/">Wire</a> и <a href="/Reference/SPI/">SPI</a> в описании даных биоблетек смотрите используемую перефирию и используемые пины.
+</span>
+
+<span class="function_description_reference">
+	<ul>
+		<li><a href="/Reference/ZUNO_BMP280/begin/">begin</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/BMP280/">BMP280</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/getTemperatureCompensation/">getTemperatureCompensation</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readAltitude/">readAltitude</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readHumidity/">readHumidity</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readHumidityH10/">readHumidityH10</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readPressure/">readPressure</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readPressureHgMM/">readPressureHgMM</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readPressureHgMM10/">readPressureHgMM10</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readPressurePa/">readPressurePa</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readTemperature/">readTemperature</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/readTemperatureC100/">readTemperatureC100</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/seaLevelForAltitude/">seaLevelForAltitude</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/sensorID/">sensorID</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/setSampling/">setSampling</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/setTemperatureCompensation/">setTemperatureCompensation</a></li>
+		<li><a href="/Reference/ZUNO_BMP280/takeForcedMeasurement/">takeForcedMeasurement</a></li>
+	</ul>
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+#include "ZUNO_BMP280.h"
+
+#define MY_SERIAL		Serial
+
+ZUNO_BMP280 bmp;
+
+void setup() {
+	MY_SERIAL.begin(115200);
+	MY_SERIAL.println(F("BMP280/BME280 test"));
+
+	if (!bmp.begin(BME280_ADDRESS_ALTERNATE)) {
+		MY_SERIAL.println(F("Could not find a valid BMP280 sensor, check wiring or "
+						"try a different address!"));
+		while (1) delay(10);
+	}
+	/* Default settings from datasheet. */
+	bmp.setSampling(ZUNO_BMP280::MODE_NORMAL,     /* Operating Mode. */
+					ZUNO_BMP280::SAMPLING_X2,     /* Temp. oversampling */
+					ZUNO_BMP280::SAMPLING_X16,    /* Pressure oversampling */
+					ZUNO_BMP280::SAMPLING_X16,
+					ZUNO_BMP280::FILTER_X16,      /* Filtering. */
+					ZUNO_BMP280::STANDBY_MS_500); /* Standby time. */
+}
+
+void loop() {
+	MY_SERIAL.print("Temperature = ");
+	MY_SERIAL.print(bmp.readTemperature());
+	MY_SERIAL.println(" *C");
+
+	MY_SERIAL.print("Pressure = ");
+	MY_SERIAL.print(bmp.readPressure());
+	MY_SERIAL.println(" Pa");
+
+	MY_SERIAL.print("Approx altitude = ");
+	MY_SERIAL.print(bmp.readAltitude(1013.25)); /* Adjusted to local forecast! */
+	MY_SERIAL.println(" m");
+
+	MY_SERIAL.println();
+	delay(1000);
+}
+		</code>
+	</pre>
+</span>  

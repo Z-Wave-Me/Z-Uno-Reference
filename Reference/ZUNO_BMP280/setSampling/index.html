@@ -1,0 +1,104 @@
+<span zunoVersion="v2"></span>
+<h1>setSampling()</h1>
+<span class="function_description">
+	Настравивает параметры работы сенсора.
+</span>
+
+<span class="function_syntax">
+	bpm.setSampling(mode, tempSampling, pressSampling, humSampling, filter, duration)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bpm:</span>
+		<span class="function_parameters_param_description"> a variable of type BMP280.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">mode:</span>
+		<span class="function_parameters_param_description">
+			the power mode to use for the sensor.
+			<ul>
+				<li>BMP280::MODE_SLEEP - Sleep mode.</li>
+				<li>BMP280::MODE_FORCED - Forced mode.</li>
+				<li>BMP280::MODE_NORMAL - Normal mode - Default.</li>
+			</ul>
+		</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">tempSampling:</span>
+		<span class="function_parameters_param_description">
+			the temp samping rate to use.
+			<ul>
+				<li>BMP280::SAMPLING_NONE - No over-sampling.</li>
+				<li>BMP280::SAMPLING_X1 - 1x over-sampling.</li>
+				<li>BMP280::SAMPLING_X2 - 2x over-sampling.</li>
+				<li>BMP280::SAMPLING_X4 - 4x over-sampling.</li>
+				<li>BMP280::SAMPLING_X8 - 8x over-sampling.</li>
+				<li>BMP280::SAMPLING_X16 - 16x over-sampling - Default.</li>
+			</ul>
+		</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">pressSampling:</span>
+		<span class="function_parameters_param_description">
+			the pressure sampling rate to use.
+			<ul>
+				<li>BMP280::SAMPLING_NONE - No over-sampling.</li>
+				<li>BMP280::SAMPLING_X1 - 1x over-sampling.</li>
+				<li>BMP280::SAMPLING_X2 - 2x over-sampling.</li>
+				<li>BMP280::SAMPLING_X4 - 4x over-sampling.</li>
+				<li>BMP280::SAMPLING_X8 - 8x over-sampling.</li>
+				<li>BMP280::SAMPLING_X16 - 16x over-sampling - Default.</li>
+			</ul>
+		</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">humSampling:</span>
+		<span class="function_parameters_param_description">
+			the humidity sampling rate to use - учитываеться софтом только в случае сенсора <a href="https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf">BME280</a> only.
+			<ul>
+				<li>BMP280::SAMPLING_NONE - No over-sampling.</li>
+				<li>BMP280::SAMPLING_X1 - 1x over-sampling.</li>
+				<li>BMP280::SAMPLING_X2 - 2x over-sampling.</li>
+				<li>BMP280::SAMPLING_X4 - 4x over-sampling.</li>
+				<li>BMP280::SAMPLING_X8 - 8x over-sampling.</li>
+				<li>BMP280::SAMPLING_X16 - 16x over-sampling - Default.</li>
+			</ul>
+		</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">filter:</span>
+		<span class="function_parameters_param_description">
+			Filtering level for sensor data:
+			<ul>
+				<li>BMP280::FILTER_OFF - No filtering - Default.</li>
+				<li>BMP280::FILTER_X2 - 2x filtering.</li>
+				<li>BMP280::FILTER_X4 - 4x filtering.</li>
+				<li>BMP280::FILTER_X8 - 8x filtering.</li>
+				<li>BMP280::FILTER_X16 - 16x filtering.</li>
+			</ul>
+		</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">duration:</span>
+		<span class="function_parameters_param_description">
+			Standby duration in ms:
+			<ul>
+				<li>BMP280::STANDBY_MS_0_5 - 0.5 ms standby.</li>
+				<li>BMP280::STANDBY_MS_63 - 62.5 ms standby.</li>
+				<li>BMP280::STANDBY_MS_125 - 125 ms standby.</li>
+				<li>BMP280::STANDBY_MS_250 - 250 ms standby.</li>
+				<li>BMP280::STANDBY_MS_500 - 500 ms standby.</li>
+				<li>BMP280::STANDBY_MS_1000 - 1000 ms standby - Default.</li>
+				<li>BMP280::STANDBY_MS_2000 - 2000 ms standby - <a href="https://cdn-shop.adafruit.com/datasheets/BST-BMP280-DS001-11.pdf">BMP280</a> only.</li>
+				<li>BMP280::STANDBY_MS_4000 - 4000 ms standby - <a href="https://cdn-shop.adafruit.com/datasheets/BST-BMP280-DS001-11.pdf">BMP280</a> only.</li>
+				<li>BMP280::STANDBY_MS_10 - 10 ms standby - <a href="https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf">BME280</a> only.</li>
+				<li>BMP280::STANDBY_MS_20 - 20 ms standby - <a href="https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf">BME280</a> only.</li>
+			</ul>
+		</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    nothing
+</span>

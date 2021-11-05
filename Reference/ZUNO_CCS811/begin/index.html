@@ -1,0 +1,37 @@
+<span zunoVersion="v2"></span>
+<h1>begin()</h1>
+<span class="function_description">
+	initialise bus i2c. Initialise sensor. Проверает id чипов.
+</span>
+
+
+<span class="function_syntax">
+	ccs.begin(addr, wire, scl, sda)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">ccs:</span>
+		<span class="function_parameters_param_description"> a variable of type ZUNO_CCS811.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">addr:</span>
+		<span class="function_parameters_param_description"> адресс сенсора на шине i2c CCS811_ADDRESS(0x5A) и CCS811_ADDRESS2(0x5B) - по умолчанию CCS811_ADDRESS.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">wire:</span>
+		<span class="function_parameters_param_description"> указатель на обьект <a href="/Reference/Wire/">Wire</a> - по умолчанию Wire.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">scl:</span>
+		<span class="function_parameters_param_description"> pin SCL - по умолчанию SCL(9).</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sda:</span>
+		<span class="function_parameters_param_description"> pin SDA - по умолчанию SDA(10).</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true on success, false otherwise
+</span>

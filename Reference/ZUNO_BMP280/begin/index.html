@@ -1,0 +1,87 @@
+<span zunoVersion="v2"></span>
+<h1>begin()</h1>
+<span class="function_description">
+	initialise bus i2c/spi. Initialise sensor with given parameters / settings. Проверает id чипов.
+</span>
+
+<span class="function_description_more">
+	Подерживаемые  id чипов:
+	<ul>
+		<li>0x56 - BMP280</li>
+		<li>0x57 - BMP280</li>
+		<li>0x58 - BMP280</li>
+		<li>0x60 - BME280</li>
+	</ul>
+</span>
+
+<span class="function_description_more">
+По умолчанию выставяемые параметры <a href="/Reference/ZUNO_BMP280/setSampling/">setSampling</a>.
+</span>
+
+<span class="function_syntax">
+	bpm.begin(addr, theWire, scl, sda)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bpm:</span>
+		<span class="function_parameters_param_description"> a variable of type BMP280.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">addr:</span>
+		<span class="function_parameters_param_description"> адресс сенсора на шине i2c BME280_ADDRESS(0x77) и BME280_ADDRESS_ALTERNATE(0x76) - по умолчанию BME280_ADDRESS.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">theWire:</span>
+		<span class="function_parameters_param_description"> указатель на обьект <a href="/Reference/Wire/">Wire</a> - по умолчанию Wire.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">scl:</span>
+		<span class="function_parameters_param_description"> pin SCL - по умолчанию SCL(9).</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sda:</span>
+		<span class="function_parameters_param_description"> pin SDA - по умолчанию SDA(10).</span><br>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true on success, false otherwise
+</span>
+
+
+<span class="function_syntax">
+	bpm.begin(spi, sck, miso, mosi, ss)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">bpm:</span>
+		<span class="function_parameters_param_description"> a variable of type BMP280.</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">theWire:</span>
+		<span class="function_parameters_param_description"> указатель на обьект <a href="/Reference/SPI/">SPI</a> .</span><br>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">sck:</span>
+		<span class="function_parameters_param_description">custom SCK pin</br></span>
+	</span>    
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">miso:</span>
+		<span class="function_parameters_param_description">custom MISO pin</br></span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">mosi:</span>
+		<span class="function_parameters_param_description">custom MOSI pin</span>
+	</span>
+	<span class="function_parameters_param">    
+		<span class="function_parameters_param_name">ss:</span>
+		<span class="function_parameters_param_description">custom SS pin</span>
+	</span>
+</span>
+
+<span class="function_returns">
+    bool - true on success, false otherwise
+</span>
+
