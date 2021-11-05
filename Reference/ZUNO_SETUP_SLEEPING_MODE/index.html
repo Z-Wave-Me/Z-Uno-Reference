@@ -33,10 +33,9 @@ There is only three possible values available:
 In <b>sleeping</b> mode periodical wakeup is configured via the Z-Wave controller using the Wake Up Command Class. <span zunoVersion="v1">The period is a factor of 4 minutes, minumum is 4 minutes.</span> Interrupt can wake up the device at any time.
     <span  zunoVersion="v2">
     User can configurate custom wakeup interval using <span class="function_ref">zunoSetCustomWUPTimer</span>() function for <b>FLiRS</b> and <b>sleeping</b> modes.
-    From sleeping EM2 or FLIRS mode device you are able to wake up device using any pin, you need just to bind this pin to interrupt controller using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() function. By default pins <b>#18</b> and <b>BTN</b> are already binded.
-    If you need to wakeup device from sleeping EM4 mode you are able to do it only by means of these pins: <b>#2, #4(A1), #11, #16(PW4), #18, #23(BTN)</b>. You can add needed pin to "wakeup" list by means of <span class="function_ref" link="zunoEM4EnablePinWakeup">zunoEM4EnablePinWakeup</span>() function.
+    You are able to wake up device from sleeping EM2 or FLIRS mode device using any pin, you need just bind this pin to interrupt controller using <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() function.
+    If you need to wakeup device from sleeping EM4 mode you are able to do it only by means of these pins: <b>#2, #4(A1), #11, #16(PW4), #18, #23(BTN)</b>. You can add needed pin to "wakeup" list by means of <span class="function_ref" link="zunoEM4EnablePinWakeup">zunoEM4EnablePinWakeup</span>() function. By default pins <b>#18</b> and <b>BTN</b> are already binded to wakeup device from EM2/EM4 modes.
     </span>
-
 </span>
 
 <span class="function_description_note" zunoVersion="v1">
@@ -69,7 +68,7 @@ If device is in sleeping mode, the USB port is available if you connect to it, b
 </span>
 
 <span class="function_description_note">
-After changing sleeping mode Z-Uno must be excluded and included back. Z-Uno will not adopt sleeping mode change without being excluded. (A <a href="/z-wave/configuration-parameters/">debug configuration parameter</a> can disable this restriction).
+After changing sleeping mode Z-Uno must be excluded and included back. Z-Uno will not adopt sleeping mode change without being excluded. <span zunoVersion="v1">(A <a href="/z-wave/configuration-parameters/">debug configuration parameter</a> can disable this restriction)</span>.
 </span>
 
 <span class="function_example">
@@ -81,12 +80,12 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
 
 <table>
     <tr>
-        <td rowspan="2">Mode</td>
-        <td rowspan="2">setup() called</td>
-        <td rowspan="2">loop() called</td>
+        <td rowspan="1">Mode</td>
+        <td rowspan="1">setup() called</td>
+        <td rowspan="1">loop() called</td>
         <td colspan="3" align="center">Wakes up</td>
-        <td rowspan="2">Routing for other Z-Wave devices</td>
-        <td rowspan="2"></td>
+        <td rowspan="1">Routing for other Z-Wave devices</td>
+        <td rowspan="1"></td>
     </tr>
     <tr>
         <td>on interrupt</td>
@@ -108,8 +107,8 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
         <td zunoVersion="v1">on each wake up</td>
         <td zunoVersion="v2">on each wake up if user selected <b>EM4</b> mode or once after power on if selected <b>EM2</b> mode.</td>
         <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
-        <td align="center" zunoVersion="v1">Yes</td>
-        <td align="center" zunoVersion="v1">Yes</td>
+        <td align="center">Yes</td>
+        <td align="center">Yes</td>
         <td align="center">No</td>
         <td align="center">No</td>
         <td></td>
@@ -203,10 +202,10 @@ int getterBarPa() {
     </code></pre>
 </span>
 <span class="function_see_also">
-    <span zunoVersion="v2"><span class="function_ref" link="zunoAttachSysHandler">zunoAttachSysHandler</span>()</span>
-    <span zunoVersion="v2"><span class="function_ref">zunoEM4EnablePinWakeup</span>()</span> 
-    <span><span class="function_ref">zunoSendDeviceToSleep</span>()</span> 
-    <span zunoVersion="v2"><span class="function_ref">zunoSetCustomWUPTimer</span>()</span>
+    <span zunoVersion="v2"><span class="function_ref" link="zunoAttachSysHandler">zunoAttachSysHandler</span>()</span><br>
+    <span zunoVersion="v2"><span class="function_ref">zunoEM4EnablePinWakeup</span>()</span><br> 
+    <span><span class="function_ref">zunoSendDeviceToSleep</span>()</span><br>
+    <span zunoVersion="v2"><span class="function_ref">zunoSetCustomWUPTimer</span>()</span><br>
     Get more information about <span class="function_ref">Z-Wave</span>.
 </span>
 
