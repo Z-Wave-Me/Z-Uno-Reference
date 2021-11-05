@@ -85,6 +85,7 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
         <td rowspan="2">loop() called</td>
         <td colspan="3" align="center">Wakes up</td>
         <td rowspan="2">Routing for other Z-Wave devices</td>
+        <td rowspan="2"></td>
     </tr>
     <tr>
         <td>on interrupt</td>
@@ -99,7 +100,6 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
         <td align="center">&mdash;</td>
         <td align="center">&mdash;</td>
         <td align="center">Yes</td>
-        <td></td>
     </tr>
     <tr>
         <td>ZUNO_SLEEPING_MODE_SLEEPING</td>
@@ -110,20 +110,17 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
         <td align="center">Yes</td>
         <td align="center">No</td>
         <td align="center">No</td>
-        <td></td>
     </tr>
     <tr>
         <td>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</td>
         <td zunoVersion="v1">on each wake up</td>
         <td zunoVersion="v2">once after power on</td>
-        
         <td>until <span class="function_ref">zunoSendDeviceToSleep</span>() is called</td>
         <td align="center">Yes</td>
         <td align="center" zunoVersion="v1">No</td>
         <td align="center" zunoVersion="v2">Yes</td>
         <td align="center">Yes</td>
         <td align="center">No</td>
-        <td></td>
     </tr>
 </table>
 
