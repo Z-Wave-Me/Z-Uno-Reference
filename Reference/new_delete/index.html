@@ -2,15 +2,14 @@
 <h1>new/delete</h1>
 
 <span class="function_description">
-Оператор new предназначен для динамиского выделения памяти под переменные, структуры, массивы...
-Оператор delete - антипод освобождает память после new
+Operaror <b>new</b> allocates memory in heap for  variables, objects, structures, arrays.  This is an analogue of the <span class="function_ref" link="malloc">malloc</span> () function in C++.
+Operator <b>delete</b> releases memory area, that was allocated by means of <b>new</b> operator.
 </span>
 
 
 <span class="function_description_more">
-	Выделение памяти под переменную:
+	Allocation of memory for a single variable/object:
 </span>
-
 
 <span class="function_syntax">
 ptrArray = new type<br>
@@ -20,11 +19,11 @@ delete ptrArray<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">ptrArray:</span>
-		<span class="function_parameters_param_description"> имя указателя.</span>
+		<span class="function_parameters_param_description"> name of pointer.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">type:</span>
-		<span class="function_parameters_param_description"> тип переменной. Тип элементов может быть базовый (int, float, …) или другой структура, класс и т.п.).</span>
+		<span class="function_parameters_param_description"> Variable type. This could be a base type like <b>int, float, char, double</b> or name of class,  typedef and etc.</span>
 	</span>
 </span>
 
@@ -34,13 +33,15 @@ delete ptrArray<br>
 #define MY_SERIAL		Serial
 
 void setup() {
-	uint8_t								*ptrArray;// объявить указателей на uint8_t
-
+	int			*ptrI;// pointer to store address of allocated data 
 	MY_SERIAL.begin(115200);
-	ptrArray = new uint8_t; // выделить память для 10 элементов типа uint8_t
-	ptrArray[0] = rand();//Забьем данными
-	MY_SERIAL.dumpPrint(ptrArray, 1);//Распичатаем
-	delete ptrArray; // освободить память, выделенную под массив
+	ptrI = new int; // Allocate one int variable in the "heap"
+	*ptrI = rand(); // Fill it with random value
+	MY_SERIAL.print("raw data:");
+	MY_SERIAL.dumpPrint(ptrI, sizeof(int)); // Print raw data
+	MY_SERIAL.print("\nInteger value:");
+	MY_SERIAL.print(*ptrI); // Print integer value
+	delete ptrI; // free "heap" memory 
 }
 
 void loop() {
@@ -51,7 +52,7 @@ void loop() {
 
 
 <span class="function_description_more">
-	Выделение памяти под массив:
+	Allocation memory for an array:
 </span>
 
 
@@ -63,15 +64,15 @@ delete[] ptrArray<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">ptrArray:</span>
-		<span class="function_parameters_param_description"> имя массива, для которого выделяется память.</span>
+		<span class="function_parameters_param_description"> pointer to memory area which holds the array.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">type:</span>
-		<span class="function_parameters_param_description"> тип элементов массива. Тип элементов может быть базовый (int, float, …) или другой структура, класс и т.п.).</span>
+		<span class="function_parameters_param_description"> Array element's type. This could be a base type like <b>int, float, char, double</b> or name of class,  typedef and etc.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">size:</span>
-		<span class="function_parameters_param_description">  размер массива (количество элементов).</span>
+		<span class="function_parameters_param_description">  Required size of array.</span>
 	</span>
 </span>
 
@@ -79,18 +80,21 @@ delete[] ptrArray<br>
 	<pre>
 		<code class="c">
 #define MY_SERIAL		Serial
-
 void setup() {
-	uint8_t								*ptrArray;// объявить массив указателей на uint8_t
-
+	int				*ptrArray; // Pointer to array 
 	MY_SERIAL.begin(115200);
-	ptrArray = new uint8_t[10]; // выделить память для 10 элементов типа uint8_t
-	for (int i = 0; i < 10; i++)
-		ptrArray[i] = rand();//Забьем данными
-	MY_SERIAL.dumpPrint(ptrArray, 10);//Распичатаем
-	delete[] ptrArray; // освободить память, выделенную под массив
+	ptrArray = new int[10]; // allocate 10 elements
+	for (int i = 0; i &lt5; i++)
+		ptrArray[i] = rand();// Fill element with random data
+	// print array to serial 
+	MY_SERIAL.print("Array: ");
+	for (int i = 0; i &lt5; i++){
+		MY_SERIAL.print(" ");
+		MY_SERIAL.print(ptrArray[i]);
+	}
+	MY_SERIAL.println();
+	delete[] ptrArray; // Free allocated memory
 }
-
 void loop() {
 }
 		</code>
@@ -98,7 +102,7 @@ void loop() {
 </span>
 
 <span class="function_example">
-Пример с выделением под класс:
+Allocate memory for object
 	<pre>
 		<code class="c">
 #include "Arduino.h"
@@ -110,7 +114,7 @@ DHT *dht22_sensor;
 
 /* the setup function runs once, when you press reset or power the board */
 void setup() {
-	dht22_sensor = new DHT(9, DHT22);
+	dht22_sensor = new DHT(9, DHT22); // allocates memory region and then calls constructor of class for this region
 	MY_SERIAL.begin(115200);
 	dht22_sensor->begin();
 	MY_SERIAL.println("\n **** Sketch is starting... ****\n");
@@ -124,12 +128,12 @@ void loop() {
 
 	MY_SERIAL.print("Millis:");
 	MY_SERIAL.println(millis());
-	result = dht22_sensor->read(true); 
+	result = dht22_sensor->read(true);  // We use -> instead of . to access methods of object located by dht22_sensor pointer
 	MY_SERIAL.print("DHT read result:");
 	MY_SERIAL.println(result);
 	MY_SERIAL.print("Raw data: { ");
 	dht22_sensor->getRawData(raw_data);
-	for(i=0;i<5;i++) {
+	for(i=0;i&lt5;i++) {
 		MY_SERIAL.print(raw_data[i], HEX);
 		MY_SERIAL.print(" ");
 	}
@@ -146,5 +150,5 @@ void loop() {
 
 
 <span class="function_description_note">
-Обратите внимание что дл успешной работы new нужно достаточное количество свободной памяти, больше про это : <span class="function_ref" link="malloc">malloc</span>()
+Please note that you need required memory area to use dynamic memory operations. See <span class="function_ref" link="malloc">malloc</span>() description for details.
 </span>

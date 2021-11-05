@@ -1,8 +1,8 @@
 <span zunoVersion="v2"></span>
 <h1>malloc_stats()</h1>
 <span class="function_description">
-Отображает информацию об используемой памяти <span class="function_ref" link="malloc">malloc</a>()</span>
-Отображает с помощью Serial0, предварительно нужно иницилизировать с помощью <span class="function_ref" link="Serial/begin">begin</a>()</span>
+Displays infomation about dynamic memory usage. You can alocate memory dynamicaly using  <span class="function_ref" link="malloc">malloc</a>()</span> function.
+Function uses Serial0 as output device, you have to initialize Serial0 usind <span class="function_ref" link="Serial/begin">begin</a>()</span> method.
 </span>
 
 <span class="function_syntax">
@@ -27,12 +27,12 @@ nothing
 #include &lt;malloc.h&gt;
 
 void setup() {
-	Serial0.begin(115200);//Иницилизируем Serial0 для вывода информации
+	Serial0.begin(115200);// Prepare Serial0
 }
 
 void loop() {
-	malloc_stats();
-	Serial0.println();
+	malloc_stats(); // prints dynamic memory statistics
+	Serial0.println(); 
 	delay(1000);
 }
 		</code>
