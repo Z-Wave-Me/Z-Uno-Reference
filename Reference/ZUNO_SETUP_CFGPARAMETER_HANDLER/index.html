@@ -138,3 +138,65 @@ void config_parameter_changed(uint8_t param, uint32_t value) {
     Get more information about <span class="function_ref">Z-Wave</span>.
 </span>
 
+<span zunoVersion="v2">
+<span class="function_description_note">
+	If you wish to include your parameters in <b>COMMAND_CLASS_CONFIGURATION</b> and thereby add their support to Zway. Then you must first fill in the structures describing your parameters.
+</span>
+<span class="function_description_note">
+	And also add a function that will inform <b>COMMAND_CLASS_CONFIGURATION</b> about your configuration parameters.
+</span>
+
+<span class="function_example">
+	An example of a correct addition to <b>COMMAND_CLASS_CONFIGURATION</b>:
+	<pre>
+		<code class="c">
+static const ZunoCFGParameter_t lp_param[] =
+{
+	{//64 parameter
+		.name = "Temperature hysteresis",//This field is used to advertise the name of the parameter
+		.info = "Defines hysteresis of temperature reports in 10th of *C",//This field is used to advertise the detailed information available for the parameter.
+		.minValue = 0x1,//The minimum value that the actual parameter can assume
+		.maxValue = 0x14,//The maximum value that the actual parameter can assume.
+		.defaultValue = 0x5,//The default value of the actual parameter
+		.size = ZUNO_CFG_PARAMETER_SIZE_32BIT,//The size of the actual parameter;ZUNO_CFG_PARAMETER_SIZE_32BIT - 4 byte, ZUNO_CFG_PARAMETER_SIZE_16BIT - 2 byte, ZUNO_CFG_PARAMETER_SIZE_8BIT - 1 byte
+		.format = ZUNO_CFG_PARAMETER_FORMAT_UNSIGNED,//The sign of the actual parameter;ZUNO_CFG_PARAMETER_FORMAT_UNSIGNED - unsigned, ZUNO_CFG_PARAMETER_FORMAT_SIGNED - signed
+		.readOnly = false,// true - indicate that the advertised parameter is read-only, false - indicate that the advertised parameter is not read-only
+		.altering = false//must false - while not used
+	},
+	{//65 parameter
+		.name = "Humidity hysteresis",
+		.info = "Defines hysteresis of temperature reports in 10th of %",
+		.minValue = 0x1,
+		.maxValue = 0x14,
+		.defaultValue = 0x5,
+		.size = ZUNO_CFG_PARAMETER_SIZE_32BIT,
+		.format = ZUNO_CFG_PARAMETER_FORMAT_UNSIGNED,
+		.readOnly = false,
+		.altering = false
+	},
+	{//66 parameter
+		.name = "Motion trigger time",
+		.info = "Minimal time interval of the next motion sensor trigger",
+		.minValue = 0x0,
+		.maxValue = 0x5000,
+		.defaultValue = 0x1000,
+		.size = ZUNO_CFG_PARAMETER_SIZE_32BIT,
+		.format = ZUNO_CFG_PARAMETER_FORMAT_UNSIGNED,
+		.readOnly = false,
+		.altering = false
+	}
+};
+
+
+const ZunoCFGParameter_t *zunoCFGParameter(size_t param) {
+
+	if (param < 64 || param > 66)//We check your parameter or not.
+		return (ZUNO_CFG_PARAMETER_UNKNOWN);//If not ours, then we report it
+	return (&lp_param[param - 64]);//Otherwise, we return a pointer to the parameter description.
+}
+		</code>
+	</pre>
+</span>
+
+</span>
+
