@@ -19,6 +19,21 @@ When Z-Uno goes to sleep it switches off activity (green) LED.
 <span zunoVersion="v2"> Look for code example inside <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span> description. </span>
 </span>
 
+<span class="function_syntax">zunoSendDeviceToSleep(mode)</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">mode:</span>
+        <span class="function_parameters_param_description">one of energy modes:
+            <ul>
+                <li>SLEEP_MODE_EM2 - RAM is retained, the most part of peripherals is on. </li>
+                <li>SLEEP_MODE_EM4 - RAM is cleaned when wakeup, only wakeup timer is avaliable, the most energy effective mode.</li>
+            </ul>
+            You can skip the parameter. By default is <b>SLEEP_MODE_EM4</b>.
+            If you use FLiRS or device doesn't include to network the parameter is ignored by the system.
+        </span>
+    </span>
+</span>
 <span zunoVersion="v1" class="function_example">
 <pre>
 <code class="c">// LED pin number
