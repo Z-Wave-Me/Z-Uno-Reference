@@ -1,0 +1,22 @@
+<span zunoVersion="v2"></span>
+<h1>zunoIsSleepLocked()</h1>
+<span class="function_description">
+Checks if user code is ready to sleep. 
+</span>
+
+<span class="function_description_more">
+If user code is ready it doesn't go sleep immediately. The delay is depends on Z-Wave protocol tasks. So sometimes you need to go "back" to "non ready" state using <span class="function_ref">zunoLockSleep</span>() function.</span>
+</span>
+
+<span class="function_syntax">
+<pre><code class="c">zunoIsSleepLocked()</code></pre>
+</span>
+<span class="function_returns">
+ <b>true</b> if <span class="function_ref">zunoSendDeviceToSleep</span>()</span> was called.
+</span>
+
+<span class="function_see_also">
+    <span class="function_ref">zunoLockSleep</span>()<br>
+    <span class="function_ref">zunoSendDeviceToSleep</span>()</span><br>
+    <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SETUP_SLEEPING_MODE</span>()</span><br>
+</span>
