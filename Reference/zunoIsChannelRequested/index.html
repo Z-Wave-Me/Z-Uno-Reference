@@ -1,0 +1,42 @@
+<span zunoVersion="v2"></span>
+<h1>zunoIsChannelRequested()</h1>
+<span class="function_description">
+Checks if controller sent "get" request for desired channel. This function helps to track changes of the variable associated with the channel.
+</span>
+
+<span class="function_syntax">
+    zunoIsChannelRequested(channelNumber)
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">channelNumber</span>
+        <span class="function_parameters_param_description">Number of channel as defined in <span class="function_ref">ZUNO_SETUP_CHANNELS</span>() staring from 1.</span>
+    </span>
+</span>
+
+<span class="function_example">
+    <pre>
+        <code class="c">
+            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS, temperature));
+
+int temperature = 0;
+
+void setup() {
+    ...
+}
+
+void loop() {
+    ...
+    if (zunoIsChannelRequested(1)) {
+        // controller wants "fresh" value
+        // seems we have too remeasure or request it from the external sensor
+    }
+    ...
+}
+        </code>
+    </pre>
+
+<span class="function_see_also">
+    <span class="function_ref">zunoIsChannelUpdated</span>()<br>
+</span>
