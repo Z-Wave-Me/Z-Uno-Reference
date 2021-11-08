@@ -198,11 +198,54 @@ int getterBarPa() {
 
     </code></pre>
 </span>
+
+<span class="function_example" zunoVersion="v2">
+    FLIRS multilevel LED-light example.
+<pre><code class="c">
+    ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
+    ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(&dimmerValue,NULL));
+    #define MY_SERIAL Serial 
+    byte dimmerValue=0;
+    uint32_t loop_count = 0; // the variable that illustrates that RAM is alive during FLiRS mode too
+
+    void setup(){
+        MY_SERIAL.begin();
+        MY_SERIAL.print("BOOT REASON:");
+        MY_SERIAL.println(zunoGetWakeReason(), HEX);
+        zunoAttachSysHandler(ZUNO_HANDLER_WUP, 0, (void*) &_wakeHandler);
+        pinMode(LED_BUILTIN, OUTPUT);
+    }
+    void _wakeHandler(void){
+        MY_SERIAL.print("wake time:");
+        MY_SERIAL.println(millis());
+        MY_SERIAL.print("loop count =");
+        MY_SERIAL.println(loop_count);
+        MY_SERIAL.print("WAKEUP REASON:");
+        MY_SERIAL.println(zunoGetWakeReason(), HEX);
+    }
+    void loop(){
+        if(zunoIsSleepLocked()){
+            // Here we do all sleep uninterruptable logic
+            analogWrite(LED_BUILTIN, dimmerValue); // Apply dimmer value from controller to builtin LED
+            MY_SERIAL.print("go sleep time:");
+            MY_SERIAL.println(millis()); // Print moment when we are ready to go to sleep
+            MY_SERIAL.print("loop count =");
+            MY_SERIAL.println(loop_count);
+            zunoSendDeviceToSleep(); // We don't need parameter for FLiRS here, Z-Uno will ingore parameter anyway
+        }
+        // Here you can do something that could be interrupted by sleep mode
+        // ...
+        loop_count++; // Increment variable
+    }
+</code></pre>
+</span>
+
 <span class="function_see_also">
     <span zunoVersion="v2"><span class="function_ref" link="zunoAttachSysHandler">zunoAttachSysHandler</span>()</span><br>
     <span zunoVersion="v2"><span class="function_ref">zunoEM4EnablePinWakeup</span>()</span><br> 
     <span><span class="function_ref">zunoSendDeviceToSleep</span>()</span><br>
     <span zunoVersion="v2"><span class="function_ref">zunoSetCustomWUPTimer</span>()</span><br>
+    <span zunoVersion="v2"><span class="function_ref">zunoGetWakeReason</span>()</span><br>
     Get more information about <span class="function_ref">Z-Wave</span>.
 </span>
 
