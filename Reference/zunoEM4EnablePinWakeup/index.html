@@ -1,0 +1,26 @@
+<span zunoVersion="v2"></span>
+<h1>zunoEM4EnablePinWakeup()</h1>
+<span class="function_description">
+Enables pin to wake up Z-Uno from most efficient energy saving mode.
+</span>
+
+<span class="function_description_more">
+Only some pins are available in EM4 mode. The full list of suitable pins is <b>#2, #4(A1), #11, #16(PW4), #18, #23(BTN)</b>. Pins <b>#18</b> and <b>#23(BTN)</b> are enabled by default. 
+You have to call this function on every boot (every time <b>setup()</b> function was called).
+Look at  <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>() for code example and details.   
+</span>
+
+<span class="function_syntax">
+<pre><code class="c">zunoEM4EnablePinWakeup(pin)</code></pre>
+</span>
+
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">pin:</span>
+        <span class="function_parameters_param_description">Z-Uno pin number from pinout.</span>
+    </span>
+</span>
+
+<span class="function_see_also">
+    <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SETUP_SLEEPING_MODE</span>()</span><br>
+</span>

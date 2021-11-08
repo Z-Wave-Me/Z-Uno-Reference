@@ -22,8 +22,9 @@ If not specified in the project, ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_ALW
 There is only three possible values available:
 <ul>
     <li>ZUNO_SLEEPING_MODE_ALWAYS_AWAKE &mdash; device is <b>always awake</b>, reachable and helps to form mesh network acting as router (default mode). Used for mains powered devices.</li>
-    <li>ZUNO_SLEEPING_MODE_SLEEPING &mdash; device <b>wakes up by user request (interrupt) or periodically</b>. Does not help to form mesh. Used for battery powered devices.</li>
-    <li>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE &mdash; device <b>wakes up by user request (interrupt) or on packet received</b>. Always available but does not help to form mesh. Used for battery powered devices. In Z-Wave this type of devices is called <b>FLiRS</b></li>
+    <li zunoVersion="v1">ZUNO_SLEEPING_MODE_SLEEPING &mdash; device <b>wakes up by user request (interrupt) or periodically</b>. Does not help to form mesh. Used for battery powered devices.</li>
+    <li zunoVersion="v2">ZUNO_SLEEPING_MODE_SLEEPING &mdash; device <b>wakes up by user request (interrupt) or periodically</b>. Does not help to form mesh. Used for battery powered devices. For Z-Uno V2 there are 2 variants of deep sleep mode: <b>EM2</b> and <b>EM4</b>. EM2 provides most peripherals avaliable during it, fast wakeup, RAM retention, but it's not so effective as EM4. EM4 is most effective energy saving mode. It provides minimal consumption current about 5-7 microamps. Commonly sleeping devices are sensors or remote controls in Z-Wave network.</li>
+    <li>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE &mdash; device <b>wakes up by user request (interrupt) or on packet received</b>. Always available but does not help to form mesh. Used for battery powered devices. In Z-Wave this type of devices is called <b>FLiRS</b> FLiRS is less power effective compared to previous "sleeping" type. This type commonly is used for battery powred actuators (not sensors) devices like sirens, doorlocks, valves and etc. </li>
 </ul>
     <span class="function_description_more"><b>FLiRS</b> &mdash; Frequently Listening Routing Slaves &mdash; the device periodically quits the sleeping mode on a short period and checks, whether a message is sent to the device. If no packets are present for this device on air, the device goes back into the sleeping mode. Awakening interval is 1 second.
     </span>
@@ -51,10 +52,10 @@ Note that in sleeping and FLiRS mode during power consumption (deep sleep) state
 </span>
 
 <span class="function_description_note" zunoVersion="v2">
-Note that in sleeping EM2 and FLiRS modes during power consumption (deep sleep) state Z-Uno memory is not cleaned. So your logic doesn't stop and you don't need to save & restore you variables in <b>EEPROM</b>. The <b>setup()</b> function doesn't call when devices wakes up, because you don't need to reinitialize hardware. If you need to call your code when device wakes up please use system handler <span class="function_ref" link="zunoAttachSysHandler">ZUNO_HANDLER_WUP</span>. 
+Note that in sleeping <b>EM2</b> and FLiRS modes during power consumption (deep sleep) state Z-Uno memory is not cleaned. So your logic feels like it doesn't stop and you don't need to save & restore you variables in <b>EEPROM</b>. The <b>setup()</b> function doesn't call when devices wakes up, because you don't need to reinitialize hardware. If you need to call your code when device wakes up please use system handler <span class="function_ref" link="zunoAttachSysHandler">ZUNO_HANDLER_WUP</span>. 
 </span>
 <span class="function_description_note" zunoVersion="v2">
-Note that in sleeping EM4 mode during power consumption (deep sleep) state Z-Uno memory is not maintained. 
+Note that in sleeping <b>EM4</b> mode during power consumption (deep sleep) state Z-Uno memory is not maintained. 
 Hence it is cleaned all the time. If you want to keep some variables across 
 sleeps you have to use  <b><span class="function_ref">EEPROM</span></b>. This memory survives even during power off - this is a so called non-volatile memory. 
 </span>

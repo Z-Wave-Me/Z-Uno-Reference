@@ -1,0 +1,19 @@
+<span zunoVersion="v2"></span>
+<h1>zunoSendWakeUpNotification()</h1>
+<span class="function_description">
+Sends wakeup notification to network controller. This starts transmission between slave & controller. 
+</span>
+
+<span class="function_description_more">
+If you need to apply settings, update firmware on sleeping device you have to send notification to controller. By default Z-Uno sends notification automatically when you wakeup it using button or when wakeup interval is triggered. This function provide a way to send wakeup notification anytime you need it. Function doesn't send notification immediately. It will send notification after <span class="function_ref">zunoSendDeviceToSleep</span>() is called.
+</span>
+
+<span class="function_syntax">
+<pre><code class="c">zunoSendWakeUpNotification()</code></pre>
+</span>
+
+
+<span class="function_see_also">
+    <span class="function_ref">zunoSendDeviceToSleep</span>()</span><br>
+    <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SETUP_SLEEPING_MODE</span>()</span><br>
+</span>

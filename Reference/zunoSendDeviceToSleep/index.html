@@ -1,17 +1,25 @@
 <h1>zunoSendDeviceToSleep()</h1>
 <span class="function_description">
-This function sends the device to sleep.
+<span zunoVersion="v1">This function sends the device to sleep.</span>
+<span zunoVersion="v2">This function notifies core that user code is ready to sleep. It doesn't send device to sleep immediately.</span>
 </span>
 
 <span class="function_description_more">
-For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> mode Z-Uno will wake up after wakeup period (set up via <b>Wakeup</b> Command Class) or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.
+This function is sultable only for <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> and <b>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</b> devices. 
+When Z-Uno goes to sleep it switches off activity (green) LED. 
+<span zunoVersion="v2">You are able to send wakeup notification from your code using <span class="function_ref">zunoSendWakeUpNotification</span>()</span>.
+<span zunoVersion="v1">For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> mode Z-Uno will wake up after wakeup period (set up via <b>Wakeup</b> Command Class) or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.</span>
+<span zunoVersion="v2">For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> mode Z-Uno will wake up after wakeup period (set up via <b>Wakeup</b> Command Class) or on external interrupt ( see <span class="function_ref">zunoEM4EnablePinWakeup</span>() for EM4 and  <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>() for EM2)or on custom timer (see <span class="function_ref">zunoSetCustomWUPTimer</span>()) interval.</span>
+
 </span>
 
 <span class="function_description_more">
-For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span> mode Z-Uno will wake up on packet recieved, after a wake up period defined using <span class="function_ref">zunoSetBeamCountWU</span>() or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.
+<span zunoVersion="v1">For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span> mode Z-Uno will wake up on packet recieved, after a wake up period defined using <span class="function_ref">zunoSetBeamCountWU</span>() or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.</span>
+<span zunoVersion="v2">For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</span> mode Z-Uno will wake up on packet recieved, after a wake up period defined using <span class="function_ref">zunoSetCustomWUPTimer</span>() or on external interrupt (see <span class="function_ref" link="Interrupts/attachInterrupt">attachInterrupt</span>()) triggered.</span>
+<span zunoVersion="v2"> Look for code example inside <span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span> description. </span>
 </span>
 
-<span class="function_example">
+<span zunoVersion="v1" class="function_example">
 <pre>
 <code class="c">// LED pin number
 // 13 pin - user LED of Z-Uno board
