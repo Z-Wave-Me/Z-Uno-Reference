@@ -1,0 +1,21 @@
+<span zunoVersion="v2"></span>
+<h1>NeoPixel.gamma8()</h1>
+<span class="function_description">
+	An 8-bit gamma-correction function for basic pixel brightness adjustment. Makes color transitions appear more perceptially correct.
+</span>
+
+<span class="function_syntax">
+NeoPixel.gamma8(x)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">x:</span>
+		<span class="function_parameters_param_description"> Input brightness, 0 (minimum or off/black) to 255 (maximum).</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+    8 bit - Gamma-adjusted brightness. This uses a fixed gamma correction exponent of 2.6, which seems reasonably okay for average NeoPixels in average tasks. If you need finer control you'll need to provide your own gamma-correction function instead.
+</span>

@@ -1,0 +1,21 @@
+<span zunoVersion="v2"></span>
+<h1>NeoPixel.gamma32()</h1>
+<span class="function_description">A gamma-correction function for 32-bit packed RGB or WRGB colors. Makes color transitions appear more perceptially correct.</span>
+
+<span class="function_syntax">
+NeoPixel.gamma32(x)<br>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">x:</span>
+		<span class="function_parameters_param_description"> Цвет возращенный <a href="/Reference/ZUNO_NeoPixel/RGB/">RGB</a> или <a href="/Reference/ZUNO_NeoPixel/RGBW/">RGBW</a>.</span>
+	</span>
+</span>
+
+
+<span class="function_returns">
+    32 bit - Gamma-adjusted packed color, can then be passed in one of the <a href="/Reference/ZUNO_NeoPixel/setColor/">setColor</a> functions. 
+	Like <a href="/Reference/ZUNO_NeoPixel/gamma8/">gamma8</a>, this uses a fixed gamma correction exponent of 2.6, which seems reasonably okay for average NeoPixels in average tasks. 
+	If you need finer control you'll need to provide your own gamma-correction function instead.
+</span>
