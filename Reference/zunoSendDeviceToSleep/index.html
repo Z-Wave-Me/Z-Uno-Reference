@@ -8,7 +8,7 @@
 This function is sultable only for <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> and <b>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</b> devices. 
 When Z-Uno goes to sleep it switches off activity (green) LED.
 <span zunoVersion="v2">You are able to send wakeup notification from your code using <span class="function_ref">zunoSendWakeUpNotification</span>()</span>.
-<span zunoVersion="v2">After the moment when the function was called you are able to check that it was called using <span class="function_ref">zunoIsSleepLocked</span> function and you can take the device back by means of <span class="function_ref"></span>zunoLockSleep</span>.
+<span zunoVersion="v2">After the moment when the function was called you are able to check that it was called using <span class="function_ref">zunoIsSleepLocked</span> function and you can take the device back by means of <span class="function_ref">zunoLockSleep</span></span>.
 </span>
 <span class="function_description_more">
 <span zunoVersion="v1">For <span class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SLEEPING_MODE_SLEEPING</span> mode Z-Uno will wake up after wakeup period (set up via <b>Wakeup</b> Command Class) or on INT1 going LOW or <span class="function_ref" link="zunoSetWUOptions">Key Scanner</span> detects press.</span>
@@ -32,7 +32,7 @@ When Z-Uno goes to sleep it switches off activity (green) LED.
                 <li>SLEEP_MODE_EM4 - RAM is cleaned when wakeup, only wakeup timer is avaliable, the most energy effective mode.</li>
             </ul>
             You can skip the parameter. By default is <b>SLEEP_MODE_EM4</b>.
-            If you use FLiRS or device doesn't include to network the parameter is ignored by the system.
+            If you use FLiRS or device wasn't included to network the parameter is ignored by the system.
         </span>
     </span>
 </span>
