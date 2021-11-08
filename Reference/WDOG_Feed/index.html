@@ -1,0 +1,18 @@
+<span zunoVersion="v2"></span>
+<h1>WDOG_Feed()</h1>
+<span class="function_description">
+Feeds the <b>watchdog</b> timer and saves your code from unexpected reboot. 
+</span>
+
+<span class="function_description_more">
+In most cases there is no need to feed watchdog. It is fed by main logic automatically, buf If you need to process some hard greedy job that lasts more the 500 milliseconds it's highly recommend to feed watchdog during processing. Itstead of <b>WDOG_Feed</b> you can use <b>delay(1);</b> for the same result.
+</span>
+
+<span class="function_syntax">
+<pre><code class="c">WDOG_Feed()</code></pre>
+</span>
+
+<span class="function_see_also">
+    <span class="function_ref">delay</span>()<br>
+    <span class="function_ref">zunoGetWakeReason</span>()</span>
+</span>
