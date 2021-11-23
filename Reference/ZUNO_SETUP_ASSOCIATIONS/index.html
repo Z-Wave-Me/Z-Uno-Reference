@@ -48,8 +48,12 @@ Groups are numbered in the same order as they are mentioned in parameters to ZUN
 Real association groups number are shifted by one. Means CTRL_GROUP_1 is in reality number 2. This is because number 1 is Life Line group. Read more in description of <span class="function_ref">Z-Wave</span> implementation.
 </span>
 
-<span class="function_description_note">
+<span class="function_description_note" zunoVersion="v1">
 After changing number and types of association groups Z-Uno must be excluded and included back. Z-Uno will not adopt any changes of association groups without being excluded. (A <a href="/z-wave/configuration-parameters/">debug configuration parameter</a> can disable this restriction).
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+After changing number and types of association groups Z-Uno must be excluded and included back. Z-Uno will not adopt any changes of association groups without being excluded.
 </span>
 
  <span class="function_example">
