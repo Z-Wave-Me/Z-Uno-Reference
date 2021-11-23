@@ -202,10 +202,10 @@ int getterBarPa() {
 <span class="function_example" zunoVersion="v2">
     FLIRS multilevel LED-light example.
 <pre><code class="c">
+    byte dimmerValue=0;
     ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
     ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(&dimmerValue,NULL));
     #define MY_SERIAL Serial 
-    byte dimmerValue=0;
     uint32_t loop_count = 0; // the variable that illustrates that RAM is alive during FLiRS mode too
 
     void setup(){
