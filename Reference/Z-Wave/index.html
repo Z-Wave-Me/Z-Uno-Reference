@@ -36,7 +36,11 @@ Z-Uno supports all three types of power management modes. You can define it usin
 
 <h2 link="Include/exclude, wake up and sending NIF">Include/exclude, wake up and sending NIF</h2>
 <p>To become part of Z-Wave network Z-Uno need to be included (added) to the network using Z-Wave controller. Read more about <a href="/getting-started/include-in-network">inclusion and exclusion processes</a>. Inclusion and exclusion are confirmed on Z-Uno by <b>three press on the Service button</b>. This sequence will also tell Z-Uno to send <b>Node Information Frame</b> (NIF).</p>
+<p zunoVersion="v2">You are able to use special non-secure inclusion using this sequence: hold the Service button until you'll see that the red LED is blinking, release the Service button and then short press it.</p>
 <p>Once sleeping power mode is used, Z-Uno will remain in deep sleep most of the time. <b>Single press on Service button</b> will wake up Z-Uno.</p>
+
+<h2  zunoVersion="v2" link="Reset locally sequence">Device reset locally</h2>
+<p zunoVersion="v2">You are able to reset Z-Uno using this sequence: hold the Service button until you'll see that the red LED is blinking, release the Service button and then triple click on it. You have to see another red LED pattern when device will be ready.</p>
 
 <h2 link="Security">Security</h2>
 <p>Z-Wave protocol allows secure commands transmission to bring more privacy to your IoT network. To enable Security in Z-Uno use Arduino IDE menu item. Once Security is turned on Z-Uno will follow the rules below:</p>
@@ -52,7 +56,8 @@ Z-Uno supports all three types of power management modes. You can define it usin
     <li>Only descriptive Command Classes are accessible without of Security: Battery, Device Reset Locally, Firmware Update, Manufacturer Specific, Power Level, Version, Wakeup, Z-Wave Plus Info.</li>
 </ul>
 
-<p>Note that Z-Uno supports Z-Wave Security S2 or Security S0.</p>
+<p zunoVersion="v1"></li>>Note that Z-Uno supports Z-Wave Security S2 or Security S0.</p>
+<p zunoVersion="v2"></li>>Note that Z-Uno supports Z-Wave Security S2/S0. You are able to switch off security by means of ArduinoIDE menu or by means of <a href="/z-wave/configuration-parameters/">parameter # 7</a></p>
 
 <h2 link="Command Classes">Command Classes</h2>
 <p>Z-Uno supports the following Command Classes:</p>
@@ -192,6 +197,13 @@ Z-Uno supports all three types of power management modes. You can define it usin
 
 <h2 link="Device reset">Device reset</h2>
 <p>Z-Uno can be excluded from network by following <a href="/getting-started/include-in-network">Exclusion process</a> via Z-Wave controller or by resetting the device via Service button: <b>hold Service button for 5 seconds and then press three times</b>. Use this procedure only if your controller is missing or inoperable. Note that the sketch is not erased during exclusion or reset process.</p>
+
+<h2 link="SmartStart inclusion">SmartStart inclusion</h2>
+<p>User is able to get DSK, PIN and QR-code text using <b>zme_make</b> utility manually or by means of ArduinoIDE. You have to select "verbose output" in preferences of IDE. DSK/PIN are listed in "Z-Uno board information" section.</p> 
+<p>Manually you are able to achieve this using the command: <b>zme_make boardInfo -d &ltCOM/tty of ZUno&gt</b></p>
+
+<h2 link="Node Identification">Node Identification</h2>
+<p>Z-Uno supports <b>Indicator</b> command class that is used to identify specific node in network. For its identification Z-Uno uses red LED. </p>
 
 <h2 link="Changing Z-Wave settings">Changing Z-Wave settings</h2>
 <p>Z-Uno sketch defines number of channels, their types, number of association groups and power mode. Arduino IDE also allows to turn on/off security. But Z-Wave do not allow to change these paramenters &laquo;on the fly&raquo;. To remain compatible with Z-Wave Plus, Z-Uno <b>will not adopt these changes until device is excluded or resetted</b>.</p>

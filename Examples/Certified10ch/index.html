@@ -1,0 +1,143 @@
+<h1>10 Channel certified example</h1>
+This page contains specific settings option for certification sketch. All standard Z-Uno parameters and Z-Wave descriptions are listed on <a link="/z-wave/">this page</a>.
+
+It consist of a very complex mains power device with 3 relay switches, 3 LED dimmers, temperature, humidity and motion sensors as well as reed switch. 
+
+
+<h2 link="Associations">Associations</h2>
+Device has 2 association groups. See the table below.
+<table>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th width="65%">Description</th>
+        <th>Maximum number of nodes</th>
+        <th>Commands</th>
+    </tr>
+    <tr>
+        <td><nobr>1</nobr></td>
+        <td>Lifeline</td>
+        <td>Main group for device reports. See Z-Wave specification for more details.</td>
+        <td>5</td>
+        <td>DeviceResetLocally.Report, SwitchBinary.Report, SwitchMultilevel.Report, SensorMultilevel.Report, Notification.Report</td>
+    </tr>
+    <tr>
+        <td><nobr>2</nobr></td>
+        <td>User group 02</td>
+        <td>Here motion sensor sends Basic on/off commands every time it is triggered.</td>
+        <td>5</td>
+        <td>Basic.On, Basic.Off</td>
+    </tr>
+</table>
+
+<h2 link="Basic interoperability">Basic interoperability</h2>
+Below is listed command class basic mapping for old endpoints. 
+<table>
+    <tr>
+        <th># Endpoint</th>
+        <th>Mapped command class</th>
+    </tr>
+    <tr>
+        <td><nobr>0</nobr></td>
+        <td>SwitchBinary</td>
+    </tr>
+    <tr>
+        <td><nobr>1</nobr></td>
+        <td>SwitchBinary</td>
+    </tr>
+    <tr>
+        <td><nobr>2</nobr></td>
+        <td>SwitchBinary</td>
+    </tr>
+    <tr>
+        <td><nobr>3</nobr></td>
+        <td>SwitchBinary</td>
+    </tr>
+    <tr>
+        <td><nobr>4</nobr></td>
+        <td>SwitchMultilevel</td>
+    </tr>
+    <tr>
+        <td><nobr>5</nobr></td>
+        <td>SwitchMultilevel</td>
+    </tr>
+    <tr>
+        <td><nobr>6</nobr></td>
+        <td>SwitchMultilevel</td>
+    </tr>
+    <tr>
+        <td><nobr>7</nobr></td>
+        <td>&ndash;</td>
+    </tr>
+    <tr>
+        <td><nobr>8</nobr></td>
+        <td>&ndash;</td>
+    </tr>
+    <tr>
+        <td><nobr>9</nobr></td>
+        <td>&ndash;</td>
+    </tr>
+    <tr>
+        <td><nobr>10</nobr></td>
+        <td>&ndash;</td>
+    </tr>
+</table>
+
+<h2 link="Configuration parameters">Configuration parameters</h2>
+In addition to the <a href="/z-wave/configuration-parameters/"> Z-Uno system configuration parameters</a>. This sketch provides user-side configuration parameters. See the table below.
+<table>
+    <tr>
+        <th>#</th>
+        <th width="65%">Description</th>
+        <th>Size</th>
+        <th>Default value</th>
+        <th>Possible values</th>
+    </tr>
+    <tr>
+        <td><nobr>64</nobr></td>
+        <td>Temperature hysteresis for sensor reports. This parameter is defined in 10th of degree. </td>
+        <td>4&nbsp;bytes</td>
+        <td>5</td>
+        <td>1&ndash;20</td>
+    </tr>
+    <tr>
+        <td><nobr>65</nobr></td>
+        <td>Humitity hysteresis for sensor reports. This parameter is defined in 10th of percent. </td>
+        <td>4&nbsp;bytes</td>
+        <td>5</td>
+        <td>1&ndash;20</td>
+    </tr>
+    <tr>
+        <td><nobr>66</nobr></td>
+        <td> Motion sensor's retrigger interval in milliseconds</td>
+        <td>4&nbsp;bytes</td>
+        <td>5000</td>
+        <td>0&ndash;100000</td>
+    </tr>
+</table>
+<h2 link="S2 suported keys">S2 Levels</h2>
+<div>This sketch supports these S2 keys:
+    <ul style="margin-bottom: 0; margin-top: 0;">
+        <li>S0</li>
+        <li>S2_UNAUTHENTICATED</li>
+        <li>S2_AUTHENTICATED</li>
+    </ul>
+</div>
+<h2 link="Notification types & events">Notification types & events</h2>
+<table>
+    <tr>
+        <th># Endpoint</th>
+        <th>Notification types/events</th>
+    </tr>
+    <tr>
+        <td><nobr>7</nobr></td>
+        <td>type: NOTIFICATION_TYPE_BURGLAR_ALARM = 0x07;<br> events: NOTIFICATION_EVENT_MOTION_DETECTION_UL = 0x08</td>
+    </tr>
+    <tr>
+        <td><nobr>8</nobr></td>
+        <td>type: NOTIFICATION_TYPE_ACCESS_CONTROL_ALARM = 0x06;<br>events: NOTIFICATION_EVENT_WINDOW_DOOR_OPENED = 0x16, NOTIFICATION_EVENT_WINDOW_DOOR_CLOSED = 0x17</td>
+    </tr>
+</table>
+
+
+
