@@ -55,7 +55,7 @@ Z-Uno supports all three types of power management modes. You can define it usin
         <ul zunoVersion="v2" style="margin-bottom: 0; margin-top: 0;">
             <li>LifeLine group always uses the highest avaliable level. You have to add to lifeline group only the nodes with highest securiry level (the highest S2 key of this Z-Uno).</li>
             <li>All other "control" groups uses dynamic-detection strategy:
-                <ul> <li>Z-Uno setups the highest avaliable S2-key</li>
+                <ul><br><li>Z-Uno setups the highest avaliable S2-key</li>
                      <li>(2) Z-Uno sends special command to node using current key and Z-Uno waits for report.</li>
                      <li>If node answers, Z-Uno will memorize detected S2-level and uses it for futher communication with node.</li>
                      <li>If node doesn't answer Z-Uno reduces the security level and goes to (2).</li>
@@ -149,7 +149,7 @@ Z-Uno supports all three types of power management modes. You can define it usin
     <tr>
        <td>Z-Wave Plus Info</td>
        <td>2</td>
-       <td>&dash</td>
+       <td>&ndash;</td>
        <td>Special command class that provides meta-information about device.</td>
        <td>Any</td>
        
@@ -157,112 +157,112 @@ Z-Uno supports all three types of power management modes. You can define it usin
     <tr>
         <td>Transport Service</td>
         <td>2</td>
-        <td>&dash</td>
-        <td>Auxilary transport command class. Is accessable on any security level.</td>
+        <td>&ndash;</td>
+        <td>Auxilary transport command class.</td>
         <td>Any</td>
      </tr>
      <tr>
         <td>Security</td>
         <td>1</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Support of S0 encryption scheme. Provides backward compatibility with S0-devices/controllers.</td>
         <td>Any</td>
      </tr>
      <tr>
         <td>Security2</td>
         <td>1</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Support of S2 encryption scheme.</td>
         <td>Any</td>
      </tr>
      <tr>
         <td>Supervision</td>
         <td>2</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Provides session context for "set" commands. It always returns operation status to sender.</td>
         <td>Any</td>
      </tr>
      <tr>
         <td>Version</td>
         <td>3</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Metainformation about firmware version and command clasess version</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Association</td>
         <td>2</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Add ability to control another z-wave nodes and send reports to the groups of devices.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>MultiChannel Association</td>
         <td>3</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Extends Association command class to end points.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Association Group Information</td>
         <td>3</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Provides metainformation about association groups (like names, command types and etc).</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Manufacturer Specific</td>
         <td>2</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Adds some manufacturer specific API to protocol</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Device Reset Locally</td>
         <td>1</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Notifies controller when user resets device using its local controls.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Indicator</td>
         <td>3</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Visualizes the device at the user's request</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Powerlevel</td>
         <td>1</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Provides diagnostic information about network nodes connectivity. Is similar to "ping" command for Z-Wave.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Configurtion</td>
         <td>4</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Provides a way to customize settings of device.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Firmware Update</td>
         <td>5</td>
-        <td>&dash</td>
+        <td>&ndash;</td>
         <td>Provides firmware upgrade over the air (OTA) process.</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Multi channel</td>
         <td>4</td>
-        <td>&dash</td>
-        <td>Combines functionality of many devices in one. Adds end points.</td>
+        <td>&ndash;</td>
+        <td>Combines functionality of many devices in one. Adds end points. It appears only if you have more then one end point (channel) in your sketch</td>
         <td>Highest</td>
      </tr>
      <tr>
         <td>Basic</td>
         <td>2</td>
-        <td>Is always mapped to some of actuator channel like Switch Binary, Switch Multilevel, Doorlock and etc. </td>
+        <td>Is always mapped to some of actuator channel like Switch Binary, Switch Multilevel, Doorlock and etc.</td>
         <td>Provides simplified interoperability and backward compatibility besides Z-Wave devices.</td>
         <td>Highest</td>
      </tr>
