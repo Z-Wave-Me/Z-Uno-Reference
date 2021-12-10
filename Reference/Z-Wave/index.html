@@ -43,20 +43,44 @@ Z-Uno supports all three types of power management modes. You can define it usin
 <h2 link="Security">Security</h2>
 <p>Z-Wave protocol allows secure commands transmission to bring more privacy to your IoT network. To enable Security in Z-Uno use Arduino IDE menu item. Once Security is turned on Z-Uno will follow the rules below:</p>
 <ul>
-    <li>All control commands to Z-Uno must be secure.</li>
+    <li zunoVersion="v1">All control commands to Z-Uno must be secure.</li>
+    <li zunoVersion="v2">All control commands to Z-Uno must be secure and use the highest avaliable for Z-Uno node S2-key.</li>
     <li>All commands sent by Z-Uno (based on Association groups) follow rules:
-        <ul style="margin-bottom: 0; margin-top: 0;">
+        <ul zunoVersion="v1" style="margin-bottom: 0; margin-top: 0;">
             <li>First time Z-Uno tries to speak securelly.</li>
             <li>If success, Z-Uno will memorize that this device must always be spoken securelly.</li>
             <li>If fails, Z-Uno will remember this and send unsecure commands to such a device.</li>
         </ul>
-        This allows to mix secure and unsecure devices in the same Association group.</li>
-    <li>Only descriptive Command Classes are accessible without of Security: Battery, Device Reset Locally, Firmware Update, Manufacturer Specific, Power Level, Version, Wakeup, Z-Wave Plus Info.</li>
+        <ul zunoVersion="v2" style="margin-bottom: 0; margin-top: 0;">
+            <li>LifeLine group always uses the highest avaliable level. You have to add to lifeline group only the nodes with highest securiry level (the highest S2 key of this Z-Uno).</li>
+            <li>All other "control" groups uses dynamic detection strategy. 
+                <ul> <li>Z-Uno setups the highest avaliable S2-key</li>
+                     <li>(2) Z-Uno sends special command to node using current key and Z-Uno waits for report.</li>
+                     <li>If node answers, Z-Uno will memorize that detected S2-level and uses it for futher communication with this node.</li>
+                     <li>If node doesn't answer Z-Uno reduces the security level and goes to (2).</li>
+                     <li>If node doesn't answer on any level (included unsecure) Z-Uno marks node as failed.</li>
+                </ul>
+        </ul>
+        <li>This approach allows to mix secure and unsecure devices in the same Association group.</li>
+    <li zunoVersion="v1">Only descriptive Command Classes are accessible without of Security: Battery, Device Reset Locally, Firmware Update, Manufacturer Specific, Power Level, Version, Wakeup, Z-Wave Plus Info.</li>
+    <li zunoVersion="v2">Only these Command Classes are accessible without of Security when device was included securely: Z-Wave Plus Info, Transport Service, Security, Security2, Supervision</li>
 </ul>
 
-<p zunoVersion="v1"></li>>Note that Z-Uno supports Z-Wave Security S2 or Security S0.</p>
-<p zunoVersion="v2"></li>>Note that Z-Uno supports Z-Wave Security S2/S0. You are able to switch off security by means of ArduinoIDE menu or by means of <a href="/z-wave/configuration-parameters/">parameter # 7</a></p>
-
+<span class="function_description_note" zunoVersion="v1">
+    Note that Z-Uno supports Z-Wave Security S2 or Security S0. Your controller has to be S0/S2-enabled to achieve this.
+</span>
+<span class="function_description_note" zunoVersion="v1">
+    Note that Z-Uno supports Z-Wave Security S2/S0. Your controller has to be S2-enabled to achieve this. You are able to switch off security by means of ArduinoIDE menu or by means of <a href="/z-wave/configuration-parameters/">parameter #7</a>. 
+</span>
+<p zunoVersion="v2">User is able to get DSK/PIN using <b>zme_make</b> utility manually or by means of ArduinoIDE. You have to select "verbose output" in preferences of IDE. DSK/PIN are listed in "Z-Uno board information" section.</p> 
+<p zunoVersion="v2">Manually you are able to do it using the command: <b>zme_make boardInfo -d &ltCOM/tty of ZUno&gt</b></p>
+<h2 zunoVersion="v2" link="SmartStart">SmartStart technology</h2>
+<p zunoVersion="v2"> Z-Uno supports SmartStart technology. You are able to add device to network by means of special QR-code/SmartStart string. Just plug in ZUno to power supply and scan SmartStart label, no other interruction with device is needed.</p> 
+<span class="function_description_note" zunoVersion="v2">
+    Note your controller has to be SmartStart-enabled to achieve this. </a>. 
+</span>
+<p zunoVersion="v2">User is able to get SmartStart string using <b>zme_make</b> utility manually or by means of ArduinoIDE. You have to select "verbose output" in preferences of IDE. Smart Strart QR-code is listed in "Z-Uno board information" section.</p> 
+<p zunoVersion="v2">Manually you are able to do it using the command: <b>zme_make boardInfo -q &lt/path/to/qrcode_output_filename.png&gt -d &ltCOM/tty of ZUno&gt</b>. It will save qr-code image into "/path/to/qrcode_output_filename.png". </p>
 <h2 link="Command Classes">Command Classes</h2>
 <p>Z-Uno supports the following Command Classes:</p>
 <style>
@@ -69,7 +93,7 @@ Z-Uno supports all three types of power management modes. You can define it usin
         margin-top: -0.5em;
     }
 </style>
-<table class="CClist">
+<table zunoVersion="v1" class="CClist">
 <tr>
    <td>
         <ul>
@@ -101,8 +125,8 @@ Z-Uno supports all three types of power management modes. You can define it usin
 </tr>
 </table>
 
-<p>Depending on channels types Z-Uno will also support some of these Command Classes:</p>
-<ul>
+<p zunoVersion="v1">Depending on channels types Z-Uno will also support some of these Command Classes:</p>
+<ul zunoVersion="v1">
     <li zunoVersion="v1">Sensor Binary and Notification</li>
     <li zunoVersion="v2">Notification</li>
     <li>Sensor Multilevel</li>
@@ -113,6 +137,213 @@ Z-Uno supports all three types of power management modes. You can define it usin
     <li>Door Lock</li>
     <li>Thermostat Mode and Thermostat Setpoit</li>
 </ul>
+
+<table zunoVersion="v2" class="CClist">
+    <tr>
+        <th>Command class</th>
+        <th>Version</th>
+        <th>ZUno channel entity</th>
+        <th>Description</th>
+        <th>S2 level</th>
+    </tr>
+    <tr>
+       <td>Z-Wave Plus Info</td>
+       <td>2</td>
+       <td>&dash</td>
+       <td>Special command class that provides meta-information about device.</td>
+       <td>Any</td>
+       
+    </tr>
+    <tr>
+        <td>Transport Service</td>
+        <td>2</td>
+        <td>&dash</td>
+        <td>Auxilary transport command class. Is accessable on any security level.</td>
+        <td>Any</td>
+     </tr>
+     <tr>
+        <td>Security</td>
+        <td>1</td>
+        <td>&dash</td>
+        <td>Support of S0 encryption scheme. Provides backward compatibility with S0-devices/controllers.</td>
+        <td>Any</td>
+     </tr>
+     <tr>
+        <td>Security2</td>
+        <td>1</td>
+        <td>&dash</td>
+        <td>Support of S2 encryption scheme.</td>
+        <td>Any</td>
+     </tr>
+     <tr>
+        <td>Supervision</td>
+        <td>2</td>
+        <td>&dash</td>
+        <td>Provides session context for "set" commands. It always returns operation status to sender.</td>
+        <td>Any</td>
+     </tr>
+     <tr>
+        <td>Version</td>
+        <td>3</td>
+        <td>&dash</td>
+        <td>Metainformation about firmware version and command clasess version</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Association</td>
+        <td>2</td>
+        <td>&dash</td>
+        <td>Add ability to control another z-wave nodes and send reports to the groups of devices.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>MultiChannel Association</td>
+        <td>3</td>
+        <td>&dash</td>
+        <td>Extends Association command class to end points.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Association Group Information</td>
+        <td>3</td>
+        <td>&dash</td>
+        <td>Provides metainformation about association groups (like names, command types and etc).</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Manufacturer Specific</td>
+        <td>2</td>
+        <td>&dash</td>
+        <td>Adds some manufacturer specific API to protocol</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Device Reset Locally</td>
+        <td>1</td>
+        <td>&dash</td>
+        <td>Notifies controller when user resets device using its local controls.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Indicator</td>
+        <td>3</td>
+        <td>&dash</td>
+        <td>Visualizes the device at the user's request</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Powerlevel</td>
+        <td>1</td>
+        <td>&dash</td>
+        <td>Provides diagnostic information about network nodes connectivity. Is similar to "ping" command for Z-Wave.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Configurtion</td>
+        <td>4</td>
+        <td>&dash</td>
+        <td>Provides a way to customize settings of device.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Firmware Update</td>
+        <td>5</td>
+        <td>&dash</td>
+        <td>Provides firmware upgrade over the air (OTA) process.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Multi channel</td>
+        <td>4</td>
+        <td>&dash</td>
+        <td>Combines functionality of many devices in one. Adds end points.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Basic</td>
+        <td>2</td>
+        <td>Is always mapped to some of actuator channel like Switch Binary, Switch Multilevel, Doorlock and etc. </td>
+        <td>Provides simplified interoperability and backward compatibility besides Z-Wave devices.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Switch Binary</td>
+        <td>2</td>
+        <td>Switch Binary, Siren, Flow Stop</td>
+        <td>Provides simple on-off switch functionality to end point.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Switch Multilevel</td>
+        <td>4</td>
+        <td>Switch Multilevel, Blinds, Switch Color</td>
+        <td>Provides dimmer functionality to end point.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Notification</td>
+        <td>8</td>
+        <td>Sensor Binary</td>
+        <td>Provides binary sensor (event based sensor) functionality to end point.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Multilevel Sensor</td>
+        <td>8</td>
+        <td>Sensor Multilevel</td>
+        <td>Provides physical value sensor (like temperature, humidity, pressure and etc.) functionaly to end point.</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Meter</td>
+        <td>5</td>
+        <td>Meter</td>
+        <td>Adds meter functionality (like energy/water/gas meter) to end point. In Z-Wave meters differ from sensor multilevel. They provide some extra functionality. </td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Doorlock</td>
+        <td>5</td>
+        <td>Doorlock</td>
+        <td>Adds doorlock functionality to end point.</td>
+        <td>S2 Access Control</td>
+     </tr>
+     <tr>
+        <td>Doorlock</td>
+        <td>5</td>
+        <td>Doorlock</td>
+        <td>Adds doorlock functionality to end point.</td>
+        <td>S2 Access Control</td>
+     </tr>
+     <tr>
+        <td>Thermostat Mode</td>
+        <td>3</td>
+        <td>Thermostat</td>
+        <td>Provides interface to select the mode of thermostat (cool, heat and etc)</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Thermostat Set Point</td>
+        <td>3</td>
+        <td>Thermostat</td>
+        <td>Provides interface to select the target temperature of thermostat</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Thermostat Set Point</td>
+        <td>3</td>
+        <td>Thermostat</td>
+        <td>Provides interface to select the target temperature of thermostat</td>
+        <td>Highest</td>
+     </tr>
+     <tr>
+        <td>Switch Color</td>
+        <td>3</td>
+        <td>Switch Color</td>
+        <td>Provides color selection interface to end point</td>
+        <td>Highest</td>
+     </tr>
+</table>
 <p>Depending on Association Groups set up Z-Uno can control:</p>
 <ul>
     <li>Basic</li>
@@ -197,9 +428,6 @@ Z-Uno supports all three types of power management modes. You can define it usin
 <p zunoVersion="v1">Z-Uno can be excluded from network by following <a href="/getting-started/include-in-network">Exclusion process</a> via Z-Wave controller or by resetting the device via Service button: <b>hold Service button for 5 seconds and then press three times</b>. Use this procedure only if your controller is missing or inoperable. Note that the sketch is not erased during exclusion or reset process.</p>
 <p zunoVersion="v2">You are able to reset Z-Uno using this sequence: hold the Service button until you'll see that the red LED is blinking, release the Service button and then triple click on it. You have to see another red LED pattern when device will be ready.</p>
 
-<h2 zunoVersion="v2" link="SmartStart inclusion">SmartStart inclusion</h2>
-<p zunoVersion="v2">User is able to get DSK, PIN and QR-code text using <b>zme_make</b> utility manually or by means of ArduinoIDE. You have to select "verbose output" in preferences of IDE. DSK/PIN are listed in "Z-Uno board information" section.</p> 
-<p zunoVersion="v2">Manually you are able to achieve this using the command: <b>zme_make boardInfo -d &ltCOM/tty of ZUno&gt</b></p>
 
 <h2 zunoVersion="v2" link="Node Identification">Node Identification</h2>
 <p zunoVersion="v2">Z-Uno supports <b>Indicator</b> command class that is used to identify specific node in network. For its identification Z-Uno uses red LED. </p>
