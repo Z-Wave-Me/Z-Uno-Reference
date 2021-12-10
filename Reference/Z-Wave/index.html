@@ -51,17 +51,17 @@ Z-Uno supports all three types of power management modes. You can define it usin
             <li>If success, Z-Uno will memorize that this device must always be spoken securelly.</li>
             <li>If fails, Z-Uno will remember this and send unsecure commands to such a device.</li>
         </ul>
+        <li zunoVersion="v1">This approach allows to mix secure and unsecure devices in the same Association group.</li>
         <ul zunoVersion="v2" style="margin-bottom: 0; margin-top: 0;">
             <li>LifeLine group always uses the highest avaliable level. You have to add to lifeline group only the nodes with highest securiry level (the highest S2 key of this Z-Uno).</li>
-            <li>All other "control" groups uses dynamic detection strategy. 
+            <li>All other "control" groups uses dynamic-detection strategy:
                 <ul> <li>Z-Uno setups the highest avaliable S2-key</li>
                      <li>(2) Z-Uno sends special command to node using current key and Z-Uno waits for report.</li>
-                     <li>If node answers, Z-Uno will memorize that detected S2-level and uses it for futher communication with this node.</li>
+                     <li>If node answers, Z-Uno will memorize detected S2-level and uses it for futher communication with node.</li>
                      <li>If node doesn't answer Z-Uno reduces the security level and goes to (2).</li>
                      <li>If node doesn't answer on any level (included unsecure) Z-Uno marks node as failed.</li>
-                </ul>
+                </ul></li>
         </ul>
-        <li>This approach allows to mix secure and unsecure devices in the same Association group.</li>
     <li zunoVersion="v1">Only descriptive Command Classes are accessible without of Security: Battery, Device Reset Locally, Firmware Update, Manufacturer Specific, Power Level, Version, Wakeup, Z-Wave Plus Info.</li>
     <li zunoVersion="v2">Only these Command Classes are accessible without of Security when device was included securely: Z-Wave Plus Info, Transport Service, Security, Security2, Supervision</li>
 </ul>
@@ -138,12 +138,12 @@ Z-Uno supports all three types of power management modes. You can define it usin
     <li>Thermostat Mode and Thermostat Setpoit</li>
 </ul>
 
-<table zunoVersion="v2" class="CClist">
+<table zunoVersion="v2">
     <tr>
-        <th>Command class</th>
+        <th width="10%">Command class</th>
         <th>Version</th>
         <th>ZUno channel entity</th>
-        <th>Description</th>
+        <th width="45%">Description</th>
         <th>S2 level</th>
     </tr>
     <tr>
@@ -309,13 +309,6 @@ Z-Uno supports all three types of power management modes. You can define it usin
         <td>S2 Access Control</td>
      </tr>
      <tr>
-        <td>Doorlock</td>
-        <td>5</td>
-        <td>Doorlock</td>
-        <td>Adds doorlock functionality to end point.</td>
-        <td>S2 Access Control</td>
-     </tr>
-     <tr>
         <td>Thermostat Mode</td>
         <td>3</td>
         <td>Thermostat</td>
@@ -344,6 +337,8 @@ Z-Uno supports all three types of power management modes. You can define it usin
         <td>Highest</td>
      </tr>
 </table>
+<br>
+<br>
 <p>Depending on Association Groups set up Z-Uno can control:</p>
 <ul>
     <li>Basic</li>
