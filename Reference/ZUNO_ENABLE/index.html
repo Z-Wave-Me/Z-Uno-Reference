@@ -180,14 +180,12 @@ ZUNO_ENABLE(NO_LOOP_MINIMALDELAY); // Disable the default 20 ms minial delay bet
     void loop(){
         // ...
     }
-    // ...
-    ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
     </code></pre>
     </span>
 <span class="function_example" zunoVersion="v2">
     Example 2. Setup some user-side flags.
     <pre><code class="c"> 
-        ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
+        ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set flags for my_library.cpp
         // ...
         void setup(){
             Serial.begin();
