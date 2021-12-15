@@ -90,7 +90,7 @@
                     <li>ZUNO_SYS_EVENT_LEARNCOMPLETED</li> Z-Uno was added to network or exluded from the network. Learn process has been finished.
                     <li>ZUNO_SYS_EVENT_LEARNSTARTED</li> Process of network inclusion/exclusion has started. 
                     <li>ZUNO_SYS_EVENT_SETDEFAULT</li> Configuration of device was cleaned up.
-                    <li>ZUNO_SYS_EVENT_SLEEP_MODEEXC</li> Warning, user tries to go to sleep listening device. Don't call <span class="function_ref">zunoSendDeviceToSleep()</span> for listening devices. 
+                    <li>ZUNO_SYS_EVENT_SLEEP_MODEEXC</li> Warning, user tries to go to sleep listening device. Don't call <span class="function_ref">zunoSendDeviceToSleep</span>() for listening devices. 
                     <li>ZUNO_SYS_EVENT_STACK_OVERFLOW</li>Firmware detected user stack overflow. Be careful with recursion and large amounts of local data inside nested functions.
                     <li>ZUNO_SYS_EVENT_QUEUE_OVERLOAD</li>IRQ queue is full. System can miss some interrupts.
                     <li>ZUNO_SYS_EVENT_INVALID_TX_REQUEST</li> Z-Uno tries to send an invalid message.
@@ -104,7 +104,7 @@
         </span>
         <span class="function_parameters_param">
             <span class="function_parameters_param_name">params</span>
-            <span class="function_parameters_param_description">Depands on <b>event</b> field. Represents aditional event data. See above.</span>
+            <span class="function_parameters_param_description">Depends on <b>event</b> field. Represents aditional event data. See above.</span>
         </span>
     
     </span>
