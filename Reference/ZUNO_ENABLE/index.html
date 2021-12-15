@@ -61,7 +61,7 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch.
         <tr>
             <td>SKETCH_VERSION</td>
             <td>INT, 16bits. Default is 0x0101 = 01.01</td>
-            <td>Sketch version number for identification.</td>
+            <td>Sketch version number for identification. You can see it in Z-Wave cotroller interface (CC Version/CC FirmwareUpdate)</td>
         </tr>
         <tr>
             <td>SKETCH_FWID</td>
@@ -72,13 +72,13 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch.
             <td>SKETCH_FLAGS</td>
             <td>INT, 32bits, superposition of bits</td>
             <td>Changes sketch behavior. <br> 
-                <b>HEADER_FLAGS_DBG</b> - enables extra debug code.<br> 
-                <b>HEADER_FLAGS_NOSKETCH_OTA</b> - disables sketch OTA process, OTA target#1 will be removed<br> 
-                <b>HEADER_FLAGS_NOSKETCH_USBLOAD</b> - disables sketch USB upload. Be careful!<br>  
-                <b>HEADER_FLAGS_NOREBOOT_CFG</b> - disables auto reboot when you change some system configuration parameters.<br> 
-                <b>HEADER_FLAGS_NOLEDS</b>- disables system LEDs<br>
-                <b>HEADER_FLAGS_ALL_SECURE</b> - device supports SECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
-                <b>HEADER_FLAGS_ALL_UNSECURE</b> - device supports UNSECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
+                <b>HEADER_FLAGS_DBG</b> (bit4) - enables extra debug code.<br> 
+                <b>HEADER_FLAGS_NOLEDS</b> (bit5)- disables system LEDs<br>
+                <b>HEADER_FLAGS_NOSKETCH_OTA</b> (bit6) - disables sketch OTA process, OTA target#1 will be removed<br> 
+                <b>HEADER_FLAGS_NOSKETCH_USBLOAD</b> (bit7) - disables sketch USB upload. Be careful!<br>  
+                <b>HEADER_FLAGS_NOREBOOT_CFG</b> (bit8) - disables auto reboot when you change some system configuration parameters.<br> 
+                <b>HEADER_FLAGS_ALL_SECURE</b> (bit9) - device supports SECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
+                <b>HEADER_FLAGS_ALL_UNSECURE</b> (bit10) - device supports UNSECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
             </td>
         </tr>
         <tr>
@@ -170,9 +170,32 @@ ZUNO_ENABLE(NO_LOOP_MINIMALDELAY); // Disable the default 20 ms minial delay bet
 </span>
 
 <span class="function_example" zunoVersion="v2">
+    Example 1. Setup some system flags.
     <pre><code class="c"> 
-    ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
+    ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging, forward it to builtin USB
+    // ...
+    void setup(){
+        // ...
+    }
+    void loop(){
+        // ...
+    }
     // ...
     ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
     </span>
-    
+<span class="function_example" zunoVersion="v2">
+    Example 2. Setup some user-side flags.
+    <pre><code class="c"> 
+        ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
+        // ...
+        void setup(){
+            Serial.begin();
+            // ...
+            #ifdef MY_LIBRARY_DEBUG
+            Serial.println("Debug information is on. See details in my_library.cpp ");
+            #endif
+        }
+        void loop(){
+            // ...
+        }
+        </span>
