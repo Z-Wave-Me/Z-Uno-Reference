@@ -82,6 +82,11 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch.
             </td>
         </tr>
         <tr>
+            <td>SKETCH_FLAGS_LOOP_DELAY</td>
+            <td>INT, 32bits, in milliseconds. Default is 32</td>
+            <td>Time interval between loop() function calls. Because of this you don't need to add some extra delay at the end of loop function. For some cases you can adjust it a little. Very low values may hang your radio transmission.</td>
+        </tr>
+        <tr>
             <td>ZUNO_EXT_FIRMWARES_COUNT</td>
             <td>INT</td>
             <td>Number of additional (custom) firmwares for OTA.</td>
@@ -94,7 +99,7 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch.
         <tr>
             <td>ZUNO_CUSTOM_OTA_OFFSET</td>
             <td>HEXADECIMAL</td>
-            <td>Additional offset for external chip OTA. Generally OTA's flash segment starts from 0x3a000. Firmware will all defined value to 0x3a000.</td>
+            <td>Additional offset for external chip OTA. Generally OTA's flash segment starts from 0x3a000. Firmware will add defined value to 0x3a000.</td>
         </tr>
         <tr>
             <td colspan="3">GPIO</td>
@@ -155,7 +160,7 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch.
     </table>
 </span>
 
-<span class="function_example">
+<span class="function_example" zunoVersion="v1">
 <pre><code class="c">ZUNO_DISABLE(WITH_CC_SENSOR_BINARY); // For a binary sensor you can suppress SensorBinary or Notification
 ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
 ZUNO_DISABLE(SERVICE_LEDS); // Disable Service LEDs to save battry and remove unwanted blinks
@@ -163,3 +168,11 @@ ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in m
 ZUNO_DISABLE(NO_MULTIBINARY_SWITCH0); // Force Switch Mulitilevel and Switch Binary to be in channels even if can be outside of channels (some controllers require it).
 ZUNO_ENABLE(NO_LOOP_MINIMALDELAY); // Disable the default 20 ms minial delay between loops - don't forget to add own delay()</code></pre>
 </span>
+
+<span class="function_example" zunoVersion="v2">
+    <pre><code class="c"> 
+    ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
+    // ...
+    ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
+    </span>
+    
