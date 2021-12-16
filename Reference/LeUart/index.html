@@ -1,0 +1,202 @@
+<span zunoVersion="v2"></span>
+<h1>LeUart</h1>
+<span class="function_description">Used for communication between the Z-Uno board and another microcontroller or a computer via UART or USB.
+	Works similarly <a class="function_ref" link="Serial">Serial</a> with the only difference that at low speeds it also does not stop working in <b>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</b> - <a class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SETUP_SLEEPING_MODE</a>
+</span>
+<span class="function_description_more">Z-Uno boards have the following serial interfaces:
+<ul>
+    <li>LeUart &mdash; UART on TX0(24) and RX0(25) pins</li>
+</ul>
+</span>
+
+<span class="function_description_more">
+	You can change default pins of UART interface, using method <span class="function_ref" link="LeUart/begin">begin</a>()</span><br>
+	<a href="https://z-uno.z-wave.me/technical/pinout/">Pinout</a><br>
+	Compatibility pin table
+	<table>
+		<tr>
+			<th>Z-Uno pin #</th>
+			<th>LeUart TX</th>
+			<th>LeUart RX</th>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+			<td>3</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+			<td>9</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+			<td>15</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>16</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>17</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>18</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>19</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>20</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+			<td>21</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>22</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>23</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>24</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+		<tr>
+			<td>25</td>
+			<td style="color: green;">✔</td>
+			<td style="color: green;">✔</td>
+		</tr>
+	</table>
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Please note, that <b>LeUart</b> uses 128 bytes receiving buffer. You can use method  <span class="function_ref" link="LeUart/begin">begin</a>()</span> to set your own buffer.
+</span>
+
+<span class="function_description_more" zunoVersion="v2">
+LeUart objects are binded to these peripherals:
+	<table>
+		<tr>
+			<th>LeUart object</th>
+			<th>Cortex peripheral</th>
+		</tr>
+		<tr>
+			<td>LeUart</td>
+			<td>LEUART0</td>
+		</tr>
+	</table>
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+Please note, every <b>LeUart</b> object occupies one <b>DMA channel</b> for fast data receiving. <b>LeUart</b> holds channel from <span class="function_ref" link="LeUart/begin">begin</a>()</span> until you free its resources by means of LeUart.end()<br>
+When you send data <b>LeUart</b> object dynamically occupies another one DMA channel for data transfer time interval. Z-Uno builtin DMA controller supports up to 8 channels. 
+</span>
+
+<span class="function_description_more">All LeUart ports have the following methods supported:
+	<ul>
+		<li>available() - works similarly <span class="function_ref" link="Serial/available">Serial.available</a>()</li>
+		<li><span class="function_ref" link="Serial/begin">begin</a>()</li>
+		<li>dumpPrint() - works similarly <span class="function_ref" link="Serial/dumpPrint">Serial.dumpPrint</a>()</li>
+		<li>end() - works similarly <span class="function_ref" link="Serial/end">Serial.end</a>()</li>
+		<li>find() - works similarly <span class="function_ref" link="Serial/find">Serial.find</a>()</li>
+		<li>findUntil() - works similarly <span class="function_ref" link="Serial/finduntil">Serial.findUntil</a>()</li>
+		<li>fixPrint() - works similarly <span class="function_ref" link="Serial/fixPrint">Serial.fixPrint</a>()</li>
+		<li>formatPrint() - works similarly <span class="function_ref" link="Serial/formatPrint">Serial.formatPrint</a>()</li>
+		<li>parseFloat() - works similarly <span class="function_ref" link="Serial/parsefloat">Serial.parseFloat</a>()</li>
+		<li>parseInt() - works similarly <span class="function_ref" link="Serial/parseint">Serial.parseInt</a>()</li>
+		<li>peek() - works similarly <span class="function_ref" link="Serial/peek">Serial.peek</a>()</li>
+		<li>print() - works similarly <span class="function_ref" link="Serial/Print">Serial.print</a>()</li>
+		<li>printf() - works similarly <span class="function_ref" link="Serial/printf">Serial.printf</a>()</li>
+		<li>println() - works similarly <span class="function_ref" link="Serial/println">Serial.println</a>()</li>
+		<li>read() - works similarly <span class="function_ref" link="Serial/read">Serial.read</a>()</li>
+		<li>readBytes() - works similarly <span class="function_ref" link="Serial/readbytes">Serial.readBytes</a>()</li>
+		<li>readBytesUntil() - works similarly <span class="function_ref" link="Serial/readbytesuntil">Serial.readBytesUntil</a>()</li>
+		<li>readString() - works similarly <a class="function_ref" link="Serial/readstring">Serial.readString</a>()</li>
+		<li>readStringUntil() - works similarly <a class="function_ref" link="Serial/readstringuntil">Serial.readStringUntil</a>()</li>
+		<li>setTimeout() - works similarly <span class="function_ref" link="Serial/settimeout">Serial.setTimeout</a>()</li>
+		<li><a class="function_ref" link="Serial/startFrame">startFrame</a>()</li>
+		<li><a class="function_ref" link="Serial/startFrameDisabled">startFrameDisabled</a>()</li>
+		<li><a class="function_ref" link="Serial/wakeUp">wakeUp</a>()</li>
+		<li><a class="function_ref" link="Serial/wakeUpDisabled">wakeUpDisabled</a>()</li>
+		<li>write() - works similarly <span class="function_ref" link="Serial/write">Serial.write</a>()</li>
+	</ul>
+</span>

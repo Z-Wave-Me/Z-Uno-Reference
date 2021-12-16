@@ -1,0 +1,78 @@
+<h1 zunoVersion="v2">LeUart.begin()</h1>
+
+<span class="function_description">Sets the data rate in bits per second (baud) for serial data transmission. For communicating with Serial Monitor, make sure to use one of the baud rates listed in the menu at the bottom right corner of its screen. 
+You can, however, specify other rates.<br></span>
+
+<span class="function_description_more">An optional second argument configures the number of data, parity, and stop bits. The default is 8 data bits, no parity, one stop bit.</span>
+
+<span class="function_syntax">
+<span>
+LeUart.begin()<br>
+LeUart.begin(speed)<br>
+LeUart.begin(speed, config)<br>
+LeUart.begin(speed, config, rx, tx) - returns error code.<br>
+LeUart.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
+</span>
+</span>
+
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">speed:</span>
+		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long. Standart supported values are: 300, 600, 1200 bps. If omitted, default 1200 bps is used.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">config:</span>
+		<span class="function_parameters_param_description"> sets data, parity, and stop bits. Valid values are:
+		<ul>
+			<li>LE_UART_SERIAL_8N1 (the default)</li>
+			<li>LE_UART_SERIAL_8N2</li>
+			<li>LE_UART_SERIAL_9N1</li>
+			<li>LE_UART_SERIAL_9N2</li>
+			<li>LE_UART_SERIAL_8E1: even parity</li>
+			<li>LE_UART_SERIAL_8E2</li>
+			<li>LE_UART_SERIAL_9E1</li>
+			<li>LE_UART_SERIAL_9E2</li>
+			<li>LE_UART_SERIAL_8O1: odd parity</li>
+			<li>LE_UART_SERIAL_8O2</li>
+			<li>LE_UART_SERIAL_9O1</li>
+			<li>LE_UART_SERIAL_9O2</li>
+		</ul>
+		</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">rx:</span>
+		<span class="function_parameters_param_description"> pin RX.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">tx:</span>
+		<span class="function_parameters_param_description"> pin TX.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">buffer:</span>
+		<span class="function_parameters_param_description"> pointer to receiving buffer.</span>
+	</span>
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">len:</span>
+		<span class="function_parameters_param_description"> size of buffer in bytes.</span>
+	</span>
+</span>
+
+<span class="function_returns">
+<span>error code. 0 means success.</span>
+</span>
+
+<span class="function_example">
+Simple variants of begin() method.
+<pre><code class="c">
+	LeUart.begin(1200); // opens LeUart port on LEUART0, sets data rate to 1200 bps	
+</code></pre>
+</span>
+<span class="function_example" zunoVersion="v2">
+Advanced variants of begin() method.	
+<pre><code class="c" >
+    static uint8_t buf[256]; // Custom receiving buffer
+    LeUart.begin(1200, LE_UART_SERIAL_8N1);//  Setup just a bit mode. 8 bita + 1 stopbit
+    LeUart.begin(1200, LE_UART_SERIAL_8N1, 9, 10);// Define bit mode and move serial0 to pins 9/10
+    LeUart.begin(1200, LE_UART_SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));// Define bit mode, move serial0 to pins 9/10 and use custom receiving buffer
+</code></pre>
+</span>
