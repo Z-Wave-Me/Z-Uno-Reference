@@ -81,11 +81,6 @@
 			<li><span class="function_ref" link="compound-bitwise-and">&amp;=</span> (compound bitwise and)</li>
 			<li><span class="function_ref" link="compound-bitwise-or">|=</span> (compound bitwise or)</li>
 		</ul>
-		<h4 zunoVersion="v2">Operators</h4>
-		<ul zunoVersion="v2">
-			<li><span class="function_ref" link="new_delete">new</span> (increment)</li>
-			<li><span class="function_ref" link="new_delete">delete</span> (increment)</li>
-		</ul>
 	</td>
 	<td>
 		<h3><span class="z2">Variables</span></h3>
@@ -288,8 +283,10 @@ float modff(float x, float * y)
 			<li><span class="function_ref">random</span></li>
 			<li><span class="function_ref">randomSeed</span></li>
 		</ul>
-		<h4 zunoVersion="v2">malloc</h4>
+		<h4 zunoVersion="v2">Dynamic memory</h4>
 		<ul zunoVersion="v2">
+			<li><span class="function_ref" link="new_delete">new</span></li>
+			<li><span class="function_ref" link="new_delete">delete</span></li>
 			<li><span class="function_ref">calloc</span></li>
 			<li><span class="function_ref">malloc</span></li>
 			<li><span class="function_ref">free</span></li>
@@ -348,6 +345,8 @@ float modff(float x, float * y)
 		<ul>
 		    <li><span class="function_ref">zunoSendReport</span>()</li>
 		    <li><span class="function_ref">zunoIsChannelUpdated</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoIsChannelRequested</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoIsBatteryRequested</span>()</li>
 		</ul>
 		<h4>Controlling other devices</h4>
 		<ul>
@@ -367,8 +366,13 @@ float modff(float x, float * y)
 		<ul>
 			<li><span class="function_ref">ZUNO_SETUP_SLEEPING_MODE</span>()</li>
 			<li><span class="function_ref">zunoSendDeviceToSleep</span>()</li>
-			<li><span class="function_ref">zunoSetBeamCountWU</span>()</li>
-			<li><span class="function_ref">zunoSetWUOptions</span>()</li>
+			<li zunoVersion="v1"><span class="function_ref">zunoSetBeamCountWU</span>()</li>
+			<li zunoVersion="v1"><span class="function_ref">zunoSetWUOptions</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoEM4EnablePinWakeup</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoIsSleepLocked</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoLockSleep</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoSendWakeUpNotification</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">zunoSetCustomWUPTimer</span>()</li>
 			<li><span class="function_ref">zunoGetWakeReason</span>()</li>
 			<li><span class="function_ref">ZUNO_SETUP_BATTERY_LEVELS</span>()</li>
 			<li><span class="function_ref">ZUNO_SETUP_BATTERY_HANDLER</span>()</li>
@@ -412,10 +416,11 @@ float modff(float x, float * y)
 		<h4>Configuration parameters</h4>
 		<ul>
 		    <li><span class="function_ref">ZUNO_SETUP_CFGPARAMETER_HANDLER</span>()</li>
+			<li zunoVersion="v2"><span class="function_ref">ZUNO_SETUP_CONFIGPARAMETERS</span>()</li>
 		    <li><span class="function_ref" link="ZUNO_SETUP_CFGPARAMETER_HANDLER">zunoLoadCFGParam</span>()</li>
 		    <li><span class="function_ref" link="ZUNO_SETUP_CFGPARAMETER_HANDLER">zunoSaveCFGParam</span>()</li>
 		</ul>
-		<h4 zunoVersion="v2">Системные хендлеры</h4>
+		<h4 zunoVersion="v2">System handlers</h4>
 		<ul zunoVersion="v2">
 		    <li><span class="function_ref">zunoAttachSysHandler</span>()</li>
 		    <li><span class="function_ref">zunoDetachSysHandler</span>()</li>
