@@ -5,7 +5,7 @@ ZUNO_ENABLE() enabled and ZUNO_DISABLE() disables features that can be used in t
 </span>
 
 <span class="function_syntax">
-    ZUNO_ENABLE(capabilities)
+    ZUNO_ENABLE(capabilities)<br>
     ZUNO_DISABLE(capabilities)
 </span>
 
@@ -25,11 +25,177 @@ For dynamic channels you need to define every user Command Class that might be u
 In fact each feature from the list is a <i>C define</i>.
 </span>
 
-<span class="function_example">
+<span class="function_description_note">
+ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch. See the examples below.
+</span>
+
+<span class="function_description_note" zunoVersion="v2">
+    Some useful macroses are listed below. We devided them into groups.
+    <table>
+        <tr>
+            <th>Macro name</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td colspan="3" align="center"><b>Debug/Diagnostics</b></td>
+        </tr>
+        <tr>
+            <td>LOGGING_DBG</td>
+            <td>-</td>
+            <td>Enables debug on the core-side. Z-Uno prints lots of debug data like incoming and outgoing packets and etc to <b>LOGGING_UART</b>.</td>
+        </tr>
+        <tr>
+            <td>LOGGING_UART</td>
+            <td>Serial, Serial0, Serial1</td>
+            <td>Defines main logging output. Default is Serial0.</td>
+        </tr>
+        <tr>
+            <td>DBG_CONSOLE_PIN</td>
+            <td>HEXADECIMAL:0xPp, where P is port, p is pin. A0 = 0x00, D13 = 0x3D </td>
+            <td>Defines pin for system console output. System console is like *nix <b>dmesg</b>. Here OS dumps internal parameters/events.  Flag <b>LOGGING_DBG</b> switches on console on TX0 pin of Z-Uno automatically. To disable console use value 0xFF. For most cases is usable 0x3D = TX0.  </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center"><b>Sketch advanced configuration</b></td>
+        </tr>
+        <tr>
+            <td>SKETCH_VERSION</td>
+            <td>INT, 16bits. Default is 0x0101 = 01.01</td>
+            <td>Sketch version number for identification. You can see it in Z-Wave cotroller interface (CC Version/CC FirmwareUpdate)</td>
+        </tr>
+        <tr>
+            <td>SKETCH_FWID</td>
+            <td>INT, 16bits. Default is 0x0101</td>
+            <td>Unique device firmware id for identification. OTA uses this to check validity of firmware image.</td>
+        </tr>
+        <tr>
+            <td>SKETCH_FLAGS</td>
+            <td>INT, 32bits, superposition of bits</td>
+            <td>Changes sketch behavior. <br> 
+                <b>HEADER_FLAGS_DBG</b> (bit4) - enables extra debug code.<br> 
+                <b>HEADER_FLAGS_NOLEDS</b> (bit5)- disables system LEDs<br>
+                <b>HEADER_FLAGS_NOSKETCH_OTA</b> (bit6) - disables sketch OTA process, OTA target#1 will be removed<br> 
+                <b>HEADER_FLAGS_NOSKETCH_USBLOAD</b> (bit7) - disables sketch USB upload. Be careful!<br>  
+                <b>HEADER_FLAGS_NOREBOOT_CFG</b> (bit8) - disables auto reboot when you change some system configuration parameters.<br> 
+                <b>HEADER_FLAGS_ALL_SECURE</b> (bit9) - device supports SECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
+                <b>HEADER_FLAGS_ALL_UNSECURE</b> (bit10) - device supports UNSECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
+            </td>
+        </tr>
+        <tr>
+            <td>SKETCH_FLAGS_LOOP_DELAY</td>
+            <td>INT, 32bits, in milliseconds. Default is 32</td>
+            <td>Time interval between loop() function calls. Because of this you don't need to add some extra delay at the end of loop function. For some cases you can adjust it a little. Very low values may hang your radio transmission.</td>
+        </tr>
+        <tr>
+            <td>ZUNO_EXT_FIRMWARES_COUNT</td>
+            <td>INT</td>
+            <td>Number of additional (custom) firmwares for OTA.</td>
+        </tr>
+        <tr>
+            <td>ZUNO_EXT_FIRMWARES_DESCR_PTR</td>
+            <td>pointer to ZUNOOTAFWDescr_t</td>
+            <td>Metadata for external chip OTA firmwares.</td>
+        </tr>
+        <tr>
+            <td>ZUNO_CUSTOM_OTA_OFFSET</td>
+            <td>HEXADECIMAL</td>
+            <td>Additional offset for external chip OTA. Generally OTA's flash segment starts from 0x3a000. Firmware will add defined value to 0x3a000.</td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center"><b>GPIO</b></td>
+        </tr>
+        <tr>
+            <td>NO_DEFAULT_PIN_SETUP</td>
+            <td>-</td>
+            <td>Do not set all pins to <b>ZUNO_DEFAULT_PIN_STATE</b> state during startup (just before setup() call). </td>
+        </tr>
+        <tr>
+            <td>ZUNO_DEFAULT_PIN_STATE</td>
+            <td>INPUT, INPUT_PULLUP, OUTPUT and etc. Default is INPUT</td>
+            <td>Default pin state. ZUno initializes pins just before setup()</td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center"><b>Sleep. Energy saving.</b></td>
+        </tr>
+        <tr>
+            <td>NO_INT1_WAKEUP</td>
+            <td>-</td>
+            <td>Disable wake up from sleep using INT1 (#18) pin.</td>
+        </tr>
+        <tr>
+            <td>NO_BTN_WAKEUP</td>
+            <td>-</td>
+            <td>Disable wake up from sleep using BTN (#23) pin.</td>
+        </tr>
+        <tr>
+            <td>NO_BTN_CHECK_BEFORE_SLEEP</td>
+            <td>-</td>
+            <td>Puts device into sleep mode even if the button is pressed.</td>
+        </tr>
+        <tr>
+            <td>NO_BTN_WUP_NOTIFICATION</td>
+            <td>-</td>
+            <td>When devices wakes up using button it doesn't sleep Wake Up Notification message. </td>
+        </tr>
+        <tr>
+            <td>ZUNO_REPORTTIME_DIVIDER</td>
+            <td>INT, default value is 7. Which means once in 80 ms.</td>
+            <td>Z-Uno sends reports by means of system timer. This macro defines a number of system timer ticks beetween reports.</td>
+        </tr>
+        <tr>
+            <td>ZUNO_MAX_REPORTCOUNT_PER_MOMENT</td>
+            <td>INT, default value is 2. Which means up to 2 reports for one timer call.</td>
+            <td>Z-Uno sends reports by means of system timer. This macro defines a maximum number of reports. If you use values bigger then default you can overload outgoing message queue.</td>
+        </tr>
+        <tr>
+            <td>ZUNO_BUTTON_NONSLEEP_TIMEOUT</td>
+            <td>INT, default value is 5000 ms.</td>
+            <td>It you wake up Z-Uno via "BTN" it waits for user action (inclusion/exclusion and etc.) defined time interval. Smaller value saves your battery, but it loads your fingers :). </td>
+        </tr>
+        <tr>
+            <td>WAKEUP_INTERVAL_DEFAULT</td>
+            <td>INT, default value is 36000 s.</td>
+            <td>Default device wake up interval if controller doesn't set it itsels.</td>
+        </tr>
+    </table>
+</span>
+
+<span class="function_example" zunoVersion="v1">
 <pre><code class="c">ZUNO_DISABLE(WITH_CC_SENSOR_BINARY); // For a binary sensor you can suppress SensorBinary or Notification
 ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging in USB
 ZUNO_DISABLE(SERVICE_LEDS); // Disable Service LEDs to save battry and remove unwanted blinks
 ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set defines used in my library
 ZUNO_DISABLE(NO_MULTIBINARY_SWITCH0); // Force Switch Mulitilevel and Switch Binary to be in channels even if can be outside of channels (some controllers require it).
 ZUNO_ENABLE(NO_LOOP_MINIMALDELAY); // Disable the default 20 ms minial delay between loops - don't forget to add own delay()</code></pre>
+</span>
+
+<span class="function_example" zunoVersion="v2">
+    Example 1. Setup some system flags.
+    <pre><code class="c"> 
+    ZUNO_ENABLE(LOGGING_EVENTS LOGGING_UART=Serial); // Enable logging, forward it to builtin USB
+    // ...
+    void setup(){
+        // ...
+    }
+    void loop(){
+        // ...
+    }
+    </code></pre>
+    </span>
+<span class="function_example" zunoVersion="v2">
+    Example 2. Setup some user-side flags.
+    <pre><code class="c"> 
+        ZUNO_ENABLE(MY_LIBRARY_DEBUG MY_LIBRARY_DEBUG_LEVEL=1); // Set flags for my_library.cpp
+        // ...
+        void setup(){
+            Serial.begin();
+            // ...
+            #ifdef MY_LIBRARY_DEBUG
+            Serial.println("Debug information is on. See details in my_library.cpp ");
+            #endif
+        }
+        void loop(){
+            // ...
+        }
+    </code></pre>
 </span>
