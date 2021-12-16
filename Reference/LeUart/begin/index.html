@@ -67,12 +67,70 @@ Simple variants of begin() method.
 	LeUart.begin(1200); // opens LeUart port on LEUART0, sets data rate to 1200 bps	
 </code></pre>
 </span>
-<span class="function_example" zunoVersion="v2">
+<span class="function_example">
 Advanced variants of begin() method.	
 <pre><code class="c" >
     static uint8_t buf[256]; // Custom receiving buffer
     LeUart.begin(1200, LE_UART_SERIAL_8N1);//  Setup just a bit mode. 8 bita + 1 stopbit
     LeUart.begin(1200, LE_UART_SERIAL_8N1, 9, 10);// Define bit mode and move serial0 to pins 9/10
     LeUart.begin(1200, LE_UART_SERIAL_8N1, 9, 10, &buf[0], sizeof(buf));// Define bit mode, move serial0 to pins 9/10 and use custom receiving buffer
+</code></pre>
+</span>
+
+<span class="function_example">
+	Complete example:
+<pre><code class="c" >
+	#include "LeUartClass.h"
+
+	byte dimmerValue=0;
+	ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
+	ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(&dimmerValue,NULL));
+	
+	#define MY_SERIAL LeUart
+	
+	uint32_t loop_count = 0; // the variable that illustrates that RAM is alive during FLiRS mode too
+	
+	void setup(){
+		MY_SERIAL.begin(1200, LE_UART_SERIAL_8N1, 8, 7);
+		MY_SERIAL.wakeUp('9');
+		MY_SERIAL.startFrame('0');
+		MY_SERIAL.print("BOOT REASON:");
+		MY_SERIAL.println(zunoGetWakeReason(), HEX);
+		zunoAttachSysHandler(ZUNO_HANDLER_WUP, 0, (void*) &_wakeHandler);
+		pinMode(LED_BUILTIN, OUTPUT);
+	}
+	void _wakeHandler(void){
+		char				c;
+	
+		c = LeUart.read();
+		while (LeUart.available()) {
+			c = LeUart.read();
+			if ( c != '9')
+				LeUart.print(c);
+		}
+		LeUart.print('\n');
+		MY_SERIAL.startFrame('0');
+		MY_SERIAL.print("wake time:");
+		MY_SERIAL.println(millis());
+		MY_SERIAL.print("loop count =");
+		MY_SERIAL.println(loop_count);
+		MY_SERIAL.print("WAKEUP REASON:");
+		MY_SERIAL.println(zunoGetWakeReason(), HEX);
+	}
+	void loop(){
+		if(zunoIsSleepLocked()){
+			// Here we do all sleep uninterruptable logic
+			analogWrite(LED_BUILTIN, dimmerValue); // Apply dimmer value from controller to builtin LED
+			MY_SERIAL.print("go sleep time:");
+			MY_SERIAL.println(millis()); // Print moment when we are ready to go to sleep
+			MY_SERIAL.print("loop count =");
+			MY_SERIAL.println(loop_count);
+			zunoSendDeviceToSleep(); // We don't need parameter for FLiRS here, Z-Uno will ingore parameter anyway
+		}
+		// Here you can do something that could be interrupted by sleep mode
+		loop_count++; // Increment variable
+		delay(1000);
+		MY_SERIAL.println("Loop");
+	}
 </code></pre>
 </span>
