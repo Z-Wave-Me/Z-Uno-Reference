@@ -18,15 +18,15 @@ This page contains specific settings option for certification sketch. All standa
 */
 #include "ZUNO_DHT.h"// Additional include for DHT sensor support
 // Pins definitions 
-#define LedPin1         9
-#define LedPin2         10
-#define LedPin3         11
-#define LedPin4         PWM2
-#define LedPin5         PWM3 
-#define LedPin6         PWM4
-#define MotionPin       12
-#define DoorPin         19
-#define DHTPin          8 
+#define LedPin1         A0
+#define LedPin2         A1
+#define LedPin3         A2
+#define LedPin4         PWM1
+#define LedPin5         PWM2 
+#define LedPin6         PWM3
+#define MotionPin       A3
+#define DoorPin         12
+#define DHTPin          11
 // Switch levels
 #define SWITCH_ON       0xff
 #define SWITCH_OFF      0
@@ -110,15 +110,15 @@ void setup() {
 // OS calls loop() function repeatedly
 void loop() {
    // Switches
-   digitalWrite(LedPin1, switchValue1 > 0);
-   digitalWrite(LedPin2, switchValue2 > 0);
-   digitalWrite(LedPin3, switchValue3 > 0);
+   digitalWrite(LedPin1, switchValue1 == 0);
+   digitalWrite(LedPin2, switchValue2 == 0);
+   digitalWrite(LedPin3, switchValue3 == 0);
    // Dimmers
    analogWrite(LedPin4, ((word)dimValue1)*255/99);
    analogWrite(LedPin5, ((word)dimValue2)*255/99);
    analogWrite(LedPin6, ((word)dimValue3)*255/99);
    // Trigger motion and wait for relax (about 5 sec) before report idle
-   byte currentMotionValue = !digitalRead(MotionPin);
+   byte currentMotionValue = digitalRead(MotionPin);
    if (currentMotionValue) {
        if (!lastMotionValue && ((millis() - motionTrigTime) > zunoLoadCFGParam(MOTION_RETRIGGER_TIME_PARAM))) {
            lastMotionValue = 1;
