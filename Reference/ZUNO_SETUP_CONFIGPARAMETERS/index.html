@@ -36,12 +36,18 @@ User is able to add metainformation (like name, descriptions, minimal, maximal &
 <span class="function_description_more">
     To make life easier there are simple macro defining popular parameters types: 
     <ul>
-        <li><b>ZUNO_CONFIG_PARAMETER_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 4 bytes signed parameter</li>
-        <li><b>ZUNO_CONFIG_PARAMETER_1B_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 1 byte signed parameter</li>
-        <li><b>ZUNO_CONFIG_PARAMETER_2B_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 2 bytes signed parameter</li>
-        <li><b>ZUNO_CONFIG_PARAMETER(NAME, MN, MX, DEF)</b> - defines 4 bytes signed parameter. Doesn't set description.</li>
-        <li><b>ZUNO_CONFIG_PARAMETER_1B(NAME, MN, MX, DEF)</b> - defines 1 byte signed parameter. Doesn't set description.</li>
-        <li><b>ZUNO_CONFIG_PARAMETER_2B(NAME, MN, MX, DEF)</b> - defines 2 bytes signed parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 4 bytes unsigned parameter</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_INFO_SIGN(NAME, DESCR, MN, MX, DEF)</b> - defines 4 bytes signed parameter</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_1B_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 1 byte unsigned parameter</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_1B_INFO_SIGN(NAME, DESCR, MN, MX, DEF)</b> - defines 1 byte signed parameter</li>   
+        <li><b>ZUNO_CONFIG_PARAMETER_2B_INFO(NAME, DESCR, MN, MX, DEF)</b> - defines 2 bytes unsigned parameter</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_2B_INFO_SIGN(NAME, DESCR, MN, MX, DEF)</b> - defines 2 bytes signed parameter</li>
+        <li><b>ZUNO_CONFIG_PARAMETER(NAME, MN, MX, DEF)</b> - defines 4 bytes unsigned parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_SIGN(NAME, MN, MX, DEF)</b> - defines 4 bytes signed parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_1B(NAME, MN, MX, DEF)</b> - defines 1 byte unsigned parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_1B_SIGN(NAME, MN, MX, DEF)</b> - defines 1 byte signed parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_2B(NAME, MN, MX, DEF)</b> - defines 2 bytes unsigned parameter. Doesn't set description.</li>
+        <li><b>ZUNO_CONFIG_PARAMETER_2B_SIGN(NAME, MN, MX, DEF)</b> - defines 2 bytes signed parameter. Doesn't set description.</li>
     </ul>
 </span>
 
