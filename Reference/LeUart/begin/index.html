@@ -18,7 +18,7 @@ LeUart.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">speed:</span>
-		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long. Standart supported values are: 300, 600, 1200 bps. If omitted, default 1200 bps is used.</span>
+		<span class="function_parameters_param_description"> in bits per second (baud). Allowed data types: long. Standart supported values are: 300, 600, 1200, 2400, 4800, 9600 bps. If omitted, default 9600 bps is used.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">config:</span>
@@ -64,7 +64,7 @@ LeUart.begin(speed, config, rx, tx, *buffer, len) - returns error code<br>
 <span class="function_example">
 Simple variants of begin() method.
 <pre><code class="c">
-	LeUart.begin(1200); // opens LeUart port on LEUART0, sets data rate to 1200 bps	
+	LeUart.begin(9600); // opens LeUart port on LEUART0, sets data rate to 9600 bps	
 </code></pre>
 </span>
 <span class="function_example">
