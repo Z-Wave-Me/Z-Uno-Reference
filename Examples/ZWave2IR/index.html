@@ -1,0 +1,161 @@
+<h1>Z-Wave to IR</h1>
+<span class="example_description">
+IR transmitter on Z-Uno allows to send IR commands on Z-Wave command received. Control your A/V from Z-Wave nodes.
+<br/><br/>
+There are two ways to define IR commands: by raw (mark & space) sequence or by pre-defined commands and protocol (vendor command).
+<br/><br/>
+To get raw sequence use IRScanner.ino sketch from examples as IR-sniffer.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Infrared LED (like <a href="https://www.sparkfun.com/products/9349">this</a> or <a href="https://www.adafruit.com/product/387">this</a>).</li>
+        <li>1 330 Ω</li>
+        <li>1 wire</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/ZWave2IR/ZWave2IR.svg">
+    <br/>
+    <a href="/files/z-uno/projects/ZWave2IR/ZWave2IR.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+{literal}
+<pre>
+<code class="c">
+#include "IRController.h"
+
+IRTransmitterParams ir_transmitter(byte(IR_TRANSMITTER_OUTPUT_PIN6), 
+                                   IR_FLAGS_OUTPUT_HIGHDRIVE,
+                                   IR_MS_PRESCALLER_4MHZ, 
+                                   IR_CARRIER_PRESCALLER_8MHZ);
+
+#define SWITCH_ON 0xff
+#define SWITCH_OFF 0
+
+// Use IRScanner.ino as IR-sniffer
+// This codes were shiffed from SONY TV IR remote control
+word raw_command_on[] = {0x19, 0x990, 0x242, 0x26D, 0x243, 0x26C, 0x244, 0x26A, 0x246, 0x4C5, 0x243, 0x4BD, 0x24B, 0x4C0,
+    0x248, 0x267, 0x249, 0x4C2, 0x246, 0x269, 0x247, 0x267, 0x249, 0x265, 0x24B, 0x264};
+word raw_command_off[] = {0x19, 0x987, 0x24B, 0x4C0, 0x248, 0x267, 0x249, 0x4C2, 0x247, 0x268, 0x248, 0x4C3, 0x245, 0x269.
+    0x246, 0x268, 0x248, 0x4C3, 0x245, 0x26A, 0x246, 0x269, 0x247, 0x267, 0x249, 0x266};
+
+// Detected vendor 
+#define MY_IR_VENDOR IR_VENDOR_SONY // Use SONY protocol. See IRController.h for more details.
+// Decoded commands  
+#define MY_IR_VENDOR_CMD_ON  0x290  
+#define MY_IR_VENDOR_CMD_OFF 0x290
+#define DECODED_COMMAND_NBITS 12
+
+// Last saved values on channels
+byte currentCh1 = 0;
+byte currentCh2 = 0;
+
+// Command to send via IR
+byte current_cmd = 0;
+IRCommand_t vendor_cmd;
+
+ZUNO_SETUP_CHANNELS(
+  ZUNO_SWITCH_BINARY(getter1, setter1),
+  ZUNO_SWITCH_BINARY(getter2, setter2)
+);
+
+void setup() {
+  // We have to setup IRLED pin as output
+  pinMode(6, OUTPUT); 
+  digitalWrite(6, LOW); 
+  
+  // setting up IR-controller as IR-transmitter
+  ir_transmitter.setupVendor(MY_IR_VENDOR);
+  IR.begin(&ir_transmitter);
+
+  vendor_cmd.vendor = MY_IR_VENDOR;
+  vendor_cmd.n_bits = DECODED_COMMAND_NBITS;
+
+}
+
+void sendRAWCommand(WORD * raw16) {
+  // we have to repeat packet like another IR-controllers do
+  byte count = 7;
+  while(count--)   {
+    IR.send_raw16(raw16);
+    delay(30);
+  }
+}
+
+void sendVendorCommand(unsigned long cmd) {
+  // we have to repeat packet like another IR-controllers do
+  byte count = 7;
+  while(count--) {
+    vendor_cmd.data[0] = cmd;
+    IR.sendCommand(&vendor_cmd);
+    delay(30);
+  }
+}
+
+void loop() {
+  switch(current_cmd) {
+      case 1:
+        sendRAWCommand(raw_command_on);
+        break;
+      case 2:
+        sendRAWCommand(raw_command_off);
+        break;
+      case 3:
+        sendVendorCommand(MY_IR_VENDOR_CMD_ON);
+        break;
+      case 4: 
+        sendVendorCommand(MY_IR_VENDOR_CMD_OFF);
+        break;
+      default:
+        // nothing to do
+        break;
+  }
+  current_cmd = 0;
+
+  delay(500);
+}
+
+void setter1(byte value) {
+  if (value != SWITCH_OFF) {
+    current_cmd = 1; // will be dispatched in the next loop
+  } else {
+    current_cmd = 2;
+  } 
+  // let's save our value for the situation, when the controller will ask us about it
+  currentCh1 = value;
+}
+
+byte getter1() {
+  return currentCh1;
+}
+
+void setter2(byte value) {
+  if (value != SWITCH_OFF) {
+    current_cmd = 3;
+  } else {
+    current_cmd = 4;
+  } 
+  currentCh2 = value;
+}
+
+byte getter2() {
+  return currentCh2;
+}
+</code></pre>
+{/literal}
+<a href="/files/z-uno/projects/ZWave2IR/ZWave2IR.ino">Download this sketch</a>
+</span>
+
+<!--
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/ZWave2IR/ZWave2IR_screen.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/ZWave2IR/ZWave2IR_photo.jpg" style="width: 50%;">
+</span>
+--> 

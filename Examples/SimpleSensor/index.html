@@ -1,0 +1,73 @@
+<h1>Simple Sensor</h1>
+<span class="example_description">
+    That is a Simple Sensor Binary example. It watches over the built in button state and sends report to the controller if button's state changes. In this example we set up 1 sensor binary channel.
+</span>
+<span>
+    Channel has one function:
+<ul>
+<li>getter &mdash; function, which returns the previously saved button state. This function runs only once the controller asks.</li>
+</ul>
+You can read more about this channel and his functions <a href="http://z-uno.z-wave.me/Reference/ZUNO_SENSOR_BINARY/">here.</a>
+</span>
+<span class="example_hardware_required">
+<ul>
+<li>Z-Uno board</li>
+<li>Breadboard</li>
+</ul>
+</span>
+<span class="example_code">
+        <pre>
+            <code class="c">// LED pin number
+// 13 pin - user LED of Z-Uno board
+#define LED_PIN     13
+
+// button pin number
+// 18 pin - button(BTN) of Z-Uno board
+#define BTN_PIN     18
+
+// channel number
+#define ZUNO_CHANNEL_NUMBER_ONE   1
+
+// variable to store current button state
+byte lastButtonState;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY(ZUNO_SENSOR_BINARY_TYPE_GENERAL_PURPOSE, getter));
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(LED_PIN, OUTPUT); // set LED pin as output
+  pinMode(BTN_PIN, INPUT_PULLUP); // set button pin as input
+}
+// the loop routine runs over and over again forever:
+void loop() {
+  // sample current button state
+  byte currenButtonState = digitalRead(BTN_PIN);
+
+  if (currenButtonState != lastButtonState) { // if state changes
+    lastButtonState = currenButtonState; // save new state
+    zunoSendReport(ZUNO_CHANNEL_NUMBER_ONE); // send report over the Z-Wave to the controller
+    if (currenButtonState == LOW) { // if button is pressed
+      digitalWrite(LED_PIN, HIGH);  // turn the LED on
+    } else {                        // if button is released
+      digitalWrite(LED_PIN, LOW);   // turn the LED off
+    }
+  }
+}
+
+byte getter() {
+  if (lastButtonState == 0) { // if button is pressed
+    return 0xff;              // return "Triggered" state to the controller
+  } else {                    // if button is released
+    return 0;                 // return "Idle" state to the controller
+  }
+}
+        </code>
+    </pre>
+</span>
+<span>
+     <span class="example_usage">
+<ol>
+    <li><a href="http://z-uno.z-wave.me/getting-started/InclusionInNetwork/"><b>Include</b></a> Z-Uno into a network (if you do it the first time) or Exclude again (also by pressing the button three times), and then again Include (it will be useful if you already included the device, or just to check if it's not included in the network).</li>
+    <li>Go to the <b>Elements</b> and here is your device &mdash; in this case (in sketch),  you connected a <b>Sensor Binary</b> channel, so you see the <b>Sensor General Purpose</b> and its current status (on, off), which you can control by pressing tne button (if BTN is pressed - turn the LED on, if it's released - turn the LED off).
+</span>
+<img src="http://rus.z-wave.me/drive/?file=090450d1dc1989cd23841e7766ef09bf7488" title="Sensor ON. Button is pressed" width="80%">

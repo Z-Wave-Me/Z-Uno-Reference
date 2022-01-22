@@ -1,0 +1,122 @@
+<h1>Secure keypad controlling a door lock</h1>
+<span class="example_description">
+This sketch shows how to connect Keypad matrix (4x4 buttons) and use it to open door lock via Z-Wave secure communication. Additional Association group is defined for door lock.
+<br/><br/>
+This example shows both battery and mains powered examples. You need to change ON_BATTERY (can be 0 or 1) and comment/uncomment one line with ZUNO_SETUP_SLEEPING_MODE.
+<br/><br/>
+Note that door lock control will not work if Z-Uno was included unsecurelly!
+<br/><br/>
+For sleeping sketch first button press should be a bit longer to let Z-Uno wake up and read the button.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Keypad 4x4 matrix (like <a href="https://www.parallax.com/sites/default/files/downloads/27899-4x4-Matrix-Membrane-Keypad-v1.2.pdf">this</a>)</li>
+        <li>8 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/keypad/keypad.svg">
+    <br/>
+    <a href="/files/z-uno/projects/keypad/keypad.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+{literal}<pre><code class="c">#include "ZMEKeypad.h"
+
+// The code that opens the door (can be any number digits, A-D chars, * or #)
+char code[] = "08*5";
+// Timeout of key input in 10 ms
+#define TIMEOUT     100
+// battery or mains powered
+#define ON_BATTERY  1
+
+
+// You have to uncomment depending on ON_BATTERY value (excuse, #if do not work here)
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING);      // ON_BATTERY is 1
+//ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_ALWAYS_AWAKE);  // ON_BATTERY is 0
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_DOORLOCK);
+
+// Pins used for rows (must be from 17-23, see zunoSetupKeyScannerWU description)
+BYTE rowPins[] = {20, 19, 18, 17};
+// Pins used for columns (must be continious range from [9-16, 8-3, TX0, RX0], see zunoSetupKeyScannerWU description)
+BYTE columnPins[] = {12, 11, 10, 9};
+
+// Titles for all buttons in one string. The order of buttons depends on wiring and order in rowPins/columnPins
+char keys[] = "123A456B789C*0#D";
+
+// Current digit to check
+int cur_digit = 0;
+// Timeout in 10 ms - see delay(10) in loop()
+int timeout = TIMEOUT;
+// Will be set to 0 if code do not match
+int match = 1;
+
+// Construct keypad object           
+ZMEKeypad kpd = ZMEKeypad(columnPins, sizeof(columnPins), rowPins, sizeof(rowPins));
+
+void setup() {
+  #if ON_BATTERY
+    // turn wakeup from sleep by key scanner with four columns: pins 9-12
+    zunoSetupKeyScannerWU(sizeof(columnPins));
+  #endif
+  
+  // Init keypad
+  kpd.begin();
+}
+
+void loop() {
+  byte actions[sizeof(columnPins)]; 
+  byte num_touched_keys = kpd.scanKeys(actions);
+
+  // We can process a number of buttons during one scan
+  for (byte i = 0; i < num_touched_keys; i++) {
+    byte key_index = KEYPAD_KEYINDEX(actions[i]);
+
+    // some button pressed, reset timer
+    timeout = TIMEOUT;
+
+    // check digit by digit
+    if (cur_digit > (sizeof(code)-1) || code[cur_digit] != keys[key_index]) {
+      match = 0;
+    }
+
+    cur_digit++;
+
+    // does the code match?
+    if (cur_digit == (sizeof(code)-1) && match) {
+      zunoSendToGroupDoorlockControl(CTRL_GROUP_1, 255);
+      timeout = 0;
+    }
+  }
+
+  if (--timeout < 0) {
+    #if ON_BATTERY
+      // go to sleep
+      zunoSendDeviceToSleep();
+    #else
+      // reset input
+      cur_digit = 0;
+      timeout = TIMEOUT;
+      match = 1;
+    #endif
+  }
+  
+  delay(10);
+}</code></pre>{/literal}
+<a href="/files/z-uno/projects/keypad/keypad.ino">Download this sketch</a>
+</span>
+
+<!--
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/keypad/keypad_screen.png" style="width: 50%;">
+</span>
+-->
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/keypad/keypad_photo.jpg" style="width: 50%;">
+</span>
+

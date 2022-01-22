@@ -1,0 +1,119 @@
+<h1>Controlling iRobot Roomba from Z-Wave</h1>
+
+<span class="example_author">Vitaliy Yurkin, Z-Wave.Me</span>
+
+<span class="example_description">
+Controlling iRobot Roomba from Z-Wave network.
+<br/>
+<br/>
+<img src="/files/z-uno/projects/iRobotRoomba/6ea7acc9e53e4097bb727f8fbbfd25c8.JPG" width="80%">
+<br/>
+<br/>
+This sketch allows to control iRobot Roomba with <i>Clean</i> and <i>Seek Dock</i> commands. It also reports current battery voltage (usefull for old Roomba battery).
+
+You can also add direct control of Roomba, read temperature sensor, read wall strike sensor, get <i>can not pass</i> notification and many more.
+<br/>
+<br/>
+DC-DC power switching is used to safely power Z-Uno from Roomba as voltage can change from 14 V during claning up to 20 V while charging.
+<br/>
+<br/>
+Two resistors are used as voltage divider to convert from 5 V TTL UART levels of Roomba to 3.3 V required for Z-Uno (RX pin only).
+<br/>
+<br/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Mu_d-xeGlUo?rel=0" frameborder="0" allowfullscreen></iframe>
+</span>
+
+<span class="example_hardware_required">
+<ul>
+<li>Z-Uno board</li>
+<li>Breadboard (optional)</li>
+<li>1 resistor 1 kΩ</li>
+<li>1 resistor 2.2 kΩ</li>
+<li>MP1584EN switching DC-DC converter</li>
+</ul>
+</span>
+
+<span class="example_schematics">
+    You can make it even more compact and put inside Roomba
+    <br/><br/>
+    <img src="/files/z-uno/projects/iRobotRoomba/40d67067df6c4b578d197c49a32e5e81.jpg" width="80%">
+</span>
+
+<span class="example_code">
+    <span class="c">
+        <pre>
+            <code>{literal}#define LED_PIN 13
+byte roombaState = 0;
+word batteryValue = 0;
+
+ZUNO_SETUP_CHANNELS(
+    ZUNO_SWITCH_BINARY(getter, setter),
+    ZUNO_SENSOR_MULTILEVEL(
+        ZUNO_SENSOR_MULTILEVEL_TYPE_VOLTAGE,
+        SENSOR_MULTILEVEL_SCALE_VOLT,
+        SENSOR_MULTILEVEL_SIZE_ONE_BYTE,
+        1,
+        getterBattery
+    )
+);
+
+void setup() {
+   pinMode(LED_PIN, OUTPUT);
+   Serial1.begin(); 
+}
+
+void loop() { 
+  // Get battery value every 1 minute
+  byte data[2] = {0, 0}; // array to store data from battery
+  byte i = 0;
+  Serial1.write(142); // Send a packet of sensor data bytes
+  Serial1.write(22);  // Get battery value
+  delay(200);
+  while (Serial1.available()) { 
+    data[i++] = Serial1.read();
+  }
+
+  // highbyte is shifted left eight bits, lowbyte is added to highbyte    
+  // encoder_count = highbyte << 8 + lowbyte
+  batteryValue = (data[0] << 8) + data[1];
+
+  zunoSendReport(2); // Send Battery every 30 seconds
+  delay(30000);
+}
+
+void setter(byte value) {
+  if (value) {
+    digitalWrite (LED_PIN, HIGH);
+    Serial1.write(128);  // Roomba START Communication
+    Serial1.write(131);  // SAFE MODE
+    Serial1.write(135);  // Clean
+    roombaState = 1;
+  }
+  else {
+    digitalWrite (LED_PIN, LOW);
+    Serial1.write(128);  // Roomba START Communication
+    Serial1.write(131);  // SAFE MODE
+    Serial1.write(135);  // Stop Clean
+    roombaState = 0;
+  }
+}
+ 
+byte getter() {
+  return roombaState;
+}
+
+byte getterBattery() {
+  return batteryValue;
+}
+{/literal}</code></pre></span>
+<a href="/files/z-uno/projects/iRobotRoomba/iRobotRoomba.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/iRobotRoomba/ec92f5f1307b4cacb4cb300b007d26a2.PNG" width="30%">
+</span>
+
+<span class="example_see_also">
+    <a href="https://geektimes.ru/company/zwave/blog/277016/">Link to detailed project description (in Russian, use Google to translate)</a>
+</span>
+ 

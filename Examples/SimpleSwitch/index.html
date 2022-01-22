@@ -1,0 +1,68 @@
+<h1>Simple Switch</h1>
+<span class="example_description">
+In this example we set up 1 Switch Binary channel. 
+</span>
+<span>
+    Channel has two functions:
+<ul>
+<li>setter &mdash; function, which sets new relay state. This function runs only once the controller sends new value.</li>
+<li>getter &mdash; function, which returns the previously saved relay value. This function runs only once the controller asks.</li>
+</ul>
+You can read more about this channel and his functions <a href="http://z-uno.z-wave.me/Reference/ZUNO_SWITCH_BINARY/">here.</a>
+</span>
+<span class="example_hardware_required">
+<ul>
+<li>Z-Uno board</li>
+<li>Breadboard</li>
+</ul>
+    
+</span>
+<span class="example_code">
+    <pre>
+        <code class="c">// LED pin number
+// 13 pin - user LED of Z-Uno board
+#define LED_PIN 13
+
+// Last saved LED value
+byte currentLEDValue;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_BINARY(getter, setter));
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(LED_PIN, OUTPUT); // setup pin as output
+}
+// the loop routine runs over and over again forever:
+void loop() {
+  // loop is empty, because all the control comes over the Z-Wave
+}
+void setter(byte value) {
+  // value is a variable, holding a "new value"
+  // which came from the controller or other Z-Wave device
+  if (value > 0) {               // if greater then zero
+    digitalWrite (LED_PIN, HIGH); //turn the LED on (HIGH is the voltage level)
+  } else {                         // if equals zero
+    digitalWrite(LED_PIN, LOW);   //turn the LED off by making the voltage LOW
+  }
+  // we'll save our value for the situation, when the controller will ask us about it
+  currentLEDValue = value;
+}
+
+byte getter() {
+  return currentLEDValue;
+}
+        </code>
+    </pre>
+</span>
+    <span class="example_usage">
+<ol>
+<li><a href="http://z-uno.z-wave.me/getting-started/InclusionInNetwork/"><b>Include</b></a> Z-Uno into a network (if you do it the first time) or Exclude again (also by pressing the button three times), and then again Include (it will be useful if you already included the device, or just to check if it is not included in the network).</li>
+<li>Go to the <b>Elements</b> and here is your device &mdash; in this case (in sketch) ,  you connected a <b>Switch Binary</b> channel, so you see the <b>Switch</b> and its current status (on / off), which you can control from here, by clicking <b>ON</b> you turn the LED on the board<br></li>
+
+    <span>
+        <img src="http://rus.z-wave.me/drive/?file=6a0ebaa68d695876237873a2c270c54a011a" title="Switch ON" width= 80% >
+        
+        <img src="http://rus.z-wave.me/drive/?file=6a0ebaa68d695876237773a2c270c54a011a" title="Switch OFF" width= 80% >
+</span>
+    </span>
+<li>It's a kind of magic! Your device is done and it's working! Congratulations! </li>

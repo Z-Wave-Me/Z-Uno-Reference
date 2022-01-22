@@ -1,0 +1,68 @@
+<h4>Multilevel sensor</h4>
+<span class="example_description">
+    That is a Simple Sensor Multilevel example. It measures the value on the potentiometer and sends report to the controller if changed. In this example we set up 1 Sensor Multilevel channel.
+</span><span>
+    Channel has one function:
+<ul>
+<li>getter &mdash; function, which returns the previously saved potentiometer value. This function runs only once the controller asks.</li>
+</ul>
+You can read more about this channel and his functions <a href="http://z-uno.z-wave.me/Reference/ZUNO_SENSOR_MULTILEVEL/">here.</a>
+</span>
+<span class="example_hardware_required">
+<ul>
+    <li>Z-Uno board</li>
+    <li>Breadboard</li>
+    <li>Hook up wires</li>
+    <li>Potentiometer</li>
+</ul>
+</span>
+<span class="example_code">
+    <pre>
+        <code class="c"> // LED pin number
+// 13 pin - user LED of Z-Uno board
+#define LED_PIN 13
+// Potentiometer pin number
+#define POT_PIN 6
+
+// channel number
+#define ZUNO_CHANNEL_NUMBER_ONE   1
+
+// Last saved potentiometer value
+byte lastValue;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_GENERAL_PURPOSE(getter));
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(LED_PIN, OUTPUT); // setup pin as output
+  pinMode(POT_PIN, INPUT);  // setup potentiometer pin as input
+}
+// the loop routine runs over and over again forever:
+void loop() {
+  // read potentiometer value and save it inside a variable
+  byte currentValue = (byte) (analogRead(A3) / 4);
+
+  // if the value is different then the previously measured one
+  // save it and send a report
+  if (currentValue != lastValue) {
+    // save the value
+    lastValue = currentValue;
+    // send report to the controller
+    zunoSendReport(ZUNO_CHANNEL_NUMBER_ONE);
+  }
+}
+
+byte getter(void) {
+  byte tempVariable;
+  tempVariable = (byte)((((word) lastValue) * 100) / 0xff);
+  return tempVariable;
+}
+        </code>
+    </pre>
+</span>
+  <span class="example_usage">
+<ol>
+    <li><a href="http://z-uno.z-wave.me/getting-started/InclusionInNetwork/"><b>Include</b></a> Z-Uno into a network (if you do it the first time) or Exclude again (also by pressing the button three times), and then again Include (it will be useful if you already included the device, or just to check if it is not included in the network).</li>
+    <li>Go to the <b>Elements</b> and here is your device &mdash; in this case (in sketch) ,  you connected a <b>Sensor Multilevel</b> channel, so you see the <b>Sensor Generic</b> and its current status (the percentage), which you can change by dimming the potentiometer (LED luminance value increases with the value of the potentiometer percentage).<br></li>
+</span>
+<img src="http://rus.z-wave.me/drive/?file=f8054eee4cbe1ae92387318cdf76ea5953ba" title="Potentiometer percentage" width="90%">

@@ -1,0 +1,194 @@
+<h1>Examples</h1>
+
+<img src="/wa-data/public/photos/70/13/1370/1370.300.jpg" class="img_right" style="border: solid #FEDC73 5px;"/>
+
+<p>Z-Uno package for Arduino IDE already includes some basic examples. They cover only basic functions of Z-Uno. To make your experience better we present here more basic examples based on different compatible hardware. These example projects show the power and flexibility of Z-Uno. Based on these examples you can build your own Z-Wave device and even mix multiple examples together. Free your imagination!</p>
+
+<p>If you search for more complex examples, have a look on <a href="#projects">cool projects</a> submitted by Z-Uno users!</p>
+
+<h2 link="basic-examples">Basic examples</h2>
+<ul class="examples_list">
+    <li><a href="/examples/SimpleSwitch" peripheral="" hwIO="Digital output" bus="" sleepingType="Always On" tag="" associationType="" channelType="Binary Switch">Simple Switch</a></li>
+    <li><a href="/examples/SimpleDimmer" peripheral="" hwIO="PWM" bus="" sleepingType="Always On" tag="" associationType="" channelType="Multilevel Switch">Simple Dimmer</a></li>
+    <li><a href="/examples/SimpleSensor" peripheral="" hwIO="Digital input" bus="" sleepingType="Always On" tag="" associationType="" channelType="Binary Sensor">Simple Sensor</a></li>
+    <li><a href="/examples/MultilevelSensor" peripheral="" hwIO="ADC" bus="" sleepingType="Always On" tag="" associationType="" channelType="Multilevel Sensor">Multilevel Sensor</a></li>
+    <li><a href="/examples/AssociationControl" peripheral="" hwIO="Digital input" bus="" sleepingType="Always On" tag="" associationType="On/Off" channelType="">Association Control</a></li>
+    <li><a href="/examples/ControlRelay" peripheral="" hwIO="Digital output" bus="" sleepingType="Always On" tag="" associationType="" channelType="Binary Switch">Control Relay</a></li>
+    <!--<li><a href="/examples/FLiRSSimpleSwitch" peripheral="" hwIO="Digital output" bus="" sleepingType="FLiRS" tag="" associationType="" channelType="Binary Switch">Simple Switch (FLiRS)</a></li>-->
+</ul>
+
+<style>
+    .highlited {
+        border-radius: 0.2em;
+        border: yellow solid 0.2em;
+        background-color: yellow;
+    }
+    
+    #chooser_title {
+        float: right;
+        white-space: nowrap;
+    }
+
+    #chooser {
+        max-width: 30%;
+        float: right;
+    }
+    
+    .tag_link {
+        border-bottom: dotted 1px black;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    
+    .tag_link:link, .tag_link:visited  {
+        color: black;
+    }
+    
+    #chooser span + h4 {
+        margin-top: 1em;
+    }
+
+    #chooser h4 {
+        margin-bottom: 0;
+    }
+</style>
+
+<div id="chooser_title"><h4 class="tag_link">&#x1f50d; Search in examples</h4></div>
+
+<div id="chooser" style="display: none;">
+    <h4>Search by description</h4>
+    <span id="choose_by_tag"></span>
+
+    <h4>Search by Z-Wave channel</h4>
+    <span id="choose_by_channel"></span>
+
+    <h4>Search by Z-Wave association type</h4>
+    <span id="choose_by_associationType"></span>
+    
+    <h4>Search by Z-Uno h/w feature</h4>
+    <span id="choose_by_hw"></span>
+    
+    <h4>Search by Z-Uno power mode</h4>
+    <span id="choose_by_sleepingType"></span>
+
+    <h4>Search by bus protocol</h4>
+    <span id="choose_by_bus"></span>
+
+    <h4>Search by connected peripheral</h4>
+    <span id="choose_by_peripheral"></span>
+</div>
+
+<h2 link="popular-sensors">Popular sensors examples</h2>
+<ul class="examples_list">
+    <li><a href="/examples/CO2_sensor" peripheral="MH-Z19" hwIO="" bus="" sleepingType="Always On" tag="CO2 sensor" associationType="" channelType="Multilevel Sensor">CO2 sensor</a></li>
+    <li><a href="/examples/bh1750" peripheral="BH1750" hwIO="" bus="I2C" sleepingType="Always On" tag="Light sensor" associationType="" channelType="Multilevel Sensor">I2C BH1750 light sensor</a></li>
+    <li><a href="/examples/1-wire-ds18b20-temperature-sensor" peripheral="DS18B20" hwIO="" bus="OneWire" sleepingType="Always On" tag="Temperature sensor" associationType="" channelType="Multilevel Sensor">1-Wire DS18B20 temperature sensor</a></li>
+    <li><a href="/examples/bmp180-oled" peripheral="BMP180, OLED" hwIO="" bus="I2C, SPI" sleepingType="Always On" tag="Display, Temperature sensor, Pressure sensor" associationType="" channelType="">I2C pressure and temperature sensor BMP180 and OLED display</a></li>
+    <li><a href="/examples/analog-temperature-sensor-lm335" peripheral="LM335" hwIO="ADC" bus="" sleepingType="Always On" tag="Temperature sensor" associationType="" channelType="Multilevel Sensor">Analog temperature sensor LM335</a></li>
+    <li><a href="/examples/onewire-temperature-sensor-ds18b20-and-i2c-lcd-display" peripheral="DS18B20" hwIO="" bus="OneWire, I2C" sleepingType="Always On" tag="Temperature sensor, Display" associationType="" channelType="">OneWire temperature sensor DS18B20 and I2C LCD display</a></li>
+    <li><a href="/examples/infrared-proximity-sensor-sharp-gp2y0a21yk" peripheral="Sharp GP2Y0A21YK" hwIO="ADC" bus="" sleepingType="Always On" tag="Proximity sensor" associationType="" channelType="Multilevel Sensor">Infrared Proximity Sensor Sharp GP2Y0A21YK</a></li>
+    <li><a href="/examples/hc-sr04-ultrasonic-distance-sensor" peripheral="HC-SR04" hwIO="Digital input, Digital output" bus="" sleepingType="Always On" tag="Proximity sensor" associationType="" channelType="Multilevel Sensor">HC-SR04 Ultrasonic Distance Sensor</a></li>
+    <li><a href="/examples/secure-keypad-controlling-a-door-lock" peripheral="" hwIO="Digital Input, Key Scanner" bus="" sleepingType="Always On, Sleeping" tag="Secure keypad" associationType="DoorLock" channelType="">Secure keypad controlling a door lock</a></li>
+    <li><a href="/examples/rgb-led-strip" peripheral="TIP120, Transistor output" hwIO="Digital output" bus="" sleepingType="Always On" tag="LED" associationType="" channelType="Multilevel Switch">RGB LED-strip</a></li>
+    <li><a href="/examples/dht11" peripheral="DHT11" hwIO="" bus="" sleepingType="Always On" tag="Temperature sensor, Humidity sensor" associationType="" channelType="Multilevel Sensor">Temperature and humidity sensor DHT11</a></li>
+    <li><a href="/examples/125khz-rfid-card-reader-controlling-a-door-lock" peripheral="125Khz RFID Card Reader" hwIO="" bus="UART" sleepingType="Always On" tag="RFID" associationType="DoorLock" channelType="">125Khz RFID Card Reader controlling a door lock</a></li>
+    <li><a href="/examples/waterlevel" peripheral="" hwIO="ADC" bus="" sleepingType="Always On" tag="Water level sensor" associationType="" channelType="Multilevel Sensor">Water Level sensor</a></li>
+    <li><a href="/examples/mcp23017-port-expander" peripheral="MCP23017" hwIO="" bus="I2C" sleepingType="Always On" tag="Port expander" associationType="" channelType="Multilevel Switch">MCP23017 I2C port expander</a></li>
+    <li><a href="/examples/74hc595-shift-register" peripheral="74HC595" hwIO="" bus="SPI" sleepingType="Always On" tag="Port expander" associationType="" channelType="Multilevel Switch">74HC595 SPI shift register</a></li>
+    <li><a href="/examples/IR2ZWave" peripheral="TSOP3xxxx" hwIO="IR" bus="" sleepingType="Always On" tag="IR learn" associationType="On/Off" channelType="">IR to Z-Wave</a></li>
+    <li><a href="/examples/ZWave2IR" peripheral="" hwIO="IR" bus="" sleepingType="Always On" tag="IR emit" associationType="" channelType="Binary Switch">Z-Wave to IR</a></li>
+    <li><a href="/examples/Water-Meter" peripheral="" hwIO="EEPROM, Digital input" bus="" sleepingType="Always On" tag="Water meter" associationType="" channelType="Meter">Water Meter with EEPROM memory</a></li>
+    <li><a href="/examples/multiple-1-wire-ds18b20-temperature-sensors" peripheral="DS18B20" hwIO="" bus="OneWire" sleepingType="Always On" tag="Temperature sensor" associationType="" channelType="Multilevel Sensor">Multiple DS18B20 temperature sensors</a></li>
+    <li><a href="/examples/multiple-dynamic-1-wire-ds18b20-temperature-sensors" peripheral="DS18B20" hwIO="" bus="OneWire" sleepingType="Always On" tag="Temperature sensor" associationType="" channelType="Multilevel Sensor">Multiple DS18B20 temperature sensors</a> (dynamic style)</li>
+    <li><a href="/examples/sharp-memory-lcd-display" peripheral="Sharp LCD" hwIO="" bus="" sleepingType="Always On" tag="Display" associationType="" channelType="">Sharp Memory LCD Display</a></li>
+    <li><a href="/examples/rs-485" peripheral="MAX485" hwIO="" bus="RS-485" sleepingType="Always On" tag="" associationType="" channelType="Binary Switch">RS-485 with MAX485</a></li>
+    <li><a href="/examples/neopixel" peripheral="WS2811/WS2812" hwIO="" bus="" sleepingType="Always On" tag="NeoPixel, LED" associationType="" channelType="">RGB LED strip control with WS2811/WS2812 (a.k.a NeoPixel)</a></li>
+    <li><a href="/examples/z-uno-as-a-modem" peripheral="" hwIO="" bus="UART, USB" sleepingType="" tag="AT commands" associationType="" channelType="Dunamic channels">Z-Uno as a modem (AT commands)</a></li>
+    <!--<li><a href="/examples/" peripheral="" hwIO="" bus="" sleepingType="" tag="" associationType="" channelType=""></a></li>-->
+ </ul>
+
+<h2 link="projects">Projects</h2>
+<p>Z-Uno is your &laquo;swiss knife&raquo; in Z-Wave world. It allows to make many different devices to complement your home automation. Most of our users love to share their success stories. We are glad to present most interesting Z-Uno based projects here.</p>
+
+<p>Please send us your own project with detailed description, photos, schematics and sample code to share with Z-Uno community.</p>
+
+<ul class="examples_list">
+    <li><a href="/projects/ny2020/" peripheral="WS2811/WS2812" hwIO="" bus="" sleepingType="Always On" tag="Music, NeoPixel, LED" associationType="" channelType="Multilevel Switch, Binary Switch, Color Switch">Z-Wow!Me &mdash; a funny gift for New Year from the Z-Wave.Me team</a></li>
+    <li><a href="/examples/battery-powered-wall-switch" peripheral="" hwIO="Key Scanner" bus="" sleepingType="Sleeping" tag="Wall switch" associationType="On/Off/Dim" channelType="">Battery powered wall switch</a></li>
+    <li><a href="/projects/sensor-wall-switch-based-on-livolo-glass" peripheral="" hwIO="Digital input" bus="" sleepingType="Always On" tag="Wall switch" associationType="On/Off" channelType="">Sensor wall switch based on Livolo glass</a></li>
+    <li><a href="/projects/controlling-irobot-roomba-from-z-wave-network" peripheral="" hwIO="" bus="UART" sleepingType="Always On" tag="iRobot" associationType="" channelType="Multilevel Sensor, Binary Switch">Control iRobot Roomba</a></li>
+    <li><a href="/projects/four-power-relays" peripheral="" hwIO="Digital output" bus="" sleepingType="Always On" tag="Power relay" associationType="" channelType="Binary Switch">Four power relays</a></li>
+    <li><a href="/projects/radiation-temperature-and-humidity-monitor-with-lcd-display" peripheral="AWARE RM-60/70/80 radiation monitor, Sharp LCD, DHT22" hwIO="Digital input" bus="UART, SPI, USB" sleepingType="Always On" tag="Radioation sensor, Temperature sensor, Humidity sensor, Display" associationType="" channelType="Multilevel Sensor">Radiation, Temperature and Humidity Monitor with LCD Display</a></li>
+    <li><a href="/projects/rotary-dimmer-to-led-control" peripheral="Encoder, MOSFET" hwIO="Digital input, Analog output" bus="" sleepingType="Always On" tag="LED" associationType="" channelType="Multilevel Switch">LED Controller based on Encoder and MOSFET</a></li>    
+    <li><a href="/projects/Mercury206" peripheral="DHT22, DS18B20, MAX485, OLED" hwIO="Digital input, Digital output" bus="OneWire, RS-485" sleepingType="Always On" tag="Display, Temperature sensor, Humidity sensor, Power relay, Electrical meter" associationType="" channelType="Meter, Binary Sensor, Multilevel Sensor, Binary Switch, Multilevel Switch">Smart meter reader for electrical meter Mercury 206</a></li>
+    <li><a href="/projects/pellet-bunker-temperature-and-fulfillment-level" peripheral="DS18B20, HC-SR04" hwIO="Digital input, Digital output" bus="OneWire" sleepingType="Always On" tag="Temperature sensor" associationType="" channelType="Multilevel Sensor">Pellet bunker temperature and fulfillment level
+</a></li>
+</ul>
+
+<h2 link="z-wave-certification">Z-Wave Plus certified examples</h2>
+<img src="/files/Z-WavePlusProduct_200.png" width="100" class="img_right"/>
+<p>According to an agreement with the Z-Wave Alliance Z-Uno was certified under Z-Wave Plus based on two sketches. Other sketches are not certified but we guarantee they will pass. Get <a href="/z-wave/z-wave-plus-certification">more info</a>.</p>
+<ul class="examples_list">
+    <li><a href="/examples/Certified10Channels" peripheral="Photo resistor, Reed switch, PIR sensor" hwIO="Digital input, Digital output, ADC, PWM" bus="" sleepingType="Always On" tag="Flood sensor, Light sensor, Temperature sensor, Door sensor, Motion sensor" associationType="On/Off" channelType="Binary Sensor, Multilevel Sensor, Binary Switch, Multilevel Switch">Certified 10 Channels</a></li>
+    <li>Certified 3 Channels (not yet certified)</li>
+    <!--<li><a href="/examples/Certified3Channels" peripheral="" hwIO="" bus="" sleepingType="Always On" tag="" associationType="" channelType="">Certified 3 Channels</a></li>-->
+</ul>
+
+<script>
+    function linksByAttr(attr) {
+        return $(".examples_list li a[" + attr + "]");
+    }
+    
+    function highlite() {
+        var tagName = $(this).attr("tagName"),
+            tagValue = $(this).attr("tagValue");
+        
+        linksByAttr(tagName).each(function (i, e) {
+            var match = $(e).attr(tagName).split(",").some(function(t) {
+                return t.trim() === tagValue;
+            });
+            if (match) {
+                $(e).addClass("highlited");
+            } else {
+                $(e).removeClass("highlited");
+            }
+        });
+        return false;
+    }
+    
+    function getAttrValues(attr) {
+        return linksByAttr(attr).map(function(i, e) {
+            return $(e).attr(attr).split(",").map(function(t) {
+                return t.trim();
+            });
+        }).filter(function(i, t) {
+            return t !== "";
+        });
+    }
+    
+    function attrValuesList(name) {
+        return $.unique(getAttrValues(name).sort());
+    }
+    
+    function tagsToLinks(tags, tagName) {
+        return tags.map(function(i, tag) {
+            return $('<a href="#" class="tag_link" tagName="' + tagName + '" tagValue="' + tag + '">' + tag + '</a>').click(highlite);
+        });
+    }
+    
+    function generateTags(blockId, tagName) {
+        tagsToLinks(attrValuesList(tagName), tagName).each(function(i, e) {
+            $("#" + blockId).append(e).append("&emsp; ");
+        });
+    }
+
+    generateTags("choose_by_tag", "tag");
+    generateTags("choose_by_channel", "channelType");
+    generateTags("choose_by_bus", "bus");
+    generateTags("choose_by_peripheral", "peripheral");
+    generateTags("choose_by_hw", "hwIO");
+    generateTags("choose_by_sleepingType", "sleepingType");
+    generateTags("choose_by_associationType", "associationType");
+    
+    $("#chooser_title").click(function() { $("#chooser_title").toggle(); $("#chooser").toggle(); })
+</script>

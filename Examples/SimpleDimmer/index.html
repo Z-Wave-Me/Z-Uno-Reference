@@ -1,0 +1,79 @@
+<h1>Simple Dimmer</h1>
+<span class="example_description">
+    That is a Simple Multilevel Dimmer example. It gives you the ability to control the built in LED brightness via Z-Wave commands. In this example we set up 1 switch multilevel channel.
+</span>
+<span>
+    Channel has two functions:
+<ul>
+<li>setter &mdash; function is called once a command comes from the Z-Wave controller or over controlling device</li>
+<li>getter &mdash; function is called once the controller or other device in the network asks Z-Uno about</li>
+</ul>
+You can read more about this channel and his functions <a href="http://z-uno.z-wave.me/Reference/ZUNO_SWITCH_MULTILEVEL/">here.</a>
+<span class="example_hardware_required">
+<ul>
+    <li>Z-Uno board</li>
+    <li>Breadboard</li>
+</ul>
+</span>
+<span class="example_code">
+        <pre>
+            <code class="c">// LED pin number
+// 13 pin - service LED of Z-Uno board
+#define LED_PIN 13
+
+// variable to store current dimmer value
+byte lastSetDimmer;
+
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getter, setter));
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(LED_PIN, OUTPUT); //set up LED pin as output
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // loop is empty, because all the control is over the Z-Wave
+}
+
+void setter(byte value) {
+  byte tempVariable;
+  // value is a variable, holding a "new value"
+  // which came from the controller or other Z-Wave device
+  if (value > 99) {
+    // by Z-Wave specification, this value can't be more then 99
+    value = 99;
+  }
+  // but the LED brightness scale ranges from 0 to 255
+  // we need to prepare our "value" for this new scale
+  tempVariable = ((word)value) * 255 / 99);
+
+  // now we set the LED brightness
+  analogWrite(PWM1, ((long)value) * 255 / 99);
+
+  // we'll save our value for the situation, when the controller will ask us about it
+  lastSetDimmer = value;
+}
+
+byte getter(void) {
+  // return previously saved (in getter()) value
+  return lastSetDimmer;
+}
+            </code>
+        </pre>
+    </span>
+</span>  
+    <span class="example_usage">
+<ol>
+    <li><a href="http://z-uno.z-wave.me/getting-started/InclusionInNetwork/"><b>Include</b></a> Z-Uno into a network (if you do it the first time) or Exclude again (also by pressing the button three times), and then again Include (it will be useful if you already included the device, or just to check if it is not included in the network).</li>
+    <li>Go to the <b>Elements</b> and here is your device &mdash; in this case (in sketch) ,  you connected a <b>Switch Multilevel</b> channel, so you see the <b>Dimmer</b> and its current status (on, off, the percentage), which you can control from here, by dimming you can change the brightness of LED on the board.<br></li>
+</ol>
+
+<img src="http://rus.z-wave.me/drive/?file=6a0ebaa68d695876237973a2c270c54a011a" title="Dimmer OFF" width= 80% >
+</span>
+
+<img src="http://rus.z-wave.me/drive/?file=6a0ebaa68d695876238073a2c270c54a011a" title="Dimming.37%" width= 80% >
+</span>
+
+<img src="http://rus.z-wave.me/drive/?file=6a0ebaa68d695876238173a2c270c54a011a" title="Dimmer ON" width= 80% >
+</span>        

@@ -1,0 +1,102 @@
+<h1>HC-SR04 Ultrasonic Distance Sensor</h1>
+<span class="example_description">
+This sketch shows how to connect HC-SR04 Ultrasonic Distance Sensor (or Range Finder)  to the Z-Uno board. Distance value is read from sensor and reported periodically to channel Multilevel Sensor.
+<br/><br/>
+Two resistors are used to shift voltage from 5 V to 3 V. Z-Uno can survive 5 V input too, but it is not recommended.
+<br/><br/>
+Note that HC-SR04 is very sensItive to power supply. If power supply is not enough (to low current), HC-SR04 will return shorter distance.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>HC-SR04 Ultrasonic Distance Sensor (like <a href="https://www.sparkfun.com/products/13959">this</a> or <a href="http://cpc.farnell.com/multicomp/hc-sr04/ultrasonic-distance-sensor/dp/SN36696">this</a>)</li>
+        <li>4 wires</li>
+        <li>1 resistor 1 kΩ</li>
+        <li>1 resistor 2.2 kΩ</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/hc-sr04/hc-sr04.svg">
+    <br/>
+    <a href="/files/z-uno/projects/hc-sr04/hc-sr04.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// HC-SR04 Ultrasonic Distance Sensor
+
+ZUNO_SETUP_CHANNELS(
+    ZUNO_SENSOR_MULTILEVEL(
+        ZUNO_SENSOR_MULTILEVEL_TYPE_DISTANCE,
+        0, // scale is meters
+        SENSOR_MULTILEVEL_SIZE_TWO_BYTES,
+        2, // two decimals after dot
+        getter
+    )
+);
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE); // to control other devices
+
+int turn_on_distance_cm = 50; // Turn on light in CTRL_GROUP_1 if distance is < 50 cm
+
+int readPin = 9;
+int triggerPin = 10;
+byte controlState = 0;
+word lastValue;
+
+void setup() {
+  Serial.begin();
+  pinMode(readPin, INPUT);
+  pinMode(triggerPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+}
+
+void loop() {
+  int tmp;
+
+  // trigger measurement
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+
+  // read pulse width
+  tmp = pulseIn(readPin, HIGH, 100000);
+  if (tmp != 0) {
+    lastValue = tmp / 58; // convert to cm, see datasheet
+    Serial.println(lastValue);
+    
+    // send On/Off to control group
+    if (lastValue < turn_on_distance_cm && controlState == 0) {
+      zunoSendToGroupSetValueCommand(CTRL_GROUP_1, 255);
+      controlState = 255;
+    } else if (lastValue >= turn_on_distance_cm && controlState == 255) {
+      zunoSendToGroupSetValueCommand(CTRL_GROUP_1, 0);
+      controlState = 0;
+    }
+    
+    // send report to controller (Life Line group)
+    zunoSendReport(1);
+  }
+  
+  delay(1000);
+}
+
+word getter() {
+  return lastValue;
+}
+</code></pre>
+<a href="/files/z-uno/projects/hc-sr04/hc-sr04.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/hc-sr04/hc-sr04_screen.png" style="width: 50%;">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/hc-sr04/hc-sr04_photo.jpg" style="width: 50%;">
+</span>
+

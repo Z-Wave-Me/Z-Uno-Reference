@@ -1,0 +1,89 @@
+<h1>OneWire temperature sensor DS18B20</h1>
+<span class="example_description">
+This sketch is an extension of <a href="/examples/1-wire-ds18b20-temperature-sensor">1-wire DS18B20 temperature sensors</a> sketch with support for multiple DS18B20 and autoscan feature. This example shows 3 DS18B20 sensors, but you can have up to 10. Just add new channels, new getters and change N_SENSOR constant.
+<br/><br/>
+Note that sensors might appear in any order depending on scan results.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>3 DS18B20 temperature sensor (like <a href="https://www.sparkfun.com/products/245">this</a> or waterproof variant like <a href="https://www.sparkfun.com/products/11050">this</a>)</li>
+        <li>1 4.7 kΩ resistor</li>
+        <li>11 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/multiple-ds18b20/multiple_ds18b20.svg">
+    <br/>
+    <a href="/files/z-uno/projects/multiple-ds18b20/multiple_ds18b20.fzz">Download Fritzing project</a>
+</span>
+
+<span class="function_see_also">
+Same <a href="/examples/multiple-dynamic-1-wire-ds18b20-temperature-sensors">example with automatic channel generation</a> based on the number of connected DS18B20 sensors.
+</span>
+
+<span class="example_code">
+{literal}<pre><code class="c">// Multiple temperature sensors DS18B20
+
+#include "ZUNO_DS18B20.h"
+
+#define DS18B20_BUS_PIN 11                  // Pin to which DS18B20 bus is connected
+#define N_SENSOR 3                          // Number of DS18B20 sensors
+// You need to adopt ZUNO_SETUP_CHANNELS and add more getters if tou need more sensors
+
+OneWire ow(DS18B20_BUS_PIN);
+DS18B20Sensor ds18b20(&ow);
+
+#define ADDR_SIZE 8                         // Size of address of devices on 1-wire bus
+byte addresses[ADDR_SIZE * N_SENSOR];        // Here we store all the scanned addresses
+#define ADDR(i) (&addresses[i * ADDR_SIZE]) // Macro to simplify our life
+byte number_of_sensors;                     // Number of sensors found
+word temperature[N_SENSOR];                 // Here we store temperatures
+
+// Define Z-Wave channels. Add more if you need more sensors
+ZUNO_SETUP_CHANNELS(
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS, getterTemp1),
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS, getterTemp2),
+        ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, SENSOR_MULTILEVEL_SCALE_CELSIUS, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS, getterTemp3)
+);
+
+void setup() {
+  number_of_sensors = ds18b20.findAllSensors(addresses);
+}
+
+void loop() {
+  for (byte i = 0; i < number_of_sensors && i < N_SENSOR; i++) {
+    // Read temperature
+    temperature[i] = ds18b20.getTemperature(ADDR(i)) * 100;
+    // Sending report
+    zunoSendReport(i + 1); // Channels starts from 1
+  }
+  delay(30000);
+}
+
+// Getters. Add more if you need more sensors
+word getterTemp1() {
+  return temperature[0];
+}
+
+word getterTemp2() {
+  return temperature[1];
+}
+
+word getterTemp3() {
+  return temperature[2];
+}
+</code></pre>{/literal}
+<a href="/files/z-uno/projects/multiple-ds18b20/multiple_ds18b20.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/multiple-ds18b20/multiple_ds18b20_screen.png" style="width: 100%;">
+</span>
+<!--
+<span class="example_photos">
+    <img src="/files/z-uno/projects/multiple-ds18b20/multiple_ds18b20_photo.jpg" style="width: 50%;">
+</span>
+-->

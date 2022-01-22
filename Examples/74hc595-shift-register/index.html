@@ -1,0 +1,76 @@
+<h1>74HC595 SPI 16 shift register</h1>
+<span class="example_description">
+This sketch shows how to connect 74HC595 SPI 16 shift register to the Z-Uno board and control 8 LEDs using channel Multilevel Dimmer.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>74HC595 SPI 16 shift register (like <a href="https://www.adafruit.com/product/450">this</a> or like <a href="https://www.sparkfun.com/products/13699">this</a>)</li>
+        <li>8 LEDs</li>
+        <li>8 50&ndash;100 Ω resistors</li>        
+        <li>wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/74HC595/74HC595.svg">
+    <br/>
+    <a href="/files/z-uno/projects/74HC595/74HC595.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting 74HC595 SPI 16 shift register to Z-Uno
+
+// add library
+#include "SPI.h"
+
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getLevel, setLevel));
+
+// pin for RSK
+#define RSK 9 
+
+int levelLeds = 0;
+byte dataForLevels[] = { 0x00, 0x01, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff };
+ 
+void setup() {
+  // wake up SPI 
+  SPI.begin();
+  // set RSK pin to outputs
+  pinMode(RSK, OUTPUT);
+  digitalWrite(RSK, LOW);
+}
+ 
+void loop() {
+  // nothing to do
+}
+
+// setter functions
+void setLevel(byte value) {
+  if (value == 255) value = 99;                                         // on On set max brightness
+  levelLeds = value;                                                    // save for getter
+  SPISettings spi_settings = SPISettings(8000000, MSBFIRST, SPI_MODE0); // setup SPI
+  SPI.beginTransaction(&spi_settings);                                  // Z-Uno specific call of beginTransaction
+  digitalWrite(RSK, LOW);                                               // select 74HC595
+  delay(10);                                                            // wait for initialization
+  SPI.transfer(dataForLevels[levelLeds/14]);                            // write value
+  delay(10);                                                            // wait for operation complete
+  digitalWrite(RSK, HIGH);                                              // release 74HC595
+  SPI.endTransaction();                                                 // stop SPI on pins
+}
+
+// getter functions
+byte getLevel() {
+  return levelLeds;
+}</code></pre>
+<a href="/files/z-uno/projects/74HC595/74HC595.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/74HC595/74HC595_screen.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/74HC595/74HC595_photo.jpg" style="width: 50%;">
+</span> 

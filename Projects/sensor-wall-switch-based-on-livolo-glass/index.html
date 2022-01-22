@@ -1,0 +1,102 @@
+<h1>Sensor wall switch based on Livolo glass</h1>
+
+<span class="example_author">Vitaliy Yurkin, Z-Wave.Me</span>
+
+<span class="example_description">
+Make a thin and beautiful battery powered wall switch based on cheap Livolo glasses and Z-Uno.</p>
+<img src="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-2.jpg" width="100%">
+</span>
+
+<span class="example_hardware_required">
+<ul>
+<li>Z-Uno board</li>
+<li>Livolo glas</li>
+<li>Livolo frame</li>
+<li>2 TTP223 touch pad detector</li>
+<li>2 schottky diodes</li>
+<li>2 resistors 220 Ω</li>
+<li>2 resistors 10 kΩ</li>
+<li>2 capacities 10 nF</li>
+<li>1 tantalum capacitor 100 μF (or 2 by 47 μF as on the photo)</li>
+<li>2 tune capacities 0-50 pF</li>
+<li>2 LEDs</li>
+</ul>
+</span>
+
+
+<span class="example_schematics">
+It is quite hard to reuse original Livolo schematics, so it is easier to make own:
+<img src="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-1_.jpg" width="100%">
+<br/>
+Here is how it looks like once assembled:
+<img src="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-4_.jpg" width="100%">
+<br/>
+Original Livolo frame can be used to mount the wall switch and to fix the CR2032 battery. It is recommended to use 4 batteries in parallel to have sufficient lifetime. A tantalum capacitor C3 allows to mitigate spikes of current during Z-Wave transmission and enhance battery life.
+<img src="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-3.jpg" width="100%">
+</span>
+
+<span class="example_code">
+    <span class="c">
+        <pre>
+            <code>#define BTN_INT_PIN 18   // INT pin
+#define BTN_PIN1 0       // button pin
+#define BTN_PIN2 20      // button pin
+#define CONTROL_GROUP 1  // number of Association Group
+#define SWITCH_ON 0xff
+#define SWITCH_OFF 0
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE); // Send Turn On/Off command to associated devices
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING);     // Sleeping mode
+
+byte lastValue1 = HIGH;
+byte lastValue2 = HIGH;
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(BTN_PIN1, INPUT_PULLUP);
+  pinMode(BTN_PIN2, INPUT_PULLUP);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  byte currentValue1 = digitalRead(BTN_PIN1);
+  byte currentValue2 = digitalRead(BTN_PIN2);
+  
+  // Button Down
+  if (currentValue1 != lastValue1) {  // if state changes
+    lastValue1 = currentValue1;       // save new state
+    if (lastValue1 == LOW) {
+      zunoSendToGroupSetValueCommand(CONTROL_GROUP, SWITCH_OFF); // if button pressed - send switch OFF command
+    }
+  }
+  
+  // Button Up
+  if (currentValue2 != lastValue2) {  // if state changes
+    lastValue2 = currentValue2;       // save new state
+    if (lastValue2 == LOW) {
+      zunoSendToGroupSetValueCommand(CONTROL_GROUP, SWITCH_ON); // if button pressed - send switch ON command
+    }
+  }
+
+  // Go to sleep after release the button
+  if (digitalRead(BTN_INT_PIN)){
+    zunoSendDeviceToSleep(); 
+  }
+}
+</code></pre></span>
+<a href="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass_.ino">Download this sketch</a>
+</span>
+
+<span class="example_photos">
+    This is how it looks on the wall
+    <img src="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-5.jpg" width="100%">
+</span>
+
+<span class="example_see_also">
+        <!--
+    <a href="/files/z-uno/projects/sensor-wall-switch-based-on-livolo-glass/sensor-wall-switch-based-on-livolo-glass-schema.pdf">Schematics in PDF</a>
+    <br/>
+    -->
+    <a href="https://geektimes.ru/company/zwave/blog/273768">Link to detailed project description (in Russian, use Google to translate)</a>
+</span>
+

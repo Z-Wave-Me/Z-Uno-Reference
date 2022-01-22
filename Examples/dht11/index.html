@@ -1,0 +1,82 @@
+<h1>Humidity and temperature sensor DHT11</h1>
+<span class="example_description">
+This sketch shows how to connect DHT11 sensor to the Z-Uno board and periodically report humidity and temperature values to channels Sensor Multilevel.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>module DHT11 (like <a href="https://www.amazon.com/Phantom-YoYo-compatible-Temperature-Humidity/dp/B00AF22GDC/ref=sr_1_2?s=industrial&ie=UTF8&qid=1475736810&sr=1-2&keywords=dht11">this</a>)</li>
+        <li>or sensor DHT11 (like <a href="https://www.adafruit.com/product/386">this</a>)</li> 
+        <li>1 10 kΩ resistor  </li>
+        <li>5 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/DHT11/DHT11.svg">
+    <br/>
+    <a href="/files/z-uno/projects/DHT11/DHT11.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting DHT11 humidity and temperature sensor to Z-Uno
+
+// add library
+#include "ZUNO_DHT.h"
+// pin connection
+#define DHTPIN 9 
+
+DHT dht(DHTPIN, DHT11);
+
+int humidity;      // here we will store the humidity
+int temperature;   // here we will store the temperature
+
+// set up channels
+ZUNO_SETUP_CHANNELS(
+      ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(getterTemperature),
+      ZUNO_SENSOR_MULTILEVEL_HUMIDITY(getterHumidity)
+);
+
+void setup() {
+  dht.begin();
+  Serial.begin(); 
+  Serial.println("start");
+}
+
+void loop() {
+  // obtaining readings from the sensor DHT
+  humidity = dht.readHumidity();
+  temperature = dht.readTemperature();
+  Serial.print("Humidity = "); 
+  Serial.print(humidity);
+  Serial.print(" %  ");
+  Serial.print("Temperature = "); 
+  Serial.print(temperature);
+  Serial.println(" *C");
+  // send data to channels
+  zunoSendReport(1);
+  zunoSendReport(2); 
+  // send every 30 second
+  delay(30000);
+}
+
+byte getterTemperature() {
+  return temperature;
+}
+
+byte getterHumidity() {
+  return humidity;
+}</code></pre>
+<a href="/files/z-uno/projects/DHT11/DHT11.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/DHT11/screen_DHT11.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/DHT11/photo_DHT11.jpg" style="width: 50%;">
+</span>
+ 

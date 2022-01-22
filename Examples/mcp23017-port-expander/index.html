@@ -1,0 +1,70 @@
+<h1>MCP23017 I2C 16 input/output port expander</h1>
+<span class="example_description">
+This sketch demonstrates how to connect MCP23017 I2C 16 input/output port expander to the board Z-Uno and control 8 LEDs using channel Multilevel Dimmer.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>MCP23017 I2C 16 input/output port expander (like <a href="https://www.adafruit.com/product/732">this</a> or like <a href="https://www.amazon.com/Adafruit-MCP23017-input-output-expander/dp/B00NAY3UAK">this</a>)</li>
+        <li>8 LEDs</li>
+        <li>8 50&ndash;100 Ω resistors </li>        
+        <li>wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/MCP23017/MCP23017.svg">
+    <br/>
+    <a href="/files/z-uno/projects/MCP23017/MCP23017.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting MCP23017 I2C 16 input/output port expander to Z-Uno
+
+// add library
+#include "Wire.h"
+
+//set up channel
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getLevel, setLevel));
+
+int levelLeds = 0;
+byte dataForLevels[] = { 0x00, 0x01, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff };
+
+void setup() {
+  Wire.begin();                             // wake up I2C bus
+  Wire.beginTransmission(0x20);             // set I/O pins to outputs
+  Wire.write(0x00);                         // IODIRA register
+  Wire.write(0x00);                         // set all of port A to outputs
+  Wire.endTransmission();
+}
+ 
+void loop() {
+  // nothing to do
+}
+
+// setter functions
+void setLevel(byte value) {
+  if (value == 255) value = 99;             // on On set max brightness
+  levelLeds = value;                        // memorize for getter
+  Wire.beginTransmission(0x20);
+  Wire.write(0x12);                         // address bank A
+  Wire.write(dataForLevels[levelLeds/14]);  // value to send (bit 1 means LED is ON, map to 8 LEDs)
+  Wire.endTransmission();
+}
+
+// getter function
+byte getLevel() {
+  return levelLeds;
+}</code></pre>
+<a href="/files/z-uno/projects/MCP23017/MCP23017.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/MCP23017/MCP23017_screen.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/MCP23017/MCP23017_photo.jpg" style="width: 50%;">
+</span> 

@@ -1,0 +1,155 @@
+<h1>Battery powered wall switch</h1>
+<span class="example_description">
+This sketch shows how to use Z-Uno as a battery powered wall connected to existing rockers by any manufacturer like Gira/Jung/Legrand/Schneider and others. Any number of rockers/control groups can be added. This example shows two rockers and two control (association) groups.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Wall rockers</li>
+        <li>Batery holder</li>
+        <li>Wires (depending on numbers of rockers)</li>
+    </ul>
+</span>
+
+<!--
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/keypad/keypad.svg">
+    <br/>
+    <a href="/files/z-uno/projects/keypad/keypad.fzz">Download Fritzing project</a>
+</span>
+-->
+
+<span class="example_code">
+{literal}<pre><code class="c">// KeyPad 1x4
+#include "ZMEKeypad.h"
+// Count of rows
+#define ROWS  1
+// Count of columns
+#define COLS  4
+
+// Set rows pins
+BYTE rowPins[1] = {17};
+// Set columns pins
+BYTE columnPins[4] = {9, 10, 11, 12};
+
+// Create object KeyPad
+ZMEKeypad kpd = ZMEKeypad(columnPins, COLS, rowPins, ROWS);
+
+#define CONTROL_GROUP1 1  // number of Association Group 
+#define CONTROL_GROUP2 2  // number of Association Group
+#define SWITCH_ON 0xff
+#define SWITCH_OFF 0
+
+// Start holding flags for 4 buttons
+byte button_0_start_holding = TRUE;
+byte button_1_start_holding = TRUE;
+byte button_2_start_holding = TRUE;
+byte button_3_start_holding = TRUE;
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM); // Send Turn On/Off and Dim commands to associated devices
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING); // SLEEPING MODE
+
+void setup() {
+  zunoSetupKeyScannerWU(4); // turn INT1 wakeup into Key Scanner mode with two columns: pins 9 and 10
+  kpd.begin();
+  kpd.setHoldTime(50); // 100 ms for detect hold button, 10 = 100 ms
+  kpd.setDebounceTime(2); // 20 ms debounce, 2 = 20 ms
+}
+
+void loop() {
+  byte actions[4]; // Array that return all actions from keypad (hold, release, press, double press, etc.)
+  byte go_to_sleep = FALSE; // go to sleep after button released;
+  
+  // Default value for buttons - inactive, then read real states
+  byte button_0_active = FALSE;
+  byte button_1_active = FALSE;
+  byte button_2_active = FALSE;
+  byte button_3_active = FALSE;
+
+  byte num_touched_keys = kpd.scanKeys(actions);
+  if (num_touched_keys) {
+    bool hold = KEYPAD_IS_HOLDING(actions[0]);
+    switch (KEYPAD_KEYINDEX(actions[0])) {
+      case 0: // Button Left Down
+        button_0_active = TRUE;
+        if (hold && button_0_start_holding) { // If button 0 start holding
+          button_0_start_holding = FALSE;
+          zunoSendToGroupDimmingCommand(CONTROL_GROUP1, TRUE, TRUE); // start dimming down (group, direction, start_stop)
+        }
+        if (!hold) { // If button 0 not holding
+          go_to_sleep = TRUE;
+          zunoSendToGroupSetValueCommand(CONTROL_GROUP1, SWITCH_OFF);  
+        }
+        break;
+      case 1: // Button Left Up
+        button_1_active = TRUE;
+        if (hold && button_1_start_holding) { // If button 1 start holding
+          button_1_start_holding = FALSE;
+          zunoSendToGroupDimmingCommand(CONTROL_GROUP1, FALSE, TRUE); // start dimming up (group, direction, start_stop)
+        }
+        if (!hold) { // If button 1 not holding
+          go_to_sleep = TRUE;
+          zunoSendToGroupSetValueCommand(CONTROL_GROUP1, SWITCH_ON);
+        }
+        break;
+      case 2: // Button Right Down
+        button_2_active = TRUE;
+        if (hold && button_2_start_holding) { // If button 2 start holding
+          button_2_start_holding = FALSE;
+          zunoSendToGroupDimmingCommand(CONTROL_GROUP2, TRUE, TRUE); // start dimming down (group, direction, start_stop)
+        }
+        if (!hold) { // If button 2 not holding
+          go_to_sleep = TRUE;
+          zunoSendToGroupSetValueCommand(CONTROL_GROUP2, SWITCH_OFF);
+        }
+        break;
+      case 3: // Button Right Up
+        button_3_active = TRUE;
+        if (hold && button_3_start_holding) { // If button 3 start holding
+          button_3_start_holding = FALSE;
+          zunoSendToGroupDimmingCommand(CONTROL_GROUP2, FALSE, TRUE); // start dimming down (group, direction, start_stop)
+        }
+        if (!hold) { // If button 3 not holding
+          go_to_sleep = TRUE;
+          zunoSendToGroupSetValueCommand(CONTROL_GROUP2, SWITCH_ON);
+        }
+        break;
+    }
+  }
+
+  if(!button_0_start_holding && !button_0_active) { // If button 0 release holding
+    button_0_start_holding = TRUE;
+    zunoSendToGroupDimmingCommand(CONTROL_GROUP1, TRUE, FALSE); // stop dimming down (group, direction, start_stop)
+  }
+   if(!button_1_start_holding && !button_1_active) { // If button 1 release holding
+    button_1_start_holding = TRUE;
+    zunoSendToGroupDimmingCommand(CONTROL_GROUP1, FALSE, FALSE); // stop dimming up (group, direction, start_stop)
+  }
+   if(!button_2_start_holding && !button_2_active) { // If button 2 release holding
+    button_2_start_holding = TRUE;
+    zunoSendToGroupDimmingCommand(CONTROL_GROUP2, TRUE, FALSE); // stop dimming down (group, direction, start_stop)
+  }
+   if(!button_3_start_holding && !button_3_active) { // If button 3 release holding
+    button_3_start_holding = TRUE;
+    zunoSendToGroupDimmingCommand(CONTROL_GROUP2, FALSE, FALSE); // stop dimming up (group, direction, start_stop)
+  }
+
+  // if all buttons released
+  if (kpd.isIdled()) {
+    go_to_sleep = TRUE;
+  }
+
+  if (go_to_sleep) {
+    zunoSendDeviceToSleep();  
+  }
+}</code></pre>{/literal}
+<a href="/files/z-uno/projects/battery-powered-wall-switch/battery-powered-wall-switch.ino">Download this sketch</a>
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/battery-powered-wall-switch/battery-powered-wall-switch_photo_1.jpg" style="width: 80%;">
+    <img src="/files/z-uno/projects/battery-powered-wall-switch/battery-powered-wall-switch_photo_2.jpg" style="width: 80%;">
+    
+    <iframe width="853" height="480" src="https://www.youtube.com/embed/Elu4r1ts7co?rel=0" frameborder="0" allowfullscreen></iframe>
+</span>
+

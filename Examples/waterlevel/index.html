@@ -1,0 +1,74 @@
+<h1>Water Level sensor</h1>
+<span class="example_description">
+This sketch turns Z-Uno in Water Level sensor to periodically report data values to channel Multilevel Sensor.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Water Level sensor (like <a href="https://www.seeedstudio.com/Electronic-Brick-Water-Sensor-p-682.html">this</a>)</li>
+        <li>6 wires</li>
+    </ul>
+</span>
+
+<!--
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/waterlevel/waterlevel.svg">
+</span>
+-->
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting level water sensor to Z-Uno
+
+// add library
+#include "ZUNO_DHT.h"
+// pin connection sensor
+#define PIN_SENSOR A0
+
+// set up channel
+ZUNO_SETUP_CHANNELS(
+   ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_GENERAL_PURPOSE_VALUE, 
+                          SENSOR_MULTILEVEL_SCALE_PERCENTAGE_VALUE,  
+                          SENSOR_MULTILEVEL_SIZE_ONE_BYTE, 
+                          SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS,
+                          getterLevel)
+);
+
+int level;  // here we will store the data sensor
+int levelpercent;  // here we will store the value level percent
+
+void setup() {
+    Serial.begin();
+    Serial.println("start");  
+}
+
+void loop() {
+    // obtaining readings from the level water sensor
+    level=analogRead(PIN_SENSOR);
+    Serial.print("level = ");
+    Serial.println(level);   
+    // in percent
+    levelpercent=level/10.24;
+    Serial.print("levelpercent = ");
+    Serial.println(levelpercent);   
+    // send data to channel
+    zunoSendReport(1);     
+    // send every 30 second
+    delay(30000);
+}
+
+byte getterLevel() {
+    return (byte)levelpercent;
+}</code></pre>
+<a href="/files/z-uno/projects/waterlevel/waterlevel.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/waterlevel/screen_waterlevel.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/waterlevel/photo_waterlevel.jpg" style="width: 50%;">
+</span>
+
