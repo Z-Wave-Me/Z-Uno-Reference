@@ -1,0 +1,102 @@
+<h1>RGB LED-strip</h1>
+<span class="example_description">
+This sketch shows how to control RGB LED-strip from Z-Uno channels of Switch Multilevel type.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>RGB strip (like <a href="https://www.sparkfun.com/products/12021">this</a>)</li>
+        <li>3 TIP120 NPN Power Darlington Transistor (like <a href="https://www.adafruit.com/product/976">this</a>) </li>        
+        <li>3 1.5 kΩ resistor </li>
+        <li>12 V power supply unit for the RGB strip </li>
+        <li>12 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/RGBstrip/RGBstrip.svg">
+    <br/>
+    <a href="/files/z-uno/projects/RGBstrip/RGBstrip.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for controlling RGB-tape connected to the Z-Uno
+
+#define REDPIN   PWM1     // pin connection R 
+#define GREENPIN PWM2     // pin connection G
+#define BLUEPIN  PWM3     // pin connection B
+  
+// set up channel
+ZUNO_SETUP_CHANNELS(
+      ZUNO_SWITCH_MULTILEVEL(getRed, setRed),
+      ZUNO_SWITCH_MULTILEVEL(getGreen, setGreen),
+      ZUNO_SWITCH_MULTILEVEL(getBlue, setBlue)
+);
+
+int levelRed;      // here wi will store for R
+int levelGreen;    // here wi will store for G
+int levelBlue;     // here wi will store for B
+
+void setup() {
+  pinMode(REDPIN, OUTPUT);
+  pinMode(GREENPIN, OUTPUT);
+  pinMode(BLUEPIN, OUTPUT);
+  Serial.begin();
+  Serial.println("start");
+  analogWrite(REDPIN,0);     // R switch off
+  analogWrite(GREENPIN,0);   // G switch off
+  analogWrite(BLUEPIN,0);    // B switch off
+}
+  
+void loop() {
+}
+
+// getter functions
+
+int getRed() {
+  return levelRed;
+}
+
+int getGreen() {
+  return levelGreen;
+}
+
+int getBlue() {
+  return levelBlue;
+}
+
+// setter functions
+
+void setRed(byte value) {
+  levelRed = value;
+  analogWrite(REDPIN, levelRed * 255 / 99); // set R
+  Serial.print("set red = ");
+  Serial.println(value);
+}
+
+void setGreen(byte value) {
+  levelGreen = value;  
+  analogWrite(GREENPIN, levelGreen * 255 / 99); // set G
+  Serial.print("set green = ");
+  Serial.println(value);
+}
+
+void setBlue(byte value) {
+  levelBlue = value;  
+  analogWrite(BLUEPIN, levelBlue * 255 / 99); // set B
+  Serial.print("set blue = ");
+  Serial.println(value);
+}</code></pre>
+<a href="/files/z-uno/projects/RGBstrip/RGBstrip.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/RGBstrip/screen_RGBstrip.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/RGBstrip/photo_RGBstrip.jpg" style="width: 50%;">
+</span>
+

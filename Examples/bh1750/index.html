@@ -1,0 +1,73 @@
+<h1>I2C light sensor BH1750</h1>
+<span class="example_description">
+This is a sketch for connecting I2C DH1750 light sensor to the board Z-Uno and periodically report light value to channel Multilevel Sensor.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>BH1750 Luminance I2C sensor (like <a href="http://www.dfrobot.com/index.php?route=product/product&product_id=531#.V7GRUpOLSRs">this</a> or like <a href="https://www.amazon.com/zhangminivy-Light-Sensor-BH1750/dp/B009YG69R4">this</a>)</li>
+        <li>4 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/bh1750/bh1750.svg">
+    <br/>
+    <a href="/files/z-uno/projects/bh1750/bh1750.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting I2C light sensor BH1750 to Z-Uno using ZUNO_BH1750 library
+
+#include "ZUNO_BH1750.h"
+
+BH1750 bh1750;
+
+// BH1750 address on the bus: BH1750_I2CADDR_L = 0x23
+#define BH1750_I2CADDR  BH1750_I2CADDR_L
+
+word lightLux;
+
+// set up channel
+ZUNO_SETUP_CHANNELS(
+      ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_LUMINANCE,
+                             SENSOR_MULTILEVEL_SCALE_LUX,  
+                             SENSOR_MULTILEVEL_SIZE_TWO_BYTES, 
+                             SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, 
+                             getterLight)
+);
+
+void setup() {
+  // Start continous measurement in HIGH_RES_MODE at 1 lx resolution
+  // Measurement time is approx 120ms. max time 180ms defined as BH1750_HIGH_RES_MODE_MAXTIME
+  bh1750.begin(BH1750_CONTINUOUS_HIGH_RES_MODE, BH1750_I2CADDR);
+}
+
+void loop() {
+  lightLux = bh1750.readLightLevel(BH1750_I2CADDR);
+
+  zunoSendReport(1); 
+  // send every 30 sec
+  delay(30000);
+}
+
+word getterLight() {
+  return lightLux;
+}
+</code></pre>
+<a href="/files/z-uno/projects/bh1750/bh1750.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/bh1750/screen.png" style="width: 50%;">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/bh1750/IMG_1493.JPG" style="width: 50%;">
+</span>
+
+<span class="function_see_also">
+    <a href="/examples/bh1750-petergebruers">Improved sketch</a> for the same sensor.
+</span>

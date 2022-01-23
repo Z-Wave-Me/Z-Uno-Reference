@@ -1,0 +1,78 @@
+<h1>Analog temperature sensor LM335</h1>
+<span class="example_description">
+This is a sketch for connecting LM335 temperature sensor to the Z-Uno board and periodically report temperature values to channel Multilevel Sensor.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>LM335 temperature sensor (like <a href="https://www.sparkfun.com/products/retired/9438">this</a>)</li>
+        <li>1 300 Ω resistor (nominal resistor R=(Uref-2.8V)/1mA)</li>
+        <li>4 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/lm335/lm335.svg">
+    <br/>
+    <a href="/files/z-uno/projects/lm335/lm335.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting LM335 temperature sensor to Z-Uno
+
+// pin connection lm335
+#define PIN_LM335 A0
+// supply voltage (if USB - 3.05 V)
+float V=3.05;
+
+// set up channel
+ZUNO_SETUP_CHANNELS(
+   ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_TEMPERATURE, 
+                          SENSOR_MULTILEVEL_SCALE_CELSIUS, 
+                          SENSOR_MULTILEVEL_SIZE_TWO_BYTES, 
+                          SENSOR_MULTILEVEL_PRECISION_ONE_DECIMAL,
+                          getterTemp)
+);
+
+int temp;  // here we will store the temperature
+
+void setup() {
+    Serial.begin();
+    Serial.println("start");  
+}
+
+void loop() {
+    // obtaining readings from the sensor lm335
+    temp = getTemplm335();
+    Serial.print("temp = ");
+    Serial.println(temp);    
+    // send data to channel
+    zunoSendReport(1);     
+    // send every 30 second
+    delay(30000);
+}
+
+int getTemplm335() {
+    int val;
+    
+    val = analogRead(PIN_LM335);
+    temp = ((float)val*V*100/1024-273.15)*10;
+    return temp;
+}
+
+word getterTemp() {
+    return temp;
+}</code></pre>
+<a href="/files/z-uno/projects/lm335/lm335.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/lm335/screen_lm335.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/lm335/lm335_photo.jpg" style="width: 50%;">
+</span>
+

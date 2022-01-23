@@ -1,0 +1,245 @@
+{literal}
+
+<div style="text-align: center;">
+    <img src="/files/z-uno/projects/ny2020/Z-Wow.Me.jpg" width="50%" />
+</div>
+
+<br/>
+<h1 align="center">A retro cyber-punk music box with nighlight based on Z-Uno</h1>
+
+<p align="center">
+    <a href="#ru">На русском</a>&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<a href="#en">In English</a>
+</p>
+
+<style media="screen">
+    .board_container {
+      width: 100%;
+      position: relative;
+      -webkit-perspective: 100%;
+         -moz-perspective: 100%;
+           -o-perspective: 100%;
+              perspective: 100%;
+    }
+
+    .board_card {
+      width: 100%;
+      height: 100%;
+      -webkit-transition: -webkit-transform 1s;
+         -moz-transition: -moz-transform 1s;
+           -o-transition: -o-transform 1s;
+              transition: transform 1s;
+      -webkit-transform-style: preserve-3d;
+         -moz-transform-style: preserve-3d;
+           -o-transform-style: preserve-3d;
+              transform-style: preserve-3d;
+    }
+
+    .board_card.flipped {
+      -webkit-transform: rotateY( 180deg );
+         -moz-transform: rotateY( 180deg );
+           -o-transform: rotateY( 180deg );
+              transform: rotateY( 180deg );
+    }
+
+    .board_card figure {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      -webkit-backface-visibility: hidden;
+         -moz-backface-visibility: hidden;
+           -o-backface-visibility: hidden;
+              backface-visibility: hidden;
+    }
+
+    .board_card .front {
+            position: absolute;
+    }
+
+    .board_card .back {
+      -webkit-transform: rotateY( 180deg );
+         -moz-transform: rotateY( 180deg );
+           -o-transform: rotateY( 180deg );
+              transform: rotateY( 180deg );
+    }
+</style>
+
+<a name="en"></a>
+<h3>What is this?</h3>
+<p>This is Z-Wow!Me &mdash; a New Year toy made by Z-Wave.Me team. It can play eleven well known melodies and act as a night light. The device can be operated by buttons as well as via Z-Wave.</p>
+
+<section class="board_container">
+<div class="board_card">
+  <figure class="front"><img src="/files/z-uno/projects/ny2020/g188.png" width="25%"/></figure>
+  <figure class="back"><img src="/files/z-uno/projects/ny2020/g10026.png" width="25%"/></figure>
+</div>
+</section>
+
+<h3>Why we did it?</h3>
+<p>Just for fun ;) We found that people are to serious about Z-Wave and a bit of fun would make people smile. Another reason was to show that making Z-Wave devices is fast &mdash; we did it in 4 weeks (from the idea to the final product) and production quantity was 80 pieces only.</p>
+
+<h3>Why Star Wars theme?</h3>
+<p>Just be cause we like the original trilogy. In fact we wanted first to make a toy playing Imperial March, but then decided to add more melodies.</p>
+
+<h3>What is it based on?</h3>
+<p>The device is based on our <a href="/module">Z-Uno Module</a> &mdash; this is why it was so fast to produce.</p>
+
+<h3>Can I modify/reprogram it?</h3>
+<p>Sure, you can! The sketch is public and is published below. You can modify it, add/change melodies or lighting scheme and upload a new sketch via the USB port.</p>
+
+<h3>Why Security S0 only and not S2?</h3>
+<p>The Z-Uno based on the 5th generation Z-Wave chip has not enogh memory to have Security S2 and all the melodies. Most of the sketch code (80%) is used by strings describing melodies' chords. In fact, if we move them to EEPROM and improve the sketch a bit we can still do Security S2. But unfortunatelly we had no time to do it before the New Year. But you can do it ;)</p>
+
+<h3>Supported controller</h3>
+<p>Z-Uno should be supported by any Z-Wave Plus controller. It works like a charm in Z-Wave.Me RaZberry/Z-Way/Hub. It works well on the latest Fibaro Home Center 2. Rostelecom controller can currently only set songs, but not the night light color/intensity. We have not tested other controllers, but it should work on most of them.</p>
+
+<h3>How to control Z-Wow!Me music box</h3>
+<p>The device has 6 buttons. Each button in the circle starts a melody on click and another one on double click. The central button click stops the music box and turns of the light. Double click of the central button turns on the white light, hold of the central button turns on random color.</p>
+<p>From the Z-Wave side there are 11 switches to toggle each melody, one dimmer to control the equalizer brightness and night light brightness and a color switch to control the night light.</p>
+
+<h3>What is recorded?</h3>
+(1-5 are single clicks, 6-10 are double click, 11th is a secret one and is available only via Z-Wave).
+<ol>
+    <li>Pine (Russian New Year song &laquo;Elochka&raquo;/&laquo;Ёлочка&raquo;)</li>
+    <li>Imperial march</li>
+    <li>Money by Pink Floyd</li>
+    <li>Caprice 24 by Niccolo Paganini</li>
+    <li>The Final Countdown by Europe</li>
+    <li>The Lonely Shepherd by James Last</li>
+    <li>Everything goes as planned (Всё идёт по плану) by Egor Letov (Russian Rock)</li>
+    <li>Korobeiniki (a Russian folk song also known as Tetris theme)</li>
+    <li>He's a pirate by Hans Zimmer (Pirates of the Caribbean theme)</li>
+    <li>Pop Corn (Pacman theme)</li>
+    <li>Smoke on the water by Deep Purple</li>
+</ol>
+<p>Of course you can record other melodies. We use very simple notation to write songs: A1@1/8 where A1 is the note and 1/8 is the interval. P is for pause. Spaces and | are ignored and are used just for convenience and note separation. See sources for more details.</p>
+
+<h3>Can I make volume lower?</h3>
+<p>Sorry, you can't ;) The schematics do not allow this. But you can solder a resistor in the speaker line to lower the sound.</p>
+
+<h3>Including in your Z-Wave network and excluding from network</h3>
+<p>On the controller, start the inclusion mode and on the device press the central button three times in a row. First time the device should auto-include itself (Z-Wave NWI) once power is connected.</p>
+
+<h3>UI in a Z-Wave controller</h3>
+<p>A Z-Wave Plus controller should show at least:</p>
+<ul>
+  <li>1 dimmer to control the brightness of the LEDs</li>
+  <li>11 relays for each melody</li>
+  <li>1 color picker to set LEDs color</li>
+</ul>
+
+<h3>A live demo</h3>
+<div class="video-container"><iframe style="width: 500px; height: 281px;" src="https://www.youtube.com/embed/o61yxL1UsNg" frameborder="0" allowfullscreen=""></iframe></div>
+<br/>
+
+<h3>Advanced info</h3>
+<p>The button on the back is chip reset. Central button is the service button (keep it pressed when resetting to go in rescue mode)</p>
+
+<h3>Uploading another sketch</h3>
+<p>Of course you can upload any other sketch to this device. For this you need to install the Z-Uno package as below:</p>
+<ol>
+    <li>Download and start Arduino IDE</li>
+    <li>File &rarr; Preferences</li>
+    <li>In Additional Boards Manager URLs insert http://z-uno.z-wave.me/files/z-uno/test-ucxx/package_z-wave.me_index.json</li>
+    <li>Tools &rarr; Board &rarr; Boards Manager</li>
+    <li>Pick Z-Uno version 2.1.6 and press Install or Update</li>
+    <li>Restart Arduino IDE and <a href="https://z-uno.z-wave.me/install">follow remaining steps</a> starting from 7th</li>
+    <li>Download and start to modify <a href="/files/z-uno/projects/ny2020/NGG2.ino">the music box sources</a></li>
+</ol>
+
+<h3>Legal side</h3>
+<p>Is it legal to use Star Wars images? Have we paid to Disney? We have not ;) But we never sold any of them and made no marketing &mdash; this is not a commercial project, so this is called User Generated Content and require no licensing. At least we hope so ;)</p>
+<p>Why there is no Z-Wave or Z-Wave Plus logo? Because we have never certified it as it is made just for fun for private usage and gifts. But it could be certified. At least we hope so;)</p>
+
+
+
+
+<a name="ru"></a>
+<h1 align="center">Ретро-киберпанк музыкальная шкатулка на базе Z-Uno</h1>
+
+<h3>Что это?</h3>
+<p>Это Z-Wow!Me &mdash; новогодняя игрушка от Z-Wave.Me team. Она может играть 11 музыкальных хитов, а так работать как ночник. Управлять можно с кнопок, а так же по Z-Wave.</p>
+
+<section class="board_container">
+<div class="board_card">
+  <figure class="front"><img src="/files/z-uno/projects/ny2020/g188.png" width="25%"/></figure>
+  <figure class="back"><img src="/files/z-uno/projects/ny2020/g10026.png" width="25%"/></figure>
+</div>
+</section>
+
+<h3>Зачем мы её сдедали?</h3>
+<p>Просто захотелось чего-то весёлого под новый год ;) Нам показалось, что всё в Z-Wave слишком серъёзно, и немного улыбки не помешает. Ещё одна пичина &mdash; показать, как можно быстро делать устройства Z-Wave &mdash; это было сделано за 4 недели от идеи до готового продукта в количестве 80 штук.</p>
+
+<h3>Почему тема Star Wars?</h3>
+<p>Просто нам нравится оригинальная трилония. Изначально мы хотели сделать проигрывание марша имерии, но потом добавили больше песен.</p>
+
+<h3>На чём основано устройство?</h3>
+<p>Устройство основано на <a href="/module">Модуле Z-Uno</a> &mdash; именно блогадяря ему музыкальную шкатулку удалось так быстро воплотить в жизнь.</p>
+
+<h3>Могу ли я её изменить?</h3>
+<p>Конечно! Сурсы опубликованы ниже. Их можно менять, добавлять песни, изменять подстветку. Скетч заливается по USB.</p>
+
+<h3>Поддержка контроллерами</h3>
+<p>Z-Uno должна работать на любом Z-Wave Plus контроллере. Она отлично работает на Z-Wave.Me RaZberry/Z-Way/Hub, а так же на последней прошивке Fibaro Home Center 2. На контроллере Ростелеком можно только управлять мелодиями, но не менять цвет/яркость.</p>
+
+<h3>Как управлять музыкальной шкатулкой Z-Wow!Me</h3>
+<p>У устройства 6 кнопок. Кнопки по кругу запускают мелодии по одинарному и двойному кликам. Центарльная кнопка останавлитвает музыку и выключает подсветку. Двойное нажатие на центральную кнопку включает белую подсветку, а долгое нажатие выставляет произвольный цвет.</p>
+<p>По Z-Wave можно управлять 11-ю переключателями для выбора мелодии, диммером для яркости эквалайзера и подсветки ночника, а так же выбором цвета ночника.</p>
+
+<h3>Какие мелодии записаны?</h3>
+(1-5 по одинарному нажанию, 6-10 по двойному, 11ая секретная включается только по Z-Wave).
+<ol>
+    <li>&laquo;Ёлочка&raquo;</li>
+    <li>Имперский марш</li>
+    <li>Money Pink Floyd</li>
+    <li>Капорис 24 by Никколо Паганини</li>
+    <li>The Final Countdown Europe</li>
+    <li>Одинокий пастух James Last</li>
+    <li>Всё идёт по плану ГрОб</li>
+    <li>Коробейники (тема Тетриса)</li>
+    <li>He's a pirate Hans Zimmer (саундрек к Пиратам карибского моря)</li>
+    <li>Воздушная кукуруза (тема Pacman)</li>
+    <li>Smoke on the water Deep Purple</li>
+</ol>
+<p>Конечно, все мелодии вы можете менять. В сурсах используется простая нотация: A1@1/8, где A1 обозначает ноту, а 1/8 длительность. P для паузыis for pause. Пробел и | используются в качестве разделителя нот и игнорируются.</p>
+
+<h3>А можно потише?</h3>
+<p>Увы, нет ;) Схематехника этого не позволяет. Но можно впаять резистор в цепь с динамиком для уменьшени громкости.</p>
+
+<h3>Включение в сеть Z-Wave</h3>
+<p>Переведите контроллер в режим добавдения и три раза нажмимте на центральную кнопку.</p>
+
+
+<h3>Интерфейс в контроллере Z-Wave</h3>
+<ul> 	 
+  <li>1 диммер управляет яркостью светодиодов</li> 
+  <li>11 реле включают свою мелодию, при этом предыдущая выключается</li> 
+  <li>1 палитра для выбора цвета и яркости ночника</li>
+</ul>
+
+<h3>Демка</h3>
+<div class="video-container"><iframe style="width: 500px; height: 281px;" src="https://www.youtube.com/embed/o61yxL1UsNg" frameborder="0" allowfullscreen=""></iframe></div>
+<br/>
+
+<h3>Подробнее</h3>
+<p>Кнопка сзади &mdash; это reset. Центральная кнопка является сервисной (ужерживайте её при нажатии ресета для входа в сервисный режим).</p>
+
+<h3>Загрузка нового скетча</h3>
+<ol>
+    <li>Скачайте и запусите Arduino IDE</li>
+    <li>File &rarr; Preferences</li>
+    <li>В строку Additional Boards Manager URLs вставьте http://z-uno.z-wave.me/files/z-uno/test-ucxx/package_z-wave.me_index.json</li>
+    <li>Tools &rarr; Board &rarr; Boards Manager</li>
+    <li>Найдите плату Z-Uno, выберите версию 2.1.6 и нажмите Установить или Обновить</li>
+    <li>Перезапустите Arduino IDE и <a href="/install">следуйте по шагам 7 и далее</a></li>
+    <li>Скачайте <a href="/files/z-uno/projects/ny2020/NGG2.ino">код музыкальной шкатулки</a> и начните его модифицировать</li>
+</ol>
+
+
+
+<script>
+    $('.board_card').mouseover(function() { $('.board_card').addClass('flipped'); })
+    $('.board_card').mouseout(function() { $('.board_card').removeClass('flipped'); })
+</script>
+
+{/literal}

@@ -1,0 +1,59 @@
+<h1>I2C pressure and temperature sensor BMP180 and OLED display</h1>
+<span class="example_description">
+This sketch shows how to connect BMP180 pressure sensor and OLED display to the Z-Uno board. There is no Z-Wave communication in this example. Data is read from sensor and printed on the display.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>BMP180 pressure and temperature sensor (like <a href="https://www.sparkfun.com/products/11824">this</a> or like <a href="https://www.adafruit.com/product/1603">this</a>)</li>
+        <li>OLED display (like <a href="https://www.adafruit.com/products/938">this</a> or like <a href="https://www.sparkfun.com/products/13003">this</a>)</li>
+        <li>8 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/bmp180-oled/bmp180-oled.svg">
+    <br/>
+    <a href="/files/z-uno/projects/bmp180-oled/bmp180-oled.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">#include "Wire.h"
+#include "ZUNO_BMP180.h"
+#include "ZUNO_OLED_I2C.h"
+
+ZUNO_BMP180 bmp;
+OLED oled;
+
+void setup() {
+  bmp.begin();
+  oled.begin();
+  oled.clrscr();
+}
+  
+void loop() {
+  delay(1000);
+  oled.gotoXY(0,0);
+  oled.print("Millis:");
+  oled.print(millis());
+    
+  oled.gotoXY(0,1);
+  oled.print("Temperature ");
+  oled.print(bmp.readTemperature());
+  oled.println(" *C");
+    
+  oled.print("Pressure ");
+  oled.print(bmp.readPressure()/133.32);
+  oled.println(" mm");
+
+  delay(2000);
+}</code></pre>
+<a href="/files/z-uno/projects/bmp180-oled/bmp180-oled.ino">Download this sketch</a>
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/bmp180-oled/bmp180-oled-photo.jpg" style="width: 50%;">
+</span>
+

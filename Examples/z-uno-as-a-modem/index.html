@@ -1,0 +1,360 @@
+<h1>Z-Uno as a modem (AT commands)</h1>
+<span class="example_description">
+This sketch implements modem feature in Z-Uno to allow configure and use Z-Uno via AT commands like any other RF modem (like Bluetooth HM-10 or XBee shields). Using AT commands you can set up the number of channels, association groups, report values and receive Set commands. Just load this sketch in Z-Uno and use AT commands to communicate with it from another MCU (like Arduino) or even from a PC.
+</span>
+
+<span class="function_description_more">
+<table>
+    <tr><td>Command</td><td>Response</td><td>Description</td></tr>
+    <tr><td>^AT_CLEAN_CHANNELS$</td><td>CLEAN_CHANNELS_OK</td><td>Clean channel information and start re-configuring Z-Uno channels. This should be the first AT command after Z-Uno boots.</td></tr>
+    <tr><td>^AT_ADD_CHANNEL<i>,type,sensor_type,size_precision</i>$</td><td>ADD_CHANNEL_OK</td><td>Add one more channel to Z-Uno. Type, ? and ? are described in <span class="function_ref">ZUNO_ADD_CHANNEL</span>() reference</td></tr>
+    <tr><td>^AT_ADD_ASSOCIATION<i>,type</i>$</td><td>ADD_ASSOCIATION_OK</td><td>Add one more association group to Z-Uno. Type is described in <span class="function_ref">ZUNO_ADD_ASSOCIATION</span>() reference</td></tr>
+    <tr><td>^AT_CONFIG_FLAGS<i>,flags</i>$</td><td>CFG_FLAGS_OK</td><td>Set Z-Uno configuration flags.</td></tr>
+    <tr><td>^AT_CONFIG_COMMIT$</td><td>COMMIT_CONFIG<i>,state</i></td><td>Finalize Z-Uno configuration and apply them. <i>state</i> tells you if it was applied or not. See <span class="function_ref">ZUNO_GET_CONFIG_STATE</span>() reference</td></tr>
+    <tr><td>^AT_LEARN<i>,startStop</i>$</td><td>LEARN_OK</td><td>Enable/disable learn mode:<i>startStop</i> equals 1 to start, 0 to abort learn mode. </td></tr>
+    <tr><td>^AT_CHANNEL_SET<i>,channel,value</i>$</td><td>CHANNEL_SET_OK</td><td>Set value of the channel</td></tr>
+    <tr><td>^AT_CHANNEL_GET<i>,channel</i>$</td><td>CHANNEL_VALUE<i>,value</i></td><td>Get value of the channel</td></tr>
+    <tr><td>^AT_SEND_REPORT<i>,channel</i>$</td><td>SEND_REPORT_OK</td><td>Sends an unsolicited report from channel. Same as to call <span class="function_ref">zunoSendReport</span>(channel)</td></tr>
+    <tr><td>^AT_SEND_ASSOC$</td><td>SEND_ASSOCIATION_OK</td><td><span class="function_ref">zunoSendAssociationCommand</span>()</td></tr>
+</table>
+All parameters and values are in decimal. No space before and after comma. Channels and association groups starts from 1.
+</span>
+
+<span class="function_description_note">
+Note that on Z-Uno reboot the last applied configuration is loaded. But on Z-Uno exclusion the configuration is cleared. Set the configuration before entering the learn mode for inclusion.
+</span>
+
+<span class="function_description">
+    <style>
+        .modem_out {
+            color: green;
+        }
+        .modem_in {
+            color: blue;
+        }
+        .modem_comment {
+            color: gray;
+            padding-left: 1em;
+        }
+    </style>
+    Example of data communications
+    <br/>
+    <br/><span class="modem_out">^AT_CLEAN_CHANNELS$</span><span class="modem_comment">start configuration</span>
+    <br/><span class="modem_in">^CLEAN_CHANNELS_OK$</span>
+    <br/><span class="modem_out">^AT_ADD_CHANNEL,01,00,00$</span><span class="modem_comment">add Switch Binary channel</span>
+    <br/><span class="modem_in">^ADD_CHANNEL_OK$</span>
+    <br/><span class="modem_out">^AT_ADD_CHANNEL,02,00,00$</span><span class="modem_comment">add Switch Multilevel channel</span>
+    <br/><span class="modem_in">^ADD_CHANNEL_OK$</span>
+    <br/><span class="modem_out">^AT_ADD_CHANNEL,04,01,66$</span><span class="modem_comment">add Sensor Multilevel channel, type temperature, size is two bytes, two bytes precision, celsius: 66 = 0x42 = 2 | (0 << 3) | (2 << 5)</span>
+    <br/><span class="modem_in">ADD_CH^ADD_CHANNEL_OK$ANNEL_OK</span>
+    <br/><span class="modem_out">^AT_ADD_ASSOCIATION,01$</span><span class="modem_comment">add one association group to set values</span>
+    <br/><span class="modem_in">^ADD_ASSOCIATION_OK$</span>
+    <br/><span class="modem_out">^AT_ADD_ASSOCIATION,04$</span><span class="modem_comment">add one association group to control door lock</span>
+    <br/><span class="modem_in">^ADD_ASSOCIATION_OK$</span>
+    <br/><span class="modem_out">^AT_CONFIG_COMMIT$</span><span class="modem_comment">apply changes</span>
+    <br/><span class="modem_in">^COMMIT_CONFIG,2$</span><span class="modem_comment">applied</span>
+    <br/>
+    <br/><span class="modem_out">^AT_LEARN$,10</span><span class="modem_comment">start learn mode for 10 seconds (to exclude and include)</span>
+    <br/><span class="modem_in">^LEARN_OK$</span>
+    <br/>
+    <br/><span class="modem_out">^AT_CHANNEL_SET,1,0$</span><span class="modem_comment">set channel 1 to Off</span>
+    <br/><span class="modem_in">^CHANNEL_SET_OK$</span>
+    <br/>
+    <br/><span class="modem_out">^AT_CHANNEL_SET,2,50$</span><span class="modem_comment">set channel 2 to 50%</span>
+    <br/><span class="modem_in">^CHANNEL_SET_OK$</span>
+    <br/>
+    <br/><span class="modem_out">^AT_CHANNEL_SET,3,2545$</span><span class="modem_comment">set channel 3 to 25.45°C</span>
+    <br/><span class="modem_in">^CHANNEL_SET_OK$</span>
+    <br/>
+    <br/><span class="modem_out">^AT_SEND_ASSOC,1,1,255,0$</span><span class="modem_comment">send to On group 1</span>
+    <br/><span class="modem_in">^SEND_ASSOCIATION_OK$</span>
+    <br/>
+    <br/><span class="modem_out">^AT_SEND_ASSOC,2,4,0,0$</span><span class="modem_comment">send to Close group 2</span>
+    <br/><span class="modem_in">^SEND_ASSOCIATION_OK$</span>
+    <br/>
+    <br/><span class="modem_in">^CHANNEL_CHANGED,1,255$</span><span class="modem_comment">received 255 (On) in channel 1</span>
+    <br/>
+    <br/><span class="modem_in">^CHANNEL_CHANGED,2,30$</span><span class="modem_comment">received 30% in channel 2</span>
+</span>
+
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>your device that will use USB or UART to talk to Z-Uno</li>
+    </ul>
+</span>
+
+<span class="function_description_more">
+USB, UART0 and UART1 are supported. Change <i>MY_SERIAL</i> definition in the sketch to select the desired serial port.
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">{literal}/*
+ * Z-Wave slave device fully controlled via Serial (USB/UART) using AT-Commands
+ */
+ 
+// Z-Uno can use any serial interface
+// You can select
+// Serial for USB
+// Serial0 for UART0
+// Serial1 fot UART1 
+#define MY_SERIAL Serial1
+
+#define MAX_CHANNELS 32 // The maximum number of channels supported by Z-Uno 
+
+ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_METER WITH_CC_SENSOR_BINARY WITH_CC_SWITCH_COLOR WITH_CC_SENSOR_MULTILEVEL WITH_CC_DOORLOCK WITH_CC_SWITCH_BINARY WITH_CC_NOTIFICATION WITH_CC_THERMOSTAT);
+// Commands
+
+ZUNO_DYNAMIC_CHANNELS(MAX_CHANNELS);
+
+enum {
+  AT_CMD_CLEAN_CHANNELS,
+  AT_CMD_ADD_CHANNEL,
+  AT_CMD_ADD_ASSOCIATION,
+  AT_CMD_CONFIG_FLAGS,
+  AT_CMD_LEARN,
+  AT_CMD_CONFIG_COMMIT,
+  AT_CMD_CHANNEL_SET,
+  AT_CMD_CHANNEL_GET,
+  AT_CMD_SEND_REPORT,
+  AT_CMD_SEND_ASSOC,
+  AT_SET_ZWAVE_CHANNEL
+};
+// Parser state machine
+enum {
+  AT_STATE_WAITSTART,
+  AT_STATE_WAITCMD,
+  AT_STATE_WAITPARAM
+};
+
+// Global data
+// We use global scope to reduce stack usage
+byte state = AT_STATE_WAITSTART;      // state machine
+byte cmd;                             // current command
+long int param[4];                    // command parameters
+byte param_count = 0;                 // number of bytes in parameters
+byte resp_count = 0;                  // number of bytes in report
+char tmp_buff[32];                    // temp buffer
+byte tmp_len = 0;                     // temp buffer length
+dword channel_to_update = 0;          // list of channels to update
+dword g_mask;                         // mask for zunoCallback
+
+// g_channels_data[CH_NUMBER].dwParam
+void setup() {
+  MY_SERIAL.begin(115200);
+}
+
+// Incoming commands parser
+byte parseCmd() {
+  tmp_buff[tmp_len] = '\0';
+  tmp_len = 0;
+
+  if (strcmp(tmp_buff, "AT_CLEAN_CHANNELS") == 0) {
+    cmd = AT_CMD_CLEAN_CHANNELS;
+  } else if (strcmp(tmp_buff, "AT_ADD_CHANNEL") == 0) {
+    cmd = AT_CMD_ADD_CHANNEL;
+  } else if (strcmp(tmp_buff, "AT_ADD_ASSOCIATION") == 0) {
+    cmd = AT_CMD_ADD_ASSOCIATION;
+  } else if (strcmp(tmp_buff, "AT_CONFIG_FLAGS") == 0) {
+    cmd = AT_CMD_CONFIG_FLAGS;
+  } else if (strcmp(tmp_buff, "AT_LEARN") == 0) {
+    cmd = AT_CMD_LEARN;
+  } else if (strcmp(tmp_buff, "AT_CONFIG_COMMIT") == 0) {
+    cmd = AT_CMD_CONFIG_COMMIT;
+  } else if (strcmp(tmp_buff, "AT_CHANNEL_SET") == 0) {
+    cmd = AT_CMD_CHANNEL_SET;
+  } else if (strcmp(tmp_buff, "AT_CHANNEL_GET") == 0) {
+    cmd = AT_CMD_CHANNEL_GET;
+  } else if (strcmp(tmp_buff, "AT_SEND_ASSOC") == 0) {
+    cmd = AT_CMD_SEND_ASSOC;
+  } else if (strcmp(tmp_buff, "AT_SEND_REPORT") == 0) {
+    cmd = AT_CMD_SEND_REPORT;
+  } else if (strcmp(tmp_buff, "AT_SET_ZWAVE_CHANNEL") == 0) {
+    cmd = AT_SET_ZWAVE_CHANNEL;
+  } 
+  else {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+// Print respons as ^...$
+void response(char *resp_name) {
+  byte i;
+  MY_SERIAL.print("^");
+  MY_SERIAL.print(resp_name);
+  for (i = 0; i < resp_count; i++) {
+    MY_SERIAL.print(",");
+    MY_SERIAL.print(param[i]);
+  }
+  MY_SERIAL.println("$");
+  resp_count = 0;
+}
+
+// Process command
+byte processCmd() {
+  switch(cmd) {
+    case AT_CMD_CLEAN_CHANNELS:
+      ZUNO_START_CONFIG();
+      response("CLEAN_CHANNELS_OK");
+      break;
+    case AT_CMD_ADD_CHANNEL:
+      ZUNO_ADD_CHANNEL(byte(param[0]), byte(param[1]), byte(param[2]));
+      response("ADD_CHANNEL_OK");
+      break;
+    case AT_CMD_ADD_ASSOCIATION:
+      ZUNO_ADD_ASSOCIATION(byte(param[0]));
+      response("ADD_ASSOCIATION_OK");
+      break;  
+    case AT_CMD_CONFIG_FLAGS:
+      g_user_sketch.flags = byte(param[0]);
+      response("CFG_FLAGS_OK");
+      break;
+    case AT_CMD_LEARN:
+      zunoStartLearn(100, byte(param[0]));
+      response("LEARN_OK");
+      break;
+    case AT_CMD_CONFIG_COMMIT:
+      ZUNO_COMMIT_CONFIG();
+      resp_count = 1;
+      param[0] = ZUNO_GET_CONFIG_STATE();
+      response("COMMIT_CONFIG");
+      break;
+    case AT_CMD_CHANNEL_SET:
+      g_channels_data[byte(param[0]) - 1].dwParam = param[1];
+      //channel_value[byte(param[0]) - 1] = param[1];
+      response("CHANNEL_SET_OK");
+      break;
+    case AT_CMD_CHANNEL_GET:
+      param[1] = g_channels_data[byte(param[0]) - 1].dwParam;
+      //param[1] = channel_value[byte(param[0]) - 1];
+      resp_count = 2;
+      response("CHANNEL_VALUE");
+      break;
+    case AT_CMD_SEND_REPORT:
+      zunoSendReport(byte(param[0]));
+      response("SEND_REPORT_OK");
+      break;
+    case AT_CMD_SEND_ASSOC:
+      zunoSendAssociationCommand(byte(param[0]), byte(param[1]), byte(param[2]), byte(param[3]));
+      response("SEND_ASSOCIATION_OK");
+      break;
+    case AT_SET_ZWAVE_CHANNEL:
+      ZUNO_SET_ZWCHANNEL(byte(param[0]));
+      response("AT_SET_ZWAVE_CHANNEL_OK");
+      break;  
+    default:
+      break;
+  } 
+  return 1;
+}
+
+// Fill command parameters
+byte parseParam() {
+  // Check if value is valid
+  for(byte i = 0; i < tmp_len; i++) {
+    if (tmp_buff[i] < '0' || tmp_buff[i] > '9') {
+      return 0;
+    }
+  }
+  tmp_buff[tmp_len] = '\0';
+  tmp_len = 0;
+  // Convert string representation to long
+  param[param_count] = atol(tmp_buff);
+  param_count++;
+  return 1;
+}
+
+// Respond with error
+void parseError() {
+  state = AT_STATE_WAITSTART;
+  MY_SERIAL.println("^SYNTAX_ERROR$");
+}
+
+// Read and parse AT command
+// Uses a state machine for parsing
+void parseAT() {
+  while(MY_SERIAL.available()) {
+    char symbol = MY_SERIAL.read();
+    switch(state) {
+      case AT_STATE_WAITSTART:
+        if (symbol == '^') {
+          tmp_len = 0;
+          param_count = 0;
+          resp_count = 0;
+          state++;
+        }     
+        break;
+      case AT_STATE_WAITCMD:
+        if (symbol == ',') {
+          if (!parseCmd()) {
+            parseError();
+          } else {
+            state++;
+          }
+        } else if (symbol == '$') {
+          if (parseCmd()) {
+            processCmd();
+          } else {
+            parseError();
+          }
+          state = AT_STATE_WAITSTART;
+        } else {
+          tmp_buff[tmp_len] = symbol;
+          tmp_len++;
+        }
+        break;
+      case AT_STATE_WAITPARAM:
+        if (symbol == ',') {  
+          if (!parseParam()) {
+            parseError();
+          }
+        } else if (symbol == '$') {
+          if (parseParam()) {
+            processCmd();
+          } else {
+            parseError();
+          }
+          state = AT_STATE_WAITSTART;
+        } else {
+          tmp_buff[tmp_len] = symbol;
+          tmp_len++;
+        }
+        break;
+    }
+  }
+}
+
+// Push unsolicited channel value updates to the serial port
+void makeUnsolicitedReports() {
+  byte i = 0;
+  g_mask = 1;
+  while (channel_to_update != 0) {
+    if (channel_to_update & g_mask) {
+      resp_count = 2;
+      param[0] = i + 1;
+      param[1] = g_channels_data[i].dwParam;
+      response("CHANNEL_CHANGED");
+    }
+
+    i++;
+    channel_to_update &= ~(g_mask);
+    g_mask <<= 1;
+  }
+}
+
+// Parse AT commands and push updates in a loop
+void loop() {
+  parseAT();
+  makeUnsolicitedReports();
+  delay(100);
+}{/literal}
+</code></pre>
+<a href="/files/z-uno/projects/Modem/Modem.ino">Download this sketch</a>
+</span>
+
+<span class="example_description">
+This sketch make use of Z-Uno dynamic configuration provided by functions: <span class="function_ref">ZUNO_START_CONFIG</span>(), <span class="function_ref">ZUNO_ADD_CHANNEL</span>(), <span class="function_ref">ZUNO_ADD_ASSOCIATION</span>(), <span class="function_ref">ZUNO_COMMIT_CONFIG</span>(), <span class="function_ref">ZUNO_GET_CONFIG_STATE</span>(), <span class="function_ref">zunoStartLearn</span>(), <span class="function_ref">zunoSendAssociationCommand</span>().
+</span>

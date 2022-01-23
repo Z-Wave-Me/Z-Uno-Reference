@@ -1,0 +1,89 @@
+<h1>Smart meter reader for Mercury 206</h1>
+
+<span class="example_author">Alexander Polyakov, Z-Wave.Me</span>
+
+<span class="example_description">
+    This Z-Uno based smart meter connects via RS485 to Mercury 206 meters. All values are reported to the Z-Wave controller. Basic values are shown on the OLED screen.
+    <br/><br/>
+    Additionaly DHT22 and DS18B20 sensors are used to report ambient temperature and humidity, switches are used to cut the power remotely or in case of overload. Door sensor is used to detect tampering of the electical case.
+    <br/><br/>
+    Configurable thresholds are used to cut off mains power in case of overheat and too big humidity.
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_photo1.jpg" style="width: 30%;">
+</span>
+
+<br/>
+
+<span class="example_description_more">
+Mercury 206 is a two tariffs electrical meter.
+
+The device implements 24 channels:
+
+Data from two tariffs meters:
+<ol>
+    <li>Energy consumed from public network</li>
+    <li>Energy generated locally</li>
+    <li>Actual voltage</li>
+    <li>Actual current</li>
+    <li>Actual active power</li>
+    <li>Actual reactive power</li>
+    <li>Maximal voltage over a period (resetted via a Switch binary channel)</li>
+    <li>Maximal current over a period</li>
+    <li>Maximal power over a period</li>
+    <li>Actual frequency</li>
+    <li>Reserve power supply voltage (battery power)</li>
+</ol>
+
+Additional features:
+<ol start="12">
+    <li>Temperature on the top corner of the electrical case</li>
+    <li>Temperature on the bottom corner of the electrical case</li>
+    <li>Temperature in the room</li>
+    <li>Humidity in the room</li>
+    <li>Minutes from power up (to detect powercycles)</li>
+    <li>Binary sensor to detect if Mecury 206 is up and running and AC power present</li>
+    <li>Binary sensor to detect switching to reserve power</li>
+    <li>Electrical case door sensor</li>
+    <li>Main power switch (turns off the house)</li>
+    <li>Additional switch 1</li>
+    <li>Additional switch 2</li>
+    <li>Reset maximal values seen (channels 7-9)</li>
+    <li>Multilevel switch to set maximal power consumption allowed (to cut off power on overload)</li>
+</ol>
+
+<b>NB!</b> Mecury 206 should be with letter R in the model name.
+</span>
+
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Z-Uno Credle in DIN-rail case</li>
+        <li>OLED screen</li>
+        <li>DHT22</li>
+        <li>2 DS18B20</li>
+        <li>relays</li>
+        <li>many additional components</li>
+    </ul>
+</span>
+
+<span class="example_code">
+    The code is too big to be presented here. It implements 24 channels.
+    <br/>
+    <a href="/files/z-uno/projects/Mercury206/Mercury206.ino">Download this sketch</a>
+    <br/>
+    <a href="/files/z-uno/projects/Mercury206/ZUNO_MERCURY206R.zip">Download additional Mercury 206R library</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_screenshot.png" style="width: 45%;">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_photo2.jpg" style="width: 45%;">
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_photo4.jpg" style="width: 45%;">
+    <br/>
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_photo3.jpg" style="width: 45%;">
+    <img src="/files/z-uno/projects/Mercury206/Mercury206_photo5.jpg" style="width: 45%;">
+</span>

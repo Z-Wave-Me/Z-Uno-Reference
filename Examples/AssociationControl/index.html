@@ -1,0 +1,55 @@
+<h1>Association Control</h1>
+<span class="example_description">
+Association groups are used to control other devices in the Z-Wave network. 
+In this example we set up one additional Association Group &mdash; ZUNO_ASSOCIATION_GROUP_SET_VALUE, which will send On/Off commands to device added to the group.
+</span>
+<span class="example_description_more">
+You can read more about Association groups <a href="/Reference/ZUNO_SETUP_ASSOCIATIONS">here.</a>
+</span>
+<span class="example_hardware_required">
+<ul>
+<li>Z-Uno board</li>
+<li>Breadboard</li>
+<li>Z-Wave switch/relay/siren</li>
+</ul> 
+</span>
+<span class="example_code">
+    <pre>
+        <code class="c">#define BTN_PIN 18       // button pin
+#define LED_PIN 13       // LED pin
+
+byte lastValue;
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE); // this macro defines association groups in Z-Uno
+
+void setup() {
+  pinMode(BTN_PIN, INPUT_PULLUP); // setup pin as input with pullup
+}
+
+void loop() {
+  byte currentValue = !digitalRead(BTN_PIN);
+  if (currentValue != lastValue) {  // if state changes
+    lastValue = currentValue;      // save new state
+
+    if (lastValue) {
+      zunoSendToGroupSetValueCommand(CTRL_GROUP_1, ZUNO_SWITCHED_ON);   // if button pressed - send switch ON command
+      digitalWrite(LED_PIN, HIGH);    //  turn the LED on
+    } else {
+      zunoSendToGroupSetValueCommand(CTRL_GROUP_1, ZUNO_SWITCHED_OFF);  // if button released - send switch OFF command
+      digitalWrite(LED_PIN, LOW);     // turn the LED off
+    }
+  }
+}
+</code></pre>
+</span>
+<span class="example_description_more">
+To set association between Z-Uno and other deivces please follow these steps:
+<ol>
+<li><a href="/getting-started/InclusionInNetwork/"><b>Include</b></a> Z-Uno in your Z-Wave network (if not done yet).</li>
+<li>Include the device what will be controlled by Z-Uno (if not yet in the network), for example it can be a binary switch.</li>
+<li>Go to the <b>association setup window</b> of your controller (in our example it's an Expert interface of the Razberry controller) and add the device to be controlled in the group #2 of Z-Uno.</li>
+<li>Control your device from Z-Uno</li>
+</ol>
+</span>
+
+<img src="https://rus.z-wave.me/drive/?file=902943209522edad221259d03a8339a7bd37" alt="Second Page" width="100%"/>

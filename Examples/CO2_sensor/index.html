@@ -1,0 +1,74 @@
+<h1>CO2 sensor</h1>
+<span class="example_description">
+This example shows how to use UART to connect MH-Z19 CO2 sensor to Z-Uno board.</br>
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Wires</li>
+        <li>MH-Z19 CO2 sensor</li>
+    </ul>
+</span>
+
+{literal}
+<span class="example_code">
+    <pre>
+        <code class="c">char response[9];
+byte cmd[9] = { 0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79 };
+int newValue;
+int responseHigh;
+int responseLow;
+int ppm;
+
+ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_ALWAYS_AWAKE);
+
+ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_CO2_LEVEL, 0, SENSOR_MULTILEVEL_SIZE_TWO_BYTES, SENSOR_MULTILEVEL_PRECISION_ZERO_DECIMALS, getter));
+
+void setup() {
+  Serial1.begin(9600); //connecting to sensor via UART
+}
+
+void loop() {
+  int i = 0;
+  for (i = 0; i < 9; i++) {
+    Serial1.write(cmd[i]);
+  }
+
+  delay(100);
+
+  i = 0;
+  while (Serial1.available()) {
+    response[i] = Serial1.read();
+    i++;
+  }
+
+  responseHigh = (int) response[2]; // returned High level concentration
+  responseLow  = (int) response[3]; // returned Low level concentration
+  newValue = (256 * responseHigh) + responseLow;
+  if ((newValue > (ppm + 100)) || (newValue < (ppm - 100))) {
+    ppm = newValue;
+    zunoSendReport(1);
+  }
+  delay(1000);
+}
+
+int getter(void) {
+  return newValue;
+}
+
+</code></pre></span>
+{/literal}
+
+<span class="example_description">
+    Information from datasheet<br>
+    <img src="http://rus.z-wave.me/drive/?file=a3a8a277d1a1bc422396eb648a6a6af458c1"><img>
+</span>
+<span class="example_photos">
+    <img src="http://rus.z-wave.me/drive/?file=bb947ae5a0b01e912408e11c6b238dd4bf5b" style="width:50%">
+    <br/>
+    <img src="http://rus.z-wave.me/drive/?file=b77939430f36240d2406c576c3106259a60a" style="width:50%">
+    <br/>
+    <img src="http://rus.z-wave.me/drive/?file=4443eb1f3deb97122407c759975fe4db6b1f" style="width:50%">
+    <br/>
+</span>

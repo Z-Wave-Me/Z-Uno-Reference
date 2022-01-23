@@ -1,0 +1,213 @@
+<h1>Rotary Dimmer to LED Control</h1>
+<span class="example_author">Vitaliy Yurkin, Z-Wave.Me</span>
+<span class="example_description">
+Make a LED controller with rotary encoder control.
+<img src="/wa-data/public/drive/img/823e15200be3de292495e0230a31e3e957a6" width="100%">
+</span>
+<span class="example_hardware_required">
+To create LED Controller need next components:
+<table>
+<tbody>
+<tr>
+	<td>#
+	</td>
+	<td>Component
+	</td>
+	<td>Photo
+	</td>
+	<td>Price
+	</td>
+</tr>
+<tr>
+	<td>1
+	</td>
+	<td>Z-Wave plate Z-Uno
+	</td>
+	<td><img src="/wa-data/public/drive/img/89cb8e07894567a82500238f793ac86dd054">
+	</td>
+	<td>59.49€
+	</td>
+</tr>
+<tr>
+	<td>2
+	</td>
+	<td><a href="http://pdf1.alldatasheet.net/datasheet-pdf/view/311711/IRF/IRLR8729PBF/+21QJ3_VGP.aITxUDDvhZlP+/datasheet.pdf">MOSFET IRLR8729</a>
+	</td>
+	<td><img src="/wa-data/public/drive/img/1274c5f9fcb61f742497685f8ffc8261b127">
+	</td>
+	<td>0.5€
+	</td>
+</tr>
+<tr>
+	<td>3
+	</td>
+	<td><a href="http://mypractic.ru/downloads/pdf/EC11.pdf">Encoder EC11</a>
+	</td>
+	<td><img src="/wa-data/public/drive/img/1274c5f9fcb61f742496685f8ffc8261b127">
+	</td>
+	<td>1€
+	</td>
+</tr>
+</tbody>
+</table>
+</span>
+<span class="example_schematics">
+Schematic for LED Controller very simply. The encoder is connected by three pin. Button pin 23 using to add device to Z-Wave network by tree times push. MOSFET connected to PWM1 pin, like a build-in LED.
+<img src="/wa-data/public/drive/img/89cb8e07894567a82501238f793ac86dd054" width="100%">
+</span>
+<span class="example_code">
+Source code contain 143 lines. Every 128 μs by interrupt from GPT timer in gpt_handler() checking in which direction the wheel is spinning. In loop caught a button press. If button pressed LED strip turn off or restore previos brigthness level.
+    <span class="c">
+        <pre>
+            <code>{literal}
+#define PUSH_BUTTON       23
+#define ENCODER_CHA_PIN   19
+#define ENCODER_CHB_PIN   20
+#define LEV_SHIFT         8
+#define ENCODER_DEBONCE   4
+#define STATE_IDLE       0xFF
+#define STATE_SKIP       0xFE
+ZUNO_SETUP_ISR_GPTIMER(gpt_handler);
+ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getter, setter));
+byte level = 0;
+byte last_reported_level = 0;
+byte g_state = STATE_IDLE;
+byte g_pins  = 0;
+byte g_debounce_time = 0;
+byte last_push_button_state = HIGH;
+byte stored_level = 0;
+dword last_level_changed_time = 0;
+// Runs every 128 μs
+void gpt_handler() {
+      byte pins = 0;
+      pins = !digitalRead(ENCODER_CHA_PIN);
+      if(!digitalRead(ENCODER_CHB_PIN))
+        pins |= 2;
+      if(g_pins == pins) {
+          // Is the state stable?
+          g_debounce_time++;
+          if(g_debounce_time&gt;ENCODER_DEBONCE) {
+              if(g_state == STATE_IDLE) {
+                  g_state = pins;
+              }
+              else if(g_state == STATE_SKIP) {
+                   if(pins == 0)
+                     g_state = 0;
+              }
+              else {
+                  if((g_state == 0 && pins == 1) ||
+                     (g_state == 1 && pins == 3) ||
+                     (g_state == 3 && pins == 2) ||
+                     (g_state == 2 && pins == 0) ) {
+                        if (level &lt; 39) {
+                            level++;
+                        }
+                        else if ((level + LEV_SHIFT) &lt;= 255) {
+                            level += LEV_SHIFT;
+                        }
+                        else if ((level + LEV_SHIFT) &gt; 255){
+                            level = 255;  
+                        }
+                  }
+                  else
+                  if((g_state == 0 && pins == 2) ||
+                     (g_state == 2 && pins == 3) ||
+                     (g_state == 3 && pins == 1) ||
+                     (g_state == 1 && pins == 0) ) {
+                        if (level &lt;= 39 && level !=0) {
+                          level--;
+                        }
+                        else if (level &gt;= LEV_SHIFT) {
+                          level -= LEV_SHIFT;
+                        }
+                        else if (level &lt; 0) {
+                          level = 0;
+                        }
+                  }
+                  if(g_state != pins)    
+                    g_state = STATE_SKIP;
+              }
+              g_debounce_time = 0;
+          }  
+      }
+      else {
+          g_debounce_time = 0;
+      }
+      g_pins = pins;
+}
+void setup() {
+    Serial.begin();
+    pinMode(PUSH_BUTTON, INPUT_PULLUP);
+    pinMode(ENCODER_CHA_PIN, INPUT);
+    pinMode(ENCODER_CHB_PIN, INPUT_PULLUP);
+    zunoGPTInit(ZUNO_GPT_SCALE1024|ZUNO_GPT_CYCLIC); // 32 MHz/1024 = 31.25 kHz (tick is 32 μs)
+    zunoGPTSet(4); // 32 μs * 4 = 128 μs
+    zunoGPTEnable(1);
+}
+void loop() {
+    // Do we need to report the level?
+    if(last_reported_level != level) {
+        if (level &gt; 0) {
+          stored_level = level; 
+        }
+        last_reported_level = level;
+        analogWrite(PWM1, level);
+        last_level_changed_time = millis();
+        Serial.print("Level: ");
+        Serial.println(level);
+    }
+    // Button handler
+    byte current_push_button_state = digitalRead(PUSH_BUTTON);
+    if (current_push_button_state != last_push_button_state) {
+        last_push_button_state = current_push_button_state;
+        // if button pressed
+        if (last_push_button_state == LOW) {
+            // if LED turned ON, turn OFF   
+            if (level &gt; 0) {
+                analogWrite(PWM1, 0);
+                level = 0;  
+            }
+            // Restore last level
+            else {
+                analogWrite(PWM1, stored_level);
+                level = stored_level;
+            }
+        }
+    }
+    // Send report if 2 seconds level not changed
+    if (last_level_changed_time && millis() &gt; last_level_changed_time + 2000) {
+        last_level_changed_time = 0;
+        zunoSendReport(1); 
+    }
+}
+void setter(byte value) {
+    if (value &gt; 99) {
+      value = 99;
+    }
+    level = (long)value * 255 / 99;
+    analogWrite(PWM1, level);
+}
+byte getter(void) {
+  return last_reported_level * 99 / 255;
+}
+            {/literal}</code>
+        </pre>
+    </span>
+</span>
+<span class="example_photos">
+    PCB
+    <img src="/wa-data/public/drive/img/daf447d1b5587e072502df7786d60b718d95" width="100%">
+    <img src="/wa-data/public/drive/img/f1f3e378ea5c85e52503ce3efcc037bb19ec" width="100%">
+    <br/>
+    Case based on Z-Wave.Me Switch
+    <img src="/wa-data/public/drive/img/823e15200be3de292492e0230a31e3e957a6" width="100%">
+    <img src="/wa-data/public/drive/img/89cb8e07894567a82499238f793ac86dd054" width="100%">
+    <br/>
+    In room
+    <img src="/wa-data/public/drive/img/823e15200be3de292493e0230a31e3e957a6" width="100%">
+</span>
+
+<span class="example_see_also">
+    <a href="https://geektimes.ru/post/297335/">Link to detailed project description (in Russian, use Google to translate)</a>
+</span>
+ 

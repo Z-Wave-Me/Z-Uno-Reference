@@ -1,0 +1,111 @@
+<h1>Infrared Proximity Sensor Sharp GP2Y0A21YK</h1>
+<span class="example_description">
+This sketch shows how to connect Infrared Proximity Sensor Sharp GP2Y0A21YK to the Z-Uno board. Distance values are read from sensorand periodically reported to channel Multilevel Sensor.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Infrared Proximity Sensor Sharp GP2Y0A21YK (like <a href="https://www.sparkfun.com/products/242">this</a> or <a href="https://www.adafruit.com/product/164">this</a>)</li>
+        <li>3 wires</li>
+    </ul>
+</span>
+
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/ir_sharp/ir_sharp.svg">
+    <br/>
+    <a href="/files/z-uno/projects/ir_sharp/ir_sharp.fzz">Download Fritzing project</a>
+</span>
+
+<span class="example_code">
+<pre>
+<code class="c">// demo sketch for connecting Infrared Proximity Sensor Sharp GP2Y0A21YK to Z-Uno
+
+// pin connection to Sharp IR
+#define PIN_SHARP A0
+
+// supply voltage (if USB - 3.05 V)
+float V = 3.05;
+
+// the number of measurements for smoothing (averaging)
+#define COUNT_AVERAGE 10
+
+// set up channel
+ZUNO_SETUP_CHANNELS(
+    ZUNO_SENSOR_MULTILEVEL(ZUNO_SENSOR_MULTILEVEL_TYPE_DISTANCE,
+                            SENSOR_MULTILEVEL_SCALE_METER,
+                            SENSOR_MULTILEVEL_SIZE_TWO_BYTES,
+                            SENSOR_MULTILEVEL_PRECISION_TWO_DECIMALS,
+                            getterDistance)
+         );
+
+// here we will store the average analog value
+int adistance;
+
+// here we will store the value of the distance
+float distance;
+
+void setup() {
+  Serial.begin();
+  Serial.println("start");
+}
+
+void loop() {
+    // obtain readings
+    adistance = irRead();
+    Serial.print("adistance = ");
+    Serial.println(adistance);
+    distance = getDistance(adistance);
+    
+    // sensor measuring range: 10-80 cm
+    distance = min(distance, 80);
+    distance = max(distance, 10);
+    Serial.print("distance = ");
+    Serial.println(distance);
+    
+    // send data to channel
+    zunoSendReport(1);
+    // every 30 second
+    delay(30000);
+}
+
+// function analog value transformation to the distance (cm)
+int getDistance(int avalue) {
+    float volts; 
+    
+    volts = avalue * 0.0048828125 / 5 * V;
+    Serial.print("volts = ");
+    Serial.println(volts); 
+    
+    return 32 * pow(volts, -1.10);
+}
+
+// Obtain readings from the sensor and average to smooth
+int irRead() {
+    int averaging = 0;  // variable for adding data
+    int avalue1;
+    
+    // We do COUNT AVERAGE measurement
+    for (int i = 0; i < COUNT_AVERAGE; i++) {
+        avalue1 = (float)(analogRead(PIN_SHARP));
+        averaging = averaging + avalue1;
+        delay(55); // Wait 55 ms before each reading
+    }
+    avalue1 = averaging / COUNT_AVERAGE; // get the average
+    return avalue1;             
+} 
+
+word getterDistance() {
+  return (word)distance;
+}</code></pre>
+<a href="/files/z-uno/projects/ir_sharp/ir_sharp.ino">Download this sketch</a>
+</span>
+
+<span class="example_screenshots">
+    <img src="/files/z-uno/projects/ir_sharp/screen_ir_sharp.png">
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/ir_sharp/ir_sharp_photo.jpg" style="width: 50%;">
+</span>
+

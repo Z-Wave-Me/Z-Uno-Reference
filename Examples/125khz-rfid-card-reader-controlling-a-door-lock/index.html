@@ -1,0 +1,98 @@
+<h1>125Khz RFID Card Reader controlling a door lock</h1>
+<span class="example_description">
+This sketch shows how to connect 125Khz RFID Card Reader and use it to open door lock via Z-Wave secure communication. Additional Association group is defined for door lock.
+</span>
+<span class="example_hardware_required">
+    <ul>
+        <li>Z-Uno board</li>
+        <li>Breadboard</li>
+        <li>Electronic brick - 125Khz RFID Card Reader (like <a href="https://www.seeedstudio.com/Electronic-brick-125Khz-RFID-Card-Reader-p-702.html">this</a>)</li>
+        <li>RFID tag combo (125khz) (like <a href="https://www.seeedstudio.com/RFID-tag-combo-(125khz)-5-pcs-p-700.html">this</a>) </li>        
+        <li>4 wires</li>
+    </ul>
+</span>
+
+<!--
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/RFID125/RFID125.svg">
+</span>
+-->
+
+<span class="example_code">
+<pre>
+<code class="c">{literal}// The code that opens the door  RFID tag combo
+
+ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_DOORLOCK);
+
+// buffer array for data receive over serial port
+unsigned int buffer[15]; 
+// counter for buffer array
+int count = 0;
+// time wait packet             
+unsigned long millis1 = 0; 
+// the code RFID tag combo that opens the door 
+unsigned int rfid_ok[14] = 
+    {0x2,0x30,0x31,0x30,0x30,0x30,0x37,0x30,0x36,0x30,0x35,0x30,0x35,0x3};
+
+void setup() {
+    Serial.begin();          // the USB Serial
+    Serial0.begin(9600);     // the Serial port of rfid reader
+}
+ 
+void loop() {
+    // read data from rfid reader
+    if (Serial0.available()) {            
+        millis1 = millis();
+        // read into buffer
+        buffer[count] = Serial0.read();
+        count++;     
+    }    
+    if (millis() - millis1 > 1000 && count > 0) {
+        // write rfid tag combo code
+        for (int i = 0; i < count; i++) { 
+            Serial.print(buffer[i], HEX);  
+            Serial.print(" ");
+        }
+        // code review
+        if (control_rfid()) {
+            Serial.println("OK!!!");
+            // command to open door
+            zunoSendToGroupDoorlockControl(1, 0xff);
+        } else {
+            Serial.println("NO!!!");
+        }       
+        clearBufferArray();
+        millis1 = millis();
+        count = 0;
+    }       
+}
+
+// function to clear buffer array
+void clearBufferArray() {
+    for (int i = 0; i < 14; i++) {
+        buffer[i] = NULL;
+    }                  
+}
+
+// function code review
+boolean control_rfid() {
+    int count1;
+  
+    count1 = 0;
+    for (int i = 0; i < 14; i++) {
+        if (buffer[i] == rfid_ok[i]) {
+            count1++;
+        }
+    }
+    if (count1 == 14) {
+        return true;
+    }
+  return false;                
+}{/literal}</code></pre>
+<a href="/files/z-uno/projects/RFID125/RFID125.ino">Download this sketch</a>
+</span>
+
+<span class="example_photos">
+    <img src="/files/z-uno/projects/RFID125/photo_RFID125.jpg" style="width: 50%;">
+</span>
+
