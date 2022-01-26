@@ -68,6 +68,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
     Defines multirelay / multidimmer device and uses common channel getter/setter for each type of channel
     <pre>
         <code class="c">
+        {literal}
             #define NUM_DIMMER_CHANNELS 4
             #define NUM_RELAY_CHANNELS  6
             
@@ -130,6 +131,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
                 // return previously saved value
                 return relayValue[channel];
             }
+        {/literal}
         </code>
     </pre>
 </span>
@@ -138,6 +140,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
     Compare the code size with previous example.
     <pre>
         <code class="c">
+        {literal}
             #define NUM_DIMMER_CHANNELS 4
             #define NUM_RELAY_CHANNELS  6
 
@@ -178,6 +181,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
                     digitalWrite(RELAY_PINS[i], relayValue[i]);
                 }
             }
+        {/literal}
         </code>
     </pre>
 </span>
