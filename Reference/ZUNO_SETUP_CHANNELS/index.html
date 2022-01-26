@@ -114,7 +114,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
                 dimmerValue[channel] = newValue;
             }
             
-            // The setSwitchMultilevelValue runs only when the controller asks for the current blink rate by Z-Wave
+            // The getSwitchMultilevelValue runs only when the controller asks for the current blink rate by Z-Wave
             byte getSwitchMultilevelValue(byte channel) {
                 // returns previously saved value
                 return dimmerValue[channel];
