@@ -70,17 +70,19 @@ After changing number of types of channels Z-Uno must be excluded and included b
         <code class="c">
             #define NUM_DIMMER_CHANNELS 4
             #define NUM_RELAY_CHANNELS  6
+            
             //Next line sets up Z-Uno channels. 
-            ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                    ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                    ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue));
+            ZUNO_SETUP_CHANNELS(
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue));
             static const byte PWM_PINS[NUM_DIMMER_CHANNELS]={0,1,2,3};
             static const byte RELAY_PINS[NUM_RELAY_CHANNELS]={10,11,12,13,14,16};
 
@@ -89,40 +91,43 @@ After changing number of types of channels Z-Uno must be excluded and included b
 
             // the setup function runs once, when you press reset or power the board
             void setup() {
-                    int i;
-                    memset(dimmerValue, 0, sizeof(dimmerValue));
-                    memset(relayValue, 0, sizeof(relayValue));
-                    for(i=0;i&lt;NUM_DIMMER_CHANNELS;i++) {
-                            analogWrite(PWM_PINS[i], 0); 
-                    }
-                    for(i=0;i&lt;NUM_RELAY_CHANNELS;i++) {
-                        pinMode(RELAY_PINS[i], OUTPUT);
-                        digitalWrite(RELAY_PINS[i], 0);
-                    }
-    
+                int i;
+                memset(dimmerValue, 0, sizeof(dimmerValue));
+                memset(relayValue, 0, sizeof(relayValue));
+                for(i=0; i&lt;NUM_DIMMER_CHANNELS; i++) {
+                    analogWrite(PWM_PINS[i], 0); 
+                }
+                for(i=0; i&lt;NUM_RELAY_CHANNELS; i++) {
+                    pinMode(RELAY_PINS[i], OUTPUT);
+                    digitalWrite(RELAY_PINS[i], 0);
+                }
             }
+            
             // the loop function runs over and over again forever
             void loop() {
-             // nothing to do here...
+                // nothing to do here...
             }
 
             void setSwitchMultilevelValue(byte channel, byte newValue) {
-                        //save new value in a variable
-                        analogWrite(PWM_PINS[channel], newValue);
-                        dimmerValue[channel] = newValue;
+                // save new value in a variable
+                analogWrite(PWM_PINS[channel], newValue);
+                dimmerValue[channel] = newValue;
             }
-            //The setSwitchMultilevelValue runs only when the controller asks for the current blink rate by Z-Wave
+            
+            // The setSwitchMultilevelValue runs only when the controller asks for the current blink rate by Z-Wave
             byte getSwitchMultilevelValue(byte channel) {
-                //returns previously saved value
+                // returns previously saved value
                 return dimmerValue[channel];
             }
+            
             void setSwitchBinarylValue(byte channel, byte newValue) {
                 digitalWrite(PWM_PINS[channel], newValue);
-                //save new value in a variable
+                // save new value in a variable
                 relayValue[channel] = newValue;
             }
+            
             byte getSwitchBinaryValue(byte channel) {
-                //return previously saved value
+                // return previously saved value
                 return relayValue[channel];
             }
         </code>
