@@ -48,7 +48,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
     Defines temperature sensor channel and transmits channel data via getterFunction()
     <pre>
         <code class="c">
-            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&getterFunction))
+            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&amp;getterFunction))
             int getterFunction(){
                 return 25; // always 25 *C
             }
@@ -59,7 +59,7 @@ After changing number of types of channels Z-Uno must be excluded and included b
     Defines temperature sensor channel and transmits channel data via mapped variable
     <pre>
         <code class="c">
-            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&temperature));
+            ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_MULTILEVEL_TEMPERATURE(&amp;temperature));
             int temperature = 25; 
         </code>
     </pre>
