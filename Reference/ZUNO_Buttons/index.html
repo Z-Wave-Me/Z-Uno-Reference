@@ -11,14 +11,14 @@
 
 <span class="function_description_reference">
 	<ul>
-		<li><a href="/Reference/ZUNO_NeoPixel/addButton/">addButton</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/deleteButton/">deleteButton</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isDoubleClick/">isDoubleClick</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isFree/">isFree</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isLongClick/">isLongClick</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isReleased/">isReleased</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isSingleClick/">isSingleClick</a></li>
-		<li><a href="/Reference/ZUNO_NeoPixel/isTripleClick/">isTripleClick</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/addButton/">addButton</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/deleteButton/">deleteButton</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isDoubleClick/">isDoubleClick</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isFree/">isFree</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isLongClick/">isLongClick</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isReleased/">isReleased</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isSingleClick/">isSingleClick</a></li>
+		<li><a href="/Reference/ZUNO_Buttons/isTripleClick/">isTripleClick</a></li>
 	</ul>
 </span>
 
@@ -83,9 +83,8 @@ void process_buttons() {
 		else
 			dimmerValue = 5;
 	}
-	if(Btn.isSingleClick(2)) {
+	if(Btn.isSingleClick(BUTTON)) {
 		MY_SERIAL.println("isSingleClick");
-		Btn.deleteButton(2);
 		if (dimmerValue == 5)
 			dimmerValue = 100;
 		else
