@@ -1,7 +1,7 @@
 <span zunoVersion="v2"></span>
 <h1>NeoPixel.addNeo()</h1>
 <span class="function_description">
-Данная функция позволяет добавить и настроить светодиодную ленту.<br>
+	This function allows you to add and customize the LED strip.<br>
 </span>
 
 <span class="function_syntax">
@@ -14,21 +14,21 @@ NeoPixel.addNeo(neo_pin, count_led, brightness, option, base)<br>
 <span class="function_parameters">
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">neo_pin:</span>
-		<span class="function_parameters_param_description"> пин к которому будет подключаться светодиодная лента.</span>
+		<span class="function_parameters_param_description"> pin to which the LED strip will be connected.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">count_led:</span>
-		<span class="function_parameters_param_description"> количество пикселей в ленте.</span>
+		<span class="function_parameters_param_description"> the number of pixels in the feed.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">brightness:</span>
-		<span class="function_parameters_param_description"> яркость для всей ленты, по умолчанию выставленна на максимум. Даллее можно для каждого пикселя в ленте можно при желании свою выставить.</span>
+		<span class="function_parameters_param_description"> brightness for the entire tape, set to maximum by default. Further, for each pixel in the tape, you can set your own if you wish. .</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">option:</span>
-		<span class="function_parameters_param_description"> доп настройки для светодиодной ленты.</span>
+		<span class="function_parameters_param_description"> additional settings for LED strip.</span>
 		<br>
-		<span class="function_parameters_param_description"> Параметры контролерующий цветовую гамму: в зависимости от вида светодиодной ленты могут использоваться 4 или 3 цветовая опция.
+		<span class="function_parameters_param_description"> Color control parameters: depending on the type of LED strip, 4 or 3 color options can be used.
 			<ul>
 				<li>NEO_RGB</li>
 				<li>NEO_RBG</li>
@@ -63,7 +63,7 @@ NeoPixel.addNeo(neo_pin, count_led, brightness, option, base)<br>
 			</ul>
 		</span>
 
-		<span class="function_parameters_param_description"> Параметры контролерующий частоту работы с светодиодной лентай.
+		<span class="function_parameters_param_description"> Parameter that controls the frequency of work with the LED strip.
 			<ul>
 				<li>NEO_KHZ800 (the default)</li>
 				<li>NEO_KHZ400</li>
@@ -72,7 +72,7 @@ NeoPixel.addNeo(neo_pin, count_led, brightness, option, base)<br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">base:</span>
-		<span class="function_parameters_param_description"> указывает какую перифирию использовать.
+		<span class="function_parameters_param_description"> specifies which peripheral to use.
 			<ul>
 				<li>ZunoNeoBaseUsart0</li>
 				<li>ZunoNeoBaseUsart1 (the default)</li>
@@ -87,11 +87,10 @@ NeoPixel.addNeo(neo_pin, count_led, brightness, option, base)<br>
 </span>
 
 <span class="function_returns">
-ркзультат работы функции - если не ZunoErrorOk то значит ошибка, ошибка например может возникнуть при нехватки памяти
+	the result of the function - if not ZunoErrorOk then it means an error, for example, an error may occur when there is not enough memory
 </span>
 
 <span class="function_description_more">
-Размер используемой памяти зависит от цветового режима и от используемой переферии.
-Про память можно почитать тут: <span class="function_ref" link="malloc">malloc</a>()</span>
-"сдесь должен быть калькулятор"
+	The amount of memory used depends on the color mode and on the peripherals used.
+	You can read more about memory here: <span class="function_ref" link="malloc">malloc</a>()</span>
 </span>
