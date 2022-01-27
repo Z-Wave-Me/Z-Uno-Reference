@@ -6,7 +6,7 @@
 </span>
 
 <span class="function_description_more">
-	Биоблетека может работать с любим пином
+	The library can work with any pin
 </span>
 
 <span class="function_description_more">
@@ -14,14 +14,14 @@ For more infomation about pins of Z-Uno <a href="http://z-uno.z-wave.me/technica
 </span>
 
 <span class="function_description_note">
-Note that DHT использует разделяемую перефирию: TIMER0 или TIMER1.<br>
-Биоблетека попробует воспользоваться TIMER0, если занято то тогда попробует воспользоваться TIMER1<br>
-Одновременно может использоваться перефирия тоько одной биоблетекой.<br>
-Так же во время  опросса датчика используеться кратковременно используеться один канал DMA.
+Note that DHT uses shared peripherals: TIMER0 или TIMER1.<br>
+The library will try to use TIMER 0, if it is busy then it will try to use TIMER1<br>
+Peripherals can be used by only one biocell at a time.<br>
+Also, during the polling of the sensor, one DMA channel is used for a short time.
 </span>
 
 <span class="function_description_note">
-Опрашивать датчик чаще чем раз в 2 секунды бесполезно.
+	Polling the sensor more than once every 2 seconds is useless.
 </span>
 
 <span class="function_description_reference">
