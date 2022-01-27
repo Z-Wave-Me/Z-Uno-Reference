@@ -1,11 +1,11 @@
 <span zunoVersion="v2"></span>
 <h1>begin()</h1>
 <span class="function_description">
-	initialise bus i2c/spi. Initialise sensor with given parameters / settings. Проверает id чипов.
+	initialise bus i2c/spi. Initialise sensor with given parameters / settings. Checks chip id.
 </span>
 
 <span class="function_description_more">
-	Подерживаемые  id чипов:
+	Supported chip IDs:
 	<ul>
 		<li>0x56 - BMP280</li>
 		<li>0x57 - BMP280</li>
@@ -15,7 +15,7 @@
 </span>
 
 <span class="function_description_more">
-По умолчанию выставяемые параметры <a href="/Reference/ZUNO_BMP280/setSampling/">setSampling</a>.
+default exposed parameters <a href="/Reference/ZUNO_BMP280/setSampling/">setSampling</a>.
 </span>
 
 <span class="function_syntax">
@@ -29,19 +29,19 @@
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">addr:</span>
-		<span class="function_parameters_param_description"> адресс сенсора на шине i2c BME280_ADDRESS(0x77) и BME280_ADDRESS_ALTERNATE(0x76) - по умолчанию BME280_ADDRESS.</span><br>
+		<span class="function_parameters_param_description"> bus sensor address i2c BME280_ADDRESS(0x77) and BME280_ADDRESS_ALTERNATE(0x76) - default BME280_ADDRESS.</span><br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">theWire:</span>
-		<span class="function_parameters_param_description"> указатель на обьект <a href="/Reference/Wire/">Wire</a> - по умолчанию Wire.</span><br>
+		<span class="function_parameters_param_description"> object pointer <a href="/Reference/Wire/">Wire</a> - default Wire.</span><br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">scl:</span>
-		<span class="function_parameters_param_description"> pin SCL - по умолчанию SCL(9).</span><br>
+		<span class="function_parameters_param_description"> pin SCL - default SCL(9).</span><br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sda:</span>
-		<span class="function_parameters_param_description"> pin SDA - по умолчанию SDA(10).</span><br>
+		<span class="function_parameters_param_description"> pin SDA - default SDA(10).</span><br>
 	</span>
 </span>
 
@@ -61,7 +61,7 @@
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">theWire:</span>
-		<span class="function_parameters_param_description"> указатель на обьект <a href="/Reference/SPI/">SPI</a> .</span><br>
+		<span class="function_parameters_param_description"> object pointer <a href="/Reference/SPI/">SPI</a> .</span><br>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">sck:</span>
