@@ -27,7 +27,7 @@ You can bind device channel directly to the main end point, to any multichannel 
 <span class="function_example">
 <b>Example 1</b> Creates one channel and binds it both to main end point and to multichannel endpoint #1.
 <pre><code class="c">
-  
+{literal}
 // Define special command class macroses
 // We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
@@ -52,20 +52,25 @@ void loop() {
   delay(dimmerValue*10);
   digitalWrite(LED_BUILTIN, LOW);
   delay(dimmerValue*10);
-}</code></pre>
+}
+{/literal}
+</code></pre>
 </span>
 
 <span class="function_example">
 <b>Example 2</b> Create 2 channel dimmer and one relay. The first dimmer is avaliable via main end point and via 1-st multichannel end point, the second dimmer is avaliable only via 2-nd multichannel end point, relay is avaliable via 3-d multichannel end point.
 In short words it imitates this static-style code:
 <pre><code class="c">
+  {literal}
   ZUNO_SETUP_CHANNELS(
     ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
     ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
     ZUNO_SWITCH_BINARY(switchValue2, NULL)
   );
+  {/literal}
 </code></pre>
 <pre><code class="c">
+  {literal}
   if(zunoStartDeviceConfiguration()) {
                                       // Check if we are able to reconfigure the device. 
                                       // Device can change its characterictics ONLY if it's not included
@@ -77,5 +82,6 @@ In short words it imitates this static-style code:
     zunoSetZWChannel(2, 3);// relay is availiable via 3-d multichannel end point 
     zunoCommitCfg();// Apply settings ^^^
   }
+  {/literal}
 </code></pre>
 </span>
