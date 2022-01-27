@@ -1,7 +1,7 @@
 <span zunoVersion="v2"></span>
 <h1>Btn.addButton()</h1>
 <span class="function_description">
-Данная функция позволяет добавить и настроить светодиодную ленту.<br>
+This function adds needed button to button set. Each button indentifies via its pin number. You are able to  <br>
 </span>
 
 <span class="function_syntax">
@@ -19,69 +19,67 @@ Btn.addButton(pin, init)<br>
 		<span class="function_parameters_param_name">type:</span>
 		<span class="function_parameters_param_description"> позволдяет указать тип кнопки.
 			<ul>
-				<li>BtnTypeButton (the default) - обычная кнопка</li>
-				<li>BtnTypeTouch - емкастная кнопка</li>
+				<li>BtnTypeButton (the default) - tact button (mechanical button)</li>
+				<li>BtnTypeTouch - capacitive button (capacitive pad)</li>
 			</ul>
 		</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">init:</span>
-		<span class="function_parameters_param_description"> указатель на <b>ZunoBtnButtonInit_t</b> позволяющую более продвинуто настроить поведение кнопки.</span>
+		<span class="function_parameters_param_description"> pointer to <b>ZunoBtnButtonInit_t</b> structure. This allows you to fine tune the behavior of the button.</span>
 	</span>
 </span>
 
 <span class="function_returns">
-ркзультат работы функции - если не ZunoErrorOk то значит ошибка, ошибка например может возникнуть при нехватки памяти
+Result of operation. If value differs from  <b>ZunoErrorOk</b> it means that operation was failed.
 </span>
 
 
 <span class="function_syntax">
 	<pre>
 		<code class="c">
-typedef struct							ZunoBtnDelayInit_s// Данная структура позволяет задать временные интервалла
+typedef struct							ZunoBtnDelayInit_s // This structure holds time intervals for button library
 {
-	uint16_t							delayDebounce;// Время в мс указывающее какой отрезак временной считать ложным срабатыванием - по умолчанию BTN_DELAY_DEBOUNCE_MILLIS_DEFAULT
-	uint16_t							delaySingleClick;// Время в мс указывающее какой отрезак временной считать единичным срабатыванием - по умолчанию BTN_DELAY_SINGLECLICK_MILLIS_DEFAULT - данный параметр так же воияет на двойной и тройной клик
-	uint16_t							delayLongClick;// Время в мс указывающее какой отрезак временной считать долгим срабатыванием - по умолчанию BTN_DELAY_LONGCLICK_MILLIS_DEFAULT
-	uint16_t							delayFree;// Время в мс указывающее какой отрезак временной считать что кнопка отпущенна - по умолчанию BTN_DELAY_FREE_MILLIS_DEFAULT
+	uint16_t							delayDebounce;  // Debounce delay interval in ms
+	uint16_t							delaySingleClick; // Single click check interval in ms
+	uint16_t							delayLongClick; // Long click detection interval in ms
+	uint16_t							delayFree; // Button release interval in ms
 }										ZunoBtnDelayInit_t;
 
-typedef enum// Перечисление режимы работы для обычных кнопок
+typedef enum // Tact button modes enumeration
 {
-	BtnButtonModeAuto,//Данный режим выбирает BtnButtonModeTimer или BtnButtonModeExtInt - в зависимости от режима сна - по умолчанию он используеться
-	BtnButtonModeTimer,// Использует системный таймер
-	BtnButtonModeExtInt// Использует внешние прерывания
+	BtnButtonModeAuto, // This mode automatically selects timer or interrups approach depends on power mode 
+	BtnButtonModeTimer,// Uses system timer for button processing
+	BtnButtonModeExtInt// Uses external inetrrups for button processing
 } ZunoButtonMode_t;
 
-typedef struct							ZunoBtnButtonInit_s// Структура иницилизации для обычных кнопок
+typedef struct							ZunoBtnButtonInit_s // Initial structure for tact-buttons
 {
-	ZunoBtnDelayInit_t					delay;//first always must be
-	ZunoButtonMode_t					mode;
-	uint8_t								bInvert;// Указывает на режим работы пинов - по умолчанию  - true
+	ZunoBtnDelayInit_t					delay; // custom time intervals for button 
+	ZunoButtonMode_t					mode;  // Defines dispatch mode 
+	uint8_t								bInvert;// Defines that logic 1 is idle state of button. Default is true
 }										ZunoBtnButtonInit_t;
 
-typedef struct							ZunoBtnTouchInit_s// Структура иницилизации для емкостных кнопок
+typedef struct							ZunoBtnTouchInit_s // Initial structure for capacitive-buttons
 {
-	ZunoBtnDelayInit_t					delay;//first always must be
-	uint8_t								clickPower;//% - мощность емкосной кнопки - влияющее на чуствительность - максимальное значение 100 - по умолчанию 1
+	ZunoBtnDelayInit_t					delay; // custom time intervals for button 
+	uint8_t								clickPower; // Power percentage of button
 }										ZunoBtnTouchInit_t;
 		</code>
 	</pre>
 </span>
 
 <span class="function_description_note">
-Обратите внимание, что в случае обычной кнопки и ее режима работы <b>BtnButtonModeExtInt</b> есть ограничения по пинам, а именно то что некоторые пины можно использовать 'или' а не 'и':
+Please note that if you use mode <b>BtnButtonModeExtInt</b> there are hardware pin-restrictions, you can use only one of pin listed in parentheses for buttons:
 0, (1/5), (2/15), (3/21), (4/22), (6/23), (7/17), 8, (9/20/25), (10/19), 11, 12, 13, 14, 16, (18/24)
 </span>
 
 <span class="function_example">
-Переработанный пример, но уже с параметрами не по умолчанию, так как мы не хотим все значения то используем макрос <b>BTN_BUTTON_INIT_DEFAULT</b>, есть аналогичный для емкосной кнопки <b>BTN_TOUCH_INIT_DEFAULT</b>:
+Example that shows how to use non-default parameters for tact-button. We use here macro <b>BTN_BUTTON_INIT_DEFAULT</b> ( for capacitive button <b>BTN_TOUCH_INIT_DEFAULT</b>):
 	<pre><code class="c">
-#include "Arduino.h"
+{literal}
 #include "ZUNO_Buttons.h"
-
 #define MY_SERIAL Serial0
-
 #define BUTTON		23
 
 uint8_t dimmerValue = 100;
@@ -94,8 +92,8 @@ void setup() {
 	MY_SERIAL.println("Setup");
 	pinMode(LED_BUILTIN, OUTPUT);
 	init = BTN_BUTTON_INIT_DEFAULT;
-	init.delay.delaySingleClick = 60;//Установим значение для одиночного клика
-	init.mode = BtnButtonModeTimer;//Указываем явно что нужно использовать системный таймер
+	init.delay.delaySingleClick = 60;// Change time interval of single click
+	init.mode = BtnButtonModeTimer; // We say library to use system timer for processing 
 	Btn.addButton(BUTTON, &init);
 }
 
@@ -138,14 +136,7 @@ void process_buttons() {
 		else
 			dimmerValue = 5;
 	}
-	if(Btn.isSingleClick(2)) {
-		Serial0.println("isSingleClick");
-		Btn.deleteButton(2);
-		if (dimmerValue == 5)
-			dimmerValue = 100;
-		else
-			dimmerValue = 5;
-	}
 }
+{/literal}
 	</code></pre>
 </span> 

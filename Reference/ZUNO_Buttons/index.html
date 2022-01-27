@@ -1,20 +1,12 @@
 <span zunoVersion="v2"></span>
-<h1>Zuno Buttons Library</h1>
+<h1>Z-Uno Buttons Library</h1>
 
 <span class="function_description">
-	Библиотека предназначена для работы с обычными кнопками и емкаснымим.
+	Library implements high-level API for tact and capacitive buttons. 
 </span>
 
 <span class="function_description_more">
-	Биоблетка подерживает работу с множеством кнопак.
-</span>
-
-<span class="function_description_more">
-	Биоблетека может работать с любим пином - в случае с обычной кнопкой если выбранн режим <b>BtnButtonModeExtInt</b> то есть определленные ограничения более подробней смотрите: <a href="/Reference/ZUNO_NeoPixel/addButton/">addButton</a>
-</span>
-
-<span class="function_description_more">
-For more infomation about pins of Z-Uno <a href="http://z-uno.z-wave.me/technical/pinout/">here</a>
+	Button sets are supported. Library is able to operate with any GPIO-pins, but for some extra functionality like interrupt mode <b>BtnButtonModeExtInt</b> there are some hardware restrictions. Please read the details in the description of  <a href="/Reference/ZUNO_NeoPixel/addButton/">addButton</a> method.
 </span>
 
 <span class="function_description_reference">
@@ -32,21 +24,19 @@ For more infomation about pins of Z-Uno <a href="http://z-uno.z-wave.me/technica
 
 
 <span class="function_description_note">
-Note that Buttons uses 2 <b>DMA channel</b> в случае емкаснай кнопки.
+Note that Buttons library uses 2 <b>DMA channel</b> in case of capacitive button support.
 </span>
 
 <span class="function_example">
 	<pre><code class="c">
-#include "Arduino.h"
+	{literal}
 #include "ZUNO_Buttons.h"
-
 #define MY_SERIAL Serial0
 
 #define BUTTON		23
-
 uint8_t dimmerValue = 100;
 
-// the setup function runs once, when you press reset or power the board
+// the setup function runs once, when you press reset or power up the board
 void setup() {
 	MY_SERIAL.begin();
 	MY_SERIAL.println("Setup");
@@ -102,5 +92,6 @@ void process_buttons() {
 			dimmerValue = 5;
 	}
 }
+{/literal}
 	</code></pre>
 </span>  
