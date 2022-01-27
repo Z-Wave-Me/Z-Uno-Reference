@@ -1,11 +1,11 @@
 <span zunoVersion="v2"></span>
 <h1>hasAlarm()</h1>
 <span class="function_description">
-	Проверает есть ли хоть одно устройство на шине поддерживаещее alarm.
+	Checks if there is at least one device on the bus that supports alarm.
 </span>
 
 <span class="function_description_more">
-	Данная функция актуальна при не выключенном <b>REQUIRESALARMS</b>
+	This function is active when the <b>REQUIRESALARMS</b>
 </span>
 
 <span class="function_syntax">
@@ -25,12 +25,12 @@
 
 
 <span class="function_description">
-	Проверает подерживает устройство с данным адрессом alarm или нет.
+	Checks whether the device with the given alarm address is supported or not.
 </span>
 
 
 <span class="function_description_more">
-Данная функция актуальна при не выключенном <b>REQUIRESALARMS</b>
+This function is active when the <b>REQUIRESALARMS</b>
 </span>
 
 <span class="function_syntax">
@@ -44,10 +44,10 @@
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">deviceAddress:</span>
-		<span class="function_parameters_param_description"> указатель на 8 байтный массив содержащий адресс.</span><br>
+		<span class="function_parameters_param_description"> pointer to an 8 byte array containing the address.</span><br>
 	</span>
 </span>
 
 <span class="function_returns">
-    bool - true - устройство поддерживает, иначе false
+    bool - true - device supports, false otherwise
 </span>
