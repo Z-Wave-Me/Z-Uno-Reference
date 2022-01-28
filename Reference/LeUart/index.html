@@ -1,12 +1,8 @@
 <span zunoVersion="v2"></span>
 <h1>LeUart</h1>
-<span class="function_description">Used for communication between the Z-Uno board and another microcontroller or a computer via UART or USB.
-	Works similarly <a class="function_ref" link="Serial">Serial</a> with the only difference that at low speeds it also does not stop working in <b>ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE</b> - <a class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">ZUNO_SETUP_SLEEPING_MODE</a>
-</span>
-<span class="function_description_more">Z-Uno boards have the following serial interfaces:
-<ul>
-    <li>LeUart &mdash; UART on TX0(24) and RX0(25) pins</li>
-</ul>
+<span class="function_description">Used for communication between the Z-Uno board and another microcontrollers.
+	Works similar to <a class="function_ref" link="Serial">Serial</a> with the only difference that at low speeds it avaliable in <a class="function_ref" link="ZUNO_SETUP_SLEEPING_MODE">EM2</a> energy safe mode.
+	By default LeUart is availiable on TX0(24) and RX0(25) pins. 
 </span>
 
 <span class="function_description_more">
