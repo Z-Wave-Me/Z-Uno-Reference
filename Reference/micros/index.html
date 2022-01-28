@@ -1,0 +1,26 @@
+<h1>micros()</h1>
+<span class="function_description">
+    Returns the number of microseconds since the Z-Uno board began running the current program. The resolution is about 27 us.
+</span>
+<span class="function_syntax">micros()</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">none</span>
+        <span class="function_parameters_param_description"></span>
+    </span>
+</span>
+<span class="function_returns">
+Number of microseconds since the program started (unsigned long)
+</span>
+<span class="function_example">
+<pre>
+<code class="c">void setup() {
+  Serial.begin();
+}
+
+void loop() {
+  Serial.println(micros());
+  delay(1000);
+}
+</code></pre>
+</span>
