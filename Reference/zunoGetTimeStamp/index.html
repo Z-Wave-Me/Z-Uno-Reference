@@ -1,0 +1,50 @@
+<h1>zunoGetTimeStamp()</h1>
+<span class="function_description">
+    Returns the number of seconds that have passed since January 1, 1970. Commonly known as UNIXTIMESTAMP.
+</span>
+<span class="function_syntax">zunoGetTimeStamp()</span>
+<span class="function_parameters">
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">none</span>
+        <span class="function_parameters_param_description"></span>
+    </span>
+</span>
+<span class="function_returns">
+    number of seconds (unsigned long)
+</span>
+<span class="function_example">
+<pre>
+<code class="c">
+    {literal}
+    // This sketch uses TimeParameter command class to setup RTC value from controller.
+    // You have to call TimeParameter.Set according to you z-wave controller manual.
+    ZUNO_ENABLE(WITH_CC_TIME_PARAMETERS); // Add needed CC
+    ZUNO_CUSTOM_CC(ZUNO_CC_VERSION(COMMAND_CLASS_TIME_PARAMETERS, 1)); // Setup custom CC version - add it to NIF
+    #define MY_SERIAL Serial
+    // Calls every time controller sends TimeParameter.Set
+    void myUpdateTimeHandler(){
+        MY_SERIAL.print("*** Time updated:");
+        MY_SERIAL.println((uint32_t)zunoGetTimeStamp());
+    }
+    void setup(){ 
+        MY_SERIAL.begin();
+        MY_SERIAL.println("START!");  
+        // Bind custom handler to system timestamp notification 
+        zunoAttachSysHandler(ZUNO_HANDLER_NOTIFICATON_TIME_STAMP, 0, (void*) &myUpdateTimeHandler);
+    }
+    void loop(){
+        // Print timestamp
+        MY_SERIAL.print("*** Current TS:");
+        time_t ts = zunoGetTimeStamp();
+        MY_SERIAL.println((uint32_t)ts);
+        tm timeinfo;
+        // Transform timestamp to timeinfo
+        gmtime_r(&ts, &timeinfo);
+        // Print date & time in readable format
+        MY_SERIAL.printf("%02d.%02d.%04d %02d:%02d:%02d\n\n", timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900, timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+        // Wait a little...
+        delay(1000);
+    }
+{/literal}
+</code></pre>
+</span>
