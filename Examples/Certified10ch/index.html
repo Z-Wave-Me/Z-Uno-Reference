@@ -1,5 +1,5 @@
 <h1>10 Channel certified example</h1>
-This page contains specific settings option for certification sketch. All standard Z-Uno parameters and Z-Wave descriptions are listed on <a href="/z-wave/">this page</a>.
+This page contains specific settings option for certification sketch. All standard Z-Uno parameters and Z-Wave descriptions are listed on <a href="/Reference/Z-Wave/">this page</a>.
 
 <p>Device represents a complex mains power device with 3 relay switches, 3 LED dimmers, temperature, humidity and motion sensors as well as reed switch.</p>
 
@@ -184,7 +184,7 @@ Device has 2 association groups. See the table below.
         <td>1</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Relay #1 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchBinary.Report</td>
     </tr>
@@ -192,7 +192,7 @@ Device has 2 association groups. See the table below.
         <td>2</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Relay #2 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchBinary.Report</td>
     </tr>
@@ -200,7 +200,7 @@ Device has 2 association groups. See the table below.
         <td>3</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Relay #3 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchBinary.Report</td>
     </tr>
@@ -208,7 +208,7 @@ Device has 2 association groups. See the table below.
         <td>4</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Dimmer #1 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchMultilevel.Report</td>
     </tr>
@@ -216,7 +216,7 @@ Device has 2 association groups. See the table below.
         <td>5</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Dimmer #2 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchMultilevel.Report</td>
     </tr>
@@ -224,7 +224,7 @@ Device has 2 association groups. See the table below.
         <td>6</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Dimmer #3 sends report here when it changes value.</td>
         <td>0</td>
         <td>SwitchMultilevel.Report</td>
     </tr>
@@ -232,7 +232,7 @@ Device has 2 association groups. See the table below.
         <td>7</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Motion sensor sends report here when it triggers.</td>
         <td>0</td>
         <td>Notification.Report</td>
     </tr>
@@ -240,7 +240,7 @@ Device has 2 association groups. See the table below.
         <td>8</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Door sensor sends report here when it triggers</td>
         <td>0</td>
         <td>Notification.Report</td>
     </tr>
@@ -248,7 +248,7 @@ Device has 2 association groups. See the table below.
         <td>9</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Temperature sensor sends report here when its value changes greater then hysteresis defined by parameter #64.</td>
         <td>0</td>
         <td>SensorMultilevel.Report</td>
     </tr>
@@ -256,7 +256,7 @@ Device has 2 association groups. See the table below.
         <td>10</td>
         <td><nobr>1</nobr></td>
         <td>Lifeline</td>
-        <td>Report group.</td>
+        <td>Report group. Humidity sensor sends report here when its value changes greater then hysteresis defined by parameter #65.</td>
         <td>0</td>
         <td>SensorMultilevel.Report</td>
     </tr>
@@ -268,49 +268,61 @@ Below is listed command class basic mapping for all the endpoints.
     <tr>
         <th># Endpoint</th>
         <th>Mapped command class</th>
+        <th>Values</th>
     </tr>
     <tr>
         <td><nobr>0</nobr></td>
         <td>SwitchBinary</td>
+        <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
         <td><nobr>1</nobr></td>
         <td>SwitchBinary</td>
+        <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
         <td><nobr>2</nobr></td>
         <td>SwitchBinary</td>
+        <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
         <td><nobr>3</nobr></td>
         <td>SwitchBinary</td>
+        <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
         <td><nobr>4</nobr></td>
         <td>SwitchMultilevel</td>
+        <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
     <tr>
         <td><nobr>5</nobr></td>
         <td>SwitchMultilevel</td>
+        <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
     <tr>
         <td><nobr>6</nobr></td>
         <td>SwitchMultilevel</td>
+        <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
     <tr>
         <td><nobr>7</nobr></td>
+        <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
     <tr>
         <td><nobr>8</nobr></td>
         <td>&ndash;</td>
+        <td>&ndash;</td>
     </tr>
     <tr>
         <td><nobr>9</nobr></td>
         <td>&ndash;</td>
+        <td>&ndash;</td>
     </tr>
     <tr>
         <td><nobr>10</nobr></td>
+        <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
 </table>
