@@ -200,14 +200,14 @@ int getterBarPa() {
 </span>
 
 <span class="function_example" zunoVersion="v2">
-    FLIRS multilevel LED-light example.
+    FLIRS switchbinary LED-light example.
 <pre><code class="c">
-    byte dimmerValue=0;
+    byte switchValue=0;
     ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
-    ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(&dimmerValue,NULL));
+    ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_BINARY(&switchValue,NULL));
     #define MY_SERIAL Serial 
     uint32_t loop_count = 0; // the variable that illustrates that RAM is alive during FLiRS mode too
-
+    
     void setup(){
         MY_SERIAL.begin();
         MY_SERIAL.print("BOOT REASON:");
@@ -226,7 +226,7 @@ int getterBarPa() {
     void loop(){
         if(zunoIsSleepLocked()){
             // Here we do all sleep uninterruptable logic
-            analogWrite(LED_BUILTIN, dimmerValue); // Apply dimmer value from controller to builtin LED
+            digitalWrite(LED_BUILTIN, switchValue != 0); // Apply switch value from controller to builtin LED
             MY_SERIAL.print("go sleep time:");
             MY_SERIAL.println(millis()); // Print moment when we are ready to go to sleep
             MY_SERIAL.print("loop count =");

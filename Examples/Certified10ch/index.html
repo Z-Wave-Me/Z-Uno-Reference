@@ -61,7 +61,11 @@ enum{
    MOTION_RETRIGGER_TIME_PARAM 
 };
 // ZUNO_ENABLE setups some global extra build flags
-ZUNO_ENABLE(LOGGING_DBG LOGGING_UART=Serial0 MODERN_MULTICHANNEL SKETCH_FLAGS=HEADER_FLAGS_NOREBOOT_CFG);
+ZUNO_ENABLE(
+            // LOGGING_DBG          // Uncomment for console output on TX0
+            MODERN_MULTICHANNEL     // No clustering, the first channel is mapped to NIF only
+            MODERN_MULTICHANNEL_S2  // S2 encapsulated NIF in multichannel
+            MODERN_MULTICHANNEL_S2_ALWAYS );
 // Device's endpoints definition
 // 3 switch binary
 // 3 switch multilevel
