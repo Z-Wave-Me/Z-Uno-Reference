@@ -42,6 +42,7 @@ This functions binds handler to Z-Uno channel.  This function is used for "dynam
 <b>CHANNEL_HANDLER_SINGLE_VALUEMAPPER</b> - Use a direct variable mapping without getter/setter function.
 
 <pre><code class="c">
+{literal}
 byte dimmerValue = 99;
 
 // Immitates static declaration like this
@@ -54,12 +55,14 @@ void setup() {
   // Just a variable binding
   zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_VALUEMAPPER, (void*)&dimmerValue); // direct pointer to value that is mapped to this channel 
 }
+{/literal}
 </code></pre>
 </span>
 
 <span class="function_example">
 <b>CHANNEL_HANDLER_SINGLE_GETTER</b> Binding getter function to the channel
 <pre><code class="c">
+{literal}
 byte dimmerValue = 99;
 // Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SENSOR_BINARY_MOTION(getterFunctionSensorBinary));
@@ -72,11 +75,13 @@ void setup() {
 BYTE getterFunctionSensorBinary() {
   return dimmerValue; // We can return any value here. Just shows a proxy getter for "dimmerValue"
 }
+{/literal}
 </code></pre>
 </span>
 <span class="function_example">
 <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b> Binding for getter и setter functions.
 <pre><code class="c">
+{literal}
 byte dimmerValue = 99;
 // Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
@@ -98,6 +103,7 @@ void setSwitchMultilevelValue(byte newValue) {
  byte getSwitchMultilevelValue(void) {
   return dimmerValue;
 }
+{/literal}
 </code></pre>
 </span>
 
@@ -106,6 +112,7 @@ void setSwitchMultilevelValue(byte newValue) {
 <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER_2P</b> is used when command class requires some extra parameter in getter/setter compared to common <b>CHANNEL_HANDLER_SINGLE_GETTERSETTER</b>.
 
 <pre><code class="c">
+{literal}
 uint8_t _color[10] = {0};
 // Immitates static declaration like this
 //ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_COLOR(SWITCH_COLOR_FLAGS_RED|SWITCH_COLOR_FLAGS_GREEN|SWITCH_COLOR_FLAGS_BLUE, getterFunctionColor, setterFunctionColor));
@@ -123,6 +130,7 @@ BYTE getterFunctionColor(BYTE component) {
 void setterFunctionColor(BYTE component, BYTE newValue) {
   _color[component] = newValue;
 }
+{/literal}
 </code></pre>
 </span>
 
@@ -130,6 +138,7 @@ void setterFunctionColor(BYTE component, BYTE newValue) {
 <b>CHANNEL_HANDLER_SINGLE_THERMOSTAT</b> specific thermostat command class hadler.
 
 <pre><code class="c">
+{literal}
 // Thermostat requires variables for current mode and its temperature
 BYTE g_therm_mode = THERMOSTAT_MODE_OFF;
 int g_therm_point;
@@ -166,12 +175,14 @@ void thermPointSetterC(BYTE mode,WORD point){
   g_therm_point = point;
   (void)mode;
 }
+{/literal}
 </code></pre>
 </span>
 
 <span class="function_example">
 <b> Multiinstance example. Lets try to imagine we have 2 montion sensor in one z-wave device.
 <pre><code class="c">
+{literal}
 zuno_handler_multi_getter_t multi_sen_getter={(void*)&getterFunctionSensorBinary,0}; // 0 is the index of first channel
 
 // Immitates static declaration like this
@@ -186,6 +197,7 @@ BYTE getterFunctionSensorBinary(byte ch) {
   // Just a stub. Always returns idle. You can add any logic you want :)
   return (0x0);
 }
+{/literal}
 </code></pre>
 </span>
 
