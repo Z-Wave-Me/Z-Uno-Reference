@@ -17,7 +17,9 @@
 </span>
 
 <span class="function_example">
-<pre><code lang="c">#include "EEPROM.h"
+<pre><code lang="c">
+{literal}
+#include "EEPROM.h"
 
 BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
 BYTE read_data[5];
@@ -29,6 +31,7 @@ void setup() {
 void loop() {
     byte i;
     word res;
+{/literal}
 </code></pre>
 <pre zunoVersion="v1"><code lang="c">
     dword addr = 0x800;
@@ -37,7 +40,7 @@ void loop() {
     dword addr = 0x0;
 </code></pre>
 <pre><code lang="c">
-
+{literal}
     Serial.println("Reading 128 Bytes one by one from EEPROM...");
     for (i = 0; i < 128; i++) {
         Serial.print(EEPROM.read(addr + i),HEX);
@@ -60,6 +63,7 @@ void loop() {
     
     delay(5000); // don't write to much in the EEPROM not to kill it
 }
+{/literal}
 </code></pre>
 </span>
 
