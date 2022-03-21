@@ -17,7 +17,9 @@
 </span>
 
 <span class="function_example">
-<pre><code lang="c">#include "EEPROM.h"
+<pre zunoVersion="v1"><code lang="c">
+{literal}
+#include "EEPROM.h"
 
 BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
 BYTE read_data[5];
@@ -29,15 +31,8 @@ void setup() {
 void loop() {
     byte i;
     word res;
-</code></pre>
-<pre zunoVersion="v1"><code lang="c">
     dword addr = 0x800;
-</code></pre>
-<pre zunoVersion="v2"><code lang="c">
-    dword addr = 0x0;
-</code></pre>
-<pre><code lang="c">
-
+    
     Serial.println("Reading 128 Bytes one by one from EEPROM...");
     for (i = 0; i < 128; i++) {
         Serial.print(EEPROM.read(addr + i),HEX);
@@ -60,6 +55,47 @@ void loop() {
     
     delay(5000); // don't write to much in the EEPROM not to kill it
 }
+{/literal}
+</code></pre>
+<pre zunoVersion="v2"><code lang="c">
+{literal}
+#include "EEPROM.h"
+
+BYTE some_data[] = {0xaa, 0xbb, 0xcc, 0xdd, 0xee}; 
+BYTE read_data[5];
+
+void setup() {
+  Serial.begin();
+}
+
+void loop() {
+    byte i;
+    word res;
+    dword addr = 0x0;
+    
+    Serial.println("Reading 128 Bytes one by one from EEPROM...");
+    for (i = 0; i < 128; i++) {
+        Serial.print(EEPROM.read(addr + i),HEX);
+        if (((i % 0x10) == 0) && (i != 0))
+          Serial.println();
+        else
+          Serial.print(' ');
+    }
+
+    Serial.println();
+
+    Serial.println("Reading buffer from EEPROM...");
+    res = EEPROM.get(addr, &read_data, sizeof(read_data));
+    Serial.print("Read ");
+    Serial.print(res);
+    Serial.println(" Bytes");
+
+    // write data to a specific address
+    res = EEPROM.put(addr, &some_data, sizeof(some_data));
+    
+    delay(5000); // don't write to much in the EEPROM not to kill it
+}
+{/literal}
 </code></pre>
 </span>
 
