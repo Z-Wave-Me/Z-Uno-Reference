@@ -81,22 +81,19 @@ Z-Uno supports all three types of power management modes. You can define it usin
 <p zunoVersion="v2">Manually you are able to do it using the command: <b>zme_make boardInfo -d &ltCOM/tty of ZUno&gt</b></p>
 <h2 zunoVersion="v2" link="SmartStart">SmartStart technology</h2>
 <p zunoVersion="v2"> Z-Uno supports SmartStart technology. You are able to add device to network by means of special QR-code/SmartStart string. Just plug in ZUno to power supply and scan SmartStart label, no other interruction with device is needed.</p> 
-<br>
 <span class="function_description_note" zunoVersion="v2">
-    Note your controller has to be SmartStart-enabled to achieve this. </a>. 
+    Note your controller has to be SmartStart-enabled to achieve this.
 </span>
 <br>
 <p zunoVersion="v2">User is able to get SmartStart string using <b>zme_make</b> utility manually or by means of ArduinoIDE. You have to select "verbose output" in preferences of IDE. Smart Strart QR-code is listed in "Z-Uno board information" section.</p> 
 <p zunoVersion="v2">Manually you are able to do it using the command: <b>zme_make boardInfo -q &lt/path/to/qrcode_output_filename.png&gt -d &ltCOM/tty of ZUno&gt</b>. It will save qr-code image into "/path/to/qrcode_output_filename.png". </p>
 <h2 zunoVersion="v2" link="Long Range">LongRange technology</h2>
 <p zunoVersion="v2"> Engineered to provide significantly extended wireless range and support robust networks, Z-Wave Long Range (LR) extends Z-Wave connectivity beyond the boundaries of the home and accelerates the adoption of Z-Wave in other verticals such as light commercial, hospitality, and multi-dwelling units (MDU). Z-Wave Long Range is an extra 100kbps DSSS OQPSK modulation addition to the Z-Wave protocol. The modulation is treated as a fourth channel – allowing gateways to add LR nodes to the existing Z-Wave channel scanning. At this time, Z-Wave LR is only available for the US market however, the Technical Workgroup is evaluating and testing to ensure compliance and to be able to support Europe and APAC regions in the future.</p>
-<p zunoVersion="v2"> Z-Uno supports Z-Wave LongRange technology for some regions. 
-    To add Z-Uno to the network using Long Range technology, select this technology on your controller when adding the device and use the same QR code as for SmartStart technology.
-    To exclude a device, use the standard triple-click exclusion algorithm. </p>
-<br>
+<p zunoVersion="v2"> Z-Uno supports Z-Wave LR for some regions only.To add Z-Uno to the network using LR technology, select this technology on your controller when adding the device and use the same QR code as for SmartStart technology.</p>
 <span class="function_description_note" zunoVersion="v2">
-    Note your network controller has to be LR-enabled to achieve this. </a>. 
+    Note your network controller has to be LR-enabled to achieve this. 
 </span>
+<p zunoVersion="v2">To exclude a device, use the standard triple-click exclusion algorithm. </p>
 <h2 link="Command Classes">Command Classes</h2>
 <p>Z-Uno supports the following Command Classes:</p>
 <style>
