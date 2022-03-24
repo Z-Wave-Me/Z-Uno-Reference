@@ -56,6 +56,29 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch. See the
             <td>Defines pin for system console output. System console is like *nix <b>dmesg</b>. Here OS dumps internal parameters/events.  Flag <b>LOGGING_DBG</b> switches on console on TX0 pin of Z-Uno automatically. To disable console use value 0xFF. For most cases is usable 0x3D = TX0.  </td>
         </tr>
         <tr>
+            <td colspan="3" align="center"><b>Z-Wave advanced options</b></td>
+        </tr>
+        <tr>
+            <td>MODERN_MULTICHANNEL</td>
+            <td>-</td>
+            <td>Disables clusterisation. Only the first endpoint (channel) is mapped to NIF.</td>
+        </tr>
+        <tr>
+            <td>MODERN_MULTICHANNEL_S2</td>
+            <td>-</td>
+            <td>All application's command classes are provided inside S2 supported list.</td>
+        </tr>
+        <tr>
+            <td>MODERN_MULTICHANNEL_S2_ALWAYS</td>
+            <td>-</td>
+            <td>S2 stays in NIF/multichannel list if device included unsecurely.</td>
+        </tr>
+        <tr>
+            <td>SECURITY_CONFIG_PARAM</td>
+            <td>-</td>
+            <td>Enables parameter #7 that controls security mode. Use it only for debug purposes!</td>
+        </tr>
+        <tr>
             <td colspan="3" align="center"><b>Sketch advanced configuration</b></td>
         </tr>
         <tr>
@@ -76,7 +99,7 @@ ZUNO_ENABLE/DISABLE is "singletone" macro. Only one call for one sketch. See the
                 <b>HEADER_FLAGS_NOLEDS</b> (bit5)- disables system LEDs<br>
                 <b>HEADER_FLAGS_NOSKETCH_OTA</b> (bit6) - disables sketch OTA process, OTA target#1 will be removed<br> 
                 <b>HEADER_FLAGS_NOSKETCH_USBLOAD</b> (bit7) - disables sketch USB upload. Be careful!<br>  
-                <b>HEADER_FLAGS_NOREBOOT_CFG</b> (bit8) - disables auto reboot when you change some system configuration parameters.<br> 
+                <b>HEADER_FLAGS_REBOOT_CFG</b> (bit8) - enables auto reboot when you change some system configuration parameters.<br> 
                 <b>HEADER_FLAGS_ALL_SECURE</b> (bit9) - device supports SECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
                 <b>HEADER_FLAGS_ALL_UNSECURE</b> (bit10) - device supports UNSECURE inclusion only. System ignores configuration parameter/IDE settings. <br> 
             </td>

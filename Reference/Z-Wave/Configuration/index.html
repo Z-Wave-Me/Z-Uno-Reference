@@ -26,6 +26,7 @@
         <td>1&nbsp;(Yes)</td>
         <td><ul><li>0 &mdash; No</li><li>1 &mdash; Yes</li></ul></td>
     </tr>
+    <!-- WAS denied during certification
     <tr>
         <td>7</td>
         <td>Enable or disable Security S0 during inclusion (requires re-inclusion)<br/>Same as changing Tools &rarr; Security in the Arduino IDE</td>
@@ -33,6 +34,7 @@
         <td>1&nbsp;(Enable)</td>
         <td><ul><li>0 &mdash; Disable</li><li>1 &mdash; Enable</li></ul></td>
     </tr>
+    -->
     <tr>
         <td>8</td>
         <td>Enable or disable logging via Z-Wave<br/>Same as changing Tools &rarr; Logging in the Arduino IDE</td>
@@ -42,13 +44,18 @@
     </tr>
     <tr>
         <td>9</td>
+        <!--
         <td>Set Z-Wave frequency and reboot<br/>Same as changing Tools &rarr; Frequency in the Arduino IDE<br/><i>Note that after issuing this command the device will stop change frequency and your controller will loose communications with it!</i></td>
+        -->
+        <td>Set Z-Wave frequency for the next device inclusion. You have to exclude device to apply this parameter. <br/>Same as changing Tools &rarr; Frequency in the Arduino IDE<br/></td>
+        
         <td>2 bytes</td>
         <td>&mdash;</td>
         <td>
             <ul>
-                <li>0&nbsp;&mdash;&nbsp;Don't change, just reboot</li>
+                <li>0&nbsp;&mdash;&nbsp;Don't change, just reboot. For debug purposes ONLY! You are able to use it only with <b>HEADER_FLAGS_REBOOT_CFG</b> flag. </li>
                 <li>255&nbsp;&mdash;&nbsp;EU</li>
+                <li>256&nbsp;&mdash;&nbsp;Load last selected frequency immediately. Note that after issuing this command the device will stop change frequency and your controller will loose communications with it!</li>
                 <li>510&nbsp;&mdash;&nbsp;RU</li>
                 <li>765&nbsp;&mdash;&nbsp;IN</li>
                 <li>1020&nbsp;&mdash;&nbsp;US</li>
