@@ -1,9 +1,17 @@
 <h1>10 Channel certified example</h1>
-This page contains specific settings option for certification sketch. All standard Z-Uno parameters and Z-Wave descriptions are listed on <a href="/Reference/Z-Wave/">this page</a>.
-
+<span class="example_description">
+<img src="/files/Z-WavePlusProduct_200.png" width="100" class="img_right"/>
+<p>This page contains specific settings option for the certified sketch. All standard Z-Uno parameters and Z-Wave descriptions are listed on <a href="/Reference/Z-Wave/">this page</a>.</p>
+<p>The sketch was certified under the Z-Wave Plus v2 program, certificate <a href="https://products.z-wavealliance.org/products/4602">ZC14-22030089</a>.</p>
 <p>Device represents a complex mains power device with 3 relay switches, 3 LED dimmers, temperature, humidity and motion sensors as well as reed switch.</p>
 
-<h2 link="Source">Sketch source code</h2>
+<span class="example_schematics">
+    <img src="/files/z-uno/projects/Certified10Ch/Certified10Ch.svg">
+    <br/>
+    <a href="/files/z-uno/projects/Certified10Ch/Certified10Ch.fzz">Download Fritzing project</a>
+</span>
+   
+<span link="Source" class="example_code">
 <pre><code lang="c">
 /* 
 * This scretch was certified by the Z-Wave Alliance.
@@ -155,6 +163,8 @@ void loop() {
    delay(50);
 }
 </code></pre>
+<a href="/files/z-uno/projects/Certified10Ch/Certified10Ch.ino">Download this sketch</a>
+</span>
 
 <h2 link="Associations">Associations</h2>
 Device has 2 association groups. See the table below.
@@ -169,7 +179,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>0</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Main group for device reports. It's mapped from EP#1 group 1.</td>
         <td>5</td>
@@ -177,7 +187,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>0</td>
-        <td><nobr>2</nobr></td>
+        <td>2</td>
         <td>User group 02</td>
         <td>Here motion sensor sends Basic on/off commands every time it is triggered.</td>
         <td>5</td>
@@ -185,7 +195,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>1</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Relay #1 sends report here when it changes value.</td>
         <td>0</td>
@@ -193,7 +203,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>2</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Relay #2 sends report here when it changes value.</td>
         <td>0</td>
@@ -201,7 +211,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>3</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Relay #3 sends report here when it changes value.</td>
         <td>0</td>
@@ -209,7 +219,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>4</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Dimmer #1 sends report here when it changes value.</td>
         <td>0</td>
@@ -217,7 +227,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>5</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Dimmer #2 sends report here when it changes value.</td>
         <td>0</td>
@@ -225,7 +235,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>6</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Dimmer #3 sends report here when it changes value.</td>
         <td>0</td>
@@ -233,7 +243,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>7</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Motion sensor sends report here when it triggers.</td>
         <td>0</td>
@@ -241,7 +251,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>8</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Door sensor sends report here when it triggers</td>
         <td>0</td>
@@ -249,7 +259,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>9</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Temperature sensor sends report here when its value changes greater then hysteresis defined by parameter #64.</td>
         <td>0</td>
@@ -257,7 +267,7 @@ Device has 2 association groups. See the table below.
     </tr>
     <tr>
         <td>10</td>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>Lifeline</td>
         <td>Report group. Humidity sensor sends report here when its value changes greater then hysteresis defined by parameter #65.</td>
         <td>0</td>
@@ -274,27 +284,27 @@ Below is listed command class basic mapping for all the endpoints.
         <th>Values</th>
     </tr>
     <tr>
-        <td><nobr>0</nobr></td>
+        <td>0</td>
         <td>SwitchBinary</td>
         <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
-        <td><nobr>1</nobr></td>
+        <td>1</td>
         <td>SwitchBinary</td>
         <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
-        <td><nobr>2</nobr></td>
+        <td>2</td>
         <td>SwitchBinary</td>
         <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
-        <td><nobr>3</nobr></td>
+        <td>3</td>
         <td>SwitchBinary</td>
         <td>0 means OFF, 0xFF (255) - ON</td>
     </tr>
     <tr>
-        <td><nobr>4</nobr></td>
+        <td>4</td>
         <td>SwitchMultilevel</td>
         <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
@@ -304,27 +314,27 @@ Below is listed command class basic mapping for all the endpoints.
         <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
     <tr>
-        <td><nobr>6</nobr></td>
+        <td>6</td>
         <td>SwitchMultilevel</td>
         <td>0 means OFF, 1 - 99 - dimmer value.</td>
     </tr>
     <tr>
-        <td><nobr>7</nobr></td>
+        <td>7</td>
         <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
     <tr>
-        <td><nobr>8</nobr></td>
+        <td>8</td>
         <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
     <tr>
-        <td><nobr>9</nobr></td>
+        <td>9</td>
         <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
     <tr>
-        <td><nobr>10</nobr></td>
+        <td>10</td>
         <td>&ndash;</td>
         <td>&ndash;</td>
     </tr>
@@ -341,22 +351,22 @@ In addition to the <a href="/z-wave/configuration-parameters/"> Z-Uno system con
         <th>Possible values</th>
     </tr>
     <tr>
-        <td><nobr>64</nobr></td>
+        <td>64</td>
         <td>Temperature hysteresis for sensor reports. This parameter is defined in 10th of degree. </td>
         <td>4&nbsp;bytes</td>
         <td>5</td>
         <td>1&ndash;20</td>
     </tr>
     <tr>
-        <td><nobr>65</nobr></td>
+        <td>65</td>
         <td>Humitity hysteresis for sensor reports. This parameter is defined in 10th of percent. </td>
         <td>4&nbsp;bytes</td>
         <td>5</td>
         <td>1&ndash;20</td>
     </tr>
     <tr>
-        <td><nobr>66</nobr></td>
-        <td> Motion sensor's retrigger interval in milliseconds</td>
+        <td>66</td>
+        <td>Motion sensor's retrigger interval in milliseconds</td>
         <td>4&nbsp;bytes</td>
         <td>5000</td>
         <td>0&ndash;100000</td>
@@ -364,7 +374,7 @@ In addition to the <a href="/z-wave/configuration-parameters/"> Z-Uno system con
 </table>
 <h2 link="S2 suported keys">S2 Levels</h2>
 <p>This sketch supports these S2 keys:
-    <ul style="margin-bottom: 0; margin-top: 0;">
+    <ul>
         <li>S0</li>
         <li>S2_UNAUTHENTICATED</li>
         <li>S2_AUTHENTICATED</li>
@@ -378,13 +388,13 @@ In addition to the <a href="/z-wave/configuration-parameters/"> Z-Uno system con
         <th>Notification Events</th>
     </tr>
     <tr>
-        <td><nobr>7</nobr></td>
-        <td>NOTIFICATION_TYPE_SECURITY = 0x07</td>>
+        <td>7</td>
+        <td>NOTIFICATION_TYPE_SECURITY = 0x07</td>
         <td>NOTIFICATION_EVENT_MOTION_DETECTION_UL = 0x08</td>
     </tr>
     <tr>
-        <td><nobr>8</nobr></td>
-        <td>NOTIFICATION_TYPE_ACCESS_CONTROL = 0x06;</td>
+        <td>8</td>
+        <td>NOTIFICATION_TYPE_ACCESS_CONTROL = 0x06</td>
         <td>NOTIFICATION_EVENT_WINDOW_DOOR_OPENED = 0x16<br>NOTIFICATION_EVENT_WINDOW_DOOR_CLOSED = 0x17</td>
     </tr>
 </table>
