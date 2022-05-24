@@ -1,221 +1,427 @@
-<h1>ZUNO_REPORTS_HANDLER()</h1>
+<span zunoVersion="v1">
+	<h1>ZUNO_REPORTS_HANDLER()</h1>
 
-<span class="function_description">
-This macro is used to setup up a handler for incoming reports from other sensors.
+	<span class="function_description">
+	This macro is used to setup up a handler for incoming reports from other sensors.
+	</span>
+	
+	<span class="function_description_note">
+	Syntax has changed starting from 2.1.5 release
+	</span>
+	
+	<span class="function_syntax">ZUNO_REPORTS_HANDLER(reportType, reportHandler)</span>
+	
+	<span class="function_parameters">
+		<span class="function_parameters_param">
+			<span class="function_parameters_param_name">reportType</span>
+			<span class="function_parameters_param_description">type of the report to handle: Battery, SensorMultilevel, SensorBinary, Notification, SwitchMultilevel, SwitchBinary, Meter, Basic.</span>
+		</span>
+		<span class="function_parameters_param">
+			<span class="function_parameters_param_name">reportHandler</span>
+			<span class="function_parameters_param_description">pointer to a user defined function that parses the incoming report of the defined type.</span>
+		</span>
+	</span>
+	
+	<span class="function_syntax">void reportHandler(void)</span>
+	
+	<span class="function_tip">
+	There are few helpful marco to parse the reported data inside the report handler:
+	<ul>
+		<li type="circle"><b>Generic</b></li>
+		<li>REPORT_NODE_ID() returns the sender Node Id</li>
+	
+		<li type="circle"><b>Basic</b></li>
+		<li>REPORT_BASIC_VALUE() returns the value</li>
+		
+		<li type="circle"><b>Switch Multilevel</b></li>
+		<li>REPORT_SWITCH_MULTILEVEL_VALUE() returns the value</li>
+		
+		<li type="circle"><b>Switch Binary</b></li>
+		<li>REPORT_SWITCH_BINARY_VALUE() returns the value</li>
+		
+		<li type="circle"><b>Notification (Alarm)</b></li>
+		<li>REPORT_NOTIFICATION_TYPE() returns notification type</li>
+		<li>REPORT_NOTIFICATION_EVENT() returns notification event</li>
+		<li>REPORT_NOTIFICATION_EVENT_PARAM(i) returns notification parameters</li>
+		<li>REPORT_NOTIFICATION_STATUS() returns notification status</li>
+	
+		<li type="circle"><b>Sensor Binary</b></li>
+		<li>REPORT_SENSOR_BINARY_TYPE() returns sensor type</li>
+		<li>REPORT_SENSOR_BINARY_VALUE() returns the value</li>
+		
+		<li type="circle"><b>Sensor Multilevel</b></li>
+		<li>REPORT_SENSOR_MULTILEVEL_TYPE() returns sensor type</li>
+		<li>REPORT_SENSOR_MULTILEVEL_SCALE() returns sensor scale</li>
+		<li>REPORT_SENSOR_MULTILEVEL_UNITS() returns sensor units</li>
+		<li>REPORT_SENSOR_MULTILEVEL_PRECISION() returns sensor precision (number of digits after .)</li>
+		<li>REPORT_SENSOR_MULTILEVEL_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_1B() returns the BYTE value for size = 1 bytes</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_2B() returns the WORD value for size = 2 bytes</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
+		
+		<li type="circle"><b>Meter</b></li>
+		<li>REPORT_METER_TYPE() returns sensor type</li>
+		<li>REPORT_METER_RATE() returns sensor type</li>
+		<li>REPORT_METER_SCALE() returns sensor scale</li>
+		<li>REPORT_METER_UNITS() returns sensor units</li>
+		<li>REPORT_METER_PRECISION() returns sensor precision (number of digits after .)</li>
+		<li>REPORT_METER_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
+		<li>REPORT_METER_VALUE_1B() returns the BYTE value for size = 1 bytes</li>
+		<li>REPORT_METER_VALUE_2B() returns the WORD value for size = 2 bytes</li>
+		<li>REPORT_METER_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
+		
+		<li type="circle"><b>Battery</b></li>
+		<li>REPORT_BATTERY_VALUE() returns battery level</li>
+		
+		<!--
+		<li>REPORT_TYPE() returns the type of the report: CC_BASIC, CC_SWITCH_BINARY, CC_SWITCH_MULTILEVEL, CC_SENSOR_BINARY, CC_SENSOR_MULTILEVEL, CC_METER, CC_THERMOSTAT_MODE, CC_THERMOSTAT_SETPOINT.</li>
+		
+		<li>REPORT_VALUE_1B() returns the BYTE value contained in the Switch Binary, Switch Multilevel, Sensor Binary/Notification, Door Lock, Thermostat Mode reports as well as Sensor Multilevel, Meter or Thermostat temperature report with size = 1 bytes</li>
+		<li>REPORT_VALUE_2B() returns the WORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 2 bytes</li>
+		<li>REPORT_VALUE_4B() returns the DWORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 4 bytes</li>
+		
+		<li>REPORT_SENSOR_TYPE() returns sensor type</li>
+		<li>REPORT_SENSOR_SCALE() returns sensor scale</li>
+		<li>REPORT_SENSOR_VALUE_UNITS() returns sensor units</li>
+		<li>REPORT_SENSOR_VALUE_PRECISION() returns sensor precision (number of digits after .)</li>
+		<li>REPORT_SENSOR_VALUE_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
+		
+		<li>REPORT_METER_TYPE() returns meter type</li>
+		<li>REPORT_METER_RATE() returns meter rate</li>
+		<li>REPORT_METER_VALUE_UNITS() returns meter units</li>
+		<li>REPORT_METER_VALUE_PRECISION() returns meter precision (number of digits after .)</li>
+		<li>REPORT_METER_VALUE_SIZE() returns Meter value size (1, 2 or 4 bytes)</li>
+		-->
+	</ul>
+	</span>
+	
+	<span class="function_description_note">
+	Z-Uno will save the highest security level it used to communicate with a devices. The same level will be expected for a report.
+	</span>
+	
+	<span class="function_example">
+		<pre>
+			<code class="c">ZUNO_REPORTS_HANDLER(reportType, reportHandler);
+	
+	void reportHandler() {
+	  ... REPORT_XXX_VALUE_1B() ...
+	}</code></pre>
+	</span>
+	
+	<span class="function_description_note">
+	It is suggested to return as fast as possible from the reports handler and do the main work in the loop().
+	</span>
+	
+	<span class="function_example">
+		<pre>
+			<code class="c">ZUNO_REPORTS_HANDLER(Battery, BatteryReport);
+	ZUNO_REPORTS_HANDLER(SensorMultilevel, SensorMultilevelReport);
+	ZUNO_REPORTS_HANDLER(SensorBinary, SensorBinaryReport);
+	ZUNO_REPORTS_HANDLER(Notification, NotificationReport);
+	ZUNO_REPORTS_HANDLER(SwitchMultilevel, SwitchMultilevelReport);
+	ZUNO_REPORTS_HANDLER(SwitchBinary, SwitchBinaryReport);
+	ZUNO_REPORTS_HANDLER(Meter, MeterReport);
+	ZUNO_REPORTS_HANDLER(Basic, BasicReport);
+	
+	#define SERIAL Serial0
+	ZUNO_ENABLE(LOGGING_DBG LOGGING_EVENTS);
+	
+	void logReportTitle(char * text) {
+		SERIAL.print(millis());
+		SERIAL.print("    ");
+		SERIAL.print(text);
+		SERIAL.print(" NODE:");
+		SERIAL.print(REPORT_NODE_ID());
+		SERIAL.print(" VALUE:");
+	}
+	
+	void BatteryReport() {
+		logReportTitle("BATTERY");
+		SERIAL.println(REPORT_BATTERY_VALUE(), HEX);
+	}
+	
+	void SensorMultilevelReport() {
+		logReportTitle("SENSOR MULTILEVEL");
+		switch(REPORT_SENSOR_MULTILEVEL_SIZE()) {
+			case 1:
+				SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_1B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
+				break;
+			case 2:
+				SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_2B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
+				break;
+			case 4:
+				SERIAL.fixPrint(long(REPORT_SENSOR_MULTILEVEL_VALUE_4B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
+				break;
+		}
+		SERIAL.print(" TYPE:");
+		SERIAL.print(REPORT_SENSOR_MULTILEVEL_TYPE(), HEX);
+		SERIAL.print(" SCALE:");
+		SERIAL.println(REPORT_SENSOR_MULTILEVEL_SCALE(), HEX);
+	}
+	
+	void SensorBinaryReport() {
+		logReportTitle("SENSOR BINARY");
+		SERIAL.print(REPORT_SENSOR_BINARY_VALUE(), HEX);
+		SERIAL.print(" TYPE:");
+		SERIAL.println(REPORT_SENSOR_BINARY_TYPE());
+	}
+	
+	void SwitchBinaryReport() {
+		logReportTitle("SWITCH BINARY");
+		SERIAL.println(REPORT_SWITCH_BINARY_VALUE(), HEX);
+	}
+	
+	void SwitchMultilevelReport() {
+		logReportTitle("SWITCH MULTILEVEL");
+		SERIAL.println(REPORT_SWITCH_MULTILEVEL_VALUE(), HEX);
+	}
+	
+	void NotificationReport() {
+		logReportTitle("NOTIFICATION ");
+		SERIAL.print(REPORT_NOTIFICATION_STATUS(), HEX);
+		SERIAL.print(" TYPE:");
+		SERIAL.print(REPORT_NOTIFICATION_TYPE(), HEX);
+		SERIAL.print(" EVENT:");
+		SERIAL.print(REPORT_NOTIFICATION_EVENT(), HEX);
+		SERIAL.print(" PARAM:");
+		SERIAL.println(REPORT_NOTIFICATION_EVENT_PARAM(0), HEX);
+	}
+	
+	void MeterReport() {
+		 logReportTitle("METER");
+		 switch(REPORT_METER_SIZE()){
+			case 1:
+				SERIAL.fixPrint(int(REPORT_METER_VALUE_1B()), REPORT_METER_PRECISION());
+				break;
+			case 2:
+				SERIAL.fixPrint(int(REPORT_METER_VALUE_2B()), REPORT_METER_PRECISION());
+				break;
+			case 4:
+				SERIAL.fixPrint(long(REPORT_METER_VALUE_4B()), REPORT_METER_PRECISION());
+				break;
+		}
+		SERIAL.print(" TYPE:");
+		SERIAL.print(REPORT_METER_TYPE(), HEX);
+		SERIAL.print(" SCALE:");
+		SERIAL.println(REPORT_METER_SCALE(), HEX);
+	}
+	
+	void BasicReport() {
+		logReportTitle("BASIC");
+		SERIAL.println(REPORT_BASIC_VALUE(), HEX);
+	}
+	
+	void setup() {
+		SERIAL.begin(115200);
+		SERIAL.print("START");
+	}
+	
+	void loop() {
+		delay(1000);
+	}</code></pre>
+	</span>
 </span>
 
-<span class="function_description_note">
-Syntax has changed starting from 2.1.5 release
-</span>
+<span zunoVersion="v2">
+	<h1>ZUNO_REPORTS_HANDLER()</h1>
 
-<span class="function_syntax">ZUNO_REPORTS_HANDLER(reportType, reportHandler)</span>
+	<span class="function_description">
+	This macro is used to setup up a handler for incoming reports from other sensors.
+	</span>
 
-<span class="function_parameters">
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">reportType</span>
-        <span class="function_parameters_param_description">type of the report to handle: Battery, SensorMultilevel, SensorBinary, Notification, SwitchMultilevel, SwitchBinary, Meter, Basic.</span>
-    </span>
-    <span class="function_parameters_param">
-        <span class="function_parameters_param_name">reportHandler</span>
-        <span class="function_parameters_param_description">pointer to a user defined function that parses the incoming report of the defined type.</span>
-    </span>
-</span>
-
-<span class="function_syntax">void reportHandler(void)</span>
-
-<span class="function_tip">
-There are few helpful marco to parse the reported data inside the report handler:
-<ul>
-    <li type="circle"><b>Generic</b></li>
-    <li>REPORT_NODE_ID() returns the sender Node Id</li>
-
-    <li type="circle"><b>Basic</b></li>
-    <li>REPORT_BASIC_VALUE() returns the value</li>
-    
-    <li type="circle"><b>Switch Multilevel</b></li>
-    <li>REPORT_SWITCH_MULTILEVEL_VALUE() returns the value</li>
-    
-    <li type="circle"><b>Switch Binary</b></li>
-    <li>REPORT_SWITCH_BINARY_VALUE() returns the value</li>
-    
-    <li type="circle"><b>Notification (Alarm)</b></li>
-    <li>REPORT_NOTIFICATION_TYPE() returns notification type</li>
-    <li>REPORT_NOTIFICATION_EVENT() returns notification event</li>
-    <li>REPORT_NOTIFICATION_EVENT_PARAM(i) returns notification parameters</li>
-    <li>REPORT_NOTIFICATION_STATUS() returns notification status</li>
-
-    <li type="circle"><b>Sensor Binary</b></li>
-    <li>REPORT_SENSOR_BINARY_TYPE() returns sensor type</li>
-    <li>REPORT_SENSOR_BINARY_VALUE() returns the value</li>
-    
-    <li type="circle"><b>Sensor Multilevel</b></li>
-    <li>REPORT_SENSOR_MULTILEVEL_TYPE() returns sensor type</li>
-    <li>REPORT_SENSOR_MULTILEVEL_SCALE() returns sensor scale</li>
-    <li>REPORT_SENSOR_MULTILEVEL_UNITS() returns sensor units</li>
-    <li>REPORT_SENSOR_MULTILEVEL_PRECISION() returns sensor precision (number of digits after .)</li>
-    <li>REPORT_SENSOR_MULTILEVEL_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
-    <li>REPORT_SENSOR_MULTILEVEL_VALUE_1B() returns the BYTE value for size = 1 bytes</li>
-    <li>REPORT_SENSOR_MULTILEVEL_VALUE_2B() returns the WORD value for size = 2 bytes</li>
-    <li>REPORT_SENSOR_MULTILEVEL_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
-    
-    <li type="circle"><b>Meter</b></li>
-    <li>REPORT_METER_TYPE() returns sensor type</li>
-    <li>REPORT_METER_RATE() returns sensor type</li>
-    <li>REPORT_METER_SCALE() returns sensor scale</li>
-    <li>REPORT_METER_UNITS() returns sensor units</li>
-    <li>REPORT_METER_PRECISION() returns sensor precision (number of digits after .)</li>
-    <li>REPORT_METER_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
-    <li>REPORT_METER_VALUE_1B() returns the BYTE value for size = 1 bytes</li>
-    <li>REPORT_METER_VALUE_2B() returns the WORD value for size = 2 bytes</li>
-    <li>REPORT_METER_VALUE_4B() returns the DWORD value for size = 4 bytes</li>
-    
-    <li type="circle"><b>Battery</b></li>
-    <li>REPORT_BATTERY_VALUE() returns battery level</li>
-    
-    <!--
-    <li>REPORT_TYPE() returns the type of the report: CC_BASIC, CC_SWITCH_BINARY, CC_SWITCH_MULTILEVEL, CC_SENSOR_BINARY, CC_SENSOR_MULTILEVEL, CC_METER, CC_THERMOSTAT_MODE, CC_THERMOSTAT_SETPOINT.</li>
-    
-    <li>REPORT_VALUE_1B() returns the BYTE value contained in the Switch Binary, Switch Multilevel, Sensor Binary/Notification, Door Lock, Thermostat Mode reports as well as Sensor Multilevel, Meter or Thermostat temperature report with size = 1 bytes</li>
-    <li>REPORT_VALUE_2B() returns the WORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 2 bytes</li>
-    <li>REPORT_VALUE_4B() returns the DWORD value contained in the Sensor Multilevel, Meter or Thermostat temperature report with size = 4 bytes</li>
-    
-    <li>REPORT_SENSOR_TYPE() returns sensor type</li>
-    <li>REPORT_SENSOR_SCALE() returns sensor scale</li>
-    <li>REPORT_SENSOR_VALUE_UNITS() returns sensor units</li>
-    <li>REPORT_SENSOR_VALUE_PRECISION() returns sensor precision (number of digits after .)</li>
-    <li>REPORT_SENSOR_VALUE_SIZE() returns sensor value size (1, 2 or 4 bytes)</li>
-    
-    <li>REPORT_METER_TYPE() returns meter type</li>
-    <li>REPORT_METER_RATE() returns meter rate</li>
-    <li>REPORT_METER_VALUE_UNITS() returns meter units</li>
-    <li>REPORT_METER_VALUE_PRECISION() returns meter precision (number of digits after .)</li>
-    <li>REPORT_METER_VALUE_SIZE() returns Meter value size (1, 2 or 4 bytes)</li>
-    -->
-</ul>
-</span>
-
-<span class="function_description_note">
-Z-Uno will save the highest security level it used to communicate with a devices. The same level will be expected for a report.
-</span>
-
-<span class="function_example">
-    <pre>
-        <code class="c">ZUNO_REPORTS_HANDLER(reportType, reportHandler);
-
-void reportHandler() {
-  ... REPORT_XXX_VALUE_1B() ...
-}</code></pre>
-</span>
-
-<span class="function_description_note">
-It is suggested to return as fast as possible from the reports handler and do the main work in the loop().
-</span>
-
-<span class="function_example">
-    <pre>
-        <code class="c">ZUNO_REPORTS_HANDLER(Battery, BatteryReport);
-ZUNO_REPORTS_HANDLER(SensorMultilevel, SensorMultilevelReport);
-ZUNO_REPORTS_HANDLER(SensorBinary, SensorBinaryReport);
-ZUNO_REPORTS_HANDLER(Notification, NotificationReport);
-ZUNO_REPORTS_HANDLER(SwitchMultilevel, SwitchMultilevelReport);
-ZUNO_REPORTS_HANDLER(SwitchBinary, SwitchBinaryReport);
-ZUNO_REPORTS_HANDLER(Meter, MeterReport);
-ZUNO_REPORTS_HANDLER(Basic, BasicReport);
-
-#define SERIAL Serial0
-ZUNO_ENABLE(LOGGING_DBG LOGGING_EVENTS);
-
-void logReportTitle(char * text) {
-    SERIAL.print(millis());
-    SERIAL.print("    ");
-    SERIAL.print(text);
-    SERIAL.print(" NODE:");
-    SERIAL.print(REPORT_NODE_ID());
-    SERIAL.print(" VALUE:");
-}
-
-void BatteryReport() {
-    logReportTitle("BATTERY");
-    SERIAL.println(REPORT_BATTERY_VALUE(), HEX);
-}
-
-void SensorMultilevelReport() {
-    logReportTitle("SENSOR MULTILEVEL");
-    switch(REPORT_SENSOR_MULTILEVEL_SIZE()) {
-        case 1:
-            SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_1B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
-            break;
-        case 2:
-            SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_2B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
-            break;
-        case 4:
-            SERIAL.fixPrint(long(REPORT_SENSOR_MULTILEVEL_VALUE_4B()), REPORT_SENSOR_MULTILEVEL_PRECISION());
-            break;
-    }
-    SERIAL.print(" TYPE:");
-    SERIAL.print(REPORT_SENSOR_MULTILEVEL_TYPE(), HEX);
-    SERIAL.print(" SCALE:");
-    SERIAL.println(REPORT_SENSOR_MULTILEVEL_SCALE(), HEX);
-}
-
-void SensorBinaryReport() {
-    logReportTitle("SENSOR BINARY");
-    SERIAL.print(REPORT_SENSOR_BINARY_VALUE(), HEX);
-    SERIAL.print(" TYPE:");
-    SERIAL.println(REPORT_SENSOR_BINARY_TYPE());
-}
-
-void SwitchBinaryReport() {
-    logReportTitle("SWITCH BINARY");
-    SERIAL.println(REPORT_SWITCH_BINARY_VALUE(), HEX);
-}
-
-void SwitchMultilevelReport() {
-    logReportTitle("SWITCH MULTILEVEL");
-    SERIAL.println(REPORT_SWITCH_MULTILEVEL_VALUE(), HEX);
-}
-
-void NotificationReport() {
-    logReportTitle("NOTIFICATION ");
-    SERIAL.print(REPORT_NOTIFICATION_STATUS(), HEX);
-    SERIAL.print(" TYPE:");
-    SERIAL.print(REPORT_NOTIFICATION_TYPE(), HEX);
-    SERIAL.print(" EVENT:");
-    SERIAL.print(REPORT_NOTIFICATION_EVENT(), HEX);
-    SERIAL.print(" PARAM:");
-    SERIAL.println(REPORT_NOTIFICATION_EVENT_PARAM(0), HEX);
-}
-
-void MeterReport() {
-     logReportTitle("METER");
-     switch(REPORT_METER_SIZE()){
-        case 1:
-            SERIAL.fixPrint(int(REPORT_METER_VALUE_1B()), REPORT_METER_PRECISION());
-            break;
-        case 2:
-            SERIAL.fixPrint(int(REPORT_METER_VALUE_2B()), REPORT_METER_PRECISION());
-            break;
-        case 4:
-            SERIAL.fixPrint(long(REPORT_METER_VALUE_4B()), REPORT_METER_PRECISION());
-            break;
-    }
-    SERIAL.print(" TYPE:");
-    SERIAL.print(REPORT_METER_TYPE(), HEX);
-    SERIAL.print(" SCALE:");
-    SERIAL.println(REPORT_METER_SCALE(), HEX);
-}
-
-void BasicReport() {
-    logReportTitle("BASIC");
-    SERIAL.println(REPORT_BASIC_VALUE(), HEX);
-}
-
-void setup() {
-    SERIAL.begin(115200);
-    SERIAL.print("START");
-}
-
-void loop() {
-    delay(1000);
-}</code></pre>
+	<span class="function_syntax">ZUNO_REPORTS_HANDLER(reportType, reportHandler)</span>
+	
+	<span class="function_parameters">
+		<span class="function_parameters_param">
+			<span class="function_parameters_param_name">reportType</span>
+			<span class="function_parameters_param_description">type of the report to handle: Battery, SensorMultilevel, SensorBinary, Notification, SwitchMultilevel, SwitchBinary, Meter, Basic.</span>
+		</span>
+		<span class="function_parameters_param">
+			<span class="function_parameters_param_name">reportHandler</span>
+			<span class="function_parameters_param_description">pointer to a user defined function that parses the incoming report of the defined type.</span>
+		</span>
+	</span>
+	
+	<span class="function_syntax">void reportHandler(ReportAuxData_t *report_data)</span>
+	
+	<span class="function_tip">
+	There are few helpful marco to parse the reported data inside the report handler:
+	<ul>
+		<li type="circle"><b>Generic</b></li>
+		<li>REPORT_NODE_ID(report_data) returns the sender Node Id</li>
+	
+		<li type="circle"><b>Basic</b></li>
+		<li>REPORT_BASIC_VALUE(report_data) returns the value</li>
+		
+		<li type="circle"><b>Switch Multilevel</b></li>
+		<li>REPORT_SWITCH_MULTILEVEL_VALUE(report_data) returns the value</li>
+		
+		<li type="circle"><b>Switch Binary</b></li>
+		<li>REPORT_SWITCH_BINARY_VALUE(report_data) returns the value</li>
+		
+		<li type="circle"><b>Notification (Alarm)</b></li>
+		<li>REPORT_NOTIFICATION_TYPE(report_data) returns notification type</li>
+		<li>REPORT_NOTIFICATION_EVENT(report_data) returns notification event</li>
+		<li>REPORT_NOTIFICATION_EVENT_PARAM(report_data, i) returns notification parameters</li>
+		<li>REPORT_NOTIFICATION_STATUS(report_data) returns notification status</li>
+	
+		<li type="circle"><b>Sensor Binary</b></li>
+		<li>REPORT_SENSOR_BINARY_TYPE(report_data) returns sensor type</li>
+		<li>REPORT_SENSOR_BINARY_VALUE(report_data) returns the value</li>
+		
+		<li type="circle"><b>Sensor Multilevel</b></li>
+		<li>REPORT_SENSOR_MULTILEVEL_TYPE(report_data) returns sensor type</li>
+		<li>REPORT_SENSOR_MULTILEVEL_SCALE(report_data) returns sensor scale</li>
+		<li>REPORT_SENSOR_MULTILEVEL_UNITS(report_data) returns sensor units</li>
+		<li>REPORT_SENSOR_MULTILEVEL_PRECISION(report_data) returns sensor precision (number of digits after .)</li>
+		<li>REPORT_SENSOR_MULTILEVEL_SIZE(report_data) returns sensor value size (1, 2 or 4 bytes)</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_1B(report_data) returns the BYTE value for size = 1 bytes</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_2B(report_data) returns the WORD value for size = 2 bytes</li>
+		<li>REPORT_SENSOR_MULTILEVEL_VALUE_4B(report_data) returns the DWORD value for size = 4 bytes</li>
+		
+		<li type="circle"><b>Meter</b></li>
+		<li>REPORT_METER_TYPE(report_data) returns sensor type</li>
+		<li>REPORT_METER_RATE(report_data) returns sensor type</li>
+		<li>REPORT_METER_SCALE(report_data) returns sensor scale</li>
+		<li>REPORT_METER_UNITS(report_data) returns sensor units</li>
+		<li>REPORT_METER_PRECISION(report_data) returns sensor precision (number of digits after .)</li>
+		<li>REPORT_METER_SIZE(report_data) returns sensor value size (1, 2 or 4 bytes)</li>
+		<li>REPORT_METER_VALUE_1B(report_data) returns the BYTE value for size = 1 bytes</li>
+		<li>REPORT_METER_VALUE_2B(report_data) returns the WORD value for size = 2 bytes</li>
+		<li>REPORT_METER_VALUE_4B(report_data) returns the DWORD value for size = 4 bytes</li>
+		
+		<li type="circle"><b>Battery</b></li>
+		<li>REPORT_BATTERY_VALUE(report_data) returns battery level</li>
+	</ul>
+	</span>
+	
+	<span class="function_description_note">
+	Z-Uno will save the highest security level it used to communicate with a devices. The same level will be expected for a report.
+	</span>
+	
+	<span class="function_example">
+		<pre>
+			<code class="c">ZUNO_REPORTS_HANDLER(reportType, reportHandler);
+	
+	void reportHandler(ReportAuxData_t *report_data) {
+	  ... REPORT_XXX_VALUE_1B(report_data) ...
+	}</code></pre>
+	</span>
+	
+	<span class="function_description_note">
+	It is suggested to return as fast as possible from the reports handler and do the main work in the loop().
+	</span>
+	
+	<span class="function_example">
+		<pre>
+			<code class="c">
+	#include "Arduino.h"
+	#define MY_SERIAL					Serial0
+	
+	ZUNO_REPORTS_HANDLER(Battery, BatteryReport);
+	ZUNO_REPORTS_HANDLER(SensorMultilevel, SensorMultilevelReport);
+	ZUNO_REPORTS_HANDLER(SensorBinary, SensorBinaryReport);
+	ZUNO_REPORTS_HANDLER(Notification, NotificationReport);
+	ZUNO_REPORTS_HANDLER(SwitchMultilevel, SwitchMultilevelReport);
+	ZUNO_REPORTS_HANDLER(SwitchBinary, SwitchBinaryReport);
+	ZUNO_REPORTS_HANDLER(Meter, MeterReport);
+	ZUNO_REPORTS_HANDLER(Basic, BasicReport);
+	
+	void logReportTitle(const char * text, ReportAuxData_t *report_data) {
+		MY_SERIAL.print(millis());
+		MY_SERIAL.print("    ");
+		MY_SERIAL.print(text);
+		MY_SERIAL.print(" NODE:");
+		MY_SERIAL.print(REPORT_NODE_ID(report_data));
+		MY_SERIAL.print(" VALUE:");
+	}
+	
+	void BatteryReport(ReportAuxData_t *report_data) {
+		logReportTitle("BATTERY", report_data);
+		MY_SERIAL.println(REPORT_BATTERY_VALUE(report_data), HEX);
+	}
+	
+	void SensorMultilevelReport(ReportAuxData_t *report_data) {
+		logReportTitle("SENSOR MULTILEVEL", report_data);
+		switch(REPORT_SENSOR_MULTILEVEL_SIZE(report_data)) {
+			case 1:
+				MY_SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_1B(report_data)), REPORT_SENSOR_MULTILEVEL_PRECISION(report_data));
+				break;
+			case 2:
+				MY_SERIAL.fixPrint(int(REPORT_SENSOR_MULTILEVEL_VALUE_2B(report_data)), REPORT_SENSOR_MULTILEVEL_PRECISION(report_data));
+				break;
+			case 4:
+				MY_SERIAL.fixPrint(long(REPORT_SENSOR_MULTILEVEL_VALUE_4B(report_data)), REPORT_SENSOR_MULTILEVEL_PRECISION(report_data));
+				break;
+		}
+		MY_SERIAL.print(" TYPE:");
+		MY_SERIAL.print(REPORT_SENSOR_MULTILEVEL_TYPE(report_data), HEX);
+		MY_SERIAL.print(" SCALE:");
+		MY_SERIAL.println(REPORT_SENSOR_MULTILEVEL_SCALE(report_data), HEX);
+	}
+	
+	void SensorBinaryReport(ReportAuxData_t *report_data) {
+		logReportTitle("SENSOR BINARY", report_data);
+		MY_SERIAL.print(REPORT_SENSOR_BINARY_VALUE(report_data), HEX);
+		MY_SERIAL.print(" TYPE:");
+		MY_SERIAL.println(REPORT_SENSOR_BINARY_TYPE(report_data));
+	}
+	
+	void SwitchBinaryReport(ReportAuxData_t *report_data) {
+		logReportTitle("SWITCH BINARY", report_data);
+		MY_SERIAL.println(REPORT_SWITCH_BINARY_VALUE(report_data), HEX);
+	}
+	
+	void SwitchMultilevelReport(ReportAuxData_t *report_data) {
+		logReportTitle("SWITCH MULTILEVEL", report_data);
+		MY_SERIAL.println(REPORT_SWITCH_MULTILEVEL_VALUE(report_data), HEX);
+	}
+	
+	void NotificationReport(ReportAuxData_t *report_data) {
+		logReportTitle("NOTIFICATION ", report_data);
+		MY_SERIAL.print(REPORT_NOTIFICATION_STATUS(report_data), HEX);
+		MY_SERIAL.print(" TYPE:");
+		MY_SERIAL.print(REPORT_NOTIFICATION_TYPE(report_data), HEX);
+		MY_SERIAL.print(" EVENT:");
+		MY_SERIAL.print(REPORT_NOTIFICATION_EVENT(report_data), HEX);
+		MY_SERIAL.print(" PARAM:");
+		MY_SERIAL.println(REPORT_NOTIFICATION_EVENT_PARAM(report_data, 0), HEX);
+	}
+	
+	void MeterReport(ReportAuxData_t *report_data) {
+			logReportTitle("METER", report_data);
+			switch(REPORT_METER_SIZE(report_data)){
+			case 1:
+				MY_SERIAL.fixPrint(int(REPORT_METER_VALUE_1B(report_data)), REPORT_METER_PRECISION(report_data));
+				break;
+			case 2:
+				MY_SERIAL.fixPrint(int(REPORT_METER_VALUE_2B(report_data)), REPORT_METER_PRECISION(report_data));
+				break;
+			case 4:
+				MY_SERIAL.fixPrint(long(REPORT_METER_VALUE_4B(report_data)), REPORT_METER_PRECISION(report_data));
+				break;
+		}
+		MY_SERIAL.print(" TYPE:");
+		MY_SERIAL.print(REPORT_METER_TYPE(report_data), HEX);
+		MY_SERIAL.print(" SCALE:");
+		MY_SERIAL.println(REPORT_METER_SCALE(report_data), HEX);
+	}
+	
+	void BasicReport(ReportAuxData_t *report_data) {
+		logReportTitle("BASIC", report_data);
+		MY_SERIAL.println(REPORT_BASIC_VALUE(report_data), HEX);
+	}
+	
+	/* the setup function runs once, when you press reset or power the board */
+	void setup() {
+		MY_SERIAL.begin(115200);
+		MY_SERIAL.print("START");
+	}
+	
+	/* the loop function runs over and over again forever */
+	void loop() {
+		delay(1000);
+	}
+		</code></pre>
+	</span>
 </span>
