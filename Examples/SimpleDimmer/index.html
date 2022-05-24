@@ -37,16 +37,12 @@ void loop() {
 }
 
 void setter(byte value) {
-  byte tempVariable;
   // value is a variable, holding a "new value"
   // which came from the controller or other Z-Wave device
   if (value > 99) {
     // by Z-Wave specification, this value can't be more then 99
     value = 99;
   }
-  // but the LED brightness scale ranges from 0 to 255
-  // we need to prepare our "value" for this new scale
-  tempVariable = ((word)value) * 255 / 99);
 
   // now we set the LED brightness
   analogWrite(PWM1, ((long)value) * 255 / 99);
