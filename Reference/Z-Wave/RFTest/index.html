@@ -1,5 +1,5 @@
 <h1>Z-Uno RF Test Mode</h1>
-<p>Z-Uno is a radio emiiting device and requires certification in different countries. To help you certify Z-Uno based devices we have added RF Test Mode.</p>
+<p>Z-Uno is a radio emitting device and requires certification in different countries. To help you certify Z-Uno based devices we have added RF Test Mode.</p>
 <p>To enter in RF Test Mode you need to connect TX0 and RX0 pins together (see <a href="/technical/pinout/">Z-Uno pinout</a>), hold Service button and press Reset button. Repeat the process to switch to next RF Test Mode. The LED will let you know which test mode is currently running.
 <br/>
 <table>
@@ -15,3 +15,23 @@
 </table>
 </p>
 <p>To go back to normal operational mode of Z-Uno disconnect TX0 from RX0 and press Reset without touching Service button.</p>
+<p zunoVersion="v2">Z-Uno 2 can be also turned in RF test mode using <b>zme_make</b> command line tool from the Z-Uno package. The tool is located in <a href="/getting-started/troubleshooting#WhereIsArduinoFolder">.arduino15</a>/packages/Z-Uno2/tools/zme_make/<i>x.y.z</i></p>
+<code zunoVersion="v2"><pre>
+40 kbps channel, modulated: zme_make(.exe) radiotest -m  B10 -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
+40 kbps channel, carrier only: zme_make(.exe)  radiotest -m  CARRIER -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
+100 kbps channel, modulated: zme_make(.exe)  radiotest -m  B10 -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
+100 kbps channel, carrier only: zme_make(.exe)  radiotest -m  CARRIER -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
+</pre></code>
+<p zunoVersion="v2">Do zme_make(.exe) -h for more info:</p>
+<code zunoVersion="v2"><pre>
+  -d DEVICE                             Device file (UNIX) or COM-port (WINDOWS) of adapter
+  -m {CARRIER,PN9,B10,PKG}              Rail test mode
+                                        CARRIER - carrier only
+                                        PN9 = x^9 + x^5 + 1
+                                        B10 = 10101010....
+                                        PKG = Z-Wave packet with random content and the chip UUID at the end
+  -fr {EU,RU,US,IN,HK,CN,JP,IL,MY,ANZ}  Region
+  -c CHANNEL                            Channel: 0 - 100, 1-40, 2 -9.6
+  -p POWER                              Power of AMP in 10th of dBms
+  -t TIMEOUT                            Timeout in milliseconds
+</pre></code>
