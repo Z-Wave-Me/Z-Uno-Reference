@@ -19,8 +19,8 @@
 <code zunoVersion="v2"><pre>
 40 kbps channel, modulated: zme_make(.exe) radiotest -m  B10 -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
 40 kbps channel, carrier only: zme_make(.exe)  radiotest -m  CARRIER -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
-100 kbps channel, modulated: zme_make(.exe)  radiotest -m  B10 -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
-100 kbps channel, carrier only: zme_make(.exe)  radiotest -m  CARRIER -c 1 -fr EU -t 10000 -d /dev/ttyUSB0
+100 kbps channel, modulated: zme_make(.exe)  radiotest -m  B10 -c 0 -fr EU -t 10000 -d /dev/ttyUSB0
+100 kbps channel, carrier only: zme_make(.exe)  radiotest -m  CARRIER -c 0 -fr EU -t 10000 -d /dev/ttyUSB0
 </pre></code>
 {literal}
 <p zunoVersion="v2">Do zme_make(.exe) -h for more info:</p>
@@ -32,7 +32,7 @@
                                           B10 = 10101010....
                                           PKG = Z-Wave packet with random content and the chip UUID at the end
   -fr {EU,RU,US,IN,HK,CN,JP,IL,MY,ANZ}  Region
-  -c CHANNEL                            Channel: 0 - 100, 1-40, 2 -9.6
+  -c CHANNEL                            Channel: 0 = 100 kbps, 1 = 40 kbps, 2 = 9.6 kbps
   -p POWER                              Power of AMP in 10th of dBms
   -t TIMEOUT                            Timeout in milliseconds
 </pre></code>
