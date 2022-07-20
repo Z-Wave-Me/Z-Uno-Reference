@@ -1,0 +1,52 @@
+<span zunoVersion="v2">
+<h1>zunoPTIConfigUART()</h1>
+<span class="function_description">
+	This function allows you to configuration Packet Trace Interface.
+</span>
+
+<span class="function_syntax">
+	<pre><code class="c">zunoPTIConfigUART(tx_pin, baud)</code></pre>
+</span>
+	
+<span class="function_parameters">
+	<span class="function_parameters_param">
+		<span class="function_parameters_param_name">tx_pin:</span>
+		<span class="function_parameters_param_description">Any Z-Uno pin.</span>
+		<span class="function_parameters_param_name">baud:</span>
+		<span class="function_parameters_param_description">Output baudrate; minimal baud is 230400; maximum baud is 1.6MBit</span>
+	</span>
+</span>
+
+<span class="function_returns">
+	bool: true - if success.
+</span>
+
+
+<span class="function_example">
+	<pre>
+		<code class="c">
+#define MY_SERIAL				Serial0
+
+#define PTI_PIN					TX2// TX2 is default USB CDC pin
+#define PTI_BAUDRATE			230400
+
+void setup() {
+	MY_SERIAL.begin(115200);
+	delay(1000);
+	MY_SERIAL.print("\n\nEnable Packet Trace Interface on pin#");
+	MY_SERIAL.print(PTI_PIN);
+	MY_SERIAL.print(" BAUD:");
+	MY_SERIAL.print(PTI_BAUDRATE);
+	MY_SERIAL.print(" ");
+	if(zunoPTIConfigUART(PTI_PIN, PTI_BAUDRATE) == true)
+		Serial0.println("[Done]");
+	else
+		Serial0.println("[Failed]");
+}
+
+// Just an empty loop function
+void loop() {
+}
+		</code>
+	</pre>
+</span>
