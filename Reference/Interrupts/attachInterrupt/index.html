@@ -123,13 +123,13 @@ You are able to attach up to 16 interrupts simultaneously. Each pin has to have 
 </table>
 
 <span class="function_syntax">
-attachInterrupt(interrupti, userFunc, mode)<br>
+attachInterrupt(pin, userFunc, mode)<br>
 </span>
 
 <span class="function_parameters">
 	<span class="function_parameters_param">
-		<span class="function_parameters_param_name">interrupti:</span>
-		<span class="function_parameters_param_description">  the interrupt index. Use <b>digitalPinToInterrupt()</b> to convert pin to its interrupt index.</span>
+		<span class="function_parameters_param_name">pin:</span>
+		<span class="function_parameters_param_description"> the number of the pin whose mode you wish to set.</span>
 	</span>
 	<span class="function_parameters_param">
 		<span class="function_parameters_param_name">userFunc:</span>
@@ -165,7 +165,7 @@ volatile byte state = LOW;
 void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(interruptPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, CHANGE);
+  attachInterrupt(interruptPin, blink, CHANGE);
 }
 
 void loop() {
@@ -179,6 +179,5 @@ void blink() {
 	</pre>
 </span>
 <span class="function_see_also">
-<span class="function_ref" link="Interrupts/attachInterrupt">detachInterrupt</span>() function <br>
-<span class="function_ref" link="Interrupts/digitalPinToInterrup">digitalPinToInterrupt</span>() function
+<span class="function_ref" link="Interrupts/detachInterrupt">detachInterrupt</span>() function <br>
 </span>
