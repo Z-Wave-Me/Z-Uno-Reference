@@ -50,7 +50,7 @@ ZUNO_SETUP_CHANNELS(
 );
 
 void setup() {
-  number_of_sensors = ds18b20.findAllSensors(addresses);
+  number_of_sensors = ds18b20.findAllSensors(addresses, N_SENSOR);
 }
 
 void loop() {
