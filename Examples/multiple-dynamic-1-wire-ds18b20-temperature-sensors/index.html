@@ -43,7 +43,7 @@ ZUNO_ENABLE(WITH_CC_SENSOR_MULTILEVEL);
 void setup() {
   // Scanning sensors on the bus every time we starting a sketch
   delay(1000);
-  number_of_sensors = ds18b20.findAllSensors(addresses);
+  number_of_sensors = ds18b20.findAllSensors(addresses, MAX_SENSORS);
 
   if (number_of_sensors > MAX_SENSORS)
     number_of_sensors = MAX_SENSORS;
