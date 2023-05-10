@@ -65,7 +65,8 @@
 <ul>
     <li>Z-Wave Plus compliant</li>
     <li>all Z-Wave frequencies (check availability)</li>
-    <li>out of the box support of AES 128 bit Security (S0 and S2)</li>
+    <li zunoVersion="v1">out of the box support of AES 128 bit Security (S0 and S2)</li>
+    <li zunoVersion="v2">2 × Hardware Cryptographic Acceleration for AES 128/256, SHA-1, SHA-2 (SHA-224 and SHA-256) and ECC</li>
     <li>upgrade via USB or radio (Z-Wave OTA)</li>
     <li>Multichannel (32 channels)</li>
     <li>5 Association groups</li>
@@ -85,6 +86,9 @@
     <li>Water Valve</li>
     <li>Siren</li>
     <li>Thermostat</li>
+    <li zunoVersion="v2">Flow Stop</li>
+    <li zunoVersion="v2">Switch Color</li>
+    <li zunoVersion="v2">Blinds</li>
 </ul>
 
 <h3 link="Dimensions">Dimensions:</h3>
@@ -97,7 +101,8 @@
 
 <h3 link="Antenna">Antenna:</h3>
 <ul>
-    <li>Antenna type: wire antenna 86 mm for 865-870 MhZ</li>
+    <li zunoVersion="v1">Antenna type: wire antenna 86 mm for 865-870 MhZ</li>
+    <li zunoVersion="v2">Antenna type: wire antenna 115 mm for 865-925 MhZ</li>
     <li>Alternative antenna: optional u.fl connector can be soldered (to RF2 pads)</li>
 </ul>
 
@@ -105,11 +110,16 @@
 <h3 link="Electrical">Electrical characteristics:</h3>
 <ul>
     <li>Digital pin in logical 1: > 2.1 V, leakage current 10 μA</li>
-    <li>Digital pin in logical 0: < 0.9 V, leakage current 10 μA or 40&ndash;120 μA (with internal pull-up enabled)</li>
-    <li>Internal pullup resistor: 15&ndash;20 kΩ (at +25°C)</li>
-    <li>Digital pin out logical 1: > 2.4 V, max current sourcing 8 mA (16 mA for digital pins 3-6)</li>
-    <li>Digital pin out logical 0: < 0.4 V, max current sinking 8 mA (16 mA for digital pins 3-6)</li>
-    <li>Total max current sourcing from GPIO pins: 120 mA</li>
+    <li zunoVersion="v1">Digital pin in logical 0: < 0.9 V, leakage current 10 μA or 40&ndash;120 μA (with internal pull-up enabled)</li>
+    <li zunoVersion="v2">All GPIO pins except PB14 and PB15, Input leakage current 30nA max</li>    
+    <li zunoVersion="v1">Internal pullup resistor: 15&ndash;20 kΩ (at +25°C)</li>
+    <li zunoVersion="v2">Internal pullup resistor: 65 kΩ max (at +25°C)</li>
+    <li zunoVersion="v1">Digital pin out logical 1: > 2.4 V, max current sourcing 8 mA (16 mA for digital pins 3-6)</li>
+    <li zunoVersion="v2">Digital pin out logical 1: > 2.4 V, max current sourcing 50 mA </li>
+    <li zunoVersion="v1">Digital pin out logical 0: < 0.4 V, max current sinking 8 mA (16 mA for digital pins 3-6)</li>
+    <li zunoVersion="v2">Digital pin out logical 0: < 0.4 V, max current sinking 50 mA </li>
+    <li zunoVersion="v1">Total max current sourcing from GPIO pins: 120 mA</li>
+    <li zunoVersion="v2">Total max current sourcing from GPIO pins: 200 mA</li>
     <li>Power consumption on 3.3 V:
         <ul style="margin-bottom: 0;">
             <li>in always listening mode 50 mA</li>
