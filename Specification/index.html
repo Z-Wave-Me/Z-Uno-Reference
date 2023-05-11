@@ -95,7 +95,8 @@
 <ul>
     <li>L×W×H: 39×20×16 mm (PCB dimentions with all compinents)</li>
     <li>L×W×H: 39×20×7 mm (PCB dimentions with PLS and battery connectors removed)</li>
-    <li>Antenna lenght: 86 mm (89 mm with isolation), can be bent to better fit your dimensions</li>
+   <li zunoVersion="v1">Antenna lenght: 86 mm (89 mm with isolation), can be bent to better fit your dimensions</li>
+   <li zunoVersion="v2">Antenna lenght: 115 mm (118 mm with isolation), can be bent to better fit your dimensions</li>
     <li>Weigth: 7 g</li>
 </ul>
 
@@ -122,17 +123,22 @@
     <li zunoVersion="v2">Total max current sourcing from GPIO pins: 200 mA</li>
     <li>Power consumption on 3.3 V:
         <ul style="margin-bottom: 0;">
-            <li>in always listening mode 50 mA</li>
-            <li>in sleep mode 1 mA (about 7 μA if DC-DC is turned off by unsoldering R12)</li>
-            <li>in FLiRS mode 1 mA (about 70 μA if DC-DC is turned off by unsoldering R12)</li>
+            <li zunoVersion="v1">in always listening mode 50 mA</li>
+            <li zunoVersion="v2">in always listening mode xx mA</li>
+            <li zunoVersion="v1">in sleep mode 1 mA (about 7 μA if DC-DC is turned off by unsoldering R12)</li>
+            <li zunoVersion="v2">in sleep mode x mA (about x μA if DC-DC is turned off by unsoldering R12)</li>
+            <li zunoVersion="v1">in FLiRS mode 1 mA (about 70 μA if DC-DC is turned off by unsoldering R12)</li>
+            <li zunoVersion="v2">in FLiRS mode x mA (about xx μA if DC-DC is turned off by unsoldering R12)</li>
         </ul>
     </li>
-    <li>Power consumption on 5 V: in always listening mode &sim; 30 mA (can be lowered by using external switching DC-DC)</li>
-    <li>Power consumption on 7&ndash;18 V: in always listening mode &sim; 35 mA (can be lowered by using external switching DC-DC)</li>
+    <li zunoVersion="v1">Power consumption on 5 V: in always listening mode &sim; 30 mA (can be lowered by using external switching DC-DC)</li>
+    <li zunoVersion="v2">Power consumption on 5 V: in always listening mode &sim; xx mA (can be lowered by using external switching DC-DC)</li>
+    <li zunoVersion="v1">Power consumption on 7&ndash;18 V: in always listening mode &sim; 35 mA (can be lowered by using external switching DC-DC)</li>
+    <li zunoVersion="v2">Power consumption on 7&ndash;18 V: in always listening mode &sim; xx mA (can be lowered by using external switching DC-DC)</li>
     <li>DC-DC installed:
         <ul style="margin-bottom: 0;">
-            <li>7&ndash;18 V &rarr; 5 V: NCP1117ST50T3G, max current sourcing from 5V pin 900 mA</li>
-            <li>5 V &rarr; 3 V: MCP1700, max current sourcing from 3V pin 200 mA</li>
+            <li>7&ndash;18 V &rarr; 5 V: NCP1117ST50T3G, max current sourcing from 5V pin 400 mA</li>
+            <li>5 V &rarr; 3 V: MCP1700, max current sourcing from 3V pin 150 mA</li>
         </ul>
     </li>
 </ul>
