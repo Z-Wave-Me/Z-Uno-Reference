@@ -10,11 +10,11 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg17323"
-   viewBox="0 0 708.66141 289.16737"
-   height="81.609459mm"
-   width="200mm"
-   sodipodi:docname="Zuno_2_vass_v03_01.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   viewBox="0 0 527.64771 302.63206"
+   height="85.409492mm"
+   width="148.91391mm"
+   sodipodi:docname="Z-Uno 2 rev 03.01 pinout original.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -24,15 +24,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1013"
+     inkscape:window-width="3840"
+     inkscape:window-height="2032"
      id="namedview2057"
      showgrid="false"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="356.3954"
-     inkscape:cy="103.9114"
-     inkscape:window-x="-9"
-     inkscape:window-y="1341"
+     inkscape:zoom="3.5527345"
+     inkscape:cx="279.19792"
+     inkscape:cy="98.388959"
+     inkscape:window-x="0"
+     inkscape:window-y="54"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:snap-global="true"
@@ -42,10 +42,16 @@
      inkscape:snap-grids="true"
      inkscape:snap-bbox-edge-midpoints="true"
      showguides="false"
-     inkscape:snap-others="false">
+     inkscape:snap-others="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
     <inkscape:grid
        type="xygrid"
-       id="grid3245" />
+       id="grid3245"
+       originx="-41.584921"
+       originy="-5.1772884" />
   </sodipodi:namedview>
   <defs
      id="defs17325">
@@ -1154,16 +1160,16 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(851.50472,-391.32449)"
+     transform="translate(809.9198,-372.68253)"
      id="layer1">
     <path
        inkscape:connector-curvature="0"
-       d="m -531.14905,574.87902 177.58373,0 m -177.58373,-10.9175 176.20406,0 m -176.20406,-10.91625 h 208.80297 m -208.80297,-10.9175 175.82063,0 m -175.82063,-10.91625 176.08433,0 m -176.08433,-10.9175 176.88219,0 m -176.88219,-10.91625 176.99367,0 m -176.99367,-10.91625 153.3173,0 m -153.3173,-10.9175 153.50413,0 m -153.50413,-10.91625 149.27159,0 m -149.27159,-10.91625 112.30688,0 m -112.30688,-10.9175 112.61938,0 m -112.61938,-10.91625 h 47.32192 2.40306 1.78158 l 93.92776,0 m 33.19818,141.89 -178.5325,0 m 0.2225,10.905 177.55625,0"
+       d="m -531.14905,574.87902 h 177.58373 m -177.58373,-10.9175 h 176.20406 m -176.20406,-10.91625 h 208.80297 m -208.80297,-10.9175 h 175.82063 m -175.82063,-10.91625 h 176.08433 m -176.08433,-10.9175 h 176.88219 m -176.88219,-10.91625 h 176.99367 m -176.99367,-10.91625 h 153.3173 m -153.3173,-10.9175 h 153.50413 m -153.50413,-10.91625 h 149.27159 m -149.27159,-10.91625 h 112.30688 m -112.30688,-10.9175 h 112.61938 m -112.61938,-10.91625 h 47.32192 2.40306 1.78158 93.92776 m 33.19818,141.89 h -178.5325 m 0.2225,10.905 h 177.55625"
        style="fill:none;stroke:#403b50;stroke-width:0.8125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
        id="path1380"
        sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc" />
@@ -1263,7 +1269,7 @@
            height="60.45763"
            width="181.37289"
            id="rect3411" /></flowRegion><flowPara
-         id="flowPara3413"></flowPara></flowRoot>    <path
+         id="flowPara3413" /></flowRoot>    <path
        inkscape:connector-curvature="0"
        d="m -698.10405,670.11427 c 0,1.99625 -1.61875,3.61249 -3.6125,3.61249 -1.995,0 -3.61375,-1.61624 -3.61375,-3.61249 0,-1.995 1.61875,-3.61251 3.61375,-3.61251 1.99375,0 3.6125,1.61751 3.6125,3.61251"
        style="fill:#c28bd9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24999988"
@@ -2270,7 +2276,7 @@
     </g>
     <path
        inkscape:connector-curvature="0"
-       d="m -628.08268,487.54439 h -68.70625 m 68.70625,10.91625 h -68.70625 m 68.70625,10.9175 h -121.03046 m 121.03046,10.91625 h -121.08375 m 121.08375,10.9175 h -119.53094 m 119.53094,10.91625 h -69.12198 m 69.12198,10.9175 h -121.95391 m 121.95391,10.915 h -120.31244 m 120.31244,10.91875 h -117.78514 m 117.78514,10.915 -121.35817,0 m 121.35817,10.9175 -120.72812,0 m 120.72812,-131.00125 h -68.59201 m 68.59201,10.9175 h -68.34342"
+       d="m -628.08268,487.54439 h -68.70625 m 68.70625,10.91625 h -68.70625 m 68.70625,10.9175 h -121.03046 m 121.03046,10.91625 h -121.08375 m 121.08375,10.9175 h -119.53094 m 119.53094,10.91625 h -69.12198 m 69.12198,10.9175 h -121.95391 m 121.95391,10.915 h -120.31244 m 120.31244,10.91875 h -117.78514 m 117.78514,10.915 h -121.35817 m 121.35817,10.9175 H -748.8108 m 120.72812,-131.00125 h -68.59201 m 68.59201,10.9175 h -68.34342"
        style="fill:none;stroke:#403b50;stroke-width:0.8125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
        id="path1442"
        sodipodi:nodetypes="cccccccccccccccccccccccccc" />
@@ -3914,7 +3920,7 @@
        id="g3745">
       <text
          xml:space="preserve"
-         style="fill:#ffffff;fill-opacity:1;font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke:none;stroke-width:0.9375"
+         style="font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.9375"
          x="-676.29956"
          y="566.81189"
          id="text5900-4-5-3-4-3-3-4-1"
@@ -3926,12 +3932,12 @@
            style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">LES</tspan><tspan
            sodipodi:role="line"
            x="-676.29956"
-           y="574.20135"
+           y="574.20325"
            style="fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
            id="tspan6251-50-4-9-0-2-7" /></text>
       <text
          xml:space="preserve"
-         style="fill:#ffffff;fill-opacity:1;font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;stroke:none;stroke-width:0.9375"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.9375"
          x="-676.29956"
          y="577.77954"
          id="text5900-4-5-3-4-3-3-4-0-0"
@@ -3962,7 +3968,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">LES</tspan><tspan
              sodipodi:role="line"
              x="-322.00235"
-             y="519.60425"
+             y="519.60614"
              style="fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-0-2" /></text>
         <text
@@ -4135,7 +4141,7 @@
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">Service</tspan><tspan
          sodipodi:role="line"
          x="-409.98123"
-         y="453.82855"
+         y="453.83044"
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
          id="tspan6251-1" /></text>
     <g
@@ -4239,25 +4245,25 @@
          id="tspan6030-7-2">ANT</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-446.25668"
        y="610.14471"
        id="text5900-96-8-9-7"><tspan
          sodipodi:role="line"
          x="-446.25668"
          y="610.14471"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
          id="tspan6030-7-3">External connector</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-445.72043"
        y="621.14209"
        id="text5900-96-8-9-7-8"><tspan
          sodipodi:role="line"
          x="-445.72043"
          y="621.14209"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
          id="tspan6030-7-3-9">Wire antenna</tspan></text>
     <g
        id="g3804">
@@ -4265,7 +4271,7 @@
          id="text5900-4-5-3-4-3-7-09"
          y="523.19861"
          x="-688.18842"
-         style="fill:#ffffff;fill-opacity:1;font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke:none;stroke-width:0.9375"
+         style="font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"
          transform="translate(-34.013056)"><tspan
            style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
@@ -4275,7 +4281,7 @@
            sodipodi:role="line">OPA</tspan><tspan
            id="tspan6251-50-4-9-2-81"
            style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
-           y="530.58807"
+           y="530.58997"
            x="-688.18842"
            sodipodi:role="line" /></text>
       <g
@@ -4293,7 +4299,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="486.9198"
+             y="486.92169"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2" /></text>
         <text
@@ -4309,7 +4315,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="497.83655"
+             y="497.83844"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-0" /></text>
         <text
@@ -4325,7 +4331,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="508.7533"
+             y="508.75519"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-2" /></text>
         <text
@@ -4341,7 +4347,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="519.67004"
+             y="519.67194"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-3" /></text>
         <text
@@ -4357,7 +4363,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="530.58618"
+             y="530.58807"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-6" /></text>
         <text
@@ -4373,7 +4379,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.67758"
-             y="541.50415"
+             y="541.50604"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-8" /></text>
         <text
@@ -4389,7 +4395,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.61224"
-             y="574.24292"
+             y="574.24481"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-22" /></text>
         <text
@@ -4405,7 +4411,7 @@
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375">OPA</tspan><tspan
              sodipodi:role="line"
              x="-392.61224"
-             y="585.15967"
+             y="585.16156"
              style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.9375"
              id="tspan6251-50-4-9-2-23" /></text>
       </g>
@@ -4828,7 +4834,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-384.26266"
        y="401.84952"
        id="text5900-4-4-2"><tspan
@@ -4836,10 +4842,10 @@
          id="tspan5898-7-0-3"
          x="-384.26266"
          y="401.84952"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;">User LED</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375">User LED</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-384.01892"
        y="413.00031"
        id="text5900-4-4-2-3"><tspan
@@ -4847,10 +4853,10 @@
          id="tspan5898-7-0-3-3"
          x="-384.01892"
          y="413.00031"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;">Service LED</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375">Service LED</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-319.00916"
        y="556.05695"
        id="text5900-4-4-2-7"><tspan
@@ -4858,7 +4864,7 @@
          id="tspan5898-7-0-3-1"
          x="-319.00916"
          y="556.05695"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;">User LED</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375">User LED</tspan></text>
     <g
        id="g3632">
       <g
@@ -4876,7 +4882,7 @@
              id="tspan6094"
              x="-18.209759"
              y="-0.84460366"
-             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:6.5px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.75;fill:#403b50;fill-opacity:1">Digital to Analog Pin</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:6.5px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.75">Digital to Analog Pin</tspan></text>
       </g>
       <g
          style="fill:#403b50;fill-opacity:1"
@@ -4899,9 +4905,9 @@
          id="text6096-0"
          y="662.02081"
          x="-412.96329"
-         style="font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-weight:normal;font-size:5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.9375;fill:#403b50;fill-opacity:1;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="662.02081"
            x="-412.96329"
            id="tspan6094-6"
@@ -4919,7 +4925,7 @@
            sodipodi:role="line">Wake up from EM4 pin</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          x="-462.12634"
          y="650.69934"
          id="text5900-4-4-2-78-5"><tspan
@@ -4927,10 +4933,10 @@
            id="tspan5898-7-0-3-25-84"
            x="-462.12634"
            y="650.69934"
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;">Antenna</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375">Antenna</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          x="-463.74316"
          y="660.86499"
          id="text5900-4-4-2-78-4"
@@ -4939,7 +4945,7 @@
            id="tspan5898-7-0-3-25-1"
            x="-463.74316"
            y="660.86499"
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;">LED</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375">LED</tspan></text>
       <g
          style="fill:#403b50;fill-opacity:1"
          id="g882-9-6-7"
@@ -4961,9 +4967,9 @@
          id="text5900-4-4-2-9"
          y="651.00812"
          x="-695.19501"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="651.00812"
            x="-695.19501"
            id="tspan5898-7-0-3-8"
@@ -4972,9 +4978,9 @@
          id="text5900-4-4-2-6"
          y="661.92334"
          x="-695.00812"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="661.92334"
            x="-695.00812"
            id="tspan5898-7-0-3-9"
@@ -4983,9 +4989,9 @@
          id="text5900-4-4-2-0"
          y="651.065"
          x="-630.61279"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="651.065"
            x="-630.61279"
            id="tspan5898-7-0-3-2"
@@ -4994,9 +5000,9 @@
          id="text5900-4-4-2-78"
          y="661.98022"
          x="-630.04407"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="661.98022"
            x="-630.04407"
            id="tspan5898-7-0-3-25"
@@ -5005,9 +5011,9 @@
          id="text5900-4-4-2-78-6"
          y="673.56104"
          x="-630.04407"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="673.56104"
            x="-630.04407"
            id="tspan5898-7-0-3-25-0"
@@ -5016,9 +5022,9 @@
          id="text5900-4-4-2-78-3"
          y="651.00812"
          x="-546.39911"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="651.00812"
            x="-546.39911"
            id="tspan5898-7-0-3-25-8"
@@ -5027,9 +5033,9 @@
          id="text5900-4-4-2-78-8"
          y="661.92334"
          x="-546.15533"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;line-height:1.25;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke:none;stroke-width:0.9375"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375;"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:8.125px;font-family:'Avrile Sans Condensed';-inkscape-font-specification:'Avrile Sans Condensed, Semi-Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#403b50;fill-opacity:1;stroke-width:0.9375"
            y="661.92334"
            x="-546.15533"
            id="tspan5898-7-0-3-25-81"
@@ -5051,13 +5057,13 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 2"
-     transform="translate(0,3.8149375e-6)" />
+     transform="translate(-41.58492,18.641968)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 1"
      style="display:inline"
-     transform="translate(0,3.8149375e-6)">
+     transform="translate(-41.58492,18.641968)">
     <path
        inkscape:connector-curvature="0"
        d="m 346.80467,185.28915 h 0.92625 v -3.1925 l 0.105,-0.5525 -0.3325,0.48 -0.53625,0.41375 -0.4475,-0.545 1.56875,-1.52625 h 0.56875 v 4.9225 h 0.91 v 0.86125 h -2.7625 z"
