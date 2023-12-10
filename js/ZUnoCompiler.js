@@ -828,29 +828,30 @@ var ZUnoCompiler = function() {
 		});
 	}
 
-	/**
-	 * Compile the sketch and load it to the Z-Uno board
-	 *
-	 * @param {*} code Sketch source code (string)
-	 * @param {*} hw Hardware vrevision (int, ex. 0x704)
-	 * @param {*} freq Frequncy (string, ex. 'EU')
-	 * @param {*} sec With security or not (boolean)
-	 * @param {*} main_pow <ax power (int, without a special license the maximum is 50)
-	 * @returns Returns a dictionary with smart_qr as string and dsk as string
-	 */
-	this.compile = function(code, hw, freq, sec, main_pow) {
-		return sketch(code, hw, freq, sec, main_pow);
-	}
+	return {
+		/**
+		 * Compile the sketch and load it to the Z-Uno board
+		 *
+		 * @param {*} code Sketch source code (string)
+		 * @param {*} hw Hardware vrevision (int, ex. 0x704)
+		 * @param {*} freq Frequncy (string, ex. 'EU')
+		 * @param {*} sec With security or not (boolean)
+		 * @param {*} main_pow <ax power (int, without a special license the maximum is 50)
+		 * @returns Returns a dictionary with smart_qr as string and dsk as string
+		 */
+		compile: function(code, hw, freq, sec, main_pow) {
+			return sketch(code, hw, freq, sec, main_pow);
+		}
 	
-	/**
-	 * Draw the QR code of the board
-	 *
-	 * @param {*} id Id of the div tag that will host the QR-code image
-	 * @param {*} qrContent Content of the QR-code to be printed
-	 */
-	this.drawQR = function(id, qrContent) {
-		return generateQrCode(id, qrContent);
-	}
+		/**
+		 * Draw the QR code of the board
+		 *
+		 * @param {*} id Id of the div tag that will host the QR-code image
+		 * @param {*} qrContent Content of the QR-code to be printed
+		 */
+		drawQR: function(id, qrContent) {
+			return generateQrCode(id, qrContent);
+		}
 }
 
 /* Example
@@ -861,10 +862,11 @@ HTML:
 <div id="dsk"></div>
 
 JS:
+var zcl = ZUnoCompiler();
 async function compileAndLoad(code) {
-	let res = sketch(code, 0x704, "EU", true, 50);
+	let res = zcl.compile(code, 0x704, "EU", true, 50);
 	res.then(function(result) {
-		let g_qcode = generateQrCode("qr-code", result["smart_qr"]);
+		let g_qcode = zcl.generateQrCode("qr-code", result["smart_qr"]);
 		document.getElementById("dsk").innerHTML = result["dsk"];
 		console.log(result);
 	}, function(err) {
