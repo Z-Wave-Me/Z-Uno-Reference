@@ -841,7 +841,7 @@ var ZUnoCompiler = function() {
 		 */
 		compile: function(code, hw, freq, sec, main_pow) {
 			return sketch(code, hw, freq, sec, main_pow);
-		}
+		},
 	
 		/**
 		 * Draw the QR code of the board
