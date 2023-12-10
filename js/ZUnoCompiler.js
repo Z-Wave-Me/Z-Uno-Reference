@@ -852,6 +852,7 @@ var ZUnoCompiler = function() {
 		drawQR: function(id, qrContent) {
 			return generateQrCode(id, qrContent);
 		}
+	};
 }
 
 /* Example
