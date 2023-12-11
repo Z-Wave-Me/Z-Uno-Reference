@@ -57,6 +57,13 @@ var ZUnoCompiler = function() {
 
 	const CRC_POLY							= 0x1021;
 
+	let progressCbk = null;
+	function progress(severity, message) {
+		if (progressCbk) {
+			progressCbk(severity, message);
+		}
+	}
+	
 	function calcSigmaCRC16(crc, data, offset, llen) {
 		let new_bit, wrk_data, b, a, bit_mask;
 		let bin_data = data;
@@ -254,7 +261,7 @@ var ZUnoCompiler = function() {
 
 	async function sendCommandUnSz(self, cmd, databuff, have_callback = false, retries = 0x3) {
 		let rbuff, result;
-		// Вдруг что висит левое и не ожиданное в буфере
+		// In case of unclean buffer
 		await clear(self);
 		while (true) {
 			await sendData(self, cmd, databuff, have_callback);
@@ -600,7 +607,7 @@ var ZUnoCompiler = function() {
 			const url = 'https://service.z-wave.me/z-uno-compilation-server/?compile&' + 'hw=' + hw_str;
 			xhr.open("POST", url);
 			xhr.responseType = 'json';
-			xhr.timeout = 300000;//5 минуты ждем максимум
+			xhr.timeout = 300000;//5 min
 			xhr.ontimeout = function () {
 				reject(Error("Request failed: Timed out"));
 			};
@@ -621,7 +628,7 @@ var ZUnoCompiler = function() {
 
 			xhr.open("POST", 'https://service.z-wave.me/z-uno-compilation-server/?version');
 			xhr.responseType = 'json';
-			xhr.timeout = 30000;//30 сек ждем максимум
+			xhr.timeout = 30000;//30 sec
 			xhr.ontimeout = function () {
 				reject(Error("Request failed: Timed out"));
 			};
@@ -642,7 +649,7 @@ var ZUnoCompiler = function() {
 			const url = 'https://service.z-wave.me/z-uno-compilation-server/?bootloader&' + 'hw=' + hw_str + "&seq=" + build_number;
 			xhr.open("POST", url);
 			xhr.responseType = 'json';
-			xhr.timeout = 300000;//5 минуты ждем максимум
+			xhr.timeout = 30000;//30 sec
 			xhr.ontimeout = function () {
 				reject(Error("Request failed: Timed out"));
 			};
@@ -656,13 +663,19 @@ var ZUnoCompiler = function() {
 		});
 	}
 
+	async function sketch_info(message) {
+		progress("info", message);
+	}
+	
 	async function sketch_error(self, reject, result) {
 		if (self != null)
 			await self["port"].close();
+		progress("error", retult.message);
 		reject(result);
 	}
 
 	function load_sketch(self, resolve, reject) {
+		sketch_info("Uploading the sketch");
 		self["promise_compile"].then(async function(result) {
 			let bin, header, md, sk_data, res;
 			try {
@@ -690,7 +703,7 @@ var ZUnoCompiler = function() {
 			if(res[4] == 0xFE)
 				return (sketch_error(self, reject, Error("Can't upload sketch! Something went wrong. Bad CRC16 :'( .")));
 			await self["port"].close();
-			await sleep(dtr_timeout);//Время нужное на перезарядку конденсатора на линии DTR
+			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Zuno")));
@@ -712,7 +725,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function load_bootloader(self, resolve, reject, hw_str, build_number_str) {
-		// const promise_bootloader = _xhr_bootloader(hw_str, '00003845');
+		sketch_info("Uploading a new bootloader to the Z-Uno");
 		const promise_bootloader = _xhr_bootloader(hw_str, build_number_str);
 		promise_bootloader.then(async function(result) {
 			let bin, sk_data;
@@ -732,7 +745,7 @@ var ZUnoCompiler = function() {
 				return (sketch_error(self, reject, Error("Something is wrong - the firmware could not be updated - there may be a problem with the version")));
 			await waitFinware(self);
 			await self["port"].close();
-			await sleep(dtr_timeout);//Время нужное на перезарядку конденсатора на линии DTR
+			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Zuno")));
@@ -770,6 +783,7 @@ var ZUnoCompiler = function() {
 				hw_str = '0' + hw_str;
 			self["promise_version"] = _xhr_version();
 			self["promise_compile"] = _xhr_compile(text_sceth, hw_str);
+			sketch_info("Checking Z-Uno version");
 			const filters = COM_PORT_FILTERS;
 			self["port"] = await navigator.serial.requestPort({filters});
 			i = 0x0;
@@ -778,7 +792,7 @@ var ZUnoCompiler = function() {
 				if (await syncWithDevice(self) == true)
 					break ;
 				await self["port"].close();
-				await sleep(dtr_timeout);//Время нужное на перезарядку конденсатора на линии DTR
+				await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
 				i++;
 			}
 			if (i >= ZUNO_BAUD.length)
@@ -803,7 +817,6 @@ var ZUnoCompiler = function() {
 					return (sketch_error(self, reject, Error("The version structure obtained after version is not valid")));
 				}
 				build_number = version_list[hw_str];
-				// build_number = "00001842"
 				if (build_number === undefined)
 					return (sketch_error(self, reject, Error("The server does not support the specified board revision")));
 				if (self["md"]["build_number"] > Number(build_number))
@@ -851,7 +864,16 @@ var ZUnoCompiler = function() {
 		 */
 		drawQR: function(id, qrContent) {
 			return generateQrCode(id, qrContent);
+		},
+		
+		/**
+		 * Set progress log callback
+		 *
+		 */
+		setProgress: function(cbk) {
+			progressCbk = cbk;
 		}
+		 
 	};
 }
 
