@@ -670,7 +670,7 @@ var ZUnoCompiler = function() {
 	async function sketch_error(self, reject, result) {
 		if (self != null)
 			await self["port"].close();
-		progress("error", retult.message);
+		progress("error", result.message);
 		reject(result);
 	}
 
@@ -783,9 +783,9 @@ var ZUnoCompiler = function() {
 				hw_str = '0' + hw_str;
 			self["promise_version"] = _xhr_version();
 			self["promise_compile"] = _xhr_compile(text_sceth, hw_str);
-			sketch_info("Checking Z-Uno version");
 			const filters = COM_PORT_FILTERS;
 			self["port"] = await navigator.serial.requestPort({filters});
+			sketch_info("Checking Z-Uno version");
 			i = 0x0;
 			while (i < ZUNO_BAUD.length) {
 				await self["port"].open({ baudRate: ZUNO_BAUD[i], bufferSize: 8192 });
