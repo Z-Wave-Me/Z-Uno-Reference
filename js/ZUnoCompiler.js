@@ -706,7 +706,7 @@ var ZUnoCompiler = function() {
 			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
-				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Zuno")));
+				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
 			self["md"] = await readBoardInfo(self);
 			if (Object.keys(self["md"]).length == 0x0)
 				return (sketch_error(self, reject, Error("Failed to read board info")));
@@ -748,7 +748,7 @@ var ZUnoCompiler = function() {
 			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
-				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Zuno")));
+				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
 			self["md"] = await readBoardInfo(self);
 			if (Object.keys(self["md"]).length == 0x0)
 				return (sketch_error(self, reject, Error("Failed to read board info")));
@@ -787,7 +787,7 @@ var ZUnoCompiler = function() {
 			try {
 				self["port"] = await navigator.serial.requestPort({filters});
 			} catch(e) {
-				return (sketch_error(null, reject, Error(e.message)));
+				return (sketch_error(null, reject, Error("No port selected")));
 			}
 			sketch_info("Checking Z-Uno version");
 			i = 0x0;
@@ -800,7 +800,7 @@ var ZUnoCompiler = function() {
 				i++;
 			}
 			if (i >= ZUNO_BAUD.length)
-				return (sketch_error(null, reject, Error("Failed to sync with Zuno")));
+				return (sketch_error(null, reject, Error("Failed to sync with Z-Uno")));
 			self["baudRate"] = ZUNO_BAUD[i];
 			self["md"] = await readBoardInfo(self);
 			if (Object.keys(self["md"]).length == 0x0)
