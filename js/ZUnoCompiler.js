@@ -784,7 +784,11 @@ var ZUnoCompiler = function() {
 			self["promise_version"] = _xhr_version();
 			self["promise_compile"] = _xhr_compile(text_sceth, hw_str);
 			const filters = COM_PORT_FILTERS;
-			self["port"] = await navigator.serial.requestPort({filters});
+			try {
+				self["port"] = await navigator.serial.requestPort({filters});
+			} catch(e) {
+				return (sketch_error(null, reject, Error(e.message)));
+			}
 			sketch_info("Checking Z-Uno version");
 			i = 0x0;
 			while (i < ZUNO_BAUD.length) {
