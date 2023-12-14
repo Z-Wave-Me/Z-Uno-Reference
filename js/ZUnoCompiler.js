@@ -772,36 +772,18 @@ var ZUnoCompiler = function() {
 		});
 	}
 
-	function sketch(text_sketch, hw, freq, sec, main_pow) {
+	function sketch(text_sketch, freq, sec, main_pow) {
 		return new Promise(async function(resolve, reject) {
+			let i, hw_str;
 			const self = {"queue":[], "seqNo": 0x0};
 			const paramtr = {};
-			if (!(freq in FREQ_TABLE_U7))
-				return (sketch_error(null, reject, Error("The specified radio frequency is not supported")));
-			paramtr["freq"] = FREQ_TABLE_U7[freq];
-			if (sec === true)
-				paramtr["sec"] = 0x1;
-			else if (sec === false)
-				paramtr["sec"] = 0x0;
-			else
-				return (sketch_error(null, reject, Error("The security parameter is incorrectly specified")));
-			if (main_pow < 0x1 || main_pow > 0xFF)
-				return (sketch_error(null, reject, Error("Radio power is out of range")));
-			paramtr["main_pow"] = main_pow;
-			self["paramtr"] = paramtr;
-			let i, hw_str;
-			hw_str = hw.toString(0x10);
-			while (hw_str.length < 0x4)
-				hw_str = '0' + hw_str;
-			self["promise_version"] = _xhr_version();
-			self["promise_compile"] = _xhr_compile(text_sketch, hw_str);
 			const filters = COM_PORT_FILTERS;
 			try {
 				self["port"] = await navigator.serial.requestPort({filters});
 			} catch(e) {
 				return (sketch_error(null, reject, Error("No port selected")));
 			}
-			sketch_info("Checking Z-Uno version...");
+			sketch_info("Determining the revision Z-Uno ...");
 			i = 0x0;
 			while (i < ZUNO_BAUD.length) {
 				await self["port"].open({ baudRate: ZUNO_BAUD[i], bufferSize: 8192 });
@@ -817,12 +799,30 @@ var ZUnoCompiler = function() {
 			self["md"] = await readBoardInfo(self);
 			if (Object.keys(self["md"]).length == 0x0)
 				return (sketch_error(self, reject, Error("Failed to read board info")));
+			sketch_info("Determining the revision Z-Uno done");
+			paramtr["freq"] = FREQ_TABLE_U7[freq];
+			if (sec === true)
+				paramtr["sec"] = 0x1;
+			else if (sec === false)
+				paramtr["sec"] = 0x0;
+			else
+				return (sketch_error(null, reject, Error("The security parameter is incorrectly specified")));
+			if (main_pow < 0x1 || main_pow > 0xFF)
+				return (sketch_error(null, reject, Error("Radio power is out of range")));
+				if (!(freq in FREQ_TABLE_U7))
+				return (sketch_error(null, reject, Error("The specified radio frequency is not supported")));
 			if (self["md"]["flag_max_power"] == false) {
 				if (main_pow > self["md"]["max_default_power"])
 					return (sketch_error(self, reject, Error("Your license does not support this maximum radio power value.")));
 			}
-			if (self["md"]["hw_rev"] != hw)
-				return (sketch_error(self, reject, Error("Board revision does not match")));
+			paramtr["main_pow"] = main_pow;
+			self["paramtr"] = paramtr;
+			hw_str = self["md"]["hw_rev"].toString(0x10);
+			while (hw_str.length < 0x4)
+				hw_str = '0' + hw_str;
+			sketch_info("Checking Z-Uno version...");
+			self["promise_version"] = _xhr_version();
+			self["promise_compile"] = _xhr_compile(text_sketch, hw_str);
 			self["promise_version"].then(async function(result) {
 				let version_list, build_number;
 				try {
@@ -863,14 +863,13 @@ var ZUnoCompiler = function() {
 		 * Compile the sketch and load it to the Z-Uno board
 		 *
 		 * @param {*} code Sketch source code (string)
-		 * @param {*} hw Hardware vrevision (int, ex. 0x704)
 		 * @param {*} freq Frequncy (string, ex. 'EU')
 		 * @param {*} sec With security or not (boolean)
 		 * @param {*} main_pow <ax power (int, without a special license the maximum is 50)
 		 * @returns Returns a dictionary with smart_qr as string and dsk as string
 		 */
-		compile: function(code, hw, freq, sec, main_pow) {
-			return sketch(code, hw, freq, sec, main_pow);
+		compile: function(code, freq, sec, main_pow) {
+			return sketch(code, freq, sec, main_pow);
 		},
 	
 		/**
@@ -894,6 +893,7 @@ var ZUnoCompiler = function() {
 	};
 }
 
+
 /* Example
 
 HTML:
@@ -904,7 +904,7 @@ HTML:
 JS:
 var zcl = ZUnoCompiler();
 async function compileAndLoad(code) {
-	let res = zcl.compile(code, 0x704, "EU", true, 50);
+	let res = zcl.compile(code, "EU", true, 50);
 	res.then(function(result) {
 		let g_qcode = zcl.generateQrCode("qr-code", result["smart_qr"]);
 		document.getElementById("dsk").innerHTML = result["dsk"];
