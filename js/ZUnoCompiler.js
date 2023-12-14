@@ -303,6 +303,10 @@ var ZUnoCompiler = function() {
 		return (sendCommandUnSz(self, 0x08, [0x04], false));
 	}
 
+	async function softReset(self) {
+		return (sendCommandUnSz(self, 0x08, [], false));
+	}
+
 	async function pushSketch(self, addr, size, crc16) {
 		return sendCommandUnSz(self, 0x08, [0x01, (addr >> 16) & 0xFF, (addr >> 8) & 0xFF, addr & 0xFF, (size >> 8) & 0xFF, size & 0xFF, (crc16 >> 8) & 0xFF, (crc16) & 0xFF], false);
 	}
@@ -712,6 +716,7 @@ var ZUnoCompiler = function() {
 			self["md"] = await readBoardInfo(self);
 			if (Object.keys(self["md"]).length == 0x0)
 				return (sketch_error(self, reject, Error("Failed to read board info")));
+			await softReset(self);
 			await self["port"].close();
 			const out = {};
 			out["dsk"] = self["md"]["dsk"];
