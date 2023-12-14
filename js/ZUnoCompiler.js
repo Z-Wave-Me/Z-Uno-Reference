@@ -608,6 +608,7 @@ var ZUnoCompiler = function() {
 			const formData = new FormData();
 
 			formData.append("sketch", new File([new Blob([data])], "sketch", { lastModified: new Date(0), type: "text/x-arduino", size: data.length, name:"sketch" }));
+			formData.append("referer", document.location.href);
 			const url = 'https://service.z-wave.me/z-uno-compilation-server/?compile&' + 'hw=' + hw_str;
 			xhr.open("POST", url);
 			xhr.responseType = 'json';
