@@ -697,6 +697,7 @@ var ZUnoCompiler = function() {
 				return (sketch_error(self, reject, Error("The sketch and firmware version do not match")));
 			if (bin.length > md["code_size"])
 				return (sketch_error(self, reject, Error("Sketch size too large")));
+			sketch_info("Uploading the sketch...");
 			if (await applyPrams(self, md) == false)
 				return (sketch_error(self, reject, Error("Failed to apply settings")));
 			sk_data = await writeArrayToNVM(self, md, md["custom_code_offset"], bin);
@@ -709,8 +710,9 @@ var ZUnoCompiler = function() {
 			if(res[4] == 0xFE)
 				return (sketch_error(self, reject, Error("Can't upload sketch! Something went wrong. Bad CRC16 :'( .")));
 			await self["port"].close();
+			sketch_info("Uploading the sketch done");
+			sketch_info("Qr-Code read...");
 			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
-			sketch_info("Uploading the sketch...");
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
@@ -723,7 +725,7 @@ var ZUnoCompiler = function() {
 			out["dsk"] = self["md"]["dsk"];
 			if ("smart_qr" in self["md"]) {
 				out["smart_qr"] = self["md"]["smart_qr"];
-				sketch_info("Uploading the sketch done");
+				sketch_info("Qr-Code read done");
 				resolve(out);
 				return ;
 			}
