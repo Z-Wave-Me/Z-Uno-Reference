@@ -820,7 +820,7 @@ var ZUnoCompiler = function() {
 				} catch (error) {
 					return (sketch_error(self, reject, Error("The version structure obtained after version is not valid")));
 				}
-				build_number = version_list[hw_str];
+				build_number = version_list[hw_str].seq;
 				if (build_number === undefined)
 					return (sketch_error(self, reject, Error("The server does not support the specified board revision")));
 				if (self["md"]["build_number"] > Number(build_number))
