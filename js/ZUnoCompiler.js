@@ -711,7 +711,7 @@ var ZUnoCompiler = function() {
 				return (sketch_error(self, reject, Error("Can't upload sketch! Something went wrong. Bad CRC16 :'( .")));
 			await self["port"].close();
 			sketch_info("Uploading the sketch done");
-			sketch_info("Qr-Code read...");
+			sketch_info("QR code read...");
 			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
@@ -725,11 +725,11 @@ var ZUnoCompiler = function() {
 			out["dsk"] = self["md"]["dsk"];
 			if ("smart_qr" in self["md"]) {
 				out["smart_qr"] = self["md"]["smart_qr"];
-				sketch_info("Qr-Code read done");
+				sketch_info("QR code read done");
 				resolve(out);
 				return ;
 			}
-			return (sketch_error(self, reject, Error("Failed to read qr code")));
+			return (sketch_error(self, reject, Error("Failed to read QR code")));
 		}, async function(err) {
 			return (sketch_error(self, reject, err));
 		});
