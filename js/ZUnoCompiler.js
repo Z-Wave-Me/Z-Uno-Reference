@@ -675,7 +675,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function load_sketch(self, resolve, reject) {
-		sketch_info("Uploading the sketch");
+		sketch_info("Uploading the sketch...");
 		self["promise_compile"].then(async function(result) {
 			let bin, header, md, sk_data, res;
 			try {
@@ -715,6 +715,7 @@ var ZUnoCompiler = function() {
 			out["dsk"] = self["md"]["dsk"];
 			if ("smart_qr" in self["md"]) {
 				out["smart_qr"] = self["md"]["smart_qr"];
+				sketch_info("Uploading the sketch done");
 				resolve(out);
 				return ;
 			}
@@ -725,7 +726,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function load_bootloader(self, resolve, reject, hw_str, build_number_str) {
-		sketch_info("Uploading a new bootloader to the Z-Uno");
+		sketch_info("Uploading a new bootloader to the Z-Uno...");
 		const promise_bootloader = _xhr_bootloader(hw_str, build_number_str);
 		promise_bootloader.then(async function(result) {
 			let bin, sk_data;
@@ -754,6 +755,7 @@ var ZUnoCompiler = function() {
 				return (sketch_error(self, reject, Error("Failed to read board info")));
 			if (Number(build_number_str) != self["md"]["build_number"])
 				return (sketch_error(self, reject, Error("Although the firmware was successfully updated, the actual version was no longer needed")));
+			sketch_info("Uploading a new bootloader to the Z-Uno done");
 			return (load_sketch(self, resolve, reject));
 		}, async function(err) {
 			return (sketch_error(self, reject, err));
@@ -789,7 +791,7 @@ var ZUnoCompiler = function() {
 			} catch(e) {
 				return (sketch_error(null, reject, Error("No port selected")));
 			}
-			sketch_info("Checking Z-Uno version");
+			sketch_info("Checking Z-Uno version...");
 			i = 0x0;
 			while (i < ZUNO_BAUD.length) {
 				await self["port"].open({ baudRate: ZUNO_BAUD[i], bufferSize: 8192 });
@@ -825,6 +827,7 @@ var ZUnoCompiler = function() {
 					return (sketch_error(self, reject, Error("The server does not support the specified board revision")));
 				if (self["md"]["build_number"] > Number(build_number))
 					return (sketch_error(self, reject, Error("The firmware on the board is newer than on the server")));
+				sketch_info("Checking Z-Uno version done");
 				if (self["md"]["build_number"] != Number(build_number))
 					return (load_bootloader(self, resolve, reject, hw_str, build_number));
 				return (load_sketch(self, resolve, reject));
