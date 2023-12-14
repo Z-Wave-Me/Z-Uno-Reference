@@ -854,7 +854,7 @@ var ZUnoCompiler = function() {
 			height: 256,
 			colorDark: "#000000",
 			colorLight: "#ffffff",
-			correctLevel: QRCode.CorrectLevel.H,
+			correctLevel: QRCode.CorrectLevel.L,
 		});
 	}
 
@@ -865,7 +865,7 @@ var ZUnoCompiler = function() {
 		 * @param {*} code Sketch source code (string)
 		 * @param {*} freq Frequncy (string, ex. 'EU')
 		 * @param {*} sec With security or not (boolean)
-		 * @param {*} main_pow <ax power (int, without a special license the maximum is 50)
+		 * @param {*} main_pow max power (int, without a special license the maximum is 50)
 		 * @returns Returns a dictionary with smart_qr as string and dsk as string
 		 */
 		compile: function(code, freq, sec, main_pow) {
