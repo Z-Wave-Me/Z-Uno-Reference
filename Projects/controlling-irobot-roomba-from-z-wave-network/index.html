@@ -40,9 +40,10 @@ Two resistors are used as voltage divider to convert from 5 V TTL UART levels of
 </span>
 
 <span class="example_code">
-    <span class="c">
+    <span>
+        {literal}
         <pre>
-            <code>{literal}#define LED_PIN 13
+            <code class="c compileAndLoad">#define LED_PIN 13
 byte roombaState = 0;
 word batteryValue = 0;
 
@@ -105,7 +106,9 @@ byte getter() {
 byte getterBattery() {
   return batteryValue;
 }
-{/literal}</code></pre></span>
+</code></pre>
+{/literal}
+</span>
 <a href="/files/z-uno/projects/iRobotRoomba/iRobotRoomba.ino">Download this sketch</a>
 </span>
 

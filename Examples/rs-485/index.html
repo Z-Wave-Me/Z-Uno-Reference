@@ -1,7 +1,6 @@
-<h1 zunoVersion="v1">RS-485 bus based on MAX485 Chip</h1>
-<h1 zunoVersion="v2">RS-485 bus based on MAX485 Chip</h1>
+<h1>RS-485 bus based on MAX485 Chip</h1>
 <span class="example_description">
-Example of RS-485 bus communications using MAX485 chip. Z-Uno Switch Binary channel state is sent via RS485 bus to a slave device (Arduino Uno).
+Example of RS-485 bus communications using MAX485 chip. Z-Uno Switch Binary channel state is sent via RS485 bus to a slave device based on Arduino Uno.
 </span>
 <span class="example_hardware_required">
     <ul>
@@ -23,7 +22,7 @@ Example of RS-485 bus communications using MAX485 chip. Z-Uno Switch Binary chan
 
 <span class="example_code">
 <pre>
-<code class="c">// demo sketch connecting Z-Uno to the RS485 network and sending commands to slave device (Arduino Uno) the status of the Switch Binary channel
+<code class="c compileAndLoad">// demo sketch connecting Z-Uno to the RS485 network and sending commands to slave device (Arduino Uno) the status of the Switch Binary channel
 
 // set up channel
 ZUNO_SETUP_CHANNELS(
@@ -87,7 +86,7 @@ void setter(byte value) {
 <a href="/files/z-uno/projects/RS485/RS485_master.ino">Download this sketch</a>
 </span>
 
-<span zunoVersion="v1" class="example_code">
+<span class="example_code">
 <pre>
 <code class="c">// demo sketch for Arduino UNO get RS485 data from Z-UNO
 

@@ -60,7 +60,7 @@ int getter(void) {
 </code></pre></span>
 <span zunoVersion="v2" class="example_code">
   <pre>
-      <code class="c">char response[9];                                                       //storage incoming data
+      <code class="c compileAndLoad">char response[9];                                                       //storage incoming data
 byte cmd[9] = { 0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79 }; //bytes for send request to get sensor data
 
 int newValueCO2, responseHigh, responseLow, ppm;           //Co2 calculation and storage variables

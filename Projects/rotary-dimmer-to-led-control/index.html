@@ -57,9 +57,10 @@ Schematic for LED Controller very simply. The encoder is connected by three pin.
 </span>
 <span class="example_code">
 Source code contain 143 lines. Every 128 μs by interrupt from GPT timer in gpt_handler() checking in which direction the wheel is spinning. In loop caught a button press. If button pressed LED strip turn off or restore previos brigthness level.
-    <span class="c">
+    <span>
+        {literal}
         <pre>
-            <code>{literal}
+            <code class="c compileAndLoad">
 #define PUSH_BUTTON       23
 #define ENCODER_CHA_PIN   19
 #define ENCODER_CHB_PIN   20
@@ -190,8 +191,9 @@ void setter(byte value) {
 byte getter(void) {
   return last_reported_level * 99 / 255;
 }
-            {/literal}</code>
+		</code>
         </pre>
+        {/literal}
     </span>
 </span>
 <span class="example_photos">
