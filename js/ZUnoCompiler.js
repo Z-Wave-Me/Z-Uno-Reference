@@ -675,7 +675,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function load_sketch(self, resolve, reject) {
-		sketch_info("Uploading the sketch...");
+		sketch_info("Compiling the sketch...");
 		self["promise_compile"].then(async function(result) {
 			let bin, header, md, sk_data, res;
 			try {
@@ -685,6 +685,7 @@ var ZUnoCompiler = function() {
 			} catch (error) {
 				return (sketch_error(self, reject, Error("The structure obtained after compilation is not valid")));
 			}
+			sketch_info("Compiling the sketch done");
 			md = self["md"];
 			header = bin.slice(0, SK_HEADER_SIZE);
 			if (HeaderCmp(header, md["version"], md["hw_rev"], md["build_number"]) == false)
@@ -703,7 +704,8 @@ var ZUnoCompiler = function() {
 			if(res[4] == 0xFE)
 				return (sketch_error(self, reject, Error("Can't upload sketch! Something went wrong. Bad CRC16 :'( .")));
 			await self["port"].close();
-			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
+			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
+			sketch_info("Uploading the sketch...");
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
@@ -746,7 +748,7 @@ var ZUnoCompiler = function() {
 				return (sketch_error(self, reject, Error("Something is wrong - the firmware could not be updated - there may be a problem with the version")));
 			await waitFinware(self);
 			await self["port"].close();
-			await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
+			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
 			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
@@ -798,7 +800,7 @@ var ZUnoCompiler = function() {
 				if (await syncWithDevice(self) == true)
 					break ;
 				await self["port"].close();
-				await sleep(dtr_timeout);// The time for the capasitor on the DTR line to recharge
+				await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
 				i++;
 			}
 			if (i >= ZUNO_BAUD.length)
