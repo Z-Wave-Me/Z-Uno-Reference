@@ -40,9 +40,9 @@ In runtime you can get channel values using macro <b>ZUNO_CFG_CHANNEL(CHANNEL)</
 <span class="example_code">
 <b>Example #1</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in a static getter/setter style
-<pre>
-<code class="c">
 {literal}
+<pre>
+<code class="c compileAndLoad">
 byte dimmerValue = 99;
 
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
@@ -66,16 +66,16 @@ void setSwitchMultilevelValue(byte newValue) {
 byte getSwitchMultilevelValue(void) {
   return dimmerValue;
 }
-{/literal}
 </code></pre>
+{/literal}
 </span>
 
 <span class="example_code">
 <b>Example 2</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic getter/setter style
-<pre>
-<code class="c">
 {literal}
+<pre>
+<code class="c compileAndLoad">
 // Define special command class macroses
 // We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
@@ -114,15 +114,15 @@ static void setSwitchMultilevelValue(byte newValue) {
 static byte getSwitchMultilevelValue(void) {
   return dimmerValue;
 }
-{/literal}
 </code></pre>
+{/literal}
 </span>
 <span class="example_code">
 <b>Example 3</b>
 Below is the Radio Blink sketch from Z-Uno paper manual made in static variable style
-<pre>
-<code class="c">
 {literal}
+<pre>
+<code class="c compileAndLoad">
 byte dimmerValue = 99;
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM)
@@ -137,16 +137,16 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);
   delay(dimmerValue*10);
 }
-{/literal}
 </code></pre>
+{/literal}
 </span>
 
 <span class="example_code">
 <b>Example 4</b>
-Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic vartiable style
-<pre>
-<code class="c">
+Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic variable style
 {literal}
+<pre>
+<code class="c compileAndLoad">
 // Define special command class macroses
 // We use SwitchMultilevel and Basic command classes for dimmer, so we have to enable them: 
 ZUNO_ENABLE(WITH_CC_SWITCH_MULTILEVEL WITH_CC_BASIC)
@@ -173,6 +173,6 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);
   delay(dimmerValue*10);
 }
-{/literal}
 </code></pre>
+{/literal}
 </span>

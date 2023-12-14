@@ -76,8 +76,8 @@ Please note that if you use mode <b>BtnButtonModeExtInt</b> there are hardware p
 
 <span class="function_example">
 Example that shows how to use non-default parameters for tact-button. We use here macro <b>BTN_BUTTON_INIT_DEFAULT</b> ( for capacitive button <b>BTN_TOUCH_INIT_DEFAULT</b>):
-	<pre><code class="c">
 {literal}
+<pre><code class="c compileAndLoad">
 #include "ZUNO_Buttons.h"
 #define MY_SERIAL Serial0
 #define BUTTON		23
@@ -137,6 +137,6 @@ void process_buttons() {
 			dimmerValue = 5;
 	}
 }
+</code></pre>
 {/literal}
-	</code></pre>
 </span> 

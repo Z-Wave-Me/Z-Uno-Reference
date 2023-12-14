@@ -64,19 +64,15 @@ byte value from the list of ZUNO_WAKEUP_REASON_* enum (see <a href="https://gith
     case ZUNO_WAKEUP_REASON_WUT_EM2:
       // Wake up by timer from  EM2 mode (for sleeping devices, defined by the controller)
       break;
-    
     case ZUNO_WAKEUP_REASON_RADIO_EM2:
       // FLiRS received a packet
       break;
     case ZUNO_WAKEUP_REASON_WATCH_DOG:
       // Rebooted by watchdog. Seems user code hangs...
       break;
-    
     case ZUNO_WAKEUP_REASON_SOFTRESET:
       // Rebooted by zunoReboot() function or from bootloader during device exclusion/NVM reset
       break;
-
-  
 }
 </code></pre></span>  
 

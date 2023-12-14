@@ -18,7 +18,8 @@ Writing to and reading from non-zero memory is very fast and energy efficient (l
 </span>
 
 <span class="function_example">
-<pre><code class="c">{literal}#include "EEPROM.h"
+{literal}
+<pre><code class="c">#include "EEPROM.h"
 
 // device will sleep until next service button press (or INT1 pulled to LOW)
 ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_SLEEPING);
@@ -60,6 +61,6 @@ void loop() {
   }
   zunoSendDeviceToSleep();
 }
-{/literal}
 </code></pre>
+{/literal}
 </span>

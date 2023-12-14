@@ -128,7 +128,7 @@ ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
 
 <span class="function_example" zunoVersion="v2">
     Multichannel sleeping sensor example. This wakes up every 300 seconds using custom wakeup timer interval and sends reports to controller. You can try EM4/EM2 modes. 
-    <pre><code class="c">
+    <pre><code class="c compileAndLoad">
 
 #define SLEEP_MODE SLEEP_MODE_EM4 // You can select from SLEEP_MODE_EM2, SLEEP_MODE_EM4
 #define WAKEUP_CUSTOM_INTERVAL 300 // Every 300 seconds
@@ -201,7 +201,7 @@ int getterBarPa() {
 
 <span class="function_example" zunoVersion="v2">
     FLIRS switchbinary LED-light example.
-<pre><code class="c">
+<pre><code class="c compileAndLoad">
     byte switchValue=0;
     ZUNO_SETUP_SLEEPING_MODE(ZUNO_SLEEPING_MODE_FREQUENTLY_AWAKE);
     ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_BINARY(&switchValue,NULL));

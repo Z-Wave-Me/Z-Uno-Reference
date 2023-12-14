@@ -24,11 +24,11 @@ Pointer to nullterminated C-string. The maximum length of group name is 42 symbo
 <span class="function_example">
 	<pre>
 		<code class="c">
-
 ZUNO_SETUP_ASSOCIATIONS(ZUNO_ASSOCIATION_GROUP_SET_VALUE, ZUNO_ASSOCIATION_GROUP_SET_VALUE_AND_DIM)
 
 void setup() {
 }
+
 // returns custom names for association groups
 const char *zunoAssociationGroupName(uint8_t groupIndex) {
 	const char				*tmp;
@@ -49,7 +49,6 @@ const char *zunoAssociationGroupName(uint8_t groupIndex) {
 
 void loop() {
 }
-
 		</code>
 	</pre>
 </span>

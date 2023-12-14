@@ -79,7 +79,7 @@ Advanced variants of begin() method.
 
 <span class="function_example">
 	Complete example:
-<pre><code class="c" >
+<pre><code class="c compileAndLoad">
 	#include "LeUartClass.h"
 
 	byte dimmerValue=0;
@@ -99,16 +99,18 @@ Advanced variants of begin() method.
 		zunoAttachSysHandler(ZUNO_HANDLER_WUP, 0, (void*) &_wakeHandler);
 		pinMode(LED_BUILTIN, OUTPUT);
 	}
+	
 	void _wakeHandler(void){
-		char				c;
+		char c;
 	
 		c = LeUart.read();
-		while (LeUart.available()) {
+		while(LeUart.available()) {
 			c = LeUart.read();
-			if ( c != '9')
+			if (c != '9')
 				LeUart.print(c);
 		}
 		LeUart.print('\n');
+		
 		MY_SERIAL.startFrame('0');
 		MY_SERIAL.print("wake time:");
 		MY_SERIAL.println(millis());
@@ -117,8 +119,9 @@ Advanced variants of begin() method.
 		MY_SERIAL.print("WAKEUP REASON:");
 		MY_SERIAL.println(zunoGetWakeReason(), HEX);
 	}
+	
 	void loop(){
-		if(zunoIsSleepLocked()){
+		if (zunoIsSleepLocked()){
 			// Here we do all sleep uninterruptable logic
 			analogWrite(LED_BUILTIN, dimmerValue); // Apply dimmer value from controller to builtin LED
 			MY_SERIAL.print("go sleep time:");
@@ -127,6 +130,7 @@ Advanced variants of begin() method.
 			MY_SERIAL.println(loop_count);
 			zunoSendDeviceToSleep(); // We don't need parameter for FLiRS here, Z-Uno will ingore parameter anyway
 		}
+		
 		// Here you can do something that could be interrupted by sleep mode
 		loop_count++; // Increment variable
 		delay(1000);

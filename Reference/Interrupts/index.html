@@ -39,7 +39,7 @@ Use this syntax to bind your <b>ISRHandlerFunction</b> to interrupt type <b>ZUNO
 
 <span class="function_example" zunoVersion="v2">
 <pre> Peripheral interrupt example1. Bind user-defined handler to USART0 RX interrupt.
-<code class="c">
+<code class="c compileAndLoad">
     uint32_t num_bytes_received = 0;
     void UARTRxInt(uint32_t p){
         // p parameter is incoming symbol
@@ -65,7 +65,7 @@ Use this syntax to bind your <b>ISRHandlerFunction</b> to interrupt type <b>ZUNO
 </span>
 <span class="function_example" zunoVersion="v2">
     <pre> Peripheral interrupt example2. GPT interrupt example.
-    <code class="c">
+    <code class="c compileAndLoad">
 
 volatile unsigned long count_gpt = 0;
 void gpt_handler() {
@@ -149,7 +149,7 @@ Old-fashioned static style definitions is available for Z-Uno v2 too. See sectio
 
 <span class="function_example" zunoVersion="v2">
 <pre> Static ISR definition. GPT interrupt handler example.
-<code class="c">
+<code class="c compileAndLoad">
 volatile unsigned long count_gpt = 0;
 // special static macro-binding
 ZUNO_SETUP_ISR_GPTIMER(gpt_handler);

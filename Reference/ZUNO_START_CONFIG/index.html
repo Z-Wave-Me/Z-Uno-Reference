@@ -50,8 +50,9 @@ More examples in <a href="https://github.com/Z-Wave-Me/Z-Uno-Test-Sketches/tree/
 
 <span class="example_code">
 Below is the Radio Blink sketch from Z-Uno paper manual made in static getter/setter style
+{literal}
 <pre>
-<code class="c">{literal}byte dimmerValue = 99;
+<code class="c compileAndLoad">byte dimmerValue = 99;
 
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue));
 
@@ -72,14 +73,16 @@ void setSwitchMultilevelValue(byte newValue) {
 
 byte getSwitchMultilevelValue(void) {
   return dimmerValue;
-}{/literal}
+}
 </code></pre>
+{/literal}
 </span>
 
 <span class="example_code">
 Below is the Radio Blink sketch from Z-Uno paper manual made in static vartiable style
+{literal}
 <pre>
-<code class="c">{literal}byte dimmerValue = 99;
+<code class="c compileAndLoad">byte dimmerValue = 99;
 
 ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL));
 
@@ -92,14 +95,15 @@ void loop() {
   delay(dimmerValue*10);
   digitalWrite(LED_BUILTIN, LOW);
   delay(dimmerValue*10);
-}{/literal}
+}
 </code></pre>
+{/literal}
 </span>
 
 <span class="example_code">
 Below is the Radio Blink sketch from Z-Uno paper manual made in dynamic style
-<pre>
-<code class="c">{literal}ZUNO_ENABLE(WITH_CC_SWITCH_BINARY);
+{literal}<pre>
+<code class="c compileAndLoad">ZUNO_ENABLE(WITH_CC_SWITCH_BINARY);
 
 void setup() {
   ZUNO_START_CONFIG();
@@ -115,6 +119,7 @@ void loop() {
   delay(g_channels_data[0].bParam * 10);
   digitalWrite(LED_BUILTIN, LOW);
   delay(g_channels_data[0].bParam * 10);
-}{/literal}
+}
 </code></pre>
+{/literal}
 </span>

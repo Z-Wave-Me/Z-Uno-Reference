@@ -33,7 +33,7 @@ delete ptrArray<br>
 #define MY_SERIAL		Serial
 
 void setup() {
-	int			*ptrI;// pointer to store address of allocated data 
+	int *ptrI;// pointer to store address of allocated data 
 	MY_SERIAL.begin(115200);
 	ptrI = new int; // Allocate one int variable in the "heap"
 	*ptrI = rand(); // Fill it with random value

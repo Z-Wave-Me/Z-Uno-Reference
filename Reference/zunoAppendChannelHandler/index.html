@@ -72,6 +72,7 @@ void setup() {
    // ...
    zunoAppendChannelHandler( 0,  1, CHANNEL_HANDLER_SINGLE_GETTER, (void*)&getterFunctionSensorBinary);// Direct pointer to getter function
 }
+
 BYTE getterFunctionSensorBinary() {
   return dimmerValue; // We can return any value here. Just shows a proxy getter for "dimmerValue"
 }

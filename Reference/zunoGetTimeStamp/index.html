@@ -13,9 +13,9 @@
     number of seconds (unsigned long)
 </span>
 <span class="function_example">
+{literal}
 <pre>
-<code class="c">
-    {literal}
+<code class="c compileAndLoad">
     // This sketch uses TimeParameter command class to setup RTC value from controller.
     // You have to call TimeParameter.Set according to you z-wave controller manual.
     ZUNO_ENABLE(WITH_CC_TIME_PARAMETERS); // Add needed CC
@@ -45,6 +45,6 @@
         // Wait a little...
         delay(1000);
     }
-{/literal}
 </code></pre>
+{/literal}
 </span>

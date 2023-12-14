@@ -66,26 +66,27 @@ After changing number of types of channels Z-Uno must be excluded and included b
 </span>
 <span class="function_example" zunoVersion="v2">
     Defines multirelay / multidimmer device and uses common channel getter/setter for each type of channel
+    {literal}
     <pre>
-        <code class="c">
-        {literal}
+        <code class="c compileAndLoad">
             #define NUM_DIMMER_CHANNELS 4
             #define NUM_RELAY_CHANNELS  6
             
             //Next line sets up Z-Uno channels. 
             ZUNO_SETUP_CHANNELS(
-                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue,setSwitchMultilevelValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue),
-                ZUNO_SWITCH_BINARY(getSwitchBinaryValue,setSwitchBinarylValue));
-            static const byte PWM_PINS[NUM_DIMMER_CHANNELS]={0,1,2,3};
-            static const byte RELAY_PINS[NUM_RELAY_CHANNELS]={10,11,12,13,14,16};
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue),
+                ZUNO_SWITCH_MULTILEVEL(getSwitchMultilevelValue, setSwitchMultilevelValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue),
+                ZUNO_SWITCH_BINARY(getSwitchBinaryValue, setSwitchBinarylValue));
+            
+            static const byte PWM_PINS[NUM_DIMMER_CHANNELS] = {0, 1, 2, 3};
+            static const byte RELAY_PINS[NUM_RELAY_CHANNELS] = {10, 11, 12, 13, 14, 16};
 
             byte dimmerValue[NUM_DIMMER_CHANNELS];
             byte relayValue[NUM_RELAY_CHANNELS];
@@ -95,10 +96,10 @@ After changing number of types of channels Z-Uno must be excluded and included b
                 int i;
                 memset(dimmerValue, 0, sizeof(dimmerValue));
                 memset(relayValue, 0, sizeof(relayValue));
-                for(i=0; i&lt;NUM_DIMMER_CHANNELS; i++) {
+                for(i = 0; i &lt; NUM_DIMMER_CHANNELS; i++) {
                     analogWrite(PWM_PINS[i], 0); 
                 }
-                for(i=0; i&lt;NUM_RELAY_CHANNELS; i++) {
+                for(i = 0; i &lt; NUM_RELAY_CHANNELS; i++) {
                     pinMode(RELAY_PINS[i], OUTPUT);
                     digitalWrite(RELAY_PINS[i], 0);
                 }
@@ -131,16 +132,16 @@ After changing number of types of channels Z-Uno must be excluded and included b
                 // return previously saved value
                 return relayValue[channel];
             }
-        {/literal}
         </code>
     </pre>
+    {/literal}
 </span>
 <span class="function_example" zunoVersion="v2">
-    Defines multirelay / multidimmer device and uses mapped arrays  for each type of channel.
+    Defines multirelay / multidimmer device and uses mapped arrays for each type of channel.
     Compare the code size with previous example.
+    {literal}
     <pre>
-        <code class="c">
-        {literal}
+        <code class="c compileAndLoad">
             #define NUM_DIMMER_CHANNELS 4
             #define NUM_RELAY_CHANNELS  6
 
@@ -150,40 +151,40 @@ After changing number of types of channels Z-Uno must be excluded and included b
             ZUNO_ENABLE(LOGGING_DBG);
 
             //Next line sets up Z-Uno channels. 
-            ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
-                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
-                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
-                                ZUNO_SWITCH_MULTILEVEL(dimmerValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL),
-                                ZUNO_SWITCH_BINARY(relayValue,NULL));
+            ZUNO_SETUP_CHANNELS(ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
+                                ZUNO_SWITCH_MULTILEVEL(dimmerValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL),
+                                ZUNO_SWITCH_BINARY(relayValue, NULL));
                                 
-            static const byte PWM_PINS[NUM_DIMMER_CHANNELS]={16,17,18,19};
-            static const byte RELAY_PINS[NUM_RELAY_CHANNELS]={10,11,12,13,14,15};
+            static const byte PWM_PINS[NUM_DIMMER_CHANNELS] = {16, 17, 18, 19};
+            static const byte RELAY_PINS[NUM_RELAY_CHANNELS] = {10, 11, 12, 13, 14, 15};
 
             // the setup function runs once, when you press reset or power the board
             void setup() {
-                int i;
                 memset(dimmerValue, 0, sizeof(dimmerValue));
                 memset(relayValue, 0, sizeof(relayValue));
             }
+            
             // the loop function runs over and over again forever
             void loop() {
                 int i;
-                for(i=0;i&lt;NUM_DIMMER_CHANNELS;i++) {
+                for(i = 0; i &lt; NUM_DIMMER_CHANNELS; i++) {
                     analogWrite(PWM_PINS[i], dimmerValue[i]); 
                 }
-                for(i=0;i&lt;NUM_RELAY_CHANNELS;i++) {
+                for(i = 0; i &lt; NUM_RELAY_CHANNELS; i++) {
                     pinMode(RELAY_PINS[i], OUTPUT);
                     digitalWrite(RELAY_PINS[i], relayValue[i]);
                 }
             }
-        {/literal}
         </code>
     </pre>
+    {/literal}
 </span>
 <span class="function_see_also">
     Get more information about <span class="function_ref">Z-Wave</span>.

@@ -1,24 +1,20 @@
 <h2>println()</h2>
     <span class="function_description">
-Prints data to the serial port as human-readable ASCII text followed by a carriage return character (ASCII 13, or '\r') and a newline character (ASCII 10, or '\n'). This command takes the same forms as Serial.print().
+        Prints data to the serial port as human-readable ASCII text followed by a carriage return character (ASCII 13, or '\r') and a newline character (ASCII 10, or '\n'). This command takes the same forms as Serial.print().
     </span>
 <span class="function_syntax">
- Serial.println(val)</br>
-Serial.println(val, format)</br> 
+Serial.println(val)<br>
+Serial.println(val, format)
 </span>
 <span class="function_parameters">
     <span class="function_parameters_param">
         <span class="function_parameters_param_name">val</span>
         <span class="function_parameters_param_description">the value to print - any data type</span>
     </span>
-        <span class="function_parameters_param">
-            <span class="function_parameters_param_name">format</span>
-            <span class="function_parameters_param_description">pecifies the number base (for integral data types) or number of decimal places (for floating point types)</span>
-</span>
-        </span>    
-        
+    <span class="function_parameters_param">
+        <span class="function_parameters_param_name">format</span>
+        <span class="function_parameters_param_description">pecifies the number base (for integral data types) or number of decimal places (for floating point types)</span>
     </span>
-</span>
 </span>
 <span class="function_returns">
     size_t (long): println() returns the number of bytes written, though reading that number is optional
@@ -46,3 +42,6 @@ void loop() {
   // delay 10 milliseconds before the next reading:
   delay(10);
 }
+        </code>
+    </pre>
+</span>
