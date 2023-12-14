@@ -762,7 +762,7 @@ var ZUnoCompiler = function() {
 		});
 	}
 
-	function sketch(text_sceth, hw, freq, sec, main_pow) {
+	function sketch(text_sketch, hw, freq, sec, main_pow) {
 		return new Promise(async function(resolve, reject) {
 			const self = {"queue":[], "seqNo": 0x0};
 			const paramtr = {};
@@ -784,7 +784,7 @@ var ZUnoCompiler = function() {
 			while (hw_str.length < 0x4)
 				hw_str = '0' + hw_str;
 			self["promise_version"] = _xhr_version();
-			self["promise_compile"] = _xhr_compile(text_sceth, hw_str);
+			self["promise_compile"] = _xhr_compile(text_sketch, hw_str);
 			const filters = COM_PORT_FILTERS;
 			try {
 				self["port"] = await navigator.serial.requestPort({filters});
