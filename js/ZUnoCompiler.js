@@ -778,6 +778,9 @@ var ZUnoCompiler = function() {
 			const self = {"queue":[], "seqNo": 0x0};
 			const paramtr = {};
 			const filters = COM_PORT_FILTERS;
+			if (!navigator.serial || !navigator.serial.requestPort) {
+				return (sketch_error(null, reject, Error("Sorry, this feature is supported only on Chrome, Edge and Opera")));
+			}
 			try {
 				self["port"] = await navigator.serial.requestPort({filters});
 			} catch(e) {
