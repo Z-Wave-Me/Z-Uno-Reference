@@ -8,15 +8,17 @@ This sketch shows how to control WS2811/WS2812 (also known as NeoPixel) right fr
         <li>Z-Uno board</li>
         <li>Breadboard</li>
         <li>NeoPixel strip or ring (like <a href="https://www.adafruit.com/product/1463">this</a> or <a href="https://www.sparkfun.com/products/12664">this</a>)</li>
-        <li>1 transistor 2N7000 FET</li>
-        <li>1 1 kΩ resistor </li>
+        <li zunoVersion="v1">1 transistor 2N7000 FET</li>
+        <li zunoVersion="v1">1 1 kΩ resistor </li>
         <li>5 V power supply for the RGB strip </li>
-        <li>7 wires</li>
+        <li zunoVersion="v1">7 wires</li>
+        <li zunoVersion="v2">5 wires</li>
     </ul>
 </span>
 
 <span class="example_description_more">
-The 2N7000 transistor is used to invert the logic of the pin. WS2811 requires very fast communications and Z-Uno uses SPI to send data fast enough. But MOSI ping logic is inverted compared to what WS2811 expects.
+<li zunoVersion="v1">The 2N7000 transistor is used to invert the logic of the pin. WS2811 requires very fast communications and Z-Uno uses SPI to send data fast enough. But MOSI ping logic is inverted compared to what WS2811 expects.</li>
+    <li zunoVersion="v2">WS2811 requires very fast communications and Z-Uno uses SPI to send data fast enough.</li>
 </span>
 
 <span class="example_schematics">
