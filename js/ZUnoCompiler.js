@@ -778,6 +778,9 @@ var ZUnoCompiler = function() {
 			const self = {"queue":[], "seqNo": 0x0};
 			const paramtr = {};
 			const filters = COM_PORT_FILTERS;
+			if (!navigator.serial || !navigator.serial.requestPort) {
+				return (sketch_error(null, reject, Error("Sorry, this feature is supported only on Chrome, Edge and Opera")));
+			}
 			try {
 				self["port"] = await navigator.serial.requestPort({filters});
 			} catch(e) {
@@ -854,7 +857,7 @@ var ZUnoCompiler = function() {
 			height: 256,
 			colorDark: "#000000",
 			colorLight: "#ffffff",
-			correctLevel: QRCode.CorrectLevel.H,
+			correctLevel: QRCode.CorrectLevel.L,
 		});
 	}
 
@@ -865,7 +868,7 @@ var ZUnoCompiler = function() {
 		 * @param {*} code Sketch source code (string)
 		 * @param {*} freq Frequncy (string, ex. 'EU')
 		 * @param {*} sec With security or not (boolean)
-		 * @param {*} main_pow <ax power (int, without a special license the maximum is 50)
+		 * @param {*} main_pow max power (int, without a special license the maximum is 50)
 		 * @returns Returns a dictionary with smart_qr as string and dsk as string
 		 */
 		compile: function(code, freq, sec, main_pow) {
