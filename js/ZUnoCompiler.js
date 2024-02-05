@@ -410,9 +410,13 @@ var ZUnoCompiler = function() {
 		bLR = false;
 		param_info = param_info.slice(4, param_info.length);
 		r = zmeRemapDictVal2Key(FREQ_TABLE_U7, param_info[1])
+		if (r == null)
+			return (md);
 		if (r != null)
 			if ((r == "US_LR") || (r == "US") ||  (r == "US_LR_BK"))
 				bLR = true;
+		md["freq_i"] = param_info[1];
+		md["freq_str"] = r;
 		bts = info.slice(4, info.length);
 		md["version"] = (bts[0] << 8) | (bts[1]);
 		md["build_number"] = (bts[2] << 24) | (bts[3] << 16) |  (bts[4] << 8) | (bts[5]);
@@ -803,6 +807,8 @@ var ZUnoCompiler = function() {
 			if (Object.keys(self["md"]).length == 0x0)
 				return (sketch_error(self, reject, Error("Failed to read board info")));
 			sketch_info("Determining the revision Z-Uno done");
+			if (freq == null)
+				freq = self["md"]["freq_str"]
 			paramtr["freq"] = FREQ_TABLE_U7[freq];
 			if (sec === true)
 				paramtr["sec"] = 0x1;
@@ -866,7 +872,7 @@ var ZUnoCompiler = function() {
 		 * Compile the sketch and load it to the Z-Uno board
 		 *
 		 * @param {*} code Sketch source code (string)
-		 * @param {*} freq Frequncy (string, ex. 'EU')
+		 * @param {*} freq Frequncy (string, ex. 'EU') or null - current use
 		 * @param {*} sec With security or not (boolean)
 		 * @param {*} main_pow max power (int, without a special license the maximum is 50)
 		 * @returns Returns a dictionary with smart_qr as string and dsk as string
