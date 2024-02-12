@@ -1,0 +1,67 @@
+#include "ZMEButtons.h"
+#include "ZUNO_SHIELD.h" // Shield library
+
+#define BTN_1 A0
+#define BTN_2 A1
+#define BTN_3 A2
+#define BTN_4 A3
+
+// Global variables
+uint8_t pin0SwitchMultilevelState = 0, _pin0SwitchMultilevelState = 1;
+uint8_t pin1SwitchMultilevelState = 0, _pin1SwitchMultilevelState = 1;
+uint8_t pin2SwitchMultilevelState = 0, _pin2SwitchMultilevelState = 1;
+uint8_t pin3SwitchMultilevelState = 0, _pin3SwitchMultilevelState = 1;
+
+// Z-Wave channels
+ZUNO_SETUP_CHANNELS(
+  ZUNO_SWITCH_MULTILEVEL(pin0SwitchMultilevelState, NULL),
+  ZUNO_SWITCH_MULTILEVEL(pin1SwitchMultilevelState, NULL),
+  ZUNO_SWITCH_MULTILEVEL(pin2SwitchMultilevelState, NULL),
+  ZUNO_SWITCH_MULTILEVEL(pin3SwitchMultilevelState, NULL)
+);
+
+ZUNOShield shield; // Shield object
+// Button controllers
+// Maps button control to switch multilevel channel
+DimmableSwitchBtnController cntrl1(BTN_1, 1, &pin0SwitchMultilevelState);
+DimmableSwitchBtnController cntrl2(BTN_2, 2, &pin1SwitchMultilevelState);
+DimmableSwitchBtnController cntrl3(BTN_3, 3, &pin2SwitchMultilevelState);
+DimmableSwitchBtnController cntrl4(BTN_4, 4, &pin3SwitchMultilevelState);
+void setup() {
+  pinMode(BTN_1, INPUT);
+  pinMode(BTN_2, INPUT);
+  pinMode(BTN_3, INPUT);
+  pinMode(BTN_4, INPUT);
+  cntrl1.begin(ZMEBUTTON_PIN_FLAG_PULL| ZMEBUTTON_PIN_FLAG_FILTER);
+  cntrl2.begin(ZMEBUTTON_PIN_FLAG_PULL| ZMEBUTTON_PIN_FLAG_FILTER);
+  cntrl3.begin(ZMEBUTTON_PIN_FLAG_PULL| ZMEBUTTON_PIN_FLAG_FILTER);
+  cntrl4.begin(ZMEBUTTON_PIN_FLAG_PULL| ZMEBUTTON_PIN_FLAG_FILTER);
+  shield.initPWM(PWM_CHANNEL_MASK(PWM1) | PWM_CHANNEL_MASK(PWM2) | PWM_CHANNEL_MASK(PWM3) | PWM_CHANNEL_MASK(PWM4));
+}
+
+void loop() {  
+  // process button controllers
+  cntrl1.process();
+  cntrl2.process();
+  cntrl3.process();
+  cntrl4.process();
+  if (pin0SwitchMultilevelState != _pin0SwitchMultilevelState) {
+    _pin0SwitchMultilevelState = pin0SwitchMultilevelState;
+    shield.writePWMPercentage(PWM_CHANNEL(PWM1), pin0SwitchMultilevelState);
+  }
+
+  if (pin1SwitchMultilevelState != _pin1SwitchMultilevelState) {
+    _pin1SwitchMultilevelState = pin1SwitchMultilevelState;
+    shield.writePWMPercentage(PWM_CHANNEL(PWM2), pin1SwitchMultilevelState);
+  }
+
+  if (pin2SwitchMultilevelState != _pin2SwitchMultilevelState) {
+    _pin2SwitchMultilevelState = pin2SwitchMultilevelState;
+    shield.writePWMPercentage(PWM_CHANNEL(PWM3), pin2SwitchMultilevelState);
+  }
+
+  if (pin3SwitchMultilevelState != _pin3SwitchMultilevelState) {
+    _pin3SwitchMultilevelState = pin3SwitchMultilevelState;
+    shield.writePWMPercentage(PWM_CHANNEL(PWM4), pin3SwitchMultilevelState);
+  }
+}
