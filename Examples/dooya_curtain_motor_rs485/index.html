@@ -18,16 +18,10 @@ The following commands are available for control:
     <li zunoVersion="v2"><img src="/files/z-uno/Z-Uno-Reference/Examples/dooya_curtain_motor_rs485/v2/Dooya-RS485.png" width="100%"></li>
 </span>
 
-<span class="example_code" zunoVersion="v1">
-<pre>
-<code class="c">/*
-Only for Shield V2
-</code></pre>
-</span>
-
 <span class="example_code" zunoVersion="v2">
 <pre>
-<code class="c compileAndLoad">/*
+<code class="c compileAndLoad">
+{literal}
 /* 
  * RS485_Blinds.ino
  * RS485_Blinds
@@ -249,7 +243,7 @@ word modbus_crc16(byte* buf, int len) {
   // Note, this number has low and high bytes swapped, so use it accordingly (or swap bytes)
   return crc; 
 }
-
+{/literal}
 </code></pre>
 <a href="/files/z-uno/Z-Uno-Reference/Examples/dooya_curtain_motor_rs485/v2/RS485_Dooya.ino">Download this sketch</a>
 </span>
