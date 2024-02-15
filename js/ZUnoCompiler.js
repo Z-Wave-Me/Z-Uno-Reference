@@ -717,7 +717,11 @@ var ZUnoCompiler = function() {
 			sketch_info("Uploading the sketch done");
 			sketch_info("QR code read...");
 			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
-			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
+			try {
+				await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
+			} catch(e) {
+				return (sketch_error(null, reject, Error("Check yours, maybe another application is using it")));
+			}
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
 			self["md"] = await readBoardInfo(self);
@@ -761,7 +765,11 @@ var ZUnoCompiler = function() {
 			await waitFinware(self);
 			await self["port"].close();
 			await sleep(dtr_timeout);// The time for the capacitor on the DTR line to recharge
-			await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
+			try {
+				await self["port"].open({ baudRate: self["baudRate"], bufferSize: 8192 });
+			} catch(e) {
+				return (sketch_error(null, reject, Error("Check yours, maybe another application is using it")));
+			}
 			if (await syncWithDevice(self) == false)
 				return (sketch_error(null, reject, Error("After a successful firmware update, it was not possible to re-sync with Z-Uno")));
 			self["md"] = await readBoardInfo(self);
@@ -790,10 +798,18 @@ var ZUnoCompiler = function() {
 			} catch(e) {
 				return (sketch_error(null, reject, Error("No port selected")));
 			}
+			try {
+				await self["port"].close();//If the port was already opened by us, but for some reason we left without closing it
+			} catch(e) {
+			}
 			sketch_info("Determining the revision Z-Uno ...");
 			i = 0x0;
 			while (i < ZUNO_BAUD.length) {
-				await self["port"].open({ baudRate: ZUNO_BAUD[i], bufferSize: 8192 });
+				try {
+					await self["port"].open({ baudRate: ZUNO_BAUD[i], bufferSize: 8192 });
+				} catch(e) {
+					return (sketch_error(null, reject, Error("Check yours, maybe another application is using it")));
+				}
 				if (await syncWithDevice(self) == true)
 					break ;
 				await self["port"].close();
