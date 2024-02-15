@@ -7,48 +7,48 @@ var ZUnoCompiler = function() {
 	const CAN_CODE							= 0x18;
 	const ACK_CODE							= 0x06;
 	const REQUEST_CODE						= 0x00;
-	const RESPONSE_CODE						= 0x01;
+	// const RESPONSE_CODE						= 0x01;
 
-	const SUCCESS_CODE						= 0x31;
-	const FAIL_CODE							= 0x30;
+	// const SUCCESS_CODE						= 0x31;
+	// const FAIL_CODE							= 0x30;
 
-	const WRITECYCLE_OK_CODE				= 0x0D;
+	// const WRITECYCLE_OK_CODE				= 0x0D;
 
 	const RECV_OK 							= 0x00;
 	const RECV_NOACK						= 0x01;
 	const RECV_INVALIDDATALEN				= 0x02;
 	const RECV_INVALIDCRC					= 0x03;
-	const RECV_WRONGDATA					= 0x04;
+	// const RECV_WRONGDATA					= 0x04;
 	const RECV_NOSOF						= 0x05;
 
 	const dtr_timeout						= 250;
 	const rcv_sof_timeout					= 3500;
-	const send_quant_size					= 240;
+	// const send_quant_size					= 240;
 
 	const ADDITIONAL_SIZE					= 3;
 
 	const ZUNO_HEADER_PREAMBL				= "ZMEZUNOC";
 
 	const SK_START_OFFSET_OLD				= 0x30000;
-	const SK_START_OFFSET					= 0x34800;
+	// const SK_START_OFFSET					= 0x34800;
 	const SK_HEADER_SIZE					= 0xC0;
 	const SK_HEADER_VERSION_MSB_OFFSET			= 0x08;
 	const SK_HEADER_VERSION_LSB_OFFSET			= 0x09;
-	const SK_HEADER_SIZE_MSB_OFFSET			= 0x0A;
-	const SK_HEADER_CRC_MSB_OFFSET			= 0x0C;
-	const SK_HEADER_CRC_CALC_START			= 0xC0;
+	// const SK_HEADER_SIZE_MSB_OFFSET			= 0x0A;
+	// const SK_HEADER_CRC_MSB_OFFSET			= 0x0C;
+	// const SK_HEADER_CRC_CALC_START			= 0xC0;
 	const SK_HEADER_NAME_START				= 56;
 	const SK_HEADER_MAX_NAME					= 47;
 	const SK_HEADER_HWREW_OFFSET				= SK_HEADER_NAME_START + SK_HEADER_MAX_NAME + 1;
 
 	const FREQ_TABLE_U7						= {"EU":0x00, "US":0x01, "ANZ":0x02, "HK": 0x03, "MY": 0x04, "IN":0x05,"IL": 0x06, "RU": 0x07, "CN": 0x08, "US_LR":0x09, "US_LR_BK":0x0A, "JP": 0x20, "KR":0x21, "FK":0xFE };
 
-	const ZUNO_LIC_FLAGS_NAMES_PTI				= 0;
-	const ZUNO_LIC_FLAGS_NAMES_KEY_DUMP			= 1;
-	const ZUNO_LIC_FLAGS_NAMES_CUSTOM_VENDOR	= 2;
-	const ZUNO_LIC_FLAGS_NAMES_MODEM			= 3;
+	// const ZUNO_LIC_FLAGS_NAMES_PTI				= 0;
+	// const ZUNO_LIC_FLAGS_NAMES_KEY_DUMP			= 1;
+	// const ZUNO_LIC_FLAGS_NAMES_CUSTOM_VENDOR	= 2;
+	// const ZUNO_LIC_FLAGS_NAMES_MODEM			= 3;
 	const ZUNO_LIC_FLAGS_NAMES_MAX_POWER		= 4;
-	const ZUNO_LIC_FLAGS_NAMES_LONG_RANGE		= 5;
+	// const ZUNO_LIC_FLAGS_NAMES_LONG_RANGE		= 5;
 
 	const MAX_DEFAULT_RF_POWER					= 50
 
@@ -198,7 +198,7 @@ var ZUnoCompiler = function() {
 	}
 
 	async function recvIncomingRequest(self) {
-		let len_data, buff_data, test_buff, check_sum, check_buff;
+		let len_data, buff_data, check_sum, check_buff;
 
 		if (await waitSOF(self) == false)
 			return ([RECV_NOSOF]);
@@ -207,8 +207,6 @@ var ZUnoCompiler = function() {
 			return ([RECV_NOSOF]);
 		len_data = len_data[0x0];
 		buff_data = await read(self, len_data);
-		test_buff = [SOF_CODE, len_data];
-		test_buff = test_buff.concat(buff_data);
 		if (buff_data.length != len_data) {
 			await sendNack(self);
 			return ([RECV_INVALIDDATALEN]);
@@ -224,7 +222,7 @@ var ZUnoCompiler = function() {
 	}
 
 	async function resyncZunoPort(self) {
-		if (navigator.platform = "Win32")
+		if (navigator.platform == "Win32")
 			await sleep(500);
 		let data = await recvIncomingRequest(self);
 		if (data[0x0] != RECV_OK)
@@ -233,7 +231,7 @@ var ZUnoCompiler = function() {
 	}
 
 	async function sendData(self, cmd, databuff, have_callback = false) {
-		let crc_data, final_data, crc16;
+		let crc_data, final_data, crc16, crc;
 		let data_len = databuff.length + ADDITIONAL_SIZE;
 		if (have_callback == true)
 			data_len++;
@@ -348,7 +346,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function conv2Decimal(buff, separator="-") {
-		let i = 0x0, text = "";
+		let i = 0x0, text = "", v;
 		while (i < (buff.length / 2)) {
 			v = buff[ (i * 2)];
 			v <<= 8;
@@ -398,7 +396,7 @@ var ZUnoCompiler = function() {
 		return result;
 	}
 
-	async function readBoardInfo(self, bSketchMD = false, bKeys = true) {
+	async function readBoardInfo(self) {
 		let md, bLR, info, param_info, r, bts, code_sz_shift, shift_smrt, prod_shift, lic_shift, lic_flags;
 		md = {};
 		info = await readNVM(self, 0xFFFF00, 0x01);
@@ -485,9 +483,9 @@ var ZUnoCompiler = function() {
 	}
 
 	async function freezeSketch(self, retries = 50) {
-		let sleep_time;
+		let sleep_time, rcv;
 		sleep_time = 10;
-		if (navigator.platform = "Win32")
+		if (navigator.platform == "Win32")
 			sleep_time = 50;
 		while (retries != 0x0) {
 			rcv = await sendCommandUnSz(self, 0x08, [0x02], false);
@@ -529,7 +527,7 @@ var ZUnoCompiler = function() {
 	}
 
 	async function writeArrayToNVM(self, md, nvmaddr, array, data_offset=0) {
-		let ret_data, data_quant, offset, data_remains, data_writed, len_send, buff, res;
+		let ret_data, data_quant, offset, data_remains, len_send, buff, res;
 
 		ret_data = array;
 		offset = data_offset;
@@ -537,9 +535,7 @@ var ZUnoCompiler = function() {
 		data_quant = 240;
 		if (md["build_number"] >= 3396)
 			data_quant = 2048;
-		data_writed = 0;
 		while (data_remains != 0x0) {
-			// console.log("Writing NVM data", (data_writed * 100.0) / (ret_data.length));
 			len_send = data_quant;
 			if (data_remains < data_quant)
 				len_send = data_remains;
@@ -552,7 +548,6 @@ var ZUnoCompiler = function() {
 				return (null);
 			offset += len_send;
 			data_remains -= len_send;
-			data_writed += len_send;
 			nvmaddr += len_send;
 		}
 		// console.log("Writing NVM data", "OK");
@@ -684,6 +679,7 @@ var ZUnoCompiler = function() {
 	}
 
 	function load_sketch(self, resolve, reject) {
+		let crc16;
 		sketch_info("Compiling the sketch...");
 		self["promise_compile"].then(async function(result) {
 			let bin, header, md, sk_data, res;
@@ -759,7 +755,7 @@ var ZUnoCompiler = function() {
 			sk_data = await writeArrayToNVM(self, self["md"], self["md"]["boot_offset"], bin);
 			if (sk_data == null)
 				return (sketch_error(self, reject, Error("Failed to upload firmware")));
-			res = await checkBootImage(self);
+			await checkBootImage(self);
 			if (await waitFinware(self) == false)
 				return (sketch_error(self, reject, Error("Something is wrong - the firmware could not be updated - there may be a problem with the version")));
 			await waitFinware(self);
@@ -914,7 +910,6 @@ var ZUnoCompiler = function() {
 		setProgress: function(cbk) {
 			progressCbk = cbk;
 		}
-		 
 	};
 }
 
