@@ -482,7 +482,7 @@ var ZUnoCompiler = function() {
 		return (md);
 	}
 
-	async function freezeSketch(self, retries = 50) {
+	async function freezeSketch(self, retries = 3) {
 		let sleep_time, rcv;
 		sleep_time = 10;
 		if (navigator.platform == "Win32")
