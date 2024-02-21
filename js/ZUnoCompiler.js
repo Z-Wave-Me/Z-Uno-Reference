@@ -222,8 +222,6 @@ var ZUnoCompiler = function() {
 	}
 
 	async function resyncZunoPort(self) {
-		if (navigator.platform == "Win32")
-			await sleep(500);
 		let data = await recvIncomingRequest(self);
 		if (data[0x0] != RECV_OK)
 			return (false);
