@@ -3,7 +3,7 @@
     <pre>
         <code class="c compileAndLoad">
 {literal}
-#include <MelodyPlayer.h>
+#include &lt;MelodyPlayer.h&gt;
 #include "Arduino.h"
 #include "ZUNO_NeoPixel.h"
 #include "ZWCCSoundSwitch.h"
@@ -168,13 +168,13 @@ void MelodyThreadFunc(void * param){
     while(1){
         RenderedNote_t * note = playbackNote();
         if (note != NULL) {
-            if (note->note != 0) {
-                tone(MELODY_PIN, note->freq);
-                delay(note->time);
+            if (note-&gt;note != 0) {
+                tone(MELODY_PIN, note-&gt;freq);
+                delay(note-&gt;time);
                 noTone(MELODY_PIN);
                 delay(5);   
             } else {
-                delay(note->time);
+                delay(note-&gt;time);
             }
         } else {
               // Repeat melody after 1 second
@@ -200,7 +200,7 @@ void loop() {
   }
 
   // turnOff after 5 minutes
-  if ((millis() - last_event_time) > AWAKE_TIME) {
+  if ((millis() - last_event_time) &gt; AWAKE_TIME) {
       current_switch = 0;
       r = 0; g = 0; b = 0; w = 0;
       goSleep();
@@ -222,7 +222,7 @@ void loop() {
   if (zunoIsChannelUpdated(1)) {
     last_event_time = millis();
     
-    if (current_switch > 0) {
+    if (current_switch &gt; 0) {
       isSwitchOn = true;
       startMelody((char*)melodies[random(1, 4)]);
       TwinkleRandom(10, 100);
@@ -238,7 +238,7 @@ void loop() {
 
   // check white color state
   if (switch_color_component_value == SWITCH_COLOR_COMPONENT_COLD_WHITE) {
-    if (switch_color_value > 0) {
+    if (switch_color_value &gt; 0) {
       // Count, SpeedDelay, OnlyOne
       TwinkleRandom(switch_color_value/25, 100);
     } else {
@@ -305,7 +305,7 @@ void Twinkle(byte red, byte green, byte blue, uint8_t Count, uint8_t SpeedDelay)
   uint8_t pixels[20] = {0};
 
   // On pixels
-  for (uint8_t i=0; i<Count; i++) {
+  for (uint8_t i=0; i&lt;Count; i++) {
     pixels[i] = random(LED_COUNT);
     NeoPixel.setColor(LED_PIN, pixels[i], NeoPixel.RGB(red, green, blue));
     NeoPixel.show(LED_PIN);
@@ -314,7 +314,7 @@ void Twinkle(byte red, byte green, byte blue, uint8_t Count, uint8_t SpeedDelay)
   delay(SpeedDelay);
 
   // Off pixels
-  for (uint8_t i=0; i<Count; i++) {
+  for (uint8_t i=0; i&lt;Count; i++) {
     NeoPixel.setColor(LED_PIN, pixels[i], NeoPixel.RGB(0,0,0));
     NeoPixel.show(LED_PIN);
     delay(SpeedDelay);
@@ -336,7 +336,7 @@ void TwinkleRandom(uint8_t Count, uint8_t SpeedDelay) {
   int pixels[20] = {0};
 
   // On pixels
-  for (uint8_t i=0; i<Count; i++) {
+  for (uint8_t i=0; i&lt;Count; i++) {
     pixels[i] = random(LED_COUNT);
     NeoPixel.setColor(LED_PIN, pixels[i], NeoPixel.RGB(random(0,255),random(0,255),random(0,255)));
     NeoPixel.show(LED_PIN);
@@ -345,7 +345,7 @@ void TwinkleRandom(uint8_t Count, uint8_t SpeedDelay) {
   delay(SpeedDelay);
 
   // Off pixels
-  for (uint8_t i=0; i<Count; i++) {
+  for (uint8_t i=0; i&lt;Count; i++) {
     NeoPixel.setColor(LED_PIN, pixels[i], NeoPixel.RGB(0,0,0));
     NeoPixel.show(LED_PIN);
     delay(SpeedDelay);
