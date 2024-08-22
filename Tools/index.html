@@ -1,0 +1,40 @@
+<h1>Z-Uno Tools</h1>
+<p>To help you work with your Z-Uno or Z-Uno Module we have created many different tools. Most of the are part of the Arduino IDE package, but they can also be used without Arduino IDE.</p>
+
+<h2 link="CompilerAndProgrammer">Compiler and Programmer</h2>
+<p>Z-Uno compiler and programmer are invoked internally from the GUI of Arduino IDE. But you can also use them from the console. This allows to use your preferred editor (like Sublime or Atom), automate some processes and do mass production.</p>
+<ul>
+    <li>If you have not installed Arduino package yet, download it using direct links (extracted from https://z-uno.z-wave.me/files/z-uno/package_z-wave.me_index.json). Make sure to pick the right file for your OS:
+    <br/>
+    Windows: https://z-uno.z-wave.me/files/z-uno/zuno_toolchain-XX.XX.XX-win32.zip<br/>
+    Linux (x86 32bit): https://z-uno.z-wave.me/files/z-uno/zuno_toolchain-XX.XX.XX-linux32.tar.gz<br/>
+    Linux (x86 64bit): https://z-uno.z-wave.me/files/z-uno/zuno_toolchain-XX.XX.XX-linux64.tar.gz<br/>
+    MacOS X: https://z-uno.z-wave.me/files/z-uno/zuno_toolchain-XX.XX.XX-macosx.tar.gz
+    </li>
+    <li>Extract it to the directory you need.</li>
+    <li>Open the terminal (cmd, xterm, Terminal depending on your OS):
+    <br/>On Windows:
+    <code><pre>$ .\compiler prog path\to\filename.bin -d &lt;ZUNO_COMPORT&gt;</pre></code>
+    On Linux/MacOS X:
+    <code><pre>$ ./compiler prog path/to/filename.bin -d &lt;ZUNO_TTY&gt;</pre></code>
+    You could use .bin or .hex files.
+    </li>
+    <li>If you need some extra parameters (like frequency) you could use "-h" key for help.</li>
+    <li>Using this toolchain you can also compile your sketch without using the Arduino IDE.</li>
+</ul>
+
+<h2 link="EEPROM">Read and write EEPROM/NVM via USB</h2>
+<p>You can store some user specific data in the EEPROM like bitmaps and fonts for LCD screens or some conversion tables. To read and write to the EEPROM/NVM using USB do:</p>
+<ul>
+    <li>Read all user date to file
+        <code><pre>compiler dumpNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
+    </li>
+    <li> Write all user data from file
+        <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
+    </li>
+    <li>Write all user data from file to address 0x1000 and upper
+        <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -a 1000 -f &lt;file.hex/bin&gt;</pre></code>
+        Then you can access it from the code using
+        <code><pre>EEPROM.read(0x1000)</pre></code>
+    </li>
+</ul>
