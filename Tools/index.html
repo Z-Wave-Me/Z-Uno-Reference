@@ -23,18 +23,20 @@
     <li>Using this toolchain you can also compile your sketch without using the Arduino IDE.</li>
 </ul>
 
-<h2 link="EEPROM">Read and write EEPROM/NVM via USB</h2>
-<p>You can store some user specific data in the EEPROM like bitmaps and fonts for LCD screens or some conversion tables. To read and write to the EEPROM/NVM using USB do:</p>
-<ul>
-    <li>Read all user date to file
-        <code><pre>compiler dumpNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
-    </li>
-    <li> Write all user data from file
-        <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
-    </li>
-    <li>Write all user data from file to address 0x1000 and upper
-        <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -a 1000 -f &lt;file.hex/bin&gt;</pre></code>
-        Then you can access it from the code using
-        <code><pre>EEPROM.read(0x1000)</pre></code>
-    </li>
-</ul>
+<span zunoVersion="v1">
+    <h2 link="EEPROM">Read and write EEPROM/NVM via USB</h2>
+    <p>You can store some user specific data in the EEPROM like bitmaps and fonts for LCD screens or some conversion tables. To read and write to the EEPROM/NVM using USB do:</p>
+    <ul>
+        <li>Read all user date to file
+            <code><pre>compiler dumpNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
+        </li>
+        <li> Write all user data from file
+            <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -f &lt;file.hex/bin&gt;</pre></code>
+        </li>
+        <li>Write all user data from file to address 0x1000 and upper
+            <code><pre>compiler restoreNVM -d &lt;Z-Uno port&gt; -a 1000 -f &lt;file.hex/bin&gt;</pre></code>
+            Then you can access it from the code using
+            <code><pre>EEPROM.read(0x1000)</pre></code>
+        </li>
+    </ul>
+</span>
