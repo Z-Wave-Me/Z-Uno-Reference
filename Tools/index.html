@@ -2,16 +2,16 @@
   <style>
     
 
-details &#123;
+details {
     border: 1px solid #ddd; 
     border-radius: 5px; 
     padding: 10px; 
     background-color: #f9f9f9; 
     margin: 10px 0; 
-  &#125;
+  }
   
   
-  summary &#123;
+  summary {
     display: flex; 
     align-items: center; 
     cursor: pointer; 
@@ -22,55 +22,55 @@ details &#123;
     color: #333; 
     border-radius: 4px; 
     border: 1px solid #ccc; 
-  &#125;
+  }
   
   
-  details .spoiler-content &#123;
+  details .spoiler-content {
     margin-left: 20px; 
-  &#125;
+  }
   
   
-  details[open] .spoiler-content &#123;
+  details[open] .spoiler-content {
     display: block; 
-  &#125;
+  }
   
-  .spoiler-content &#123;
+  .spoiler-content {
     display: none; 
-  &#125;
+  }
   
 
-.table-wrapper &#123;
+.table-wrapper {
     display: flex;
     justify-content: flex-start; 
     padding: 0 400px; 
     box-sizing: border-box; 
     margin: 20px 0; 
-&#125;
+}
 
 
-table &#123;
+table {
     width: auto; 
     max-width: 100%; 
     border-collapse: collapse; 
     overflow-x: auto; 
     word-wrap: break-word; 
-&#125;
+}
 
 
-th, td &#123;
+th, td {
     border: 1px solid #ddd; 
     padding: 8px; 
     text-align: left; 
-&#125;
+}
 
 
-th &#123;
+th {
     background-color: #f6f8fa; 
     font-weight: bold; 
-&#125;
+}
 
 
-code &#123;
+code {
     background-color: #f6f8fa; 
     color: #e83e8c; 
     padding: 2px 4px; 
@@ -79,19 +79,19 @@ code &#123;
     font-size: 90%; 
     white-space: pre-wrap; 
     display: inline-block; 
-&#125;
+}
 
 
   
-.shell-wrapper &#123;
+.shell-wrapper {
     display: flex;
     justify-content: center; 
     padding: 0 20px; 
     box-sizing: border-box; 
     margin: 20px 0; 
-  &#125;
+  }
 
-.shell &#123;
+.shell {
     background-color: #1e1e1e;
     border-radius: 8px;
     color: #e6e6e6;
@@ -102,52 +102,52 @@ code &#123;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     overflow-x: auto; 
     margin: 0 auto; 
-  &#125;
-  .shell-header &#123;
+  }
+  .shell-header {
     display: flex;
     justify-content: flex-start;
     gap: 8px;
     margin-bottom: 10px;
-  &#125;
+  }
   
-  .shell-header span &#123;
+  .shell-header span {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     display: inline-block;
-  &#125;
+  }
   
-  .shell-header .red &#123;
+  .shell-header .red {
     background-color: #ff605c;
-  &#125;
+  }
   
-  .shell-header .yellow &#123;
+  .shell-header .yellow {
     background-color: #ffbd44;
-  &#125;
+  }
   
-  .shell-header .green &#123;
+  .shell-header .green {
     background-color: #00ca4e;
-  &#125;
+  }
   
-  .shell-body &#123;
+  .shell-body {
     background-color: #000;
     padding: 15px;
     border-radius: 4px;
     color: #00ff00;
     overflow-x: auto;
-  &#125;
+  }
   
 
   
-  .cmd &#123;
+  .cmd {
     color: #00ff00;
-  &#125;
+  }
   
-  pre &#123;
+  pre {
     margin: 0;
-  &#125;
+  }
   
-  .cmd::after &#123;
+  .cmd::after {
     content: '';
     display: inline-block;
     width: 8px;
@@ -155,14 +155,14 @@ code &#123;
     background-color: #00ff00;
     margin-left: 5px;
     animation: blink 1s steps(2, start) infinite;
-  &#125;
+  }
   
-  @keyframes blink &#123;
-    to &#123;
+  @keyframes blink {
+    to {
       visibility: hidden;
-    &#125;
-  &#125;
-  .powershell &#123;
+    }
+  }
+  .powershell {
     background-color: #012456;
     border-radius: 8px;
     color: #ffffff;
@@ -171,38 +171,38 @@ code &#123;
     max-width: 600px;
     padding: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  &#125;
+  }
   
-  .powershell-header &#123;
+  .powershell-header {
     background-color: #007ACC;
     padding: 8px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     font-weight: bold;
     color: #ffffff;
-  &#125;
+  }
   
-  .powershell-header span &#123;
+  .powershell-header span {
     margin-left: 10px;
-  &#125;
+  }
   
-  .powershell-body &#123;
+  .powershell-body {
     background-color: #012456;
     padding: 15px;
     border-radius: 4px;
     color: #d4d4d4;
-  &#125;
+  }
   
-  .cmd &#123;
+  .cmd {
     color: #00ff00;
-  &#125;
+  }
   
-  pre &#123;
+  pre {
     margin: 0;
     white-space: pre-wrap;
-  &#125;
+  }
   
-  .cmd::after &#123;
+  .cmd::after {
     content: '';
     display: inline-block;
     width: 8px;
@@ -210,13 +210,13 @@ code &#123;
     background-color: #00ff00;
     margin-left: 5px;
     animation: blink 1s steps(2, start) infinite;
-  &#125;
+  }
   
-  @keyframes blink &#123;
-    to &#123;
+  @keyframes blink {
+    to {
       visibility: hidden;
-    &#125;
-  &#125;    
+    }
+  }    
 
 
   </style>
@@ -244,6 +244,7 @@ code &#123;
 <blockquote>
 <p>zme_make -h</p>
 </blockquote>
+
       <div class="shell">
         <div class="shell-header">
           <span class="red"></span>
@@ -253,12 +254,12 @@ code &#123;
         <div class="shell-body">
           <pre>$ zme_make -h</pre>
 <pre>usage: zme_make.py [-h]</pre>
-<pre>                   &#123;build,upload,upload_bin,boot,boardInfo,eraseNVM,writeNVM,dumpNVM,arduino_size,arduino_dummy,arduino_preproc,trace,radiotest,serialmonitor,pinmap&#125; ...</pre>
+<pre>                   &#123;build,upload,upload_bin,boot,boardInfo,eraseNVM,writeNVM,dumpNVM,arduino_size,arduino_dummy,arduino_preproc,trace,radiotest,serialmonitor,pinmap} ...</pre>
 <pre></pre>
 <pre>ZWave>ME make tool for ZUno G2. Version:0.402b18 DBG_MODE:True Welcome :)</pre>
 <pre></pre>
 <pre>positional arguments:</pre>
-<pre>  &#123;build,upload,upload_bin,boot,boardInfo,eraseNVM,writeNVM,dumpNVM,arduino_size,arduino_dummy,arduino_preproc,trace,radiotest,serialmonitor,pinmap&#125;</pre>
+<pre>  &#123;build,upload,upload_bin,boot,boardInfo,eraseNVM,writeNVM,dumpNVM,arduino_size,arduino_dummy,arduino_preproc,trace,radiotest,serialmonitor,pinmap}</pre>
 <pre>    build               Builds a sketch.</pre>
 <pre>    upload              Uploads a sketch to board.</pre>
 <pre>    upload_bin          Uploads a binarie file to board.</pre>
